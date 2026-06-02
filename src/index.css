@@ -1,0 +1,78 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Playfair+Display:ital,wght@1,600&family=Dancing+Script:wght@700&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --color-navy: var(--theme-bg);
+  --color-navy-alt: var(--theme-bg-alt);
+  --color-slate: var(--theme-text-soft);
+  --color-white: var(--theme-text-strong);
+  --color-gold: var(--theme-accent);
+  --color-gold-hover: color-mix(in oklab, var(--theme-accent) 80%, black);
+  --color-glass: var(--theme-glass);
+  --color-phone-border: var(--theme-phone-border);
+  
+  --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-script: "Dancing Script", cursive;
+}
+
+:root, [data-theme="premium"] {
+  --theme-bg: #1A2530;
+  --theme-bg-alt: #16202A;
+  --theme-text-soft: #F4F5F7;
+  --theme-text-strong: #FFFFFF;
+  --theme-accent: #D4AF37;
+  --theme-glass: rgba(244, 245, 247, 0.05);
+  --theme-phone-border: #2A3B4C;
+}
+
+[data-theme="fresh-eco"] {
+  --theme-bg: #F0F7F4;
+  --theme-bg-alt: #E3EFE9;
+  --theme-text-soft: #276342;
+  --theme-text-strong: #1E7145;
+  --theme-accent: #00A859;
+  --theme-glass: rgba(30, 113, 69, 0.08);
+  --theme-phone-border: #D1E5DB;
+}
+
+[data-theme="organic"] {
+  --theme-bg: #F6F7F5;
+  --theme-bg-alt: #EBEEE8;
+  --theme-text-soft: #5b7966;
+  --theme-text-strong: #4A6754;
+  --theme-accent: #C7B07B;
+  --theme-glass: rgba(74, 103, 84, 0.08);
+  --theme-phone-border: #DCE1DA;
+}
+
+[data-theme="deep-woods"] {
+  --theme-bg: #FFFFFF;
+  --theme-bg-alt: #F4F7F6;
+  --theme-text-soft: #235c46;
+  --theme-text-strong: #134633;
+  --theme-accent: #2E8B57;
+  --theme-glass: rgba(19, 70, 51, 0.05);
+  --theme-phone-border: #E8EFEA;
+}
+
+body {
+  @apply bg-navy text-slate font-sans antialiased transition-colors duration-500;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-heading tracking-tight transition-colors duration-500;
+}
+
+.pill {
+  @apply rounded-full;
+}
+
+.glass-card {
+  background: var(--theme-glass);
+  border: 1px solid color-mix(in oklab, var(--theme-accent) 15%, transparent);
+  border-radius: 24px;
+  backdrop-filter: blur(12px);
+}
+

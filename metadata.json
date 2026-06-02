@@ -1,0 +1,8 @@
+{
+  "name": "The Laundry Man",
+  "description": "Premium, eco-friendly laundry and dry cleaning services with a seamless mobile-responsive booking journey.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
