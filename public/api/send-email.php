@@ -118,14 +118,58 @@ function loadApplicationConfig(): array
         );
     }
 
+    if ($developmentMode) {
+        // Mailtrap sandbox accepts any address; use a neutral From (not the live domain).
+        $fromEmail = $env('MAILTRAP_FROM_EMAIL', 'mailtrap@example.com');
+        if (!filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) {
+            throw new RuntimeException('MAILTRAP_FROM_EMAIL is missing or invalid.');
+        }
+
+        return [
+            'system' => [
+                'development_mode' => true,
+            ],
+            'mail' => [
+                'recipient'      => $env('MAILTRAP_TO_EMAIL', $recipientEmail),
+                'from_email'     => $fromEmail,
+                'from_name'      => $env('MAIL_FROM_NAME', 'The Laundry Man Website (Dev)'),
+                'from_domain'    => extractEmailDomain($fromEmail),
+                'subject_prefix' => 'New Collection Booking',
+            ],
+            'mailtrap' => [
+                'host'     => $mailtrapHost,
+                'port'     => $mailtrapPort,
+                'username' => $mailtrapUsername,
+                'password' => $mailtrapPassword,
+            ],
+            'templates' => [
+                'appointment' => __DIR__ . '/templates/appointment-template.html',
+            ],
+        ];
+    }
+
+    $fromEmail = $env('MAIL_FROM_EMAIL', $recipientEmail);
+    if (!filter_var($fromEmail, FILTER_VALIDATE_EMAIL)) {
+        throw new RuntimeException('MAIL_FROM_EMAIL is missing or invalid.');
+    }
+
+    $fromDomain = extractEmailDomain($fromEmail);
+    $recipientDomain = extractEmailDomain($recipientEmail);
+    if (strcasecmp($fromDomain, $recipientDomain) !== 0) {
+        throw new RuntimeException(
+            'MAIL_FROM_EMAIL must use the same domain as NOTIFICATION_RECEIVER_EMAIL on shared hosting.'
+        );
+    }
+
     return [
         'system' => [
             'development_mode' => $developmentMode,
         ],
         'mail' => [
             'recipient'      => $recipientEmail,
-            'from_email'     => 'noreply@thelaundryman.co.uk',
-            'from_name'      => 'The Laundry Man Website',
+            'from_email'     => $fromEmail,
+            'from_name'      => $env('MAIL_FROM_NAME', 'The Laundry Man Website'),
+            'from_domain'    => $fromDomain,
             'subject_prefix' => 'New Collection Booking',
         ],
         'mailtrap' => [
@@ -278,11 +322,68 @@ function parseJsonRequestBody(): array
     return $data;
 }
 
+/**
+ * Accepts nested BookingPayload from the React form or legacy flat JSON keys.
+ */
+function normalizeBookingPayload(array $data): array
+{
+    if (isset($data['customer']) && is_array($data['customer'])) {
+        return [
+            'name'             => (string) ($data['customer']['fullName'] ?? ''),
+            'email'            => (string) ($data['customer']['email'] ?? ''),
+            'phone'            => (string) ($data['customer']['phone'] ?? ''),
+            'address'          => (string) ($data['location']['address'] ?? ''),
+            'city'             => (string) ($data['location']['city'] ?? ''),
+            'postcode'         => (string) ($data['location']['postcode'] ?? ''),
+            'instructions'     => (string) ($data['location']['instructions'] ?? ''),
+            'service'          => (string) ($data['service']['type'] ?? ''),
+            'volume'           => (string) ($data['service']['volume'] ?? ''),
+            'notes'            => (string) ($data['service']['notes'] ?? ''),
+            'date'             => (string) ($data['schedule']['collectionDate'] ?? ''),
+            'collection_time'  => (string) ($data['schedule']['collectionTime'] ?? ''),
+        ];
+    }
+
+    return $data;
+}
+
+function extractEmailDomain(string $email): string
+{
+    $atPos = strrpos($email, '@');
+
+    return $atPos === false ? '' : strtolower(substr($email, $atPos + 1));
+}
+
+function encodeMailHeaderValue(string $value): string
+{
+    $value = str_replace(["\r", "\n"], '', $value);
+
+    if ($value === '' || preg_match('/^[\x20-\x7E]*$/', $value) === 1) {
+        return $value;
+    }
+
+    return '=?UTF-8?B?' . base64_encode($value) . '?=';
+}
+
+function encodeMailSubject(string $subject): string
+{
+    if (preg_match('/^[\x20-\x7E]*$/', $subject) === 1) {
+        return $subject;
+    }
+
+    return '=?UTF-8?B?' . base64_encode($subject) . '?=';
+}
+
 function formatEmailHeaderAddress(string $email, string $displayName): string
 {
-    $safeName = str_replace(['"', "\r", "\n"], '', $displayName);
+    $safeEmail = filter_var($email, FILTER_SANITIZE_EMAIL);
+    $safeName = encodeMailHeaderValue(str_replace(['"', "\r", "\n"], '', $displayName));
 
-    return sprintf('%s <%s>', $safeName, $email);
+    if ($safeName === '') {
+        return $safeEmail;
+    }
+
+    return sprintf('%s <%s>', $safeName, $safeEmail);
 }
 
 // =============================================================================
@@ -364,14 +465,90 @@ function mapBookingToTemplateData(array $booking): array
 // =============================================================================
 // Mail transport
 // =============================================================================
-function buildHtmlEmailHeaders(array $config, array $booking): array
+function buildPlainTextBookingSummary(array $booking, string $subject): string
 {
-    return [
+    $locationParts = array_filter([
+        $booking['address'],
+        $booking['city'],
+        $booking['postcode'],
+    ]);
+
+    $lines = [
+        $subject,
+        str_repeat('-', min(strlen($subject), 60)),
+        '',
+        'Customer: ' . $booking['name'],
+        'Email: ' . $booking['email'],
+        'Phone: ' . $booking['phone'],
+        'Location: ' . implode(', ', $locationParts),
+        'Service: ' . $booking['service'],
+        'Collection date: ' . $booking['date'],
+        'Collection time: ' . $booking['collectionTime'],
+    ];
+
+    if ($booking['volume'] !== '') {
+        $lines[] = 'Estimated load: ' . $booking['volume'];
+    }
+
+    if ($booking['instructions'] !== '') {
+        $lines[] = 'Delivery instructions: ' . $booking['instructions'];
+    }
+
+    if ($booking['notes'] !== '') {
+        $lines[] = 'Special requests: ' . $booking['notes'];
+    }
+
+    $lines[] = '';
+    $lines[] = 'Reply to this email to contact the customer directly.';
+
+    return implode("\r\n", $lines);
+}
+
+/**
+ * Builds RFC-compliant multipart/alternative MIME (plain text + HTML).
+ * From uses the authorized domain mailbox; Reply-To carries the customer address.
+ *
+ * @return array{headers: string[], body: string, subject: string, envelope_from: string}
+ */
+function buildMimeMessage(array $config, array $booking, string $subject, string $htmlBody): array
+{
+    $mail = $config['mail'];
+    $boundary = '=_TLM_' . bin2hex(random_bytes(16));
+    $plainBody = buildPlainTextBookingSummary($booking, $subject);
+    $messageId = sprintf(
+        '%s.%s@%s',
+        bin2hex(random_bytes(8)),
+        (string) time(),
+        $mail['from_domain']
+    );
+
+    $headers = [
         'MIME-Version: 1.0',
-        'Content-Type: text/html; charset=UTF-8',
-        'From: ' . formatEmailHeaderAddress($config['mail']['from_email'], $config['mail']['from_name']),
+        'Date: ' . gmdate('D, d M Y H:i:s') . ' +0000',
+        'Message-ID: <' . $messageId . '>',
+        'From: ' . formatEmailHeaderAddress($mail['from_email'], $mail['from_name']),
         'Reply-To: ' . formatEmailHeaderAddress($booking['email'], $booking['name']),
-        'X-Mailer: PHP/' . phpversion(),
+        'To: ' . $mail['recipient'],
+        'Content-Type: multipart/alternative; boundary="' . $boundary . '"',
+        'Content-Transfer-Encoding: 8bit',
+        'X-Mailer: The Laundry Man Booking Form',
+    ];
+
+    $body = '--' . $boundary . "\r\n";
+    $body .= "Content-Type: text/plain; charset=UTF-8\r\n";
+    $body .= "Content-Transfer-Encoding: 8bit\r\n\r\n";
+    $body .= $plainBody . "\r\n\r\n";
+    $body .= '--' . $boundary . "\r\n";
+    $body .= "Content-Type: text/html; charset=UTF-8\r\n";
+    $body .= "Content-Transfer-Encoding: 8bit\r\n\r\n";
+    $body .= $htmlBody . "\r\n\r\n";
+    $body .= '--' . $boundary . '--';
+
+    return [
+        'headers'         => $headers,
+        'body'            => $body,
+        'subject'         => encodeMailSubject($subject),
+        'envelope_from'   => $mail['from_email'],
     ];
 }
 
@@ -402,10 +579,28 @@ function smtpCommand($socket, string $command, array $validCodes): void
     smtpExpect($socket, $validCodes);
 }
 
+function smtpEnableTls($socket): void
+{
+    $methods = STREAM_CRYPTO_METHOD_TLS_CLIENT;
+
+    if (defined('STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT')) {
+        $methods |= STREAM_CRYPTO_METHOD_TLSv1_2_CLIENT;
+    }
+
+    if (defined('STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT')) {
+        $methods |= STREAM_CRYPTO_METHOD_TLSv1_3_CLIENT;
+    }
+
+    if (!stream_socket_enable_crypto($socket, true, $methods)) {
+        throw new RuntimeException('SMTP STARTTLS negotiation failed.');
+    }
+}
+
 function sendViaMailtrapSmtp(array $config, array $booking, string $subject, string $htmlBody): void
 {
     $mail = $config['mail'];
     $smtp = $config['mailtrap'];
+    $ehloHost = 'localhost';
 
     $socket = @stream_socket_client(
         sprintf('tcp://%s:%d', $smtp['host'], $smtp['port']),
@@ -422,14 +617,10 @@ function sendViaMailtrapSmtp(array $config, array $booking, string $subject, str
 
     try {
         smtpExpect($socket, [220]);
-        smtpCommand($socket, 'EHLO localhost', [250]);
+        smtpCommand($socket, 'EHLO ' . $ehloHost, [250]);
         smtpCommand($socket, 'STARTTLS', [220]);
-
-        if (!stream_socket_enable_crypto($socket, true, STREAM_CRYPTO_METHOD_TLS_CLIENT)) {
-            throw new RuntimeException('SMTP STARTTLS negotiation failed.');
-        }
-
-        smtpCommand($socket, 'EHLO localhost', [250]);
+        smtpEnableTls($socket);
+        smtpCommand($socket, 'EHLO ' . $ehloHost, [250]);
         smtpCommand($socket, 'AUTH LOGIN', [334]);
         smtpCommand($socket, base64_encode($smtp['username']), [334]);
         smtpCommand($socket, base64_encode($smtp['password']), [235]);
@@ -437,12 +628,15 @@ function sendViaMailtrapSmtp(array $config, array $booking, string $subject, str
         smtpCommand($socket, 'RCPT TO:<' . $mail['recipient'] . '>', [250]);
         smtpCommand($socket, 'DATA', [354]);
 
-        $headers = buildHtmlEmailHeaders($config, $booking);
-        $message = 'To: ' . $mail['recipient'] . "\r\n";
-        $message .= 'Subject: ' . $subject . "\r\n";
-        $message .= implode("\r\n", $headers) . "\r\n";
-        $message .= "\r\n";
-        $message .= preg_replace('/^\./m', '..', $htmlBody);
+        $mime = buildMimeMessage($config, $booking, $subject, $htmlBody);
+        $message = 'From: ' . formatEmailHeaderAddress($mail['from_email'], $mail['from_name']) . "\r\n";
+        $message .= 'To: ' . $mail['recipient'] . "\r\n";
+        $message .= 'Subject: ' . $mime['subject'] . "\r\n";
+        $message .= implode("\r\n", array_filter(
+            $mime['headers'],
+            static fn (string $header): bool => !preg_match('/^(From|To):/i', $header)
+        )) . "\r\n\r\n";
+        $message .= preg_replace('/^\./m', '..', $mime['body']);
 
         fwrite($socket, $message . "\r\n.\r\n");
         smtpExpect($socket, [250]);
@@ -454,11 +648,15 @@ function sendViaMailtrapSmtp(array $config, array $booking, string $subject, str
 
 function sendViaNativeMail(array $config, array $booking, string $subject, string $htmlBody): void
 {
+    $mime = buildMimeMessage($config, $booking, $subject, $htmlBody);
+    $envelopeParam = '-f' . $mime['envelope_from'];
+
     $sent = mail(
         $config['mail']['recipient'],
-        $subject,
-        $htmlBody,
-        implode("\r\n", buildHtmlEmailHeaders($config, $booking))
+        $mime['subject'],
+        $mime['body'],
+        implode("\r\n", $mime['headers']),
+        $envelopeParam
     );
 
     if (!$sent) {
@@ -494,7 +692,7 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 try {
     $config = loadApplicationConfig();
-    $booking = validateBookingPayload(parseJsonRequestBody());
+    $booking = validateBookingPayload(normalizeBookingPayload(parseJsonRequestBody()));
     $htmlBody = renderEmailTemplate(
         $config['templates']['appointment'],
         mapBookingToTemplateData($booking),

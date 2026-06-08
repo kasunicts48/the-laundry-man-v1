@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Calendar, MapPin, PackageOpen, Tag, CheckCircle2 } from 'lucide-react';
+import { X, Calendar, MapPin, PackageOpen, Tag, CheckCircle2, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import type { BookingPayload } from '../types';
 
@@ -12,6 +12,9 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const bookingApiUrl = import.meta.env.VITE_BOOKING_API_URL ?? '/api/send-email.php';
 
   // Form State
   const [formData, setFormData] = useState({
@@ -28,9 +31,10 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
   const handleNext = () => setStep(s => Math.min(s + 1, 4));
   const handlePrev = () => setStep(s => Math.max(s - 1, 1));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
 
     const payload: BookingPayload = {
       customer: {
@@ -59,17 +63,31 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
       }
     };
 
-    // Simulate Network Request / Email Send
-    setTimeout(() => {
-      console.log("Email Notification Payload:", JSON.stringify(payload, null, 2));
-      setIsSubmitting(false);
+    try {
+      const response = await fetch(bookingApiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || !result?.success) {
+        throw new Error(result?.message ?? 'Unable to send your booking request. Please try again or call us directly.');
+      }
+
       setIsSuccess(true);
-    }, 1500);
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : 'Unable to send your booking request. Please try again or call us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const resetForm = () => {
     setStep(1);
     setIsSuccess(false);
+    setSubmitError(null);
     setFormData({
       fullName: '', email: '', phone: '',
       address: '', city: '', postcode: '', instructions: '',
@@ -230,6 +248,13 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
                       <p>Your items will be cleaned and delivered back to you roughly 24-48 hours after collection. Exact return time arranged via SMS upon completion.</p>
                     </div>
                   </motion.div>
+                )}
+
+                {submitError && (
+                  <div className="mt-6 flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-200">
+                    <AlertCircle size={18} className="mt-0.5 shrink-0 text-red-400" />
+                    <p>{submitError}</p>
+                  </div>
                 )}
 
                 {/* Navigation Buttons */}
