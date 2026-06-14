@@ -107,19 +107,19 @@ export const footerUkCitiesCol2: string[] = [
 export const footerSocialLinks = [
   {
     label: 'Facebook',
-    href: 'https://www.facebook.com/',
+    href: 'https://www.facebook.com/wilmslowedcls/',
     className: 'bg-[#1877F2] hover:bg-[#166fe0]',
     icon: 'facebook' as const,
   },
   {
-    label: 'X',
-    href: 'https://x.com/',
+    label: 'TikTok',
+    href: 'https://www.tiktok.com/@ecolaundryanddrycleaners',
     className: 'bg-black hover:bg-zinc-900',
-    icon: 'x' as const,
+    icon: 'tiktok' as const,
   },
   {
     label: 'Instagram',
-    href: 'https://www.instagram.com/',
+    href: 'https://www.instagram.com/thedrycleaners2025',
     className: 'bg-gradient-to-br from-[#f58529] via-[#dd2a7b] to-[#8134af] hover:opacity-90',
     icon: 'instagram' as const,
   },

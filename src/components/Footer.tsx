@@ -77,7 +77,7 @@ function FooterLinkList({ links }: { links: FooterLink[] }) {
   );
 }
 
-function SocialIcon({ type }: { type: 'facebook' | 'x' | 'instagram' }) {
+function SocialIcon({ type }: { type: 'facebook' | 'tiktok' | 'instagram' }) {
   if (type === 'facebook') {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true" className="w-6 h-6 fill-current">
@@ -86,10 +86,10 @@ function SocialIcon({ type }: { type: 'facebook' | 'x' | 'instagram' }) {
     );
   }
 
-  if (type === 'x') {
+  if (type === 'tiktok') {
     return (
       <svg viewBox="0 0 24 24" aria-hidden="true" className="w-6 h-6 fill-current">
-        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+        <path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.97-1.336-2.214-1.336-3.518V1h-3.077v13.327c0 1.605-1.303 2.9-2.908 2.9s-2.908-1.295-2.908-2.9 1.303-2.9 2.908-2.9c.307 0 .602.047.882.134V9.43a6.026 6.026 0 0 0-.882-.065c-3.233 0-5.852 2.619-5.852 5.852s2.619 5.852 5.852 5.852 5.852-2.619 5.852-5.852V8.687a8.182 8.182 0 0 0 4.773 1.527V7.135a5.093 5.093 0 0 1-2.154-.573z" />
       </svg>
     );
   }
@@ -234,12 +234,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/5 text-center space-y-4">
-          <p className="text-xs text-slate/50 font-medium">
+        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="text-xs text-slate/50 font-medium text-left">
             © 2026 The Laundry Man App Ltd. All Rights Reserved.
           </p>
           <nav
-            className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-xs text-slate/50 font-light"
+            className="flex flex-wrap items-center justify-start sm:justify-end gap-x-2 gap-y-2 text-xs text-slate/50 font-light"
             aria-label="Footer legal and attribution links"
           >
             <a
