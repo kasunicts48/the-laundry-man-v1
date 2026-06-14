@@ -5,7 +5,7 @@ import ServicesOverview from '../components/ServicesOverview';
 import AppPromoAndReviews from '../components/AppPromo';
 
 interface HomeProps {
-  onBookNow: () => void;
+  onBookNow: (serviceId?: string) => void;
 }
 
 export default function Home({ onBookNow }: HomeProps) {
@@ -13,7 +13,7 @@ export default function Home({ onBookNow }: HomeProps) {
     <>
       <Hero onBookNow={onBookNow} />
       <HowItWorks />
-      <ServicesOverview />
+      <ServicesOverview onBookNow={onBookNow} />
       <AppPromoAndReviews />
     </>
   );

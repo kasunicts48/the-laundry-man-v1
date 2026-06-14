@@ -1,134 +1,275 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Mail, Phone, MapPin, ArrowRight } from 'lucide-react';
+import {
+  footerServices,
+  footerOperatingHours,
+  footerQuickLinksCol1,
+  footerQuickLinksCol2,
+  footerLondonRegions,
+  footerUkCitiesCol1,
+  footerUkCitiesCol2,
+  footerSocialLinks,
+  resolveCityHref,
+  type FooterLink,
+  type FooterServiceLink,
+} from '../data/footerContent';
+
+const linkClassName =
+  'text-sm text-slate/80 font-light hover:text-gold transition-colors duration-300 leading-relaxed';
+
+function FooterSectionHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <h4 className="text-[10px] uppercase tracking-widest text-gold font-bold pb-3 mb-6 border-b border-white/5">
+      {children}
+    </h4>
+  );
+}
+
+function FooterNavLink({ label, href }: FooterLink) {
+  if (href.startsWith('/') && !href.startsWith('//')) {
+    return (
+      <Link to={href} className={linkClassName}>
+        {label}
+      </Link>
+    );
+  }
+
+  return (
+    <a href={href} className={linkClassName}>
+      {label}
+    </a>
+  );
+}
+
+function FooterServiceLink({ label, href, serviceId }: FooterServiceLink) {
+  return (
+    <Link
+      to={href}
+      state={{ autoOpenBooking: true, serviceType: serviceId }}
+      className={linkClassName}
+    >
+      {label}
+    </Link>
+  );
+}
+
+function FooterServiceLinkList({ links }: { links: FooterServiceLink[] }) {
+  return (
+    <ul className="space-y-2.5">
+      {links.map((link) => (
+        <li key={link.serviceId}>
+          <FooterServiceLink {...link} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function FooterLinkList({ links }: { links: FooterLink[] }) {
+  return (
+    <ul className="space-y-2.5">
+      {links.map((link) => (
+        <li key={link.label}>
+          <FooterNavLink {...link} />
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function SocialIcon({ type }: { type: 'facebook' | 'x' | 'instagram' }) {
+  if (type === 'facebook') {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" className="w-6 h-6 fill-current">
+        <path d="M13.5 8.5H16V5.5H13.5C11.01 5.5 9 7.51 9 10V12H6.5V15H9V22H12V15H15L15.5 12H12V10C12 9.17 12.67 8.5 13.5 8.5Z" />
+      </svg>
+    );
+  }
+
+  if (type === 'x') {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true" className="w-6 h-6 fill-current">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true" className="w-6 h-6 fill-current">
+      <path d="M7 3C5.34 3 4 4.34 4 6V18C4 19.66 5.34 21 7 21H17C18.66 21 20 19.66 20 18V6C20 4.34 18.66 3 17 3H7ZM12 7.5C13.93 7.5 15.5 9.07 15.5 11C15.5 12.93 13.93 14.5 12 14.5C10.07 14.5 8.5 12.93 8.5 11C8.5 9.07 10.07 7.5 12 7.5ZM12 13C13.1 13 14 12.1 14 11C14 9.9 13.1 9 12 9C10.9 9 10 9.9 10 11C10 12.1 10.9 13 12 13ZM17 8.25C17.41 8.25 17.75 7.91 17.75 7.5C17.75 7.09 17.41 6.75 17 6.75C16.59 6.75 16.25 7.09 16.25 7.5C16.25 7.91 16.59 8.25 17 8.25Z" />
+    </svg>
+  );
+}
+
+function AreaList({ areas }: { areas: string[] }) {
+  return (
+    <ul className="space-y-2.5">
+      {areas.map((area) => {
+        const href = resolveCityHref(area);
+
+        return (
+          <li key={area}>
+            {href === '#' ? (
+              <span className={linkClassName}>{area}</span>
+            ) : (
+              <Link to={href} className={linkClassName}>
+                {area}
+              </Link>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
+
+function UkCityList({ cities }: { cities: string[] }) {
+  return (
+    <ul className="space-y-2.5">
+      {cities.map((city) => {
+        const href = resolveCityHref(city);
+
+        return (
+          <li key={city}>
+            {href === '#' ? (
+              <span className={linkClassName}>{city}</span>
+            ) : (
+              <Link to={href} className={linkClassName}>
+                {city}
+              </Link>
+            )}
+          </li>
+        );
+      })}
+    </ul>
+  );
+}
 
 export default function Footer() {
   return (
-    <footer id="footer" className="bg-navy text-white pt-24 pb-10 border-t border-white/10">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        
-        {/* Main Footer Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          
-          {/* Brand Column */}
-          <div className="col-span-1 lg:col-span-1">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-navy font-heading font-bold text-xl">
-                LM
-              </div>
-              <span className="font-heading font-extrabold text-2xl tracking-tight text-white">
-                The Laundry<br/><span className="text-gold leading-none block -mt-1 font-light tracking-wider uppercase text-[10px]">Man.</span>
-              </span>
-            </div>
-            <p className="text-slate opacity-60 mb-6 font-light leading-relaxed">
-              Premium, eco-friendly laundry and dry cleaning services returning your garments pristine within 24 hours.
-            </p>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold hover:text-navy transition-colors">FB</a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold hover:text-navy transition-colors">IG</a>
-              <a href="#" className="w-10 h-10 rounded-full bg-white/10 flex items-center justify-center hover:bg-gold hover:text-navy transition-colors">X</a>
-            </div>
+    <footer id="footer" className="bg-navy-alt text-slate border-t border-white/5 transition-colors duration-500">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10 lg:pt-24">
+        {/* Upper section — 4 equal columns on large screens */}
+        <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8 lg:gap-x-12 xl:gap-x-16 items-start">
+          {/* Column 1: Services */}
+          <div className="min-w-0">
+            <FooterSectionHeading>Services</FooterSectionHeading>
+            <FooterServiceLinkList links={footerServices} />
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-6">Quick Links</h4>
-            <ul className="space-y-3 text-slate opacity-80 font-medium text-sm">
-              <li><Link to="/about" className="hover:text-white transition-colors flex items-center gap-2"><ArrowRight size={14}/> About Us</Link></li>
-              <li><Link to="/services" className="hover:text-white transition-colors flex items-center gap-2"><ArrowRight size={14}/> Services</Link></li>
-              <li><Link to="/commercial" className="hover:text-white transition-colors flex items-center gap-2"><ArrowRight size={14}/> Commercial Cleaning</Link></li>
-              <li><Link to="/blog" className="hover:text-white transition-colors flex items-center gap-2"><ArrowRight size={14}/> Blog</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition-colors flex items-center gap-2"><ArrowRight size={14}/> Contact</Link></li>
+          {/* Column 2: Operating hours */}
+          <div className="min-w-0">
+            <FooterSectionHeading>Operating Hours</FooterSectionHeading>
+            <ul className="space-y-2.5">
+              {footerOperatingHours.map(({ day, hours }) => (
+                <li key={day} className="flex items-baseline justify-between gap-4 text-sm font-light">
+                  <span className="text-slate/80">{day}</span>
+                  <span className="text-slate/60 shrink-0 tabular-nums">{hours}</span>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact & Offices */}
-          <div className="col-span-1 md:col-span-2 lg:col-span-2">
-            <h4 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-6">Our Offices</h4>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 text-slate opacity-80 font-light text-sm leading-relaxed">
-              
-              {/* London */}
-              <div>
-                <h5 className="text-white font-bold text-base mb-3 border-b border-white/20 pb-2">London Office</h5>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <MapPin size={18} className="text-gold shrink-0 mt-0.5" />
-                    <span>The Laundry Man App Ltd,<br/>71-75 Shelton Street, Covent Garden,<br/>London, WC2H 9JQ</span>
-                  </div>
-                  <div className="flex items-center gap-3">
-                    <Phone size={18} className="text-gold shrink-0" />
-                    <span>0800 037 0485 / 0845 299 3524</span>
-                  </div>
-                </div>
+          {/* Column 3: Quick links (sub-column 1) */}
+          <div className="min-w-0">
+            <FooterSectionHeading>Quick Links</FooterSectionHeading>
+            <FooterLinkList links={footerQuickLinksCol1} />
+          </div>
+
+          {/* Column 4: Quick links (sub-column 2) + social media */}
+          <div className="min-w-0 flex flex-col">
+            <div
+              className="hidden md:block pb-3 mb-6 border-b border-white/5"
+              aria-hidden="true"
+            >
+              <span className="text-[10px] uppercase tracking-widest font-bold opacity-0 select-none pointer-events-none">
+                Quick Links
+              </span>
+            </div>
+            <FooterLinkList links={footerQuickLinksCol2} />
+            <div className="mt-8 flex flex-wrap items-center gap-4">
+              <span className="text-sm text-slate/80 font-light">Social media</span>
+              <div className="flex items-center gap-3">
+                {footerSocialLinks.map((social) => (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate/70 hover:text-gold hover:border-gold/30 hover:bg-gold/5 transition-all duration-300"
+                  >
+                    <SocialIcon type={social.icon} />
+                  </a>
+                ))}
               </div>
+            </div>
+          </div>
+        </div>
 
-              {/* Manchester */}
-              <div>
-                <h5 className="text-white font-bold text-base mb-3 border-b border-white/20 pb-2">Manchester Office</h5>
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <MapPin size={18} className="text-gold shrink-0 mt-0.5" />
-                    <span>The Laundry Man App,<br/>61 Mosley St,<br/>Manchester M2 3HZ</span>
+        {/* Lower section */}
+        <div className="mt-16 pt-12 border-t border-white/5">
+          <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-x-8 xl:gap-y-12 items-start">
+            {/* London */}
+            <div className="xl:col-span-8">
+              <FooterSectionHeading>The Laundry Man App London</FooterSectionHeading>
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+                {footerLondonRegions.map((region) => (
+                  <div key={region.name}>
+                    <p className="text-sm font-bold text-white mb-2">{region.name}</p>
+                    <AreaList areas={region.areas} />
                   </div>
-                  <div className="flex items-center gap-3">
-                    <Phone size={18} className="text-gold shrink-0" />
-                    <span>0161 241 9685 / 0161 509 2469</span>
-                  </div>
-                  <div className="flex items-center gap-3 pt-2">
-                    <Mail size={18} className="text-gold shrink-0" />
-                    <a href="mailto:info@thelaundryman.co.uk" className="hover:text-white">info@thelaundryman.co.uk</a>
-                  </div>
-                </div>
+                ))}
               </div>
+            </div>
 
-            </div>
-          </div>
-
-        </div>
-
-        {/* Service Areas */}
-        <div className="py-8 border-y border-white/5 mb-8">
-          <h4 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-6">Service Areas (The Laundry Man App UK)</h4>
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6 text-xs text-slate opacity-60 font-light leading-relaxed">
-            <div>
-              <span className="text-white font-bold block mb-1 uppercase tracking-widest text-[10px] opacity-80">East London</span>
-              <p>Hackney, Walthamstow, Dalston, Canary Wharf</p>
-            </div>
-            <div>
-              <span className="text-white font-bold block mb-1 uppercase tracking-widest text-[10px] opacity-80">North London</span>
-              <p>Stoke Newington, Highbury, Holloway, Homerton, Hoxton, Camden, Crouch End, Finsbury Park</p>
-            </div>
-            <div>
-              <span className="text-white font-bold block mb-1 uppercase tracking-widest text-[10px] opacity-80">South London</span>
-              <p>Richmond Upon, London Fields, Muswell Hill, Stratford, Islington</p>
-            </div>
-            <div>
-              <span className="text-white font-bold block mb-1 uppercase tracking-widest text-[10px] opacity-80">West London</span>
-              <p>Mayfair, Tottenham, Wood Green, Stamford Hill, Leytonstone</p>
-            </div>
-            <div>
-              <span className="text-white font-bold block mb-1 uppercase tracking-widest text-[10px] opacity-80">Other Cities/Regions</span>
-              <p className="flex flex-wrap gap-2">
-                <Link to="/manchester" className="hover:text-gold transition-colors">Manchester</Link>, 
-                <Link to="/leeds" className="hover:text-gold transition-colors">Leeds</Link>, 
-                <Link to="/birmingham" className="hover:text-gold transition-colors">Birmingham</Link>, 
-                <Link to="/sheffield" className="hover:text-gold transition-colors">Sheffield</Link>, 
-                <Link to="/cheshire" className="hover:text-gold transition-colors">Cheshire</Link>
-              </p>
+            {/* UK */}
+            <div className="xl:col-span-4">
+              <FooterSectionHeading>The Laundry Man App UK</FooterSectionHeading>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5">
+                <UkCityList cities={footerUkCitiesCol1} />
+                <UkCityList cities={footerUkCitiesCol2} />
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Bottom Bar */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-xs text-slate/50 font-medium">
-          <p>© {new Date().getFullYear()} The Laundry Man App Ltd. All Rights Reserved.</p>
-          <div className="flex gap-4 mt-4 md:mt-0">
-            <a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Icons by Flaticon</a>
-            <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
-          </div>
+        <div className="mt-12 pt-8 border-t border-white/5 text-center space-y-4">
+          <p className="text-xs text-slate/50 font-medium">
+            © 2026 The Laundry Man App Ltd. All Rights Reserved.
+          </p>
+          <nav
+            className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-xs text-slate/50 font-light"
+            aria-label="Footer legal and attribution links"
+          >
+            <a
+              href="https://www.flaticon.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-gold transition-colors duration-300"
+            >
+              Icons by Flaticon
+            </a>
+            <span className="text-slate/30" aria-hidden="true">
+              ·
+            </span>
+            <Link
+              to="/privacy-policy"
+              className="hover:text-gold transition-colors duration-300"
+            >
+              Privacy Policy
+            </Link>
+            <span className="text-slate/30" aria-hidden="true">
+              ·
+            </span>
+            <Link
+              to="/terms-conditions"
+              className="hover:text-gold transition-colors duration-300"
+            >
+              Terms of Service
+            </Link>
+          </nav>
         </div>
-
       </div>
     </footer>
   );

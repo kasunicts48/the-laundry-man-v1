@@ -1,17 +1,24 @@
-import React, { useState } from 'react';
-import { X, Calendar, MapPin, PackageOpen, Tag, CheckCircle2 } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { X, Calendar, MapPin, PackageOpen, Tag, CheckCircle2, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import type { BookingPayload } from '../types';
+import { services } from '../data/services';
+import { generateBookingReference } from '../config/bookingEmail';
 
 interface BookingFormProps {
   isOpen: boolean;
   onClose: () => void;
+  initialServiceId?: string | null;
 }
 
-export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
+export default function BookingForm({ isOpen, onClose, initialServiceId }: BookingFormProps) {
   const [step, setStep] = useState(1);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
+  const [bookingReference, setBookingReference] = useState<string | null>(null);
+  const [submitError, setSubmitError] = useState<string | null>(null);
+
+  const bookingApiUrl = import.meta.env.VITE_BOOKING_API_URL ?? '/api/send-email.php';
 
   // Form State
   const [formData, setFormData] = useState({
@@ -21,6 +28,15 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
     collectionDate: '', collectionTime: ''
   });
 
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const isValidService = initialServiceId && services.some((s) => s.id === initialServiceId);
+    if (isValidService) {
+      setFormData((prev) => ({ ...prev, serviceType: initialServiceId }));
+    }
+  }, [isOpen, initialServiceId]);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
@@ -28,9 +44,13 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
   const handleNext = () => setStep(s => Math.min(s + 1, 4));
   const handlePrev = () => setStep(s => Math.max(s - 1, 1));
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setSubmitError(null);
+
+    const selectedService = services.find((service) => service.id === formData.serviceType);
+    const referenceNumber = generateBookingReference();
 
     const payload: BookingPayload = {
       customer: {
@@ -45,7 +65,7 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
         instructions: formData.instructions
       },
       service: {
-        type: formData.serviceType,
+        type: selectedService?.name ?? formData.serviceType,
         volume: formData.volume,
         notes: formData.notes
       },
@@ -55,21 +75,47 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
       },
       metadata: {
         sourceUrl: window.location.href,
-        submittedAt: new Date().toISOString()
+        submittedAt: new Date().toISOString(),
+        referenceNumber,
       }
     };
 
-    // Simulate Network Request / Email Send
-    setTimeout(() => {
-      console.log("Email Notification Payload:", JSON.stringify(payload, null, 2));
-      setIsSubmitting(false);
+    try {
+      const response = await fetch(bookingApiUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload),
+      });
+
+      const result = await response.json().catch(() => null);
+
+      if (!response.ok || !result?.success) {
+        if (!result && (response.status === 500 || response.status === 502 || response.status === 503)) {
+          throw new Error('Booking API is not running. Restart dev with: npm run dev');
+        }
+
+        throw new Error(result?.message ?? 'Unable to send your booking request. Please try again or call us directly.');
+      }
+
+      setBookingReference(result?.meta?.referenceNumber ?? referenceNumber);
       setIsSuccess(true);
-    }, 1500);
+    } catch (error) {
+      if (error instanceof TypeError) {
+        setSubmitError('Cannot reach the booking API. Restart dev with: npm run dev');
+        return;
+      }
+
+      setSubmitError(error instanceof Error ? error.message : 'Unable to send your booking request. Please try again or call us directly.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const resetForm = () => {
     setStep(1);
     setIsSuccess(false);
+    setBookingReference(null);
+    setSubmitError(null);
     setFormData({
       fullName: '', email: '', phone: '',
       address: '', city: '', postcode: '', instructions: '',
@@ -108,17 +154,26 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
           {/* Form Content */}
           <div className="p-6 md:p-8 overflow-y-auto custom-scrollbar">
             {isSuccess ? (
-              <div className="text-center py-12">
-                <div className="mx-auto w-24 h-24 bg-green-500/10 text-green-400 border border-green-500/20 rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_-5px_rgba(34,197,94,0.3)]">
-                  <CheckCircle2 size={48} />
+              <div className="text-center py-10 max-w-md mx-auto">
+                <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-green-500/25 bg-green-500/10 text-green-500 shadow-[0_0_24px_-6px_rgba(34,197,94,0.35)]">
+                  <CheckCircle2 size={40} strokeWidth={2} />
                 </div>
-                <h3 className="text-3xl font-extrabold text-slate tracking-tighter mb-4">Booking Confirmed.</h3>
-                <p className="text-lg text-slate/60 font-light max-w-sm mx-auto mb-10 leading-relaxed">
-                  Thank you, <span className="font-bold text-white">{formData.fullName}</span>. We've sent a confirmation email to <span className="text-gold">{formData.email}</span>. Our driver will contact you prior to collection.
+                <h3 className="text-3xl font-extrabold text-slate tracking-tighter mb-6">Booking Confirmed.</h3>
+                <p className="text-base text-slate leading-relaxed mb-5">
+                  Thank you, <span className="font-bold">{formData.fullName}</span>. We&apos;ve sent a confirmation email to{' '}
+                  <span className="font-bold">{formData.email}</span>. Our driver will contact you prior to collection.
+                </p>
+                {bookingReference && (
+                  <p className="text-base font-bold text-slate mb-5">
+                    Reference Number: {bookingReference}
+                  </p>
+                )}
+                <p className="text-sm text-slate-500 leading-relaxed mb-10">
+                  Note: If you don&apos;t see the confirmation email in your inbox, please check your Spam or Promotions folder.
                 </p>
                 <button 
                   onClick={resetForm}
-                  className="px-10 py-4 border border-gold text-gold pill hover:bg-gold hover:text-navy transition-all font-bold uppercase tracking-wide text-xs"
+                  className="px-10 py-4 border border-gold text-gold pill hover:bg-gold hover:text-navy transition-all font-bold uppercase tracking-wide text-xs cursor-pointer"
                 >
                   Return to Site
                 </button>
@@ -180,17 +235,17 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
                         <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Service Type</label>
                         <select required name="serviceType" value={formData.serviceType} onChange={handleInputChange} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy text-slate transition-all font-sans appearance-none">
                           <option value="" className="text-slate/50">Select a service...</option>
-                          <option value="Dry Cleaning">Dry Cleaning</option>
-                          <option value="Wash & Fold">Wash & Fold</option>
-                          <option value="Ironing">Ironing Service</option>
-                          <option value="Bedding">Bedding & Duvets</option>
-                          <option value="Mixed">Mixed Bag</option>
+                          {services.map((service) => (
+                            <option key={service.id} value={service.id}>
+                              {service.name}
+                            </option>
+                          ))}
                         </select>
                       </div>
                       <div>
-                        <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Estimated Load</label>
+                        <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Quantity <span className="text-[10px] font-normal normal-case">(Optional)</span></label>
                         <select name="volume" value={formData.volume} onChange={handleInputChange} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy text-slate transition-all font-sans appearance-none">
-                          <option value="" className="text-slate/50">Select volume (Optional)</option>
+                          <option value="" className="text-slate/50">Select quantity (Optional)</option>
                           <option value="Small">Small Bag (1-5 items)</option>
                           <option value="Medium">Medium Bag (6-15 items)</option>
                           <option value="Large">Large Bag (15+ items)</option>
@@ -232,19 +287,26 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
                   </motion.div>
                 )}
 
+                {submitError && (
+                  <div className="mt-6 flex items-start gap-3 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-200">
+                    <AlertCircle size={18} className="mt-0.5 shrink-0 text-red-400" />
+                    <p>{submitError}</p>
+                  </div>
+                )}
+
                 {/* Navigation Buttons */}
                 <div className="mt-10 flex gap-4 pt-6 border-t border-white/5">
                   {step > 1 && (
-                    <button type="button" onClick={handlePrev} className="flex-1 py-4 px-6 pill border border-white/20 text-slate font-bold hover:bg-white/5 transition-colors text-center text-xs uppercase tracking-widest">
+                    <button type="button" onClick={handlePrev} className="flex-1 py-4 px-6 pill border border-white/20 text-slate font-bold hover:bg-white/5 transition-colors text-center text-xs uppercase tracking-widest cursor-pointer">
                       Back
                     </button>
                   )}
                   {step < 4 ? (
-                    <button type="submit" className="flex-[2] py-4 px-6 pill bg-white/5 border border-gold/50 text-gold font-bold hover:bg-gold/10 transition-colors shadow-lg text-center text-xs uppercase tracking-widest">
+                    <button type="submit" className="flex-[2] py-4 px-6 pill bg-white/5 border border-gold/50 text-gold font-bold hover:bg-gold/10 transition-colors shadow-lg text-center text-xs uppercase tracking-widest cursor-pointer">
                       Continue
                     </button>
                   ) : (
-                    <button type="submit" disabled={isSubmitting} className="flex-[2] py-4 px-6 pill bg-gold text-navy font-bold hover:shadow-[0_10px_40px_-10px_rgba(212,175,55,0.4)] transition-all shadow-lg flex items-center justify-center gap-2 relative overflow-hidden text-xs uppercase tracking-widest">
+                    <button type="submit" disabled={isSubmitting} className="flex-[2] py-4 px-6 pill bg-gold text-navy font-bold hover:shadow-[0_10px_40px_-10px_rgba(212,175,55,0.4)] transition-all shadow-lg flex items-center justify-center gap-2 relative overflow-hidden text-xs uppercase tracking-widest cursor-pointer disabled:cursor-not-allowed">
                       {isSubmitting ? 'Processing...' : 'Confirm Book'}
                     </button>
                   )}

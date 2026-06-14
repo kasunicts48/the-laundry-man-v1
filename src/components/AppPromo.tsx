@@ -1,5 +1,5 @@
 import React from 'react';
-import { Star, Apple, Play } from 'lucide-react';
+import { Star } from 'lucide-react';
 import { motion } from 'motion/react';
 import type { CityData } from '../data/cities';
 

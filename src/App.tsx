@@ -9,7 +9,10 @@ import About from './pages/About';
 import Services from './pages/Services';
 import Commercial from './pages/Commercial';
 import Blog from './pages/Blog';
+import BlogDetails from './pages/BlogDetails';
 import Contact from './pages/Contact';
+import PrivacyPolicy from './pages/PrivacyPolicy';
+import TermsConditions from './pages/TermsConditions';
 import CityLanding from './pages/CityLanding';
 
 function ScrollToTop() {
@@ -24,13 +27,21 @@ function ScrollToTop() {
 
 export default function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
+  const [preselectedServiceId, setPreselectedServiceId] = useState<string | null>(null);
 
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', 'eco-professional');
   }, []);
 
-  const handleOpenBooking = () => setIsBookingOpen(true);
-  const handleCloseBooking = () => setIsBookingOpen(false);
+  const handleOpenBooking = (serviceId?: string) => {
+    setPreselectedServiceId(serviceId ?? null);
+    setIsBookingOpen(true);
+  };
+
+  const handleCloseBooking = () => {
+    setIsBookingOpen(false);
+    setPreselectedServiceId(null);
+  };
 
   return (
     <Router>
@@ -42,10 +53,13 @@ export default function App() {
           <Routes>
             <Route path="/" element={<Home onBookNow={handleOpenBooking} />} />
             <Route path="/about" element={<About />} />
-            <Route path="/services" element={<Services />} />
+            <Route path="/services" element={<Services onBookNow={handleOpenBooking} />} />
             <Route path="/commercial" element={<Commercial />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogDetails />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
             <Route path="/manchester" element={<CityLanding city="Manchester" onBookNow={handleOpenBooking} />} />
             <Route path="/leeds" element={<CityLanding city="Leeds" onBookNow={handleOpenBooking} />} />
             <Route path="/birmingham" element={<CityLanding city="Birmingham" onBookNow={handleOpenBooking} />} />
@@ -58,7 +72,8 @@ export default function App() {
 
         <BookingForm 
           isOpen={isBookingOpen} 
-          onClose={handleCloseBooking} 
+          onClose={handleCloseBooking}
+          initialServiceId={preselectedServiceId}
         />
       </div>
     </Router>

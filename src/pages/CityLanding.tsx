@@ -7,7 +7,7 @@ import { getCityData } from '../data/cities';
 
 interface CityLandingProps {
   city: string;
-  onBookNow: () => void;
+  onBookNow: (serviceId?: string) => void;
 }
 
 export default function CityLanding({ city, onBookNow }: CityLandingProps) {
@@ -94,7 +94,7 @@ export default function CityLanding({ city, onBookNow }: CityLandingProps) {
     <>
       <Hero onBookNow={onBookNow} city={city} cityData={cityData} />
       <HowItWorks />
-      <ServicesOverview city={city} cityData={cityData} />
+      <ServicesOverview city={city} cityData={cityData} onBookNow={onBookNow} />
       <AppPromoAndReviews cityData={cityData} />
     </>
   );

@@ -22,6 +22,14 @@ export interface ScheduleInfo {
   collectionTime: string;
 }
 
+export interface ContactPayload {
+  name: string;
+  email: string;
+  phone: string;
+  subject: string;
+  message: string;
+}
+
 export interface BookingPayload {
   customer: CustomerInfo;
   location: LocationInfo;
@@ -30,5 +38,6 @@ export interface BookingPayload {
   metadata: {
     sourceUrl: string;
     submittedAt: string;
+    referenceNumber: string;
   };
 }

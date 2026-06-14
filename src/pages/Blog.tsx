@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
+import { blogPosts } from '../data/blogPosts';
 
 export default function Blog() {
   return (
@@ -11,13 +13,25 @@ export default function Blog() {
         Read about garment care tips, our eco-friendly practices, and industry news.
       </p>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {[1, 2, 3].map((item) => (
-           <div key={item} className="glass-card p-8">
-             <div className="h-40 bg-white/5 rounded-xl mb-6"></div>
-             <p className="text-gold text-xs font-bold uppercase tracking-widest mb-3">Garment Care</p>
-             <h3 className="text-xl font-bold text-white mb-3">How to care for your delicate silks</h3>
-             <p className="text-sm text-slate opacity-60 font-light">Learn the best practices to maintain the sheen and quality of your silk garments at home...</p>
-           </div>
+        {blogPosts.map((post) => (
+           <Link
+             key={post.id}
+             to={`/blog/${post.id}`}
+             className="glass-card p-8 block hover:border-gold/30 transition-colors"
+           >
+             <div className="h-40 bg-white/5 rounded-xl mb-6 overflow-hidden">
+               <img
+                 src={post.image}
+                 alt={post.imageAlt}
+                 className="w-full h-full object-cover"
+               />
+             </div>
+             {post.category && (
+               <p className="text-gold text-xs font-bold uppercase tracking-widest mb-3">{post.category}</p>
+             )}
+             <h3 className="text-xl font-bold text-white mb-3">{post.title}</h3>
+             <p className="text-sm text-slate opacity-60 font-light">{post.excerpt}...</p>
+           </Link>
         ))}
       </div>
     </div>

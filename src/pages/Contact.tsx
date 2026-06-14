@@ -1,15 +1,16 @@
 import React from 'react';
 import { Mail, Phone, MapPin } from 'lucide-react';
+import ContactForm from '../components/ContactForm';
 
 export default function Contact() {
   return (
-    <div className="pt-32 pb-20 min-h-[70vh] bg-navy px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto flex flex-col justify-center">
+    <div className="pt-32 pb-20 min-h-[70vh] bg-navy px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
       <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">Get in Touch</h2>
       <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-12">
-        We're here to <span className="text-gold">help</span>.
+        We&apos;re here to <span className="text-gold">help</span>.
       </h1>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 mb-16">
         <div className="glass-card p-10 space-y-8">
            <h3 className="text-2xl font-bold text-white">London Office</h3>
            <div className="space-y-4 font-light text-slate opacity-80">
@@ -42,6 +43,8 @@ export default function Contact() {
            </div>
         </div>
       </div>
+
+      <ContactForm />
     </div>
   );
 }

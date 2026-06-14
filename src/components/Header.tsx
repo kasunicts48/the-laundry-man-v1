@@ -41,7 +41,7 @@ export default function Header({ onBookNow }: HeaderProps) {
             <span className="opacity-70">Follow Us:</span>
             <a href="#" className="hover:text-gold transition-colors"><Facebook size={14} /></a>
             <a href="#" className="hover:text-gold transition-colors">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M4 4l11.733 16h4.267l-11.733 -16z"/><path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/></svg>
+              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/></svg>
             </a>
             <a href="#" className="hover:text-gold transition-colors"><Instagram size={14} /></a>
           </div>
@@ -74,7 +74,7 @@ export default function Header({ onBookNow }: HeaderProps) {
             ))}
             <button 
               onClick={onBookNow}
-              className="px-6 py-2.5 border border-gold text-gold pill hover:bg-gold hover:text-navy transition-all text-xs font-semibold uppercase tracking-wide"
+              className="px-6 py-2.5 border border-gold text-gold pill hover:bg-gold hover:text-navy transition-all text-xs font-semibold uppercase tracking-wide cursor-pointer"
             >
               Book Now
             </button>
@@ -112,7 +112,7 @@ export default function Header({ onBookNow }: HeaderProps) {
                   setIsMobileMenuOpen(false);
                   onBookNow();
                 }}
-                className="border border-gold text-gold w-full py-3 px-6 pill hover:bg-gold hover:text-navy transition-all text-sm font-semibold uppercase tracking-wide text-center"
+                className="border border-gold text-gold w-full py-3 px-6 pill hover:bg-gold hover:text-navy transition-all text-sm font-semibold uppercase tracking-wide text-center cursor-pointer"
               >
                 Book a Collection
               </button>

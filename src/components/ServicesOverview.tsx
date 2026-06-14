@@ -1,61 +1,24 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
-import { Columns, Sparkles, Shirt, Wind, Briefcase, Layers, X } from 'lucide-react';
+import { X } from 'lucide-react';
 import type { CityData } from '../data/cities';
-
-import curtainsImg from '../assets/images/curtains.png';
-import suitDressImg from '../assets/images/suit-dress.png';
-import foldedShirtImg from '../assets/images/folded-shirt.png';
-import ironImg from '../assets/images/iron.png';
-import suitCoverImg from '../assets/images/suit-cover.png';
-import washingMachineImg from '../assets/images/washing-machine.png';
+import { services, type ServiceItem } from '../data/services';
 
 interface ServicesOverviewProps {
   city?: string;
   cityData?: CityData;
+  onBookNow?: (serviceId: string) => void;
 }
 
-export default function ServicesOverview({ city, cityData }: ServicesOverviewProps = {}) {
-  const [selectedService, setSelectedService] = useState<any>(null);
+export default function ServicesOverview({ city, cityData, onBookNow }: ServicesOverviewProps = {}) {
+  const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
 
-  const services = [
-    {
-      title: "Curtain Cleaning",
-      description: "Refresh and restore your curtains with our professional curtain cleaning service for both residential and commercial properties across Manchester. Using specialist cleaning techniques and careful handling, we remove dust, odours, and everyday build-up while helping to preserve the appearance, colour, and fabric quality of your curtains.\n\nWe have the expertise and equipment to clean a wide range of curtain types, including delicate and lined fabrics. We also specialise in cleaning blackout curtains, a service that requires particular care and is not widely offered. Every curtain is treated with attention to detail and returned fresh, clean, and ready to hang.",
-      image: curtainsImg,
-      price: "£10.00"
-    },
-    {
-      title: "Wedding Dress Cleaning",
-      description: "Preserve the beauty of your treasured gown with our specialist wedding dress cleaning service. Using gentle, professional cleaning techniques, we carefully treat delicate fabrics, intricate lace, beadwork, embroidery, and detailed embellishments to achieve the best possible results.\n\nEvery wedding dress receives individual attention and expert care, helping to remove marks and restore freshness while protecting the fabric and fine details. Whether you wish to preserve your gown as a keepsake or prepare it for future use, we ensure it is returned in the best possible condition with the care it deserves.",
-      image: suitDressImg,
-      price: "£50.00"
-    },
-    {
-      title: "Shirt Service",
-      description: "Look your best every day with our professional Shirt Service. Each shirt is carefully washed, expertly pressed, and finished to a high standard, ensuring a crisp, fresh, and professional appearance.\n\nUsing quality laundry processes and professional finishing equipment, we help maintain the shape, fabric quality, and appearance of your shirts. For your convenience, shirts can be returned neatly folded or individually hung and ready to wear, saving you valuable time while delivering outstanding results.",
-      image: foldedShirtImg,
-      price: "£6.00"
-    },
-    {
-      title: "Ironing Service",
-      description: "Enjoy perfectly finished garments with our professional ironing service. Each item is carefully pressed and finished with attention to detail, giving your clothes a crisp, fresh, and polished appearance.\n\nWe provide expert ironing for shirts, trousers, office wear, casual clothing, everyday dresses, occasion wear, and delicate fabrics. Using professional equipment and garment-specific techniques, we help maintain the shape, quality, and presentation of your clothing, saving you time while ensuring exceptional results every time.",
-      image: ironImg,
-      price: "£4.50"
-    },
-    {
-      title: "Dry Cleaning",
-      description: "Your garments are professionally cleaned, pressed, and finished using advanced, industry-leading equipment and premium eco-friendly cleaning solutions. Our carefully selected processes are designed to remove stains effectively while helping to preserve the colour, texture, and quality of your garments.\n\nWith a focus on quality and garment care, we use high-performance equipment and environmentally responsible products to deliver exceptional results while being gentle on both your clothes and the environment.",
-      image: suitCoverImg,
-      price: "£6.00"
-    },
-    {
-      title: "Wash & Fold",
-      description: "Enjoy the convenience of professionally washed, carefully dried, and neatly folded laundry, ready to wear or put away. Our Wash & Fold service is ideal for busy individuals, families, and businesses looking to save time without compromising on quality.\n\nFor garments that require extra care and a crisp, polished appearance, we also offer a professional ironing service. Every item is handled with attention to detail to ensure your clothes are returned fresh, clean, and finished to the highest standard.",
-      image: washingMachineImg,
-      price: "£4.50"
-    }
-  ];
+  const handleBookService = () => {
+    if (!selectedService) return;
+    const serviceId = selectedService.id;
+    setSelectedService(null);
+    onBookNow?.(serviceId);
+  };
 
   return (
     <section id="services" className="py-24 bg-navy-alt transition-colors duration-500 relative">
@@ -81,7 +44,7 @@ export default function ServicesOverview({ city, cityData }: ServicesOverviewPro
           {services.map((service, index) => {
             return (
               <motion.div 
-                key={index}
+                key={service.id}
                 initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -116,12 +79,14 @@ export default function ServicesOverview({ city, cityData }: ServicesOverviewPro
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-navy/80 backdrop-blur-sm"
+            onClick={() => setSelectedService(null)}
           >
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               exit={{ opacity: 0, y: 20, scale: 0.95 }}
               className="bg-navy-alt rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto shadow-2xl relative border border-white/10"
+              onClick={(e) => e.stopPropagation()}
             >
               <button 
                 onClick={() => setSelectedService(null)}
@@ -146,8 +111,9 @@ export default function ServicesOverview({ city, cityData }: ServicesOverviewPro
                     <div className="text-sm font-bold opacity-80 text-slate">Prices starting from {selectedService.price}</div>
                   </div>
                   <button 
-                    onClick={() => setSelectedService(null)}
-                    className="w-full sm:w-auto px-8 py-3 border border-slate/20 text-slate/60 font-bold uppercase tracking-widest text-xs hover:border-slate/40 hover:text-slate transition-colors rounded-full shrink-0"
+                    type="button"
+                    onClick={handleBookService}
+                    className="w-full sm:w-auto px-8 py-3 border border-gold/50 bg-gold/10 text-gold font-bold uppercase tracking-widest text-xs hover:bg-gold hover:text-navy transition-colors rounded-full shrink-0 cursor-pointer"
                   >
                     Book Now
                   </button>
