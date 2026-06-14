@@ -43,16 +43,39 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
             transition={{ duration: 0.6 }}
           >
             <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">Testimonials</h2>
-            <h3 className="text-4xl sm:text-5xl font-extrabold text-slate tracking-tighter mb-10">What Our {cityData?.name ? `${cityData.name} ` : ''}Customers Say</h3>
+            <h3 className="text-4xl sm:text-5xl font-extrabold text-slate tracking-tighter mb-4">What Our {cityData?.name ? `${cityData.name} ` : ''}Customers Say</h3>
             
+            <div className="flex items-center gap-3 mb-10">
+              <div className="flex gap-[2px]">
+                {[...Array(5)].map((_, idx) => (
+                  <div key={idx} className="w-6 h-6 bg-[#00B67A] flex items-center justify-center rounded-[2px]">
+                    <Star size={12} className="fill-white text-white" />
+                  </div>
+                ))}
+              </div>
+              <div className="text-slate font-bold text-sm">Excellent</div>
+              <div className="text-slate opacity-40 text-sm">•</div>
+              <a href="https://www.trustpilot.com/review/www.thelaundryman.co.uk" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+                <span className="text-slate text-sm font-light">Based on reviews on</span>
+                <div className="flex items-center gap-1 font-bold text-slate">
+                  <Star size={16} className="fill-[#00B67A] text-[#00B67A]" />
+                  Trustpilot
+                </div>
+              </a>
+            </div>
+
             <div className="space-y-6">
               {reviews.map((review, i) => (
-                <div key={i} className="glass-card p-6 border-l-[3px] border-l-gold !rounded-bl-md !rounded-tl-md">
-                  <div className="flex text-gold mb-3">
-                    {[...Array(5)].map((_, idx) => <Star key={idx} size={16} className="fill-gold" />)}
+                <div key={i} className="glass-card p-6 border-l-[4px] border-l-[#00B67A] !rounded-bl-md !rounded-tl-md">
+                  <div className="flex gap-[2px] mb-3">
+                    {[...Array(5)].map((_, idx) => (
+                      <div key={idx} className="w-5 h-5 bg-[#00B67A] flex items-center justify-center rounded-[2px]">
+                        <Star size={10} className="fill-white text-white" />
+                      </div>
+                    ))}
                   </div>
                   <p className="text-slate opacity-80 font-light leading-relaxed mb-3">"{review.text}"</p>
-                  <p className="text-sm font-bold text-gold opacity-90">- {review.author}</p>
+                  <p className="text-sm font-bold text-[#00B67A] opacity-90">- {review.author}</p>
                 </div>
               ))}
             </div>
@@ -76,19 +99,19 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
               <p className="text-slate opacity-60 text-lg mb-10 font-light leading-relaxed">Manage your orders, track driver locations, and pay securely right from your phone.</p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="#" className="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl px-6 py-4 transition-transform hover:-translate-y-1 w-full sm:w-auto">
-                  <Apple size={28} className="text-slate" />
-                  <div className="text-left">
-                    <div className="text-[10px] uppercase tracking-widest text-slate/60">Download on the</div>
-                    <div className="text-lg font-bold leading-tight mt-0.5 text-slate">App Store</div>
-                  </div>
+                <a href="#" className="transition-transform hover:-translate-y-1 inline-block">
+                  <img 
+                    src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" 
+                    alt="Download on the App Store" 
+                    className="h-12 sm:h-14 w-auto"
+                  />
                 </a>
-                <a href="#" className="flex items-center justify-center gap-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-2xl px-6 py-4 transition-transform hover:-translate-y-1 w-full sm:w-auto">
-                  <Play size={24} className="fill-slate text-slate" />
-                  <div className="text-left">
-                    <div className="text-[10px] uppercase tracking-widest text-slate/60">GET IT ON</div>
-                    <div className="text-lg font-bold leading-tight mt-0.5 text-slate">Google Play</div>
-                  </div>
+                <a href="#" className="transition-transform hover:-translate-y-1 inline-block">
+                  <img 
+                    src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
+                    alt="Get it on Google Play" 
+                    className="h-12 sm:h-14 w-auto"
+                  />
                 </a>
               </div>
             </div>

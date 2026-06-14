@@ -69,3 +69,69 @@ While traditional SEO relies on Server-Side Rendering (SSR), modern Googlebot ex
 1. **Targeted Long-Tail Keywords:** Ranking a single homepage for "Laundry Service UK" is highly competitive. Ranking a specific page for **"Premium Laundry Service in Leeds"** is much easier. Dedicated landing pages allow you to target localization queries.
 2. **Relevancy Metrics:** When a user searches for a service in their city, Google prioritizes pages with a strong local signal. Having `/leeds` in the URL alongside distinct visual cues (the "Leeds" text dynamically highlighted in script font) lowers bounce rates because users immediately confirm you service their specific area.
 3. **Link Building & Marketing Strategy:** Having dedicated URLs means you can run localized Facebook/Google Ads directly to `yourdomain.com/birmingham` rather than dropping the user on a generic homepage.
+
+---
+
+## 4. Architecture & Future Extensibility
+
+The application is built with a highly modular component-based architecture designed for low-friction scaling and future feature enhancements. 
+
+### Extensibility Analysis
+
+*   **Component Modularity:** Because the UI is built utilizing React components (e.g., `<Hero />`, `<ServicesOverview />`), new features or pages can be assembled rapidly by re-using existing, styled building blocks without risking regressions in other parts of the app.
+*   **Decoupled Data Layer:** The recent introduction of `src/data/cities.ts` proves the app's capability to separate "content" from "presentation". This allows non-developers or a future Headless CMS (like Sanity or Strapi) to inject data without touching the React code.
+*   **Predictable Scaling via TypeScript:** The strict typing ensures that as the application grows (e.g., adding a customer portal or complex booking forms), the compiler will catch structural errors before they hit production, vastly reducing manual QA time.
+*   **Backend Readiness:** The SPA architecture is natively decoupled. At any point, the client can choose to integrate a real API backend (Node.js/Express, Laravel/PHP, or Firebase) to handle user authentication, booking history, and driver routing without needing to rewrite the frontend. 
+
+### Architecture Diagram
+
+```mermaid
+graph TD
+    %% Core Users
+    User((User / Googlebot))
+
+    %% Frontend Routing Layer
+    subgraph Frontend [Vite + React SPA Application]
+        Router[React Router DOM]
+        
+        %% Pages
+        subgraph Pages [Page Views]
+            Home[Home Landing]
+            City[City Specifc Landing Pages\n/manchester, /leeds]
+            Services[Services Page]
+        end
+        
+        %% Components & Data
+        subgraph Internals [Core Modules]
+            Components[UI Components\nHero, HowItWorks, Nav]
+            Data[Local Data Store\ncities.ts]
+            SEO[SEO & Meta Hooks\nDynamic JSON-LD & Titles]
+        end
+    end
+
+    %% Future Backend / API hook
+    subgraph Future [Future Enhancements]
+        CMS[(Headless CMS)]
+        API[Booking Backend API / Node or PHP]
+        DB[(Database MySQL / Postgres)]
+    end
+
+    %% Connections
+    User -->|Visits Site| Router
+    Router --> Home
+    Router --> City
+    Router --> Services
+    
+    City --> SEO
+    City --> Data
+    City --> Components
+    Home --> Components
+
+    %% Future Connections
+    Data -.->|Future Sync| CMS
+    Pages -.->|Fetch Data / Post Bookings| API
+    API -.-> DB
+
+    classDef future fill:#f9f9f9,stroke:#333,stroke-dasharray: 5 5;
+    class Future,CMS,API,DB future;
+```

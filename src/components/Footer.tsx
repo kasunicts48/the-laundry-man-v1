@@ -123,6 +123,7 @@ export default function Footer() {
         <div className="flex flex-col md:flex-row justify-between items-center text-xs text-slate/50 font-medium">
           <p>© {new Date().getFullYear()} The Laundry Man App Ltd. All Rights Reserved.</p>
           <div className="flex gap-4 mt-4 md:mt-0">
+            <a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer" className="hover:text-white transition-colors">Icons by Flaticon</a>
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
           </div>

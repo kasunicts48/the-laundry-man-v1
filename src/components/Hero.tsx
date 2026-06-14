@@ -1,8 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { ShieldCheck, Truck, Star } from 'lucide-react';
+import { Truck, Star, ShieldCheck } from 'lucide-react';
 import { motion } from 'motion/react';
-import friendlyLaundryMan from '../assets/images/friendly_laundry_man_1779977474422.png';
+import lavBotLaundry from '../assets/images/lav_bot_laundry_1780456662542.png';
+import satisfactionImg from '../assets/images/satisfaction.png';
+import collectionDeliveryImg from '../assets/images/collection-delivery.png';
+import recommendedServiceImg from '../assets/images/recommended-service.png';
 import type { CityData } from '../data/cities';
 
 interface HeroProps {
@@ -13,17 +16,14 @@ interface HeroProps {
 
 export default function Hero({ onBookNow, city, cityData }: HeroProps) {
   return (
-    <div className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden flex items-center min-h-[90vh]">
+    <div className="relative overflow-hidden flex items-center min-h-screen pt-24 pb-12 lg:pt-32 lg:pb-16">
       {/* Background Image & Overlay */}
-      <div className="absolute inset-0 z-0 bg-navy">
+      <div className={`absolute inset-0 z-0 bg-white`}>
         <img 
-          src={friendlyLaundryMan} 
-          alt="Friendly Laundry Man" 
-          className="w-full h-full object-cover object-[70%_center] opacity-80 mix-blend-luminosity"
+          src={lavBotLaundry} 
+          alt="Laundry Hero" 
+          className={`w-full h-full object-cover transition-all duration-700 opacity-100 object-bottom`}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-navy via-navy/95 to-transparent mix-blend-multiply" />
-        <div className="absolute inset-0 bg-gradient-to-r from-navy via-navy/80 to-transparent" />
-        <div className="absolute top-0 right-0 w-2/3 h-full bg-gradient-to-l from-navy/30 to-transparent mix-blend-overlay"></div>
       </div>
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
@@ -97,25 +97,27 @@ export default function Hero({ onBookNow, city, cityData }: HeroProps) {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ duration: 1, delay: 0.8 }}
-            className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6"
+            className="mt-12 grid grid-cols-1 sm:grid-cols-3 gap-6 lg:gap-4"
           >
-            <div className="flex items-center gap-3 text-white/90">
-              <div className="bg-gold/20 p-2 rounded-full text-gold">
-                <Star size={24} className="fill-gold" />
+            <div className="flex items-center gap-4 text-slate bg-glass/90 backdrop-blur-md p-4 rounded-2xl border border-gold/20 transition-colors hover:bg-glass">
+              <div className="shrink-0 flex items-center justify-center">
+                <img src={satisfactionImg} alt="100% Customer Satisfaction" className="w-8 h-8 opacity-90" style={{ filter: "invert(13%) sepia(25%) saturate(1142%) hue-rotate(177deg) brightness(96%) contrast(87%)" }} />
               </div>
-              <span className="font-bold text-sm tracking-wide">100% Customer Satisfaction</span>
+              <span className="font-bold text-sm sm:text-base tracking-wide flex-1 text-slate font-sans">100% Customer Satisfaction</span>
             </div>
-            <div className="flex items-center gap-3 text-slate">
-              <div className="bg-white/5 border border-gold/20 p-2 rounded-2xl text-gold">
-                <Truck size={24} />
+            
+            <div className="flex items-center gap-4 text-slate bg-glass/90 backdrop-blur-md p-4 rounded-2xl border border-gold/20 transition-colors hover:bg-glass">
+              <div className="shrink-0 flex items-center justify-center">
+                <img src={collectionDeliveryImg} alt="Free Collection & Delivery" className="w-8 h-8 opacity-90" style={{ filter: "invert(13%) sepia(25%) saturate(1142%) hue-rotate(177deg) brightness(96%) contrast(87%)" }} />
               </div>
-              <span className="font-bold text-sm tracking-wide">Free Collection & Delivery</span>
+              <span className="font-bold text-sm sm:text-base tracking-wide flex-1 text-slate font-sans">Free Collection & Delivery</span>
             </div>
-            <div className="flex items-center gap-3 text-slate">
-              <div className="bg-white/5 border border-gold/20 p-2 rounded-2xl text-gold">
-                <ShieldCheck size={24} />
+
+            <div className="flex items-center gap-4 text-slate bg-glass/90 backdrop-blur-md p-4 rounded-2xl border border-gold/20 transition-colors hover:bg-glass">
+              <div className="shrink-0 flex items-center justify-center">
+                <img src={recommendedServiceImg} alt="Highly Recommended Service" className="w-8 h-8 opacity-90" style={{ filter: "invert(13%) sepia(25%) saturate(1142%) hue-rotate(177deg) brightness(96%) contrast(87%)" }} />
               </div>
-              <span className="font-bold text-sm tracking-wide">Highly Recommended Service</span>
+              <span className="font-bold text-sm sm:text-base tracking-wide flex-1 text-slate font-sans">Highly Recommended Service</span>
             </div>
           </motion.div>
         </div>

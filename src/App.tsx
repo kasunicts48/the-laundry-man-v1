@@ -25,6 +25,10 @@ function ScrollToTop() {
 export default function App() {
   const [isBookingOpen, setIsBookingOpen] = useState(false);
 
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', 'eco-professional');
+  }, []);
+
   const handleOpenBooking = () => setIsBookingOpen(true);
   const handleCloseBooking = () => setIsBookingOpen(false);
 

@@ -151,8 +151,8 @@ export default function BookingForm({ isOpen, onClose }: BookingFormProps) {
                   <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
                     <h3 className="text-xl font-bold text-slate flex items-center gap-3 border-b border-white/5 pb-4"><div className="p-2 rounded-xl bg-gold/10"><MapPin className="text-gold" size={18} /></div> Service Location</h3>
                     <div>
-                      <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Street Address</label>
-                      <input required name="address" value={formData.address} onChange={handleInputChange} type="text" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans placeholder:text-slate/20" placeholder="Flat 4, 12 High Street" />
+                      <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Street Address <span className="text-[10px] font-normal lowercase">(optional)</span></label>
+                      <input name="address" value={formData.address} onChange={handleInputChange} type="text" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans placeholder:text-slate/20" placeholder="Flat 4, 12 High Street" />
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>

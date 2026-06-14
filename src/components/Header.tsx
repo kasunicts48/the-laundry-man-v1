@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Facebook, Instagram, Mail } from 'lucide-react';
-import ThemeSelector from './ThemeSelector';
 
 interface HeaderProps {
   onBookNow: () => void;
@@ -73,7 +72,6 @@ export default function Header({ onBookNow }: HeaderProps) {
                 {link.name}
               </Link>
             ))}
-            <ThemeSelector />
             <button 
               onClick={onBookNow}
               className="px-6 py-2.5 border border-gold text-gold pill hover:bg-gold hover:text-navy transition-all text-xs font-semibold uppercase tracking-wide"
@@ -109,7 +107,6 @@ export default function Header({ onBookNow }: HeaderProps) {
               </Link>
             ))}
             <div className="pt-4 pb-2 px-3 flex flex-col items-center space-y-4">
-              <ThemeSelector />
               <button 
                 onClick={() => {
                   setIsMobileMenuOpen(false);
