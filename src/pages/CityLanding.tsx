@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Hero from '../components/Hero';
 import HowItWorks from '../components/HowItWorks';
 import ServicesOverview from '../components/ServicesOverview';
+import WhyChooseUs from '../components/WhyChooseUs';
 import AppPromoAndReviews from '../components/AppPromo';
 import { getCityData } from '../data/cities';
 
@@ -95,6 +96,7 @@ export default function CityLanding({ city, onBookNow }: CityLandingProps) {
       <Hero onBookNow={onBookNow} city={city} cityData={cityData} />
       <HowItWorks />
       <ServicesOverview city={city} cityData={cityData} onBookNow={onBookNow} />
+      <WhyChooseUs />
       <AppPromoAndReviews cityData={cityData} />
     </>
   );

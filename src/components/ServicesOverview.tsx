@@ -40,7 +40,7 @@ export default function ServicesOverview({ city, cityData, onBookNow }: Services
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+        <div className="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-x-8 md:gap-y-16 items-stretch">
           {services.map((service, index) => {
             return (
               <motion.div 
@@ -49,23 +49,35 @@ export default function ServicesOverview({ city, cityData, onBookNow }: Services
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex flex-col items-center text-center group cursor-pointer bg-navy border border-slate/5 rounded-3xl p-8 sm:p-10 shadow-sm hover:shadow-xl hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
+                className="flex h-full flex-col items-center text-center group cursor-pointer bg-transparent border-0 shadow-none rounded-none p-1.5 md:bg-navy md:border md:border-slate/5 md:rounded-3xl md:p-8 lg:p-10 md:shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
                 onClick={() => setSelectedService(service)}
               >
-                <div className="absolute inset-0 bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                <div className="mb-6 relative z-10 w-20 h-20 lg:w-24 lg:h-24">
-                  <img 
-                    src={service.image} 
-                    alt={service.title}
-                    className="w-full h-full object-contain transition-transform duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100"
-                    style={{ filter: "invert(13%) sepia(25%) saturate(1142%) hue-rotate(177deg) brightness(96%) contrast(87%)" }}
-                    onError={(e) => {
-                      (e.target as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
+                <div className="absolute inset-0 hidden bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none md:block"></div>
+
+                <div className="relative z-10 flex h-full w-full flex-col justify-between items-center md:h-auto md:justify-start">
+                  <div className="mx-auto flex h-14 w-14 shrink-0 items-center justify-center md:mb-6 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                    <img 
+                      src={service.image} 
+                      alt={service.title}
+                      className="max-h-full max-w-full object-contain object-center transition-transform duration-500 group-hover:scale-110 opacity-90 group-hover:opacity-100"
+                      style={{ filter: "invert(13%) sepia(25%) saturate(1142%) hue-rotate(177deg) brightness(96%) contrast(87%)" }}
+                      onError={(e) => {
+                        (e.target as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
+                  </div>
+
+                  <div className="flex w-full flex-col items-center md:gap-y-0">
+                    <h4 className="mb-1 flex h-[40px] w-full items-end justify-center px-0.5 text-center text-sm font-bold uppercase leading-tight tracking-normal text-slate transition-colors group-hover:text-gold sm:h-[48px] sm:text-base sm:tracking-wide md:mb-0 md:block md:h-auto md:text-xl md:leading-snug">
+                      {service.title}
+                    </h4>
+
+                    <div className="mt-0 flex w-full shrink-0 flex-col items-center justify-center text-[11px] sm:text-xs md:mt-2 md:text-sm font-bold opacity-60 text-slate leading-none md:leading-tight">
+                      <span className="block md:inline">Prices starting from</span>
+                      <span className="block md:inline md:ml-1">{service.price}</span>
+                    </div>
+                  </div>
                 </div>
-                <h4 className="text-lg font-bold text-slate mb-2 uppercase tracking-wide z-10 transition-colors group-hover:text-gold">{service.title}</h4>
-                <div className="text-xs font-bold opacity-60 text-slate z-10">Prices starting from {service.price}</div>
               </motion.div>
             );
           })}

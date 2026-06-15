@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import Header from './components/Header';
 import Footer from './components/Footer';
 import BookingForm from './components/BookingForm';
+import StickyBookNowBar from './components/StickyBookNowBar';
 
 import Home from './pages/Home';
 import About from './pages/About';
@@ -69,6 +70,8 @@ export default function App() {
         </main>
         
         <Footer />
+
+        <StickyBookNowBar onBookNow={() => handleOpenBooking()} />
 
         <BookingForm 
           isOpen={isBookingOpen} 

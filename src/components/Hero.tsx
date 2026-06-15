@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'motion/react';
 import lavBotLaundry from '../assets/images/lav_bot_laundry_1780456662542.png';
 import type { CityData } from '../data/cities';
@@ -73,24 +72,6 @@ export default function Hero({ onBookNow, city, cityData }: HeroProps) {
               View Services
             </a>
           </motion.div>
-
-          {!city && (
-            <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.5 }}
-              className="mt-6 flex flex-wrap items-center gap-3 text-xs font-semibold text-white/80 md:text-slate/80 uppercase tracking-widest"
-            >
-              <span>Available in:</span>
-              <div className="flex flex-wrap gap-2">
-                <Link to="/manchester" className="hover:text-gold transition-colors">Manchester</Link>
-                <Link to="/leeds" className="hover:text-gold transition-colors">Leeds</Link>
-                <Link to="/birmingham" className="hover:text-gold transition-colors">Birmingham</Link>
-                <Link to="/sheffield" className="hover:text-gold transition-colors">Sheffield</Link>
-                <Link to="/cheshire" className="hover:text-gold transition-colors">Cheshire</Link>
-              </div>
-            </motion.div>
-          )}
         </div>
       </div>
     </div>

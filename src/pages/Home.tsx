@@ -2,6 +2,7 @@ import React from 'react';
 import Hero from '../components/Hero';
 import HowItWorks from '../components/HowItWorks';
 import ServicesOverview from '../components/ServicesOverview';
+import WhyChooseUs from '../components/WhyChooseUs';
 import AppPromoAndReviews from '../components/AppPromo';
 
 interface HomeProps {
@@ -14,6 +15,7 @@ export default function Home({ onBookNow }: HomeProps) {
       <Hero onBookNow={onBookNow} />
       <HowItWorks />
       <ServicesOverview onBookNow={onBookNow} />
+      <WhyChooseUs />
       <AppPromoAndReviews />
     </>
   );

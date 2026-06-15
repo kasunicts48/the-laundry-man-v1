@@ -45,7 +45,37 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
             <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">Testimonials</h2>
             <h3 className="text-4xl sm:text-5xl font-extrabold text-slate tracking-tighter mb-4">What Our {cityData?.name ? `${cityData.name} ` : ''}Customers Say</h3>
             
-            <div className="flex items-center gap-3 mb-10">
+            {/* Mobile: compact Trustpilot widget */}
+            <div className="flex md:hidden items-center justify-center mb-10">
+              <div className="flex flex-col items-center">
+                <div className="flex gap-[2px]">
+                  {[...Array(5)].map((_, idx) => (
+                    <div key={idx} className="w-6 h-6 bg-[#00B67A] flex items-center justify-center rounded-[2px]">
+                      <Star size={12} className="fill-white text-white" />
+                    </div>
+                  ))}
+                </div>
+                <div className="text-slate font-bold text-xs mt-1.5 whitespace-nowrap">Excellent</div>
+              </div>
+
+              <div className="w-px h-8 bg-gray-300 mx-4 shrink-0" aria-hidden="true" />
+
+              <a
+                href="https://www.trustpilot.com/review/www.thelaundryman.co.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex flex-col items-center hover:opacity-80 transition-opacity"
+              >
+                <span className="text-slate text-xs font-light whitespace-nowrap">Based on reviews on</span>
+                <div className="flex items-center gap-1 font-bold text-slate mt-1.5 whitespace-nowrap">
+                  <Star size={16} className="fill-[#00B67A] text-[#00B67A]" />
+                  Trustpilot
+                </div>
+              </a>
+            </div>
+
+            {/* Desktop: original horizontal row */}
+            <div className="hidden md:flex items-center gap-3 mb-10">
               <div className="flex gap-[2px]">
                 {[...Array(5)].map((_, idx) => (
                   <div key={idx} className="w-6 h-6 bg-[#00B67A] flex items-center justify-center rounded-[2px]">
@@ -55,9 +85,14 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
               </div>
               <div className="text-slate font-bold text-sm">Excellent</div>
               <div className="text-slate opacity-40 text-sm">•</div>
-              <a href="https://www.trustpilot.com/review/www.thelaundryman.co.uk" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-                <span className="text-slate text-sm font-light">Based on reviews on</span>
-                <div className="flex items-center gap-1 font-bold text-slate">
+              <a
+                href="https://www.trustpilot.com/review/www.thelaundryman.co.uk"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 hover:opacity-80 transition-opacity"
+              >
+                <span className="text-slate text-sm font-light whitespace-nowrap">Based on reviews on</span>
+                <div className="flex items-center gap-1 font-bold text-slate whitespace-nowrap">
                   <Star size={16} className="fill-[#00B67A] text-[#00B67A]" />
                   Trustpilot
                 </div>
@@ -99,14 +134,24 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
               <p className="text-slate opacity-60 text-lg mb-10 font-light leading-relaxed">Manage your orders, track driver locations, and pay securely right from your phone.</p>
               
               <div className="flex flex-col sm:flex-row gap-4">
-                <a href="#" className="transition-transform hover:-translate-y-1 inline-block">
+                <a
+                  href="https://apps.apple.com/kr/app/the-laundryman-app/id6748582882?l=en-GB"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-transform hover:-translate-y-1 inline-block"
+                >
                   <img 
                     src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" 
                     alt="Download on the App Store" 
                     className="h-12 sm:h-14 w-auto"
                   />
                 </a>
-                <a href="#" className="transition-transform hover:-translate-y-1 inline-block">
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.cleancloudapp.thelaundryman"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-transform hover:-translate-y-1 inline-block"
+                >
                   <img 
                     src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
                     alt="Get it on Google Play" 

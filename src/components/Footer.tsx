@@ -123,6 +123,15 @@ function AreaList({ areas }: { areas: string[] }) {
   );
 }
 
+function LondonRegion({ name, areas }: { name: string; areas: string[] }) {
+  return (
+    <div>
+      <p className="text-sm font-bold text-white mb-2">{name}</p>
+      <AreaList areas={areas} />
+    </div>
+  );
+}
+
 function UkCityList({ cities }: { cities: string[] }) {
   return (
     <ul className="space-y-2.5">
@@ -148,7 +157,7 @@ function UkCityList({ cities }: { cities: string[] }) {
 export default function Footer() {
   return (
     <footer id="footer" className="bg-navy-alt text-slate border-t border-white/5 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-10 lg:pt-24">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-28 md:pb-10 lg:pt-24">
         {/* Upper section — 4 equal columns on large screens */}
         <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8 lg:gap-x-12 xl:gap-x-16 items-start">
           {/* Column 1: Services */}
@@ -213,12 +222,23 @@ export default function Footer() {
             {/* London */}
             <div className="xl:col-span-8">
               <FooterSectionHeading>The Laundry Man App London</FooterSectionHeading>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
+              {/* Mobile (sm and below): East + North | South + West */}
+              <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:hidden">
+                <div className="space-y-8 min-w-0">
+                  {footerLondonRegions.slice(0, 2).map((region) => (
+                    <LondonRegion key={region.name} name={region.name} areas={region.areas} />
+                  ))}
+                </div>
+                <div className="space-y-8 min-w-0">
+                  {footerLondonRegions.slice(2).map((region) => (
+                    <LondonRegion key={region.name} name={region.name} areas={region.areas} />
+                  ))}
+                </div>
+              </div>
+              {/* sm and up: 2 columns on tablet, 4 on desktop */}
+              <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
                 {footerLondonRegions.map((region) => (
-                  <div key={region.name}>
-                    <p className="text-sm font-bold text-white mb-2">{region.name}</p>
-                    <AreaList areas={region.areas} />
-                  </div>
+                  <LondonRegion key={region.name} name={region.name} areas={region.areas} />
                 ))}
               </div>
             </div>
@@ -226,7 +246,7 @@ export default function Footer() {
             {/* UK */}
             <div className="xl:col-span-4">
               <FooterSectionHeading>The Laundry Man App UK</FooterSectionHeading>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-2.5">
+              <div className="grid grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-2.5">
                 <UkCityList cities={footerUkCitiesCol1} />
                 <UkCityList cities={footerUkCitiesCol2} />
               </div>
@@ -234,12 +254,12 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <p className="text-xs text-slate/50 font-medium text-left">
+        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+          <p className="text-xs text-slate/50 font-medium">
             © 2026 The Laundry Man App Ltd. All Rights Reserved.
           </p>
           <nav
-            className="flex flex-wrap items-center justify-start sm:justify-end gap-x-2 gap-y-2 text-xs text-slate/50 font-light"
+            className="flex flex-wrap items-center justify-center sm:justify-end gap-x-2 gap-y-2 text-xs text-slate/50 font-light"
             aria-label="Footer legal and attribution links"
           >
             <a
