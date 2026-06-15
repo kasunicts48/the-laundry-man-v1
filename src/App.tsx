@@ -47,7 +47,7 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <div className="min-h-screen flex flex-col font-sans text-slate bg-navy">
+      <div className="min-h-screen flex flex-col font-sans text-ink bg-navy">
         <Header onBookNow={handleOpenBooking} />
         
         <main className="flex-grow">

@@ -15,7 +15,7 @@ import {
 } from '../data/footerContent';
 
 const linkClassName =
-  'text-sm text-slate/80 font-light hover:text-gold transition-colors duration-300 leading-relaxed';
+  'text-sm text-ink font-light hover:text-gold transition-colors duration-300 leading-relaxed';
 
 function FooterSectionHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -156,7 +156,7 @@ function UkCityList({ cities }: { cities: string[] }) {
 
 export default function Footer() {
   return (
-    <footer id="footer" className="bg-navy-alt text-slate border-t border-white/5 transition-colors duration-500">
+    <footer id="footer" className="bg-navy-alt text-ink border-t border-white/5 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-28 md:pb-10 lg:pt-24">
         {/* Upper section — 4 equal columns on large screens */}
         <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8 lg:gap-x-12 xl:gap-x-16 items-start">
@@ -172,8 +172,8 @@ export default function Footer() {
             <ul className="space-y-2.5">
               {footerOperatingHours.map(({ day, hours }) => (
                 <li key={day} className="flex items-baseline justify-between gap-4 text-sm font-light">
-                  <span className="text-slate/80">{day}</span>
-                  <span className="text-slate/60 shrink-0 tabular-nums">{hours}</span>
+                  <span className="text-ink">{day}</span>
+                  <span className="text-ink shrink-0 tabular-nums">{hours}</span>
                 </li>
               ))}
             </ul>
@@ -197,7 +197,7 @@ export default function Footer() {
             </div>
             <FooterLinkList links={footerQuickLinksCol2} />
             <div className="mt-8 flex flex-wrap items-center gap-4">
-              <span className="text-sm text-slate/80 font-light">Social media</span>
+              <span className="text-sm text-ink font-light">Social media</span>
               <div className="flex items-center gap-3">
                 {footerSocialLinks.map((social) => (
                   <a
@@ -206,7 +206,7 @@ export default function Footer() {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={social.label}
-                    className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-slate/70 hover:text-gold hover:border-gold/30 hover:bg-gold/5 transition-all duration-300"
+                    className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-ink hover:text-gold hover:border-gold/30 hover:bg-gold/5 transition-all duration-300"
                   >
                     <SocialIcon type={social.icon} />
                   </a>
@@ -255,11 +255,11 @@ export default function Footer() {
         </div>
 
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-          <p className="text-xs text-slate/50 font-medium">
+          <p className="text-xs text-ink font-medium">
             © 2026 The Laundry Man App Ltd. All Rights Reserved.
           </p>
           <nav
-            className="flex flex-wrap items-center justify-center sm:justify-end gap-x-2 gap-y-2 text-xs text-slate/50 font-light"
+            className="flex flex-wrap items-center justify-center sm:justify-end gap-x-2 gap-y-2 text-xs text-ink font-light"
             aria-label="Footer legal and attribution links"
           >
             <a
@@ -270,7 +270,7 @@ export default function Footer() {
             >
               Icons by Flaticon
             </a>
-            <span className="text-slate/30" aria-hidden="true">
+            <span className="text-ink" aria-hidden="true">
               ·
             </span>
             <Link
@@ -279,7 +279,7 @@ export default function Footer() {
             >
               Privacy Policy
             </Link>
-            <span className="text-slate/30" aria-hidden="true">
+            <span className="text-ink" aria-hidden="true">
               ·
             </span>
             <Link

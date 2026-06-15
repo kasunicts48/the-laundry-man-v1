@@ -4,9 +4,9 @@ import { motion } from 'motion/react';
 import type { ContactPayload } from '../types';
 
 const inputClassName =
-  'w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans placeholder:text-slate/20';
+  'w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink/50';
 
-const labelClassName = 'block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2';
+const labelClassName = 'block text-xs uppercase tracking-widest font-bold text-ink mb-2';
 
 export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -97,7 +97,7 @@ export default function ContactForm() {
       className="glass-card p-8 sm:p-10"
     >
       <h3 className="text-2xl font-bold text-white mb-2">Send Us a Message</h3>
-      <p className="text-slate opacity-70 font-light mb-8">
+      <p className="text-ink font-light mb-8">
         Have a question about our services? Fill in the form below and we&apos;ll get back to you as soon as possible.
       </p>
 
@@ -106,7 +106,7 @@ export default function ContactForm() {
           <CheckCircle2 className="mx-auto text-gold" size={56} />
           <div>
             <h4 className="text-xl font-bold text-white mb-2">Message Sent</h4>
-            <p className="text-slate opacity-80 font-light">
+            <p className="text-ink font-light">
               Thank you, <span className="font-bold text-white">{formData.name}</span>. We&apos;ve received your message and will respond to{' '}
               <span className="text-gold">{formData.email}</span> shortly.
             </p>

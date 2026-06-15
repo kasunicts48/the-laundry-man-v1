@@ -57,7 +57,7 @@ export default function LegalPageLayout({
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-6">{title}</h1>
 
       {intro && (
-        <p className="text-lg text-slate opacity-80 font-light leading-relaxed mb-12 max-w-3xl">{intro}</p>
+        <p className="text-lg text-ink font-light leading-relaxed mb-12 max-w-3xl">{intro}</p>
       )}
 
       <div className="space-y-10">
@@ -72,14 +72,14 @@ export default function LegalPageLayout({
             {section.paragraphs?.map((paragraph, paragraphIndex) => (
               <p
                 key={`${sectionIndex}-p-${paragraphIndex}`}
-                className="text-slate opacity-80 font-light leading-relaxed"
+                className="text-ink font-light leading-relaxed"
               >
                 {renderTextWithEmailLinks(paragraph, `${sectionIndex}-p-${paragraphIndex}`)}
               </p>
             ))}
 
             {section.listItems && section.listItems.length > 0 && (
-              <ul className="list-disc pl-5 space-y-2 text-slate opacity-80 font-light leading-relaxed">
+              <ul className="list-disc pl-5 space-y-2 text-ink font-light leading-relaxed">
                 {section.listItems.map((item, itemIndex) => (
                   <li key={`${sectionIndex}-li-${itemIndex}`}>
                     {renderTextWithEmailLinks(item, `${sectionIndex}-li-${itemIndex}`)}

@@ -7,7 +7,7 @@ export default function About() {
       <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white leading-tight mb-6">
         Dedicated to <span className="text-gold">Quality</span> and the <span className="text-gold">Planet</span>.
       </h1>
-      <p className="text-lg sm:text-xl text-slate opacity-80 max-w-3xl font-light leading-relaxed mb-16">
+      <p className="text-lg sm:text-xl text-ink max-w-3xl font-light leading-relaxed mb-16">
         We are a premium eco-friendly laundry and dry cleaning service. 
         Our closed-loop technology and pH-neutral bio-enzymes ensure your garments receive the best care possible, without harming the environment.
       </p>
@@ -17,7 +17,7 @@ export default function About() {
           Why Choose Us?
         </h3>
         
-        <div className="space-y-6 text-slate opacity-80 text-base sm:text-lg font-light leading-relaxed">
+        <div className="space-y-6 text-ink text-base sm:text-lg font-light leading-relaxed">
           <p>
             With over 25 years of experience, we provide expert laundry and dry-cleaning services with quality, care, and attention to detail. All work is carried out at our own premises, ensuring consistent standards and reliable results.
           </p>

@@ -67,7 +67,7 @@ export default function Hero({ onBookNow, city, cityData }: HeroProps) {
             </button>
             <a 
               href="#services"
-              className="px-6 py-3 bg-white/5 border border-white/10 text-slate font-bold text-xs pill hover:bg-white/10 transition-transform hover:-translate-y-1 text-center tracking-wider uppercase"
+              className="px-6 py-3 bg-white/5 border border-white/10 text-ink font-bold text-xs pill hover:bg-white/10 transition-transform hover:-translate-y-1 text-center tracking-wider uppercase"
             >
               View Services
             </a>

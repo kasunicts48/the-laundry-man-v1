@@ -5,7 +5,7 @@ import { getBlogPostById, type BlogContentBlock } from '../data/blogPosts';
 
 function BlogContent({ blocks }: { blocks: BlogContentBlock[] }) {
   return (
-    <div className="space-y-6 text-slate opacity-80 font-light leading-relaxed">
+    <div className="space-y-6 text-ink font-light leading-relaxed">
       {blocks.map((block, index) => {
         if (block.type === 'paragraph') {
           return <p key={index}>{block.text}</p>;
@@ -53,7 +53,7 @@ export default function BlogDetails() {
           Back to Blog
         </Link>
         <h1 className="text-3xl font-extrabold text-white mb-4">Article not found</h1>
-        <p className="text-slate opacity-70 font-light">The blog post you are looking for does not exist.</p>
+        <p className="text-ink font-light">The blog post you are looking for does not exist.</p>
       </div>
     );
   }
@@ -69,7 +69,7 @@ export default function BlogDetails() {
         <p className="text-gold text-xs font-bold uppercase tracking-widest mb-3">{post.category}</p>
       )}
       <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">{post.title}</h1>
-      <p className="text-sm text-slate opacity-50 font-light mb-8">{post.date}</p>
+      <p className="text-sm text-ink font-light mb-8">{post.date}</p>
 
       <div className="overflow-hidden rounded-2xl border border-white/10 mb-10">
         <img src={post.image} alt={post.imageAlt} className="w-full h-auto max-h-[420px] object-cover" />

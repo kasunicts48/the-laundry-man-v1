@@ -143,10 +143,10 @@ export default function BookingForm({ isOpen, onClose, initialServiceId }: Booki
           {/* Header */}
           <div className="px-6 py-5 border-b border-white/5 bg-white/5 backdrop-blur-md text-white flex justify-between items-center shrink-0">
             <div>
-              <h2 className="text-2xl font-extrabold tracking-tight text-slate">Book a Collection</h2>
+              <h2 className="text-2xl font-extrabold tracking-tight text-ink">Book a Collection</h2>
               {!isSuccess && <p className="text-gold text-xs uppercase tracking-widest font-bold mt-1">Step {step} of 4</p>}
             </div>
-            <button onClick={onClose} className="p-2 text-slate/50 hover:text-white hover:bg-white/10 rounded-full transition-colors border border-white/5">
+            <button onClick={onClose} className="p-2 text-ink hover:text-white hover:bg-white/10 rounded-full transition-colors border border-white/5">
               <X size={20} />
             </button>
           </div>
@@ -158,17 +158,17 @@ export default function BookingForm({ isOpen, onClose, initialServiceId }: Booki
                 <div className="mx-auto mb-6 flex h-20 w-20 items-center justify-center rounded-full border border-green-500/25 bg-green-500/10 text-green-500 shadow-[0_0_24px_-6px_rgba(34,197,94,0.35)]">
                   <CheckCircle2 size={40} strokeWidth={2} />
                 </div>
-                <h3 className="text-3xl font-extrabold text-slate tracking-tighter mb-6">Booking Confirmed.</h3>
-                <p className="text-base text-slate leading-relaxed mb-5">
+                <h3 className="text-3xl font-extrabold text-ink tracking-tighter mb-6">Booking Confirmed.</h3>
+                <p className="text-base text-ink leading-relaxed mb-5">
                   Thank you, <span className="font-bold">{formData.fullName}</span>. We&apos;ve sent a confirmation email to{' '}
                   <span className="font-bold">{formData.email}</span>. Our driver will contact you prior to collection.
                 </p>
                 {bookingReference && (
-                  <p className="text-base font-bold text-slate mb-5">
+                  <p className="text-base font-bold text-ink mb-5">
                     Reference Number: {bookingReference}
                   </p>
                 )}
-                <p className="text-sm text-slate-500 leading-relaxed mb-10">
+                <p className="text-sm text-ink leading-relaxed mb-10">
                   Note: If you don&apos;t see the confirmation email in your inbox, please check your Spam or Promotions folder.
                 </p>
                 <button 
@@ -183,19 +183,19 @@ export default function BookingForm({ isOpen, onClose, initialServiceId }: Booki
                 {/* Step 1: Customer */}
                 {step === 1 && (
                   <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
-                    <h3 className="text-xl font-bold text-slate flex items-center gap-3 border-b border-white/5 pb-4"><div className="p-2 rounded-xl bg-gold/10"><Tag className="text-gold" size={18} /></div> Contact Details</h3>
+                    <h3 className="text-xl font-bold text-ink flex items-center gap-3 border-b border-white/5 pb-4"><div className="p-2 rounded-xl bg-gold/10"><Tag className="text-gold" size={18} /></div> Contact Details</h3>
                     <div>
-                      <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Full Name</label>
-                      <input required name="fullName" value={formData.fullName} onChange={handleInputChange} type="text" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans placeholder:text-slate/20" placeholder="e.g. John Doe" />
+                      <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">Full Name</label>
+                      <input required name="fullName" value={formData.fullName} onChange={handleInputChange} type="text" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink/50" placeholder="e.g. John Doe" />
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Email Address</label>
-                        <input required name="email" value={formData.email} onChange={handleInputChange} type="email" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans placeholder:text-slate/20" placeholder="john@example.com" />
+                        <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">Email Address</label>
+                        <input required name="email" value={formData.email} onChange={handleInputChange} type="email" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink/50" placeholder="john@example.com" />
                       </div>
                       <div>
-                        <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Phone Number</label>
-                        <input required name="phone" value={formData.phone} onChange={handleInputChange} type="tel" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans placeholder:text-slate/20" placeholder="07700 900077" />
+                        <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">Phone Number</label>
+                        <input required name="phone" value={formData.phone} onChange={handleInputChange} type="tel" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink/50" placeholder="07700 900077" />
                       </div>
                     </div>
                   </motion.div>
@@ -204,24 +204,24 @@ export default function BookingForm({ isOpen, onClose, initialServiceId }: Booki
                 {/* Step 2: Location */}
                 {step === 2 && (
                   <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
-                    <h3 className="text-xl font-bold text-slate flex items-center gap-3 border-b border-white/5 pb-4"><div className="p-2 rounded-xl bg-gold/10"><MapPin className="text-gold" size={18} /></div> Service Location</h3>
+                    <h3 className="text-xl font-bold text-ink flex items-center gap-3 border-b border-white/5 pb-4"><div className="p-2 rounded-xl bg-gold/10"><MapPin className="text-gold" size={18} /></div> Service Location</h3>
                     <div>
-                      <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Street Address <span className="text-[10px] font-normal lowercase">(optional)</span></label>
-                      <input name="address" value={formData.address} onChange={handleInputChange} type="text" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans placeholder:text-slate/20" placeholder="Flat 4, 12 High Street" />
+                      <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">Street Address <span className="text-[10px] font-normal lowercase">(optional)</span></label>
+                      <input name="address" value={formData.address} onChange={handleInputChange} type="text" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink/50" placeholder="Flat 4, 12 High Street" />
                     </div>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">City/Town</label>
-                        <input required name="city" value={formData.city} onChange={handleInputChange} type="text" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans placeholder:text-slate/20" placeholder="London" />
+                        <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">City/Town</label>
+                        <input required name="city" value={formData.city} onChange={handleInputChange} type="text" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink/50" placeholder="London" />
                       </div>
                       <div>
-                        <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Postcode</label>
-                        <input required name="postcode" value={formData.postcode} onChange={handleInputChange} type="text" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans placeholder:text-slate/20" placeholder="WC2H 9JQ" />
+                        <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">Postcode</label>
+                        <input required name="postcode" value={formData.postcode} onChange={handleInputChange} type="text" className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink/50" placeholder="WC2H 9JQ" />
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Delivery Instructions <span className="text-[10px] text-slate/30">(Optional)</span></label>
-                      <textarea name="instructions" value={formData.instructions} onChange={handleInputChange} rows={2} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans placeholder:text-slate/20" placeholder="e.g. Leave at reception, gate code..." />
+                      <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">Delivery Instructions <span className="text-[10px] text-ink">(Optional)</span></label>
+                      <textarea name="instructions" value={formData.instructions} onChange={handleInputChange} rows={2} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink/50" placeholder="e.g. Leave at reception, gate code..." />
                     </div>
                   </motion.div>
                 )}
@@ -229,12 +229,12 @@ export default function BookingForm({ isOpen, onClose, initialServiceId }: Booki
                 {/* Step 3: Service Details */}
                 {step === 3 && (
                   <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
-                    <h3 className="text-xl font-bold text-slate flex items-center gap-3 border-b border-white/5 pb-4"><div className="p-2 rounded-xl bg-gold/10"><PackageOpen className="text-gold" size={18} /></div> Service Details</h3>
+                    <h3 className="text-xl font-bold text-ink flex items-center gap-3 border-b border-white/5 pb-4"><div className="p-2 rounded-xl bg-gold/10"><PackageOpen className="text-gold" size={18} /></div> Service Details</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Service Type</label>
-                        <select required name="serviceType" value={formData.serviceType} onChange={handleInputChange} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy text-slate transition-all font-sans appearance-none">
-                          <option value="" className="text-slate/50">Select a service...</option>
+                        <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">Service Type</label>
+                        <select required name="serviceType" value={formData.serviceType} onChange={handleInputChange} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy text-ink transition-all font-sans appearance-none">
+                          <option value="" className="text-ink">Select a service...</option>
                           {services.map((service) => (
                             <option key={service.id} value={service.id}>
                               {service.name}
@@ -243,9 +243,9 @@ export default function BookingForm({ isOpen, onClose, initialServiceId }: Booki
                         </select>
                       </div>
                       <div>
-                        <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Quantity <span className="text-[10px] font-normal normal-case">(Optional)</span></label>
-                        <select name="volume" value={formData.volume} onChange={handleInputChange} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy text-slate transition-all font-sans appearance-none">
-                          <option value="" className="text-slate/50">Select quantity (Optional)</option>
+                        <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">Quantity <span className="text-[10px] font-normal normal-case">(Optional)</span></label>
+                        <select name="volume" value={formData.volume} onChange={handleInputChange} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy text-ink transition-all font-sans appearance-none">
+                          <option value="" className="text-ink">Select quantity (Optional)</option>
                           <option value="Small">Small Bag (1-5 items)</option>
                           <option value="Medium">Medium Bag (6-15 items)</option>
                           <option value="Large">Large Bag (15+ items)</option>
@@ -253,8 +253,8 @@ export default function BookingForm({ isOpen, onClose, initialServiceId }: Booki
                       </div>
                     </div>
                     <div>
-                      <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Special Requests <span className="text-[10px] text-slate/30">(Optional)</span></label>
-                      <textarea name="notes" value={formData.notes} onChange={handleInputChange} rows={2} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans placeholder:text-slate/20" placeholder="e.g. No starch on shirts, gentle cycle..." />
+                      <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">Special Requests <span className="text-[10px] text-ink">(Optional)</span></label>
+                      <textarea name="notes" value={formData.notes} onChange={handleInputChange} rows={2} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink/50" placeholder="e.g. No starch on shirts, gentle cycle..." />
                     </div>
                   </motion.div>
                 )}
@@ -262,16 +262,16 @@ export default function BookingForm({ isOpen, onClose, initialServiceId }: Booki
                 {/* Step 4: Schedule */}
                 {step === 4 && (
                   <motion.div initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} className="space-y-6">
-                    <h3 className="text-xl font-bold text-slate flex items-center gap-3 border-b border-white/5 pb-4"><div className="p-2 rounded-xl bg-gold/10"><Calendar className="text-gold" size={18} /></div> Schedule Collection</h3>
+                    <h3 className="text-xl font-bold text-ink flex items-center gap-3 border-b border-white/5 pb-4"><div className="p-2 rounded-xl bg-gold/10"><Calendar className="text-gold" size={18} /></div> Schedule Collection</h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
                       <div>
-                        <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Collection Date</label>
-                        <input required name="collectionDate" value={formData.collectionDate} onChange={handleInputChange} type="date" min={new Date(Date.now() + 86400000).toISOString().split('T')[0]} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-slate transition-all font-sans custom-date-input" />
+                        <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">Collection Date</label>
+                        <input required name="collectionDate" value={formData.collectionDate} onChange={handleInputChange} type="date" min={new Date(Date.now() + 86400000).toISOString().split('T')[0]} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans custom-date-input" />
                       </div>
                       <div>
-                        <label className="block text-xs uppercase tracking-widest font-bold text-slate/50 mb-2">Time Window</label>
-                        <select required name="collectionTime" value={formData.collectionTime} onChange={handleInputChange} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy text-slate transition-all font-sans appearance-none">
-                          <option value="" className="text-slate/50">Select a time...</option>
+                        <label className="block text-xs uppercase tracking-widest font-bold text-ink mb-2">Time Window</label>
+                        <select required name="collectionTime" value={formData.collectionTime} onChange={handleInputChange} className="w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-navy text-ink transition-all font-sans appearance-none">
+                          <option value="" className="text-ink">Select a time...</option>
                           <option value="08:00 - 10:00">08:00 - 10:00</option>
                           <option value="10:00 - 12:00">10:00 - 12:00</option>
                           <option value="12:00 - 14:00">12:00 - 14:00</option>
@@ -280,7 +280,7 @@ export default function BookingForm({ isOpen, onClose, initialServiceId }: Booki
                         </select>
                       </div>
                     </div>
-                    <div className="bg-gold/5 border border-gold/10 p-5 rounded-2xl flex items-start gap-4 mt-6 text-sm font-light text-slate/80">
+                    <div className="bg-gold/5 border border-gold/10 p-5 rounded-2xl flex items-start gap-4 mt-6 text-sm font-light text-ink">
                       <div className="mt-0.5"><CheckCircle2 size={18} className="text-gold" /></div>
                       <p>Your items will be cleaned and delivered back to you roughly 24-48 hours after collection. Exact return time arranged via SMS upon completion.</p>
                     </div>
@@ -297,7 +297,7 @@ export default function BookingForm({ isOpen, onClose, initialServiceId }: Booki
                 {/* Navigation Buttons */}
                 <div className="mt-10 flex gap-4 pt-6 border-t border-white/5">
                   {step > 1 && (
-                    <button type="button" onClick={handlePrev} className="flex-1 py-4 px-6 pill border border-white/20 text-slate font-bold hover:bg-white/5 transition-colors text-center text-xs uppercase tracking-widest cursor-pointer">
+                    <button type="button" onClick={handlePrev} className="flex-1 py-4 px-6 pill border border-white/20 text-ink font-bold hover:bg-white/5 transition-colors text-center text-xs uppercase tracking-widest cursor-pointer">
                       Back
                     </button>
                   )}

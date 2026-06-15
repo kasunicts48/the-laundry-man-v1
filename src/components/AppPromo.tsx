@@ -84,7 +84,7 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
                 ))}
               </div>
               <div className="text-ink font-bold text-sm">Excellent</div>
-              <div className="text-ink opacity-40 text-sm">•</div>
+              <div className="text-ink text-sm">•</div>
               <a
                 href="https://www.trustpilot.com/review/www.thelaundryman.co.uk"
                 target="_blank"
@@ -110,7 +110,7 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
                     ))}
                   </div>
                   <p className="text-ink font-light leading-relaxed mb-3">"{review.text}"</p>
-                  <p className="text-sm font-bold text-[#00B67A] opacity-90">- {review.author}</p>
+                  <p className="text-sm font-bold text-[#00B67A]">- {review.author}</p>
                 </div>
               ))}
             </div>
