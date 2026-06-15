@@ -10,6 +10,7 @@
   --color-gold-hover: color-mix(in oklab, var(--theme-accent) 80%, black);
   --color-glass: var(--theme-glass);
   --color-phone-border: var(--theme-phone-border);
+  --color-ink: #000000;
   
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;

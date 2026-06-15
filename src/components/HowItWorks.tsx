@@ -3,7 +3,7 @@ import { motion } from 'motion/react';
 
 import bookingIcon from '../assets/icons/booking.png';
 import pickupTimeIcon from '../assets/icons/pickup-time.png';
-import fastDeliveryIcon from '../assets/icons/fast-delivery.png';
+import deliveryManIcon from '../assets/icons/delivery-man.png';
 
 const steps = [
   {
@@ -18,7 +18,7 @@ const steps = [
       'Our trusted drivers collect your clothes directly and our experts clean them meticulously.',
   },
   {
-    image: fastDeliveryIcon,
+    image: deliveryManIcon,
     title: '3. Fast Delivery',
     description: 'Your clothes are returned fresh, folded, and ready to wear.',
   },
@@ -45,17 +45,17 @@ export default function HowItWorks() {
   return (
     <section id="about" className="py-12 sm:py-24 bg-navy relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
           <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">How It Works</h2>
           <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate tracking-tighter">
             Effortless Laundry in 3 Simple Steps
           </h3>
         </div>
 
-        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-6 lg:gap-10 max-w-5xl mx-auto">
+        <div className="relative grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-4 lg:gap-6 max-w-5xl mx-auto">
           {/* Desktop: horizontal connector between step icons */}
           <div
-            className="hidden md:block absolute top-10 lg:top-12 left-[17%] right-[17%] h-px bg-slate/20 z-0 pointer-events-none"
+            className="hidden md:block absolute top-8 lg:top-9 left-[17%] right-[17%] h-px bg-slate/20 z-0 pointer-events-none"
             aria-hidden="true"
           />
 
@@ -68,14 +68,14 @@ export default function HowItWorks() {
               transition={{ duration: 0.5, delay: index * 0.2 }}
               className="relative z-10 flex flex-col items-center text-center group"
             >
-              <div className="relative z-10 mb-5 flex h-32 w-32 items-center justify-center bg-transparent border-0 shadow-none rounded-none p-0 backdrop-blur-none md:mb-6 md:h-16 md:w-16 md:bg-glass/90 md:backdrop-blur-md md:rounded-2xl md:shadow-sm md:border md:border-gold/20 md:p-3 md:transition-colors md:duration-300 md:transform md:group-hover:bg-glass md:group-hover:-translate-y-1 lg:h-20 lg:w-20 lg:p-4">
+              <div className="relative z-10 mb-1 flex h-24 w-24 items-center justify-center bg-transparent border-0 shadow-none rounded-none p-0 backdrop-blur-none md:mb-2 md:h-14 md:w-14 md:bg-glass/90 md:backdrop-blur-md md:rounded-2xl md:shadow-sm md:border md:border-gold/20 md:p-2.5 md:transition-colors md:duration-300 md:transform md:group-hover:bg-glass md:group-hover:-translate-y-1 lg:h-16 lg:w-16 lg:p-3">
                 <StepIcon image={step.image} title={step.title} />
               </div>
 
-              <h4 className="text-xl md:text-lg lg:text-xl font-extrabold md:font-bold text-slate mb-2.5 md:mb-3 leading-snug">
+              <h4 className="text-xl md:text-lg lg:text-xl font-extrabold md:font-bold text-slate mb-1.5 md:mb-2 leading-snug">
                 {step.title}
               </h4>
-              <p className="text-sm md:text-sm opacity-80 md:opacity-60 leading-relaxed px-2 sm:px-4 text-slate max-w-xs md:max-w-none mx-auto md:mx-0">
+              <p className="text-sm leading-relaxed px-2 sm:px-4 text-ink max-w-xs md:max-w-none mx-auto md:mx-0">
                 {step.description}
               </p>
             </motion.div>

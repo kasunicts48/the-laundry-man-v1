@@ -44,7 +44,7 @@ export default function WhyChooseUs() {
           <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate tracking-tighter">
             Best Dry Cleaning & Laundry Service
           </h3>
-          <p className="text-slate opacity-60 font-light mt-4 text-lg leading-relaxed">
+          <p className="text-ink font-light mt-4 text-lg leading-relaxed">
             We pick up, clean and return within 24 hours.
           </p>
         </div>
@@ -60,7 +60,7 @@ export default function WhyChooseUs() {
               className="text-center md:text-left max-w-md mx-auto md:max-w-none md:mx-0"
             >
               <h4 className="text-lg font-bold text-slate mb-2 leading-snug">{benefit.title}</h4>
-              <p className="text-sm sm:text-base text-slate opacity-60 font-light leading-relaxed">
+              <p className="text-sm sm:text-base text-ink font-light leading-relaxed">
                 {benefit.description}
               </p>
             </motion.div>

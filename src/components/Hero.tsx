@@ -11,7 +11,7 @@ interface HeroProps {
 
 export default function Hero({ onBookNow, city, cityData }: HeroProps) {
   return (
-    <div className="relative overflow-hidden flex items-center min-h-screen pt-24 pb-12 lg:pt-32 lg:pb-16">
+    <div id="hero" className="relative overflow-hidden flex items-center min-h-screen pt-24 pb-12 lg:pt-32 lg:pb-16">
       {/* Background — solid theme on mobile; full image from md up */}
       <div className="absolute inset-0 z-0 bg-navy">
         <img
@@ -48,7 +48,7 @@ export default function Hero({ onBookNow, city, cityData }: HeroProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-base sm:text-lg text-slate/90 mb-10 max-w-2xl font-light leading-relaxed opacity-80"
+            className="text-base sm:text-lg text-ink mb-10 max-w-2xl font-light leading-relaxed"
           >
             {cityData ? cityData.heroDescription : `Eco-friendly, professional garment care delivered right to your door. We pick up, clean, and return your clothes pristine within 24 hours.`}
           </motion.p>

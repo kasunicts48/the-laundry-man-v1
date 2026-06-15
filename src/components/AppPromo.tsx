@@ -55,7 +55,7 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
                     </div>
                   ))}
                 </div>
-                <div className="text-slate font-bold text-xs mt-1.5 whitespace-nowrap">Excellent</div>
+                <div className="text-ink font-bold text-xs mt-1.5 whitespace-nowrap">Excellent</div>
               </div>
 
               <div className="w-px h-8 bg-gray-300 mx-4 shrink-0" aria-hidden="true" />
@@ -66,8 +66,8 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
                 rel="noopener noreferrer"
                 className="flex flex-col items-center hover:opacity-80 transition-opacity"
               >
-                <span className="text-slate text-xs font-light whitespace-nowrap">Based on reviews on</span>
-                <div className="flex items-center gap-1 font-bold text-slate mt-1.5 whitespace-nowrap">
+                <span className="text-ink text-xs font-light whitespace-nowrap">Based on reviews on</span>
+                <div className="flex items-center gap-1 font-bold text-ink mt-1.5 whitespace-nowrap">
                   <Star size={16} className="fill-[#00B67A] text-[#00B67A]" />
                   Trustpilot
                 </div>
@@ -83,16 +83,16 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
                   </div>
                 ))}
               </div>
-              <div className="text-slate font-bold text-sm">Excellent</div>
-              <div className="text-slate opacity-40 text-sm">•</div>
+              <div className="text-ink font-bold text-sm">Excellent</div>
+              <div className="text-ink opacity-40 text-sm">•</div>
               <a
                 href="https://www.trustpilot.com/review/www.thelaundryman.co.uk"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center gap-2 hover:opacity-80 transition-opacity"
               >
-                <span className="text-slate text-sm font-light whitespace-nowrap">Based on reviews on</span>
-                <div className="flex items-center gap-1 font-bold text-slate whitespace-nowrap">
+                <span className="text-ink text-sm font-light whitespace-nowrap">Based on reviews on</span>
+                <div className="flex items-center gap-1 font-bold text-ink whitespace-nowrap">
                   <Star size={16} className="fill-[#00B67A] text-[#00B67A]" />
                   Trustpilot
                 </div>
@@ -109,7 +109,7 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
                       </div>
                     ))}
                   </div>
-                  <p className="text-slate opacity-80 font-light leading-relaxed mb-3">"{review.text}"</p>
+                  <p className="text-ink font-light leading-relaxed mb-3">"{review.text}"</p>
                   <p className="text-sm font-bold text-[#00B67A] opacity-90">- {review.author}</p>
                 </div>
               ))}
@@ -131,7 +131,7 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
             <div className="relative z-10 w-full max-w-md mx-auto xl:mx-0">
               <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">The App</h2>
               <h3 className="text-4xl sm:text-5xl font-extrabold text-slate tracking-tighter mb-6 leading-tight">Download Our App for Easier Booking</h3>
-              <p className="text-slate opacity-60 text-lg mb-10 font-light leading-relaxed">Manage your orders, track driver locations, and pay securely right from your phone.</p>
+              <p className="text-ink text-lg mb-10 font-light leading-relaxed">Manage your orders, track driver locations, and pay securely right from your phone.</p>
               
               <div className="flex flex-col sm:flex-row gap-4">
                 <a
