@@ -9,9 +9,10 @@ interface ServicesOverviewProps {
   city?: string;
   cityData?: CityData;
   onBookNow?: (serviceId: string) => void;
+  hideSectionHeader?: boolean;
 }
 
-export default function ServicesOverview({ city, cityData, onBookNow }: ServicesOverviewProps = {}) {
+export default function ServicesOverview({ city, cityData, onBookNow, hideSectionHeader = false }: ServicesOverviewProps = {}) {
   const [selectedService, setSelectedService] = useState<ServiceItem | null>(null);
 
   const handleBookService = () => {
@@ -33,8 +34,9 @@ export default function ServicesOverview({ city, cityData, onBookNow }: Services
   }, [selectedService]);
 
   return (
-    <section id="services" className="py-24 bg-navy-alt transition-colors duration-500 relative">
+    <section id="services" className={`bg-navy-alt transition-colors duration-500 relative ${hideSectionHeader ? 'pt-12 pb-24' : 'py-24'}`}>
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {!hideSectionHeader && (
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">Our Services</h2>
           {city ? (
@@ -51,6 +53,7 @@ export default function ServicesOverview({ city, cityData, onBookNow }: Services
              </>
           )}
         </div>
+        )}
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 md:gap-x-8 md:gap-y-16 items-stretch max-w-5xl md:max-w-none mx-auto">
           {services.map((service, index) => {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Facebook, Instagram, Mail } from 'lucide-react';
 import { footerSocialLinks } from '../data/footerContent';
@@ -21,6 +21,7 @@ interface HeaderProps {
 export default function Header({ onBookNow }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -31,6 +32,31 @@ export default function Header({ onBookNow }: HeaderProps) {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    const syncHeaderHeight = () => {
+      if (!headerRef.current) return;
+      document.documentElement.style.setProperty(
+        '--site-header-height',
+        `${headerRef.current.offsetHeight}px`
+      );
+    };
+
+    syncHeaderHeight();
+    requestAnimationFrame(syncHeaderHeight);
+
+    window.addEventListener('resize', syncHeaderHeight);
+    window.addEventListener('orientationchange', syncHeaderHeight);
+
+    const observer = new ResizeObserver(syncHeaderHeight);
+    if (headerRef.current) observer.observe(headerRef.current);
+
+    return () => {
+      window.removeEventListener('resize', syncHeaderHeight);
+      window.removeEventListener('orientationchange', syncHeaderHeight);
+      observer.disconnect();
+    };
+  }, [location.pathname, isScrolled]);
+
   const navLinks = [
     { name: 'Home', href: '/' },
     { name: 'About Us', href: '/about' },
@@ -40,11 +66,26 @@ export default function Header({ onBookNow }: HeaderProps) {
     { name: 'Contact', href: '/contact' },
   ];
 
+  const heroRoutes = ['/', '/manchester', '/leeds', '/birmingham', '/sheffield', '/cheshire'];
+  const hasHeroBanner = heroRoutes.includes(location.pathname);
+  const useSolidHeader = !hasHeroBanner || isScrolled;
+
   return (
-    <header className={`fixed w-full z-50 transition-all duration-300 border-b ${isScrolled ? 'bg-navy/80 backdrop-blur-md border-white/5 py-0' : 'bg-transparent border-transparent py-2'}`}>
-      {/* Top Bar */}
-      <div className="bg-navy text-ink border-b border-white/5 py-2 px-4 sm:px-6 lg:px-8 text-xs font-medium">
-        <div className="max-w-7xl mx-auto flex justify-between items-center">
+    <header
+      className={`fixed w-full z-50 transition-all duration-300 border-b ${
+        useSolidHeader
+          ? 'bg-navy/80 backdrop-blur-md border-white/5'
+          : 'bg-transparent border-transparent py-2'
+      }`}
+    >
+      <div ref={headerRef}>
+        {/* Top Bar */}
+        <div
+          className={`text-ink border-b border-white/5 py-2 px-4 sm:px-6 lg:px-8 text-xs font-medium ${
+            useSolidHeader ? '' : 'bg-navy'
+          }`}
+        >
+          <div className="max-w-7xl mx-auto flex justify-between items-center">
           <a href="mailto:info@thelaundryman.co.uk" className="flex items-center gap-2 hover:text-gold transition-colors">
             <Mail size={14} />
             <span className="hidden sm:inline">info@thelaundryman.co.uk</span>
@@ -64,12 +105,12 @@ export default function Header({ onBookNow }: HeaderProps) {
               </a>
             ))}
           </div>
+          </div>
         </div>
-      </div>
 
-      {/* Main Nav */}
-      <div className={`max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 ${isScrolled ? 'py-4' : 'py-4'}`}>
-        <div className="flex justify-between items-center">
+        {/* Main Nav */}
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 py-4">
+          <div className="flex justify-between items-center">
           {/* Logo */}
           <Link to="/" className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo(0,0)}>
             <div className="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-navy font-heading font-bold text-xl">
@@ -109,11 +150,12 @@ export default function Header({ onBookNow }: HeaderProps) {
             </button>
           </div>
         </div>
+        </div>
       </div>
 
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-navy border-t border-white/10 shadow-xl absolute w-full">
+        <div className="md:hidden bg-navy/95 backdrop-blur-md border-t border-white/10 shadow-xl absolute w-full">
           <div className="px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <Link

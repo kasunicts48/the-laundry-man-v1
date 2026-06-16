@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import ServicesOverview from '../components/ServicesOverview';
+import InnerPageHeader, { InnerPageTitleHighlight } from '../components/InnerPageHeader';
 import type { ServicesBookingLocationState } from '../data/footerContent';
 
 interface ServicesProps {
@@ -20,8 +21,20 @@ export default function Services({ onBookNow }: ServicesProps) {
   }, [location.pathname, location.state, navigate, onBookNow]);
 
   return (
-    <div className="pt-24 pb-12 min-h-[70vh] bg-navy-alt transition-colors duration-500">
-      <ServicesOverview onBookNow={onBookNow} />
-    </div>
+    <>
+      <InnerPageHeader
+        eyebrow="Our Services"
+        title={
+          <>
+            Comprehensive <InnerPageTitleHighlight>Garment Care</InnerPageTitleHighlight>.
+          </>
+        }
+        description="We handle everything from your everyday wash & fold to specialized dry cleaning, ensuring superior quality across all fabrics."
+      />
+
+      <div className="pb-12 min-h-[70vh] bg-navy-alt transition-colors duration-500">
+        <ServicesOverview onBookNow={onBookNow} hideSectionHeader />
+      </div>
+    </>
   );
 }

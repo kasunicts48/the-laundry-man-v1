@@ -11,6 +11,7 @@
   --color-glass: var(--theme-glass);
   --color-phone-border: var(--theme-phone-border);
   --color-ink: #000000;
+  --color-paper: #ffffff;
   
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
   --font-heading: "Outfit", ui-sans-serif, system-ui, sans-serif;
@@ -73,6 +74,13 @@
   --theme-bg-image: none;
 }
 
+:root {
+  --site-header-height: 6.625rem;
+}
+
+.inner-page-banner {
+  margin-top: calc(var(--site-header-height, 6.625rem) - 1px);
+}
 
 body {
   @apply bg-navy text-ink font-sans antialiased transition-colors duration-500;
