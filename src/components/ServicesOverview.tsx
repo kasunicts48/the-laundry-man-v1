@@ -52,7 +52,7 @@ export default function ServicesOverview({ city, cityData, onBookNow }: Services
           )}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 md:gap-x-8 md:gap-y-16 items-stretch max-w-5xl md:max-w-none mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-0 md:gap-x-8 md:gap-y-16 items-stretch max-w-5xl md:max-w-none mx-auto">
           {services.map((service, index) => {
             return (
               <motion.div 
@@ -61,13 +61,13 @@ export default function ServicesOverview({ city, cityData, onBookNow }: Services
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex h-full flex-col items-center text-center group cursor-pointer bg-transparent border-0 shadow-none rounded-none p-1.5 md:bg-navy md:border md:border-slate/5 md:rounded-3xl md:p-8 lg:p-10 md:shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
+                className="flex h-full flex-col items-center text-center group cursor-pointer bg-transparent border-0 shadow-none rounded-none py-5 md:py-0 p-1.5 md:bg-navy md:border md:border-slate/5 md:rounded-3xl md:p-8 lg:p-10 md:shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
                 onClick={() => setSelectedService(service)}
               >
                 <div className="absolute inset-0 hidden bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none md:block"></div>
 
                 <div className="relative z-10 flex h-full w-full flex-col justify-between items-center md:h-auto md:justify-start">
-                  <div className="mx-auto mb-3 flex h-16 w-16 shrink-0 items-center justify-center md:mb-6 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                  <div className="mx-auto mb-1 flex h-24 w-24 shrink-0 items-center justify-center md:mb-6 md:h-20 md:w-20 lg:h-24 lg:w-24">
                     <img 
                       src={service.image} 
                       alt={service.title}
@@ -90,6 +90,13 @@ export default function ServicesOverview({ city, cityData, onBookNow }: Services
                     </div>
                   </div>
                 </div>
+
+                {index < services.length - 1 && (
+                  <hr
+                    className="md:hidden mt-5 w-48 max-w-[70%] border-0 border-t border-slate/20"
+                    aria-hidden="true"
+                  />
+                )}
               </motion.div>
             );
           })}
