@@ -5,6 +5,7 @@ import {
   footerOperatingHours,
   footerQuickLinksCol1,
   footerQuickLinksCol2,
+  footerExploreLinks,
   footerLondonRegions,
   footerUkCitiesCol1,
   footerUkCitiesCol2,
@@ -26,6 +27,14 @@ function FooterSectionHeading({ children }: { children: React.ReactNode }) {
 }
 
 function FooterNavLink({ label, href }: FooterLink) {
+  if (href.includes('#')) {
+    return (
+      <a href={href} className={linkClassName}>
+        {label}
+      </a>
+    );
+  }
+
   if (href.startsWith('/') && !href.startsWith('//')) {
     return (
       <Link to={href} className={linkClassName}>
@@ -41,11 +50,11 @@ function FooterNavLink({ label, href }: FooterLink) {
   );
 }
 
-function FooterServiceLink({ label, href, serviceId }: FooterServiceLink) {
+function FooterServiceLink({ label, serviceId }: FooterServiceLink) {
   return (
     <Link
-      to={href}
-      state={{ autoOpenBooking: true, serviceType: serviceId }}
+      to="/book"
+      state={{ serviceType: serviceId }}
       className={linkClassName}
     >
       {label}
@@ -104,21 +113,13 @@ function SocialIcon({ type }: { type: 'facebook' | 'tiktok' | 'instagram' }) {
 function AreaList({ areas }: { areas: string[] }) {
   return (
     <ul className="space-y-2.5">
-      {areas.map((area) => {
-        const href = resolveCityHref(area);
-
-        return (
-          <li key={area}>
-            {href === '#' ? (
-              <span className={linkClassName}>{area}</span>
-            ) : (
-              <Link to={href} className={linkClassName}>
-                {area}
-              </Link>
-            )}
-          </li>
-        );
-      })}
+      {areas.map((area) => (
+        <li key={area}>
+          <Link to={resolveCityHref(area)} className={linkClassName}>
+            {area}
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 }
@@ -135,21 +136,13 @@ function LondonRegion({ name, areas }: { name: string; areas: string[] }) {
 function UkCityList({ cities }: { cities: string[] }) {
   return (
     <ul className="space-y-2.5">
-      {cities.map((city) => {
-        const href = resolveCityHref(city);
-
-        return (
-          <li key={city}>
-            {href === '#' ? (
-              <span className={linkClassName}>{city}</span>
-            ) : (
-              <Link to={href} className={linkClassName}>
-                {city}
-              </Link>
-            )}
-          </li>
-        );
-      })}
+      {cities.map((city) => (
+        <li key={city}>
+          <Link to={resolveCityHref(city)} className={linkClassName}>
+            {city}
+          </Link>
+        </li>
+      ))}
     </ul>
   );
 }
@@ -158,15 +151,12 @@ export default function Footer() {
   return (
     <footer id="footer" className="bg-navy-alt text-ink border-t border-white/5 transition-colors duration-500">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-28 md:pb-10 lg:pt-24">
-        {/* Upper section — 4 equal columns on large screens */}
-        <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-y-12 gap-x-8 lg:gap-x-12 xl:gap-x-16 items-start">
-          {/* Column 1: Services */}
+        <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-y-12 gap-x-8 lg:gap-x-10 xl:gap-x-12 items-start">
           <div className="min-w-0">
             <FooterSectionHeading>Services</FooterSectionHeading>
             <FooterServiceLinkList links={footerServices} />
           </div>
 
-          {/* Column 2: Operating hours */}
           <div className="min-w-0">
             <FooterSectionHeading>Operating Hours</FooterSectionHeading>
             <ul className="space-y-2.5">
@@ -179,13 +169,16 @@ export default function Footer() {
             </ul>
           </div>
 
-          {/* Column 3: Quick links (sub-column 1) */}
+          <div className="min-w-0">
+            <FooterSectionHeading>Explore</FooterSectionHeading>
+            <FooterLinkList links={footerExploreLinks} />
+          </div>
+
           <div className="min-w-0">
             <FooterSectionHeading>Quick Links</FooterSectionHeading>
             <FooterLinkList links={footerQuickLinksCol1} />
           </div>
 
-          {/* Column 4: Quick links (sub-column 2) + social media */}
           <div className="min-w-0 flex flex-col">
             <div
               className="hidden md:block pb-3 mb-6 border-b border-white/5"
@@ -216,34 +209,36 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Lower section */}
-        <div className="mt-16 pt-12 border-t border-white/5">
+        {/* Lower section — locations */}
+        <div id="locations" className="mt-16 pt-12 border-t border-white/5 scroll-mt-28">
           <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-x-8 xl:gap-y-12 items-start">
-            {/* London */}
             <div className="xl:col-span-8">
               <FooterSectionHeading>The Laundry Man App London</FooterSectionHeading>
-              {/* Mobile (sm and below): East + North | South + West */}
               <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:hidden">
                 <div className="space-y-8 min-w-0">
                   {footerLondonRegions.slice(0, 2).map((region) => (
-                    <LondonRegion key={region.name} name={region.name} areas={region.areas} />
+                    <div key={region.name}>
+                      <LondonRegion name={region.name} areas={region.areas} />
+                    </div>
                   ))}
                 </div>
                 <div className="space-y-8 min-w-0">
                   {footerLondonRegions.slice(2).map((region) => (
-                    <LondonRegion key={region.name} name={region.name} areas={region.areas} />
+                    <div key={region.name}>
+                      <LondonRegion name={region.name} areas={region.areas} />
+                    </div>
                   ))}
                 </div>
               </div>
-              {/* sm and up: 2 columns on tablet, 4 on desktop */}
               <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
                 {footerLondonRegions.map((region) => (
-                  <LondonRegion key={region.name} name={region.name} areas={region.areas} />
+                  <div key={region.name}>
+                    <LondonRegion name={region.name} areas={region.areas} />
+                  </div>
                 ))}
               </div>
             </div>
 
-            {/* UK */}
             <div className="xl:col-span-4">
               <FooterSectionHeading>The Laundry Man App UK</FooterSectionHeading>
               <div className="grid grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-2.5">
@@ -256,7 +251,7 @@ export default function Footer() {
 
         <div className="mt-12 pt-8 border-t border-white/5 flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
           <p className="text-xs text-ink font-medium">
-            © 2026 The Laundry Man App Ltd. All Rights Reserved.
+            © 2026 The Laundry Man App. All Rights Reserved.
           </p>
           <nav
             className="flex flex-wrap items-center justify-center sm:justify-end gap-x-2 gap-y-2 text-xs text-ink font-light"

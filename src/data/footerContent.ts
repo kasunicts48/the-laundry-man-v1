@@ -1,4 +1,5 @@
 import { services, type ServiceId } from './services';
+import { resolveLocationHref } from './locations';
 
 export interface FooterLink {
   label: string;
@@ -26,17 +27,9 @@ export interface LondonRegion {
   areas: string[];
 }
 
-const cityRouteMap: Record<string, string> = {
-  cheshire: '/cheshire',
-  leeds: '/leeds',
-  manchester: '/manchester',
-  'manchester city centre': '/manchester',
-  birmingham: '/birmingham',
-  sheffield: '/sheffield',
-};
-
+/** @deprecated Use resolveLocationHref from ./locations */
 export function resolveCityHref(area: string): string {
-  return cityRouteMap[area.toLowerCase()] ?? '#';
+  return resolveLocationHref(area);
 }
 
 export const footerServices: FooterServiceLink[] = services.map((service) => ({
@@ -59,6 +52,13 @@ export const footerQuickLinksCol1: FooterLink[] = [
   { label: 'About us', href: '/about' },
   { label: 'Services', href: '/services' },
   { label: 'Contact', href: '/contact' },
+];
+
+export const footerExploreLinks: FooterLink[] = [
+  { label: 'How It Works', href: '/#how-it-works' },
+  { label: 'Why Choose Us', href: '/#why-choose-us' },
+  { label: 'Testimonials', href: '/#testimonials' },
+  { label: 'Locations', href: '/locations' },
 ];
 
 export const footerQuickLinksCol2: FooterLink[] = [

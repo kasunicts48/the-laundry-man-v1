@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Facebook, Instagram, Mail } from 'lucide-react';
 import { footerSocialLinks } from '../data/footerContent';
+import { isLocationHomePath } from '../data/locations';
 
 function HeaderSocialIcon({ type }: { type: 'facebook' | 'tiktok' | 'instagram' }) {
   if (type === 'facebook') return <Facebook size={14} />;
@@ -66,8 +67,7 @@ export default function Header({ onBookNow }: HeaderProps) {
     { name: 'Contact', href: '/contact' },
   ];
 
-  const heroRoutes = ['/', '/manchester', '/leeds', '/birmingham', '/sheffield', '/cheshire'];
-  const hasHeroBanner = heroRoutes.includes(location.pathname);
+  const hasHeroBanner = isLocationHomePath(location.pathname);
   const useSolidHeader = !hasHeroBanner || isScrolled;
 
   return (

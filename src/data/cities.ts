@@ -13,6 +13,22 @@ export interface CityData {
 }
 
 export const citiesData: Record<string, CityData> = {
+  london: {
+    id: 'london',
+    name: 'London',
+    heroSubtitle: 'Premium Laundry & Dry Cleaning Services in',
+    heroDescription:
+      'Eco-friendly, professional garment care delivered right to your door across London. We pick up, clean, and return your clothes pristine within 24 hours.',
+    servicesDescription:
+      'Serving East, North, South, and West London with specialist garment care for busy city living.',
+    testimonials: [
+      {
+        author: 'Happy Customer',
+        text: 'Extremely convenient and reliable service in London. Highly recommended!',
+        rating: 5,
+      },
+    ],
+  },
   manchester: {
     id: 'manchester',
     name: 'Manchester',

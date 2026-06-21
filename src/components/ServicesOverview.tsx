@@ -70,7 +70,7 @@ export default function ServicesOverview({ city, cityData, onBookNow, hideSectio
                 <div className="absolute inset-0 hidden bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none md:block"></div>
 
                 <div className="relative z-10 flex h-full w-full flex-col justify-between items-center md:h-auto md:justify-start">
-                  <div className="mx-auto mb-1 flex h-24 w-24 shrink-0 items-center justify-center md:mb-6 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                  <div className="mx-auto mb-1 flex h-32 w-32 shrink-0 items-center justify-center md:mb-6 md:h-20 md:w-20 lg:h-24 lg:w-24">
                     <img 
                       src={service.image} 
                       alt={service.title}
@@ -87,7 +87,7 @@ export default function ServicesOverview({ city, cityData, onBookNow, hideSectio
                       {service.title}
                     </h4>
 
-                    <div className="mt-1 flex w-full shrink-0 flex-col items-center justify-center text-xs md:mt-2 md:text-sm font-semibold text-ink leading-tight md:leading-tight">
+                    <div className="mt-1 flex w-full shrink-0 flex-col items-center justify-center text-xs md:mt-2 md:text-sm font-normal text-ink leading-tight md:leading-tight">
                       <span className="block md:inline">Prices starting from</span>
                       <span className="block md:inline md:ml-1">{service.price}</span>
                     </div>
@@ -144,7 +144,7 @@ export default function ServicesOverview({ city, cityData, onBookNow, hideSectio
                     <div className="flex flex-col sm:flex-row sm:justify-between sm:items-start gap-4 sm:gap-6 mb-6 sm:mb-8">
                       <div>
                         <h3 className="text-2xl sm:text-3xl font-extrabold text-slate mb-2 uppercase tracking-tighter">{selectedService.title}</h3>
-                        <div className="text-sm font-semibold text-ink">Prices starting from {selectedService.price}</div>
+                        <div className="text-sm font-normal text-ink">Prices starting from {selectedService.price}</div>
                       </div>
                       <button
                         type="button"

@@ -31,16 +31,74 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
   }
 
   return (
-    <section className="py-24 bg-navy overflow-hidden">
+    <section id="testimonials" className="pt-12 pb-24 md:py-24 bg-navy overflow-hidden scroll-mt-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
-          {/* Reviews Side */}
+
+          {/* App Promo Side — first on mobile, right column on desktop */}
+          <motion.div 
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="order-1 lg:order-2 glass-card p-10 sm:p-14 relative flex flex-col justify-center min-h-[500px] overflow-hidden"
+          >
+            {/* Abstract Background Shapes */}
+            <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
+            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl translate-y-1/4 -translate-x-1/4"></div>
+
+            <div className="relative z-10 w-full max-w-md mx-auto xl:mx-0">
+              <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">The App</h2>
+              <h3 className="text-4xl sm:text-5xl font-extrabold text-slate tracking-tighter mb-6 leading-tight">Download Our App for Easier Booking</h3>
+              <p className="text-ink text-lg mb-10 font-light leading-relaxed">Manage your orders, track driver locations, and pay securely right from your phone.</p>
+              
+              <div className="flex flex-col sm:flex-row gap-4">
+                <a
+                  href="https://apps.apple.com/kr/app/the-laundryman-app/id6748582882?l=en-GB"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-transform hover:-translate-y-1 inline-block"
+                >
+                  <img 
+                    src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" 
+                    alt="Download on the App Store" 
+                    className="h-12 sm:h-14 w-auto"
+                  />
+                </a>
+                <a
+                  href="https://play.google.com/store/apps/details?id=com.cleancloudapp.thelaundryman"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="transition-transform hover:-translate-y-1 inline-block"
+                >
+                  <img 
+                    src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
+                    alt="Get it on Google Play" 
+                    className="h-12 sm:h-14 w-auto"
+                  />
+                </a>
+              </div>
+            </div>
+            
+            {/* Simulated Phone Mockup peeking out */}
+            <div className="absolute -bottom-24 -right-12 sm:-right-8 lg:-right-24 xl:-right-10 w-64 sm:w-80 h-96 bg-navy rounded-t-[3rem] border-8 border-phone-border shadow-[0_-20px_60px_-15px_rgba(212,175,55,0.1)] opacity-40 sm:opacity-100 hidden md:block rotate-12 transform origin-bottom-right transition-colors duration-500">
+              <div className="w-full h-full bg-navy-alt rounded-t-[2.5rem] p-4 pt-10 border border-white/5 transition-colors duration-500">
+                <div className="w-1/2 h-4 bg-white/10 rounded-full mx-auto mb-8 relative before:absolute before:inset-y-1 before:right-2 before:w-2 before:h-2 before:bg-white/20 before:rounded-full"></div>
+                <div className="space-y-4">
+                  <div className="w-full h-24 bg-white/5 rounded-2xl border border-white/5"></div>
+                  <div className="w-full h-24 bg-white/5 rounded-2xl border border-white/5"></div>
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Reviews Side — second on mobile, left column on desktop */}
           <motion.div 
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="order-2 lg:order-1"
           >
             <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">Testimonials</h2>
             <h3 className="text-4xl sm:text-5xl font-extrabold text-slate tracking-tighter mb-4">What Our {cityData?.name ? `${cityData.name} ` : ''}Customers Say</h3>
@@ -113,63 +171,6 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
                   <p className="text-sm font-bold text-[#00B67A]">- {review.author}</p>
                 </div>
               ))}
-            </div>
-          </motion.div>
-
-          {/* App Promo Side */}
-          <motion.div 
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="glass-card p-10 sm:p-14 relative flex flex-col justify-center min-h-[500px] overflow-hidden"
-          >
-            {/* Abstract Background Shapes */}
-            <div className="absolute top-0 right-0 w-64 h-64 bg-gold/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/2"></div>
-            <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl translate-y-1/4 -translate-x-1/4"></div>
-
-            <div className="relative z-10 w-full max-w-md mx-auto xl:mx-0">
-              <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">The App</h2>
-              <h3 className="text-4xl sm:text-5xl font-extrabold text-slate tracking-tighter mb-6 leading-tight">Download Our App for Easier Booking</h3>
-              <p className="text-ink text-lg mb-10 font-light leading-relaxed">Manage your orders, track driver locations, and pay securely right from your phone.</p>
-              
-              <div className="flex flex-col sm:flex-row gap-4">
-                <a
-                  href="https://apps.apple.com/kr/app/the-laundryman-app/id6748582882?l=en-GB"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-transform hover:-translate-y-1 inline-block"
-                >
-                  <img 
-                    src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg" 
-                    alt="Download on the App Store" 
-                    className="h-12 sm:h-14 w-auto"
-                  />
-                </a>
-                <a
-                  href="https://play.google.com/store/apps/details?id=com.cleancloudapp.thelaundryman"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="transition-transform hover:-translate-y-1 inline-block"
-                >
-                  <img 
-                    src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg" 
-                    alt="Get it on Google Play" 
-                    className="h-12 sm:h-14 w-auto"
-                  />
-                </a>
-              </div>
-            </div>
-            
-            {/* Simulated Phone Mockup peeking out */}
-            <div className="absolute -bottom-24 -right-12 sm:-right-8 lg:-right-24 xl:-right-10 w-64 sm:w-80 h-96 bg-navy rounded-t-[3rem] border-8 border-phone-border shadow-[0_-20px_60px_-15px_rgba(212,175,55,0.1)] opacity-40 sm:opacity-100 hidden md:block rotate-12 transform origin-bottom-right transition-colors duration-500">
-              <div className="w-full h-full bg-navy-alt rounded-t-[2.5rem] p-4 pt-10 border border-white/5 transition-colors duration-500">
-                <div className="w-1/2 h-4 bg-white/10 rounded-full mx-auto mb-8 relative before:absolute before:inset-y-1 before:right-2 before:w-2 before:h-2 before:bg-white/20 before:rounded-full"></div>
-                <div className="space-y-4">
-                  <div className="w-full h-24 bg-white/5 rounded-2xl border border-white/5"></div>
-                  <div className="w-full h-24 bg-white/5 rounded-2xl border border-white/5"></div>
-                </div>
-              </div>
             </div>
           </motion.div>
 

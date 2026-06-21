@@ -8,7 +8,17 @@ const inputClassName =
 
 const labelClassName = 'block text-xs uppercase tracking-widest font-bold text-ink mb-2';
 
-export default function ContactForm() {
+interface ContactFormProps {
+  defaultSubject?: string;
+  heading?: string;
+  description?: string;
+}
+
+export default function ContactForm({
+  defaultSubject = '',
+  heading = 'Send Us a Message',
+  description = "Have a question about our services? Fill in the form below and we'll get back to you as soon as possible.",
+}: ContactFormProps) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
@@ -19,7 +29,7 @@ export default function ContactForm() {
     name: '',
     email: '',
     phone: '',
-    subject: '',
+    subject: defaultSubject,
     message: '',
   });
 
@@ -36,7 +46,7 @@ export default function ContactForm() {
       name: '',
       email: '',
       phone: '',
-      subject: '',
+      subject: defaultSubject,
       message: '',
     });
   };
@@ -96,10 +106,8 @@ export default function ContactForm() {
       transition={{ duration: 0.5 }}
       className="glass-card p-8 sm:p-10"
     >
-      <h3 className="text-2xl font-bold text-white mb-2">Send Us a Message</h3>
-      <p className="text-ink font-light mb-8">
-        Have a question about our services? Fill in the form below and we&apos;ll get back to you as soon as possible.
-      </p>
+      <h3 className="text-2xl font-bold text-white mb-2">{heading}</h3>
+      <p className="text-ink font-light mb-8">{description}</p>
 
       {isSuccess ? (
         <div className="text-center py-8 space-y-6">

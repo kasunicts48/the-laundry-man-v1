@@ -7,6 +7,9 @@ import dryCleaningWinterCoatImg from '../assets/images/blog/dry-cleaning-winter-
 import whatIsDryCleaningImg from '../assets/images/blog/what-is-dry-cleaning.jpg';
 import choosingDressesImg from '../assets/images/blog/choosing-dresses.jpg';
 import dryCleanerDryer2Img from '../assets/images/blog/dry-cleaner-dryer-2.jpg';
+import blogsImported from './blogsImported.json';
+import { normalizeLegacySiteLinks } from '../utils/normalizeLegacySiteLinks';
+import { sanitizeBlogHtml } from '../utils/sanitizeBlogHtml';
 
 export type BlogContentBlock =
   | { type: 'paragraph'; text: string }
@@ -22,10 +25,13 @@ export interface BlogPost {
   excerpt: string;
   image: string;
   imageAlt: string;
-  content: BlogContentBlock[];
+  content?: BlogContentBlock[];
+  contentHtml?: string;
 }
 
-export const blogPosts: BlogPost[] = [
+export const BLOG_POSTS_PER_PAGE = 10;
+
+const handcraftedBlogPosts: BlogPost[] = [
   {
     id: 'laundry-and-dry-cleaning-manchester',
     category: '',
@@ -155,6 +161,41 @@ export const blogPosts: BlogPost[] = [
   },
 ];
 
+function parsePostDate(date: string): number {
+  const parsed = new Date(date);
+  return Number.isNaN(parsed.getTime()) ? 0 : parsed.getTime();
+}
+
+const importedBlogPosts = blogsImported as BlogPost[];
+const blogSlugSet = new Set([
+  ...handcraftedBlogPosts.map((post) => post.id),
+  ...importedBlogPosts.map((post) => post.id),
+]);
+
+const normalizedImportedPosts: BlogPost[] = importedBlogPosts.map((post) => ({
+  ...post,
+  excerpt: post.excerpt
+    ? normalizeLegacySiteLinks(post.excerpt, blogSlugSet)
+    : post.excerpt,
+  contentHtml: post.contentHtml
+    ? sanitizeBlogHtml(normalizeLegacySiteLinks(post.contentHtml, blogSlugSet))
+    : post.contentHtml,
+}));
+
+export const blogPosts: BlogPost[] = [...handcraftedBlogPosts, ...normalizedImportedPosts].sort(
+  (a, b) => parsePostDate(b.date) - parsePostDate(a.date)
+);
+
 export function getBlogPostById(id: string): BlogPost | undefined {
   return blogPosts.find((post) => post.id === id);
+}
+
+export function getBlogPageCount(): number {
+  return Math.max(1, Math.ceil(blogPosts.length / BLOG_POSTS_PER_PAGE));
+}
+
+export function getBlogPostsForPage(page: number): BlogPost[] {
+  const safePage = Math.min(Math.max(page, 1), getBlogPageCount());
+  const start = (safePage - 1) * BLOG_POSTS_PER_PAGE;
+  return blogPosts.slice(start, start + BLOG_POSTS_PER_PAGE);
 }

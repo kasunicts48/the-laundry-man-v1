@@ -1,18 +1,23 @@
 import React from 'react';
+import { useMatch } from 'react-router-dom';
 import { motion } from 'motion/react';
 import lavBotLaundry from '../assets/images/lav_bot_laundry_1780456662542.png';
+import HeroPromoBooking from './HeroPromoBooking';
+import { DEFAULT_LOCATION_NAME } from '../data/locations';
 import type { CityData } from '../data/cities';
 
 interface HeroProps {
-  onBookNow: () => void;
-  city?: string;
+  locationName: string;
   cityData?: CityData;
 }
 
-export default function Hero({ onBookNow, city, cityData }: HeroProps) {
+export default function Hero({ locationName, cityData }: HeroProps) {
+  const isRootHome = Boolean(useMatch({ path: '/', end: true }));
+  const resolvedLocationName =
+    locationName?.trim() || cityData?.name || DEFAULT_LOCATION_NAME;
+
   return (
-    <div id="hero" className="relative overflow-hidden flex items-center min-h-screen pt-24 pb-12 lg:pt-32 lg:pb-16">
-      {/* Background — solid theme on mobile; full image from md up */}
+    <div id="hero" className="relative overflow-hidden flex items-center min-h-[100svh] pt-24 pb-10 sm:pt-28 sm:pb-12 lg:pt-32 lg:pb-14">
       <div className="absolute inset-0 z-0 bg-navy">
         <img
           src={lavBotLaundry}
@@ -29,48 +34,40 @@ export default function Hero({ onBookNow, city, cityData }: HeroProps) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <h1 className="font-extrabold text-white leading-[0.95] tracking-tighter mb-8">
-              {city ? (
-                <div className="text-5xl sm:text-6xl lg:text-7xl">
-                  Premium Laundry &<br/>
-                  Dry Cleaning Services in <span className="text-gold">{cityData?.name || city}</span>.
+            <h1 className="font-extrabold text-white leading-[0.95] tracking-tighter mb-5 sm:mb-6">
+              {isRootHome ? (
+                <div className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl">
+                  Premium Laundry &<br />
+                  <span className="text-gold">Dry Cleaning Services.</span>
                 </div>
               ) : (
-                <div className="text-6xl sm:text-7xl lg:text-8xl">
-                  Premium Laundry &<br/>
-                  <span className="text-gold">Dry Cleaning Services.</span>
+                <div className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl">
+                  Premium Laundry &<br />
+                  Dry Cleaning Services in{' '}
+                  <span className="text-gold">{resolvedLocationName}</span>.
                 </div>
               )}
             </h1>
           </motion.div>
-          
-          <motion.p 
+
+          <motion.p
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-base sm:text-lg text-ink mb-10 max-w-2xl font-light leading-relaxed"
+            className="text-base sm:text-lg text-ink mb-6 sm:mb-8 max-w-2xl font-light leading-relaxed"
           >
-            {cityData ? cityData.heroDescription : `Eco-friendly, professional garment care delivered right to your door. We pick up, clean, and return your clothes pristine within 24 hours.`}
+            {isRootHome
+              ? 'Eco-friendly, professional garment care delivered right to your door. We pick up, clean, and return your clothes pristine within 24 hours.'
+              : cityData?.heroDescription ??
+                `Eco-friendly, professional garment care delivered right to your door in ${resolvedLocationName}. We pick up, clean, and return your clothes pristine within 24 hours.`}
           </motion.p>
-          
-          <motion.div 
+
+          <motion.div
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex flex-col sm:flex-row gap-4"
           >
-            <button 
-              onClick={onBookNow}
-              className="px-6 py-3 bg-gold text-navy font-bold text-xs pill shadow-[0_10px_40px_-10px_rgba(212,175,55,0.4)] transition-transform hover:-translate-y-1 text-center tracking-wider uppercase cursor-pointer"
-            >
-              Book a Collection
-            </button>
-            <a 
-              href="#services"
-              className="px-6 py-3 bg-white/5 border border-white/10 text-ink font-bold text-xs pill hover:bg-white/10 transition-transform hover:-translate-y-1 text-center tracking-wider uppercase"
-            >
-              View Services
-            </a>
+            <HeroPromoBooking />
           </motion.div>
         </div>
       </div>

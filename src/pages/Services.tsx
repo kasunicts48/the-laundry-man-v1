@@ -16,9 +16,11 @@ export default function Services({ onBookNow }: ServicesProps) {
     const state = location.state as ServicesBookingLocationState | null;
     if (!state?.autoOpenBooking) return;
 
-    onBookNow(state.serviceType);
-    navigate(location.pathname, { replace: true, state: null });
-  }, [location.pathname, location.state, navigate, onBookNow]);
+    navigate('/book', {
+      replace: true,
+      state: state.serviceType ? { serviceType: state.serviceType } : undefined,
+    });
+  }, [location.state, navigate]);
 
   return (
     <>

@@ -8,8 +8,14 @@ interface StickyBookNowBarProps {
 export default function StickyBookNowBar({ onBookNow }: StickyBookNowBarProps) {
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
+  const isBookPage = location.pathname === '/book';
 
   useEffect(() => {
+    if (isBookPage) {
+      setIsVisible(false);
+      return;
+    }
+
     const hero = document.getElementById('hero');
 
     if (!hero) {
@@ -29,7 +35,11 @@ export default function StickyBookNowBar({ onBookNow }: StickyBookNowBarProps) {
     observer.observe(hero);
 
     return () => observer.disconnect();
-  }, [location.pathname]);
+  }, [location.pathname, isBookPage]);
+
+  if (isBookPage) {
+    return null;
+  }
 
   return (
     <div

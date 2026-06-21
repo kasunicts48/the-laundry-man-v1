@@ -100,3 +100,184 @@ h1, h2, h3, h4, h5, h6 {
   border-radius: 24px;
   backdrop-filter: blur(12px);
 }
+
+.shadow-accent {
+  box-shadow: 0 10px 40px -10px color-mix(in oklab, var(--theme-accent) 40%, transparent);
+}
+
+.shadow-accent-sm {
+  box-shadow: 0 8px 32px -8px color-mix(in oklab, var(--theme-bg-alt) 60%, transparent);
+}
+
+.shadow-accent-lg {
+  box-shadow: 0 14px 48px -10px color-mix(in oklab, var(--theme-accent) 55%, transparent);
+}
+
+/* CleanCloud embed — match site theme; no third-party gray panel look */
+.cleancloud-booking-page .cleancloud-booking-shell {
+  background: var(--theme-bg);
+}
+
+.cleancloud-booking-page .cleancloud-booking-shell,
+.cleancloud-booking-page .cleancloud-store-container,
+.cleancloud-booking-page #myStoreContainer,
+.cleancloud-booking-page .cleanCloudWebApp {
+  position: relative !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  background-color: var(--theme-bg) !important;
+  background: var(--theme-bg) !important;
+  color: var(--theme-text-soft) !important;
+  box-shadow: none !important;
+}
+
+.cleancloud-booking-page .cleanCloudWebApp .__cc_order-flow-wrapper,
+.cleancloud-booking-page .cleanCloudWebApp .__cc_authWrapper,
+.cleancloud-booking-page .cleanCloudWebApp .__cc_order-flow,
+.cleancloud-booking-page .cleanCloudWebApp .__cc_order-flow__container,
+.cleancloud-booking-page .cleanCloudWebApp .footerMenuWrapper,
+.cleancloud-booking-page .cleanCloudWebApp [class*='order-flow'] {
+  background-color: var(--theme-bg) !important;
+  background: var(--theme-bg) !important;
+}
+
+.cleancloud-booking-page .cleanCloudWebApp [class*='card'],
+.cleancloud-booking-page .cleanCloudWebApp [class*='Card'],
+.cleancloud-booking-page .cleanCloudWebApp [class*='panel'],
+.cleancloud-booking-page .cleanCloudWebApp [class*='Panel'] {
+  background-color: var(--theme-bg-alt) !important;
+  border-color: color-mix(in oklab, var(--theme-accent) 18%, transparent) !important;
+}
+
+.cleancloud-booking-page .cleanCloudWebApp .__cc_order-flow__container--fullscreen {
+  position: relative !important;
+  inset: auto !important;
+  top: auto !important;
+  left: auto !important;
+  right: auto !important;
+  bottom: auto !important;
+  width: 100% !important;
+  height: auto !important;
+  min-height: 0 !important;
+  max-height: none !important;
+  overflow: visible !important;
+  z-index: auto !important;
+  background-color: var(--theme-bg) !important;
+}
+
+/* CleanCloud default grays — blend with white page background */
+.cleancloud-booking-page .cleanCloudWebApp div[style*='background-color: rgb(241, 241, 244)'],
+.cleancloud-booking-page .cleanCloudWebApp div[style*='background-color:#f1f1f4'],
+.cleancloud-booking-page .cleanCloudWebApp div[style*='background-color: #f1f1f4'],
+.cleancloud-booking-page .cleanCloudWebApp div[style*='background: rgb(241, 241, 244)'],
+.cleancloud-booking-page .cleanCloudWebApp div[style*='background:#f1f1f4'],
+.cleancloud-booking-page .cleanCloudWebApp div[style*='background: #f1f1f4'] {
+  background-color: var(--theme-bg) !important;
+  background: var(--theme-bg) !important;
+}
+
+/* Desktop — center login / sign-up form */
+@media (min-width: 768px) {
+  .cleancloud-booking-page .cleanCloudWebApp .cleanCloudAuthentication {
+    width: 100% !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+  }
+
+  .cleancloud-booking-page .cleanCloudWebApp .__cc_authenticationFormWrapper {
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* Hide CleanCloud branding footer only — do not hide the auth form */
+.cleancloud-booking-page .cleanCloudWebApp .__cc_desktopFooter,
+.cleancloud-booking-page .cleanCloudWebApp #poweredByCleanCloud {
+  display: none !important;
+  box-shadow: none !important;
+}
+
+.cleancloud-booking-page .cleancloud-booking-shell .cleanCloudWebApp .cleanCloudAuthentication .__cc_authenticationFormWrapper {
+  box-shadow: none !important;
+  -webkit-box-shadow: none !important;
+  -moz-box-shadow: none !important;
+}
+
+/* Imported blog article HTML */
+.blog-html-content p {
+  margin-bottom: 1rem;
+}
+
+.blog-html-content ol,
+.blog-html-content ul {
+  margin: 1rem 0 1rem 1.25rem;
+}
+
+.blog-html-content ol {
+  list-style: decimal;
+}
+
+.blog-html-content ul {
+  list-style: disc;
+}
+
+.blog-html-content li {
+  margin-bottom: 0.75rem;
+}
+
+.blog-html-content a {
+  color: var(--theme-accent);
+  text-decoration: underline;
+}
+
+.blog-html-content img {
+  width: 100%;
+  height: auto;
+  border-radius: 0.75rem;
+  border: 1px solid color-mix(in oklab, var(--theme-accent) 15%, transparent);
+  margin: 1.5rem 0;
+}
+
+.blog-html-content strong {
+  color: var(--theme-text-strong);
+  font-weight: 700;
+}
+
+.blog-html-content h3,
+.blog-html-content h4 {
+  margin: 1.5rem 0 0.75rem;
+  color: var(--theme-text-strong);
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.blog-html-content h3 {
+  font-size: 1.25rem;
+}
+
+.blog-html-content h4 {
+  font-size: 1.125rem;
+}
+
+.blog-html-content div {
+  background: transparent !important;
+  color: inherit !important;
+  overflow: visible !important;
+  max-width: 100% !important;
+  width: auto !important;
+  height: auto !important;
+  min-height: 0 !important;
+  border: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.blog-html-content__image--fallback {
+  max-height: 280px;
+  object-fit: contain;
+  background: var(--theme-bg-alt);
+}

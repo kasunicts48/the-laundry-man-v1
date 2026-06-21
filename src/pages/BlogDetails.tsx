@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useEffect, useMemo, useRef } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { ArrowLeft } from 'lucide-react';
-import { getBlogPostById, type BlogContentBlock } from '../data/blogPosts';
+import { blogPosts, getBlogPostById, type BlogContentBlock } from '../data/blogPosts';
+import {
+  normalizeLegacyHref,
+  normalizeLegacySiteLinks,
+} from '../utils/normalizeLegacySiteLinks';
+import { sanitizeBlogHtml } from '../utils/sanitizeBlogHtml';
 
+const blogSlugSet = new Set(blogPosts.map((post) => post.id));
 function BlogContent({ blocks }: { blocks: BlogContentBlock[] }) {
   return (
     <div className="space-y-6 text-ink font-light leading-relaxed">
@@ -38,6 +44,54 @@ function BlogContent({ blocks }: { blocks: BlogContentBlock[] }) {
         );
       })}
     </div>
+  );
+}
+
+function BlogHtmlContent({ html }: { html: string }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const normalizedHtml = useMemo(
+    () => sanitizeBlogHtml(normalizeLegacySiteLinks(html, blogSlugSet)),
+    [html]
+  );
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
+
+    container.querySelectorAll<HTMLAnchorElement>('a[href]').forEach((anchor) => {
+      const href = anchor.getAttribute('href');
+      if (!href || !href.includes('thelaundryman.co.uk')) return;
+
+      const nextHref = normalizeLegacyHref(href, blogSlugSet);
+      anchor.setAttribute('href', nextHref);
+
+      if (nextHref.startsWith('/')) {
+        anchor.removeAttribute('target');
+        anchor.removeAttribute('rel');
+      }
+    });
+
+    container.querySelectorAll<HTMLImageElement>('img').forEach((image) => {
+      image.loading = 'lazy';
+      image.referrerPolicy = 'no-referrer';
+      image.classList.add('blog-html-content__image');
+
+      if (image.dataset.fallbackBound === 'true') return;
+      image.dataset.fallbackBound = 'true';
+
+      image.addEventListener('error', () => {
+        image.classList.add('blog-html-content__image--fallback');
+        image.removeAttribute('srcset');
+      });
+    });
+  }, [normalizedHtml]);
+
+  return (
+    <div
+      ref={containerRef}
+      className="blog-html-content space-y-6 text-ink font-light leading-relaxed"
+      dangerouslySetInnerHTML={{ __html: normalizedHtml }}
+    />
   );
 }
 
@@ -81,7 +135,11 @@ export default function BlogDetails() {
         <img src={post.image} alt={post.imageAlt} className="w-full h-auto max-h-[420px] object-cover" />
       </div>
 
-      <BlogContent blocks={post.content} />
+      {post.contentHtml ? (
+        <BlogHtmlContent html={post.contentHtml} />
+      ) : post.content ? (
+        <BlogContent blocks={post.content} />
+      ) : null}
     </article>
   );
 }

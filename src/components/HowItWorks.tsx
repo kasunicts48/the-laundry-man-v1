@@ -2,8 +2,8 @@ import React from 'react';
 import { motion } from 'motion/react';
 
 import bookingIcon from '../assets/icons/booking.png';
-import pickupTimeIcon from '../assets/icons/pickup-time.png';
-import deliveryManIcon from '../assets/icons/delivery-man.png';
+import clothingIcon from '../assets/icons/clothing.png';
+import fastDeliveryIcon from '../assets/icons/fast-delivery.png';
 
 const steps = [
   {
@@ -12,13 +12,13 @@ const steps = [
     description: 'Easily schedule a convenient collection slot online or via our app.',
   },
   {
-    image: pickupTimeIcon,
+    image: clothingIcon,
     title: '2. Pickup & Clean',
     description:
       'Our trusted drivers collect your clothes directly and our experts clean them meticulously.',
   },
   {
-    image: deliveryManIcon,
+    image: fastDeliveryIcon,
     title: '3. Fast Delivery',
     description: 'Your clothes are returned fresh, folded, and ready to wear.',
   },
@@ -43,7 +43,7 @@ function StepIcon({ image, title }: { image: string; title: string }) {
 
 export default function HowItWorks() {
   return (
-    <section id="about" className="py-12 sm:py-24 bg-navy relative">
+    <section id="how-it-works" className="py-12 sm:py-24 bg-navy relative scroll-mt-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
           <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">How It Works</h2>
