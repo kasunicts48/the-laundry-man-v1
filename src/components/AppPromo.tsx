@@ -48,7 +48,7 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
             <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl translate-y-1/4 -translate-x-1/4"></div>
 
             <div className="relative z-10 w-full max-w-md mx-auto xl:mx-0">
-              <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">The App</h2>
+              <h2 className="section-eyebrow">The App</h2>
               <h3 className="text-4xl sm:text-5xl font-extrabold text-slate tracking-tighter mb-6 leading-tight">Download Our App for Easier Booking</h3>
               <p className="text-ink text-lg mb-10 font-light leading-relaxed">Manage your orders, track driver locations, and pay securely right from your phone.</p>
               
@@ -100,7 +100,7 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
             transition={{ duration: 0.6 }}
             className="order-2 lg:order-1"
           >
-            <h2 className="text-[10px] uppercase tracking-widest text-gold font-bold mb-2">Testimonials</h2>
+            <h2 className="section-eyebrow">Testimonials</h2>
             <h3 className="text-4xl sm:text-5xl font-extrabold text-slate tracking-tighter mb-4">What Our {cityData?.name ? `${cityData.name} ` : ''}Customers Say</h3>
             
             {/* Mobile: compact Trustpilot widget */}

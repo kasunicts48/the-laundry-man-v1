@@ -17,7 +17,10 @@ export default function Hero({ locationName, cityData }: HeroProps) {
     locationName?.trim() || cityData?.name || DEFAULT_LOCATION_NAME;
 
   return (
-    <div id="hero" className="relative overflow-hidden flex items-center min-h-[100svh] pt-24 pb-10 sm:pt-28 sm:pb-12 lg:pt-32 lg:pb-14">
+    <div
+      id="hero"
+      className="hero-section relative overflow-hidden flex items-center min-h-[100svh] pb-10 sm:pb-12 lg:pb-14"
+    >
       <div className="absolute inset-0 z-0 bg-navy">
         <img
           src={lavBotLaundry}

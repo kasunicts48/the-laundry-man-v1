@@ -90,6 +90,42 @@ h1, h2, h3, h4, h5, h6 {
   @apply font-heading tracking-tight transition-colors duration-500;
 }
 
+.hero-section {
+  padding-top: var(--site-header-height, 6.625rem);
+}
+
+.section-eyebrow {
+  @apply text-sm sm:text-base uppercase tracking-widest text-gold font-bold mb-2;
+}
+
+.marquee-ticker__track {
+  animation: marquee-scroll 40s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-ticker__track {
+    animation: none;
+    flex-wrap: wrap;
+    width: 100%;
+    justify-content: center;
+    gap: 0.75rem 1.5rem;
+    padding: 0 1rem;
+  }
+
+  .marquee-ticker__viewport {
+    overflow: visible;
+  }
+}
+
+@keyframes marquee-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
 .pill {
   @apply rounded-full;
 }

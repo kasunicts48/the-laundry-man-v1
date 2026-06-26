@@ -26,6 +26,10 @@ function FooterSectionHeading({ children }: { children: React.ReactNode }) {
   );
 }
 
+function isStaticPageHref(href: string): boolean {
+  return href.endsWith('.html') || href === '/locations' || href.startsWith('/locations?');
+}
+
 function FooterNavLink({ label, href }: FooterLink) {
   if (href.includes('#')) {
     return (
@@ -35,7 +39,7 @@ function FooterNavLink({ label, href }: FooterLink) {
     );
   }
 
-  if (href.endsWith('.html')) {
+  if (isStaticPageHref(href)) {
     return (
       <a href={href} className={linkClassName}>
         {label}

@@ -100,8 +100,9 @@ const regionCount = generalRegions.length;
 const areaCount = generalRegions.reduce((total, region) => total + region.areas.length, 0);
 
 const usedDataKeys = [...new Set(locationPageSections.map((section) => section.dataKey))];
+/** Every section uses the same county/region directory as General for consistent layout. */
 const regionsByKey = Object.fromEntries(
-  usedDataKeys.map((key) => [key, locationsBySection[key] ?? generalRegions])
+  usedDataKeys.map((key) => [key, generalRegions])
 );
 
 const locationsData = {
@@ -222,7 +223,7 @@ const rendererScript = `
           if (regionId) {
             params.set('area', regionId);
           }
-          return '/locations.html?' + params.toString();
+          return '/locations?' + params.toString();
         }
 
         function migrateLegacyHashToQuery() {
@@ -915,7 +916,7 @@ ${sectionsHtml}
           <div class="footer-grid">
             <div><h4 class="footer-heading">Services</h4><ul class="footer-list"><li><a href="/booking.html">Wash &amp; Fold</a></li><li><a href="/booking.html">Dry Cleaning</a></li><li><a href="/booking.html">Ironing Service</a></li><li><a href="/booking.html">Shirt Service</a></li><li><a href="/booking.html">Curtain Cleaning</a></li><li><a href="/booking.html">Wedding Dress Cleaning</a></li></ul></div>
             <div><h4 class="footer-heading">Operating Hours</h4><ul class="footer-list"><li class="hours-row"><span>Monday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Tuesday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Wednesday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Thursday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Friday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Saturday</span><span>08:00 - 18:00</span></li><li class="hours-row"><span>Sunday</span><span>09:00 - 21:00</span></li></ul></div>
-            <div><h4 class="footer-heading">Explore</h4><ul class="footer-list"><li><a href="/#how-it-works">How It Works</a></li><li><a href="/#why-choose-us">Why Choose Us</a></li><li><a href="/#testimonials">Testimonials</a></li><li><a href="/locations.html">Locations</a></li></ul></div>
+            <div><h4 class="footer-heading">Explore</h4><ul class="footer-list"><li><a href="/#how-it-works">How It Works</a></li><li><a href="/#why-choose-us">Why Choose Us</a></li><li><a href="/#testimonials">Testimonials</a></li><li><a href="/locations">Locations</a></li></ul></div>
             <div><h4 class="footer-heading">Quick Links</h4><ul class="footer-list"><li><a href="/about">About us</a></li><li><a href="/services">Services</a></li><li><a href="/contact">Contact</a></li></ul></div>
             <div><ul class="footer-list"><li><a href="/blog">Blog</a></li><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/commercial">Commercial Cleaning</a></li><li><a href="/terms-conditions">Terms &amp; Conditions</a></li></ul></div>
           </div>
@@ -962,9 +963,9 @@ ${sectionsHtml}
 </html>
 `;
 
-const htmlPath = join(root, 'public/locations.html');
 const dataPath = join(root, 'public/locations-data.json');
 const dirPath = join(root, 'public/locations');
+const htmlPath = join(dirPath, 'index.html');
 const imagesDir = join(root, 'public/images');
 const bannerSvgSource = join(root, 'src/assets/images/Directions-bro.svg');
 const bannerSvgDest = join(imagesDir, 'banner-locations.svg');
@@ -973,12 +974,10 @@ mkdirSync(dirPath, { recursive: true });
 mkdirSync(imagesDir, { recursive: true });
 writeFileSync(bannerSvgDest, readFileSync(bannerSvgSource, 'utf8'), 'utf8');
 writeFileSync(htmlPath, html, 'utf8');
-writeFileSync(join(dirPath, 'index.html'), html, 'utf8');
 writeFileSync(dataPath, JSON.stringify(locationsData), 'utf8');
 
 const htmlMb = (Buffer.byteLength(html, 'utf8') / (1024 * 1024)).toFixed(2);
 const dataMb = (Buffer.byteLength(JSON.stringify(locationsData), 'utf8') / (1024 * 1024)).toFixed(2);
 
-console.log(`Generated ${htmlPath} (${htmlMb} MB shell, ${locationPageSections.length} sections)`);
-console.log(`Generated ${join(dirPath, 'index.html')} (directory index)`);
+console.log(`Generated ${htmlPath} (${htmlMb} MB, ${locationPageSections.length} sections)`);
 console.log(`Generated ${dataPath} (${dataMb} MB location data)`);

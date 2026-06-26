@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route, useLocation, useParams, Navigat
 import Header from './components/Header';
 import Footer from './components/Footer';
 import StickyBookNowBar from './components/StickyBookNowBar';
+import FirstTimeDiscountPopup from './components/FirstTimeDiscountPopup';
 import { useOpenBooking } from './hooks/useOpenBooking';
 
 import Home from './pages/Home';
@@ -12,7 +13,6 @@ import Commercial from './pages/Commercial';
 import Blog from './pages/Blog';
 import BlogDetails from './pages/BlogDetails';
 import Contact from './pages/Contact';
-import LocationsRedirect from './pages/LocationsRedirect';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
 import { isReservedPathSegment } from './data/locations';
@@ -58,7 +58,6 @@ function AppLayout() {
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/locations" element={<LocationsRedirect />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
           <Route path="/:location" element={<LocationHomeRoute onBookNow={openBooking} />} />
@@ -68,6 +67,7 @@ function AppLayout() {
       <Footer />
 
       <StickyBookNowBar />
+      <FirstTimeDiscountPopup />
     </div>
   );
 }

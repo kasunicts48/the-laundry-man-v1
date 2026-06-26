@@ -80,5 +80,5 @@ export function buildLocationsHref(sectionId: string, regionId?: string): string
     params.set('area', normalizeRegionSlug(regionId));
   }
 
-  return `/locations.html?${params.toString()}`;
+  return `/locations?${params.toString()}`;
 }

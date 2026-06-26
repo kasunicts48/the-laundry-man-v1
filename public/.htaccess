@@ -4,7 +4,13 @@ DirectoryIndex index.html index.php
   RewriteEngine On
   RewriteBase /
 
-  # InfinityFree: serve existing files and folders directly (booking.html, locations.html, assets/, etc.)
+  # Legacy locations URL
+  RewriteRule ^locations\.html$ /locations/ [R=301,L]
+
+  # /locations and /locations/ → directory index (static locations page)
+  RewriteRule ^locations/?$ /locations/index.html [L,QSA]
+
+  # InfinityFree: serve existing files and folders directly (booking.html, locations/, assets/, etc.)
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
   RewriteRule ^ - [L]

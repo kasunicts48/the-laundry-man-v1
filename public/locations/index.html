@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Service Areas | The Laundry Man</title>
-    <meta name="description" content="Browse laundry and dry cleaning service areas across the UK. Free collection and delivery in 48 regions and 68 neighbourhoods." />
+    <meta name="description" content="Browse laundry and dry cleaning service areas across the UK. Free collection and delivery in 15 regions and 2,200 neighbourhoods." />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -127,12 +127,6 @@
       @media (min-width: 1024px) { .location-region__areas { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
       .location-link { font-size: 0.875rem; font-weight: 300; line-height: 1.5; color: var(--theme-text-soft); transition: color 0.2s; }
       .location-link--heading { font-weight: 800; color: var(--theme-text); }
-      .location-region--flat { padding-bottom: 0; margin-bottom: 0; border-bottom: 0; }
-      .location-directory--flat { display: grid; grid-template-columns: 1fr; gap: 0.625rem; }
-      @media (min-width: 640px) { .location-directory--flat { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-      @media (min-width: 1024px) { .location-directory--flat { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-      .location-link--flat { display: block; padding: 0.625rem 0.75rem; border: 1px solid rgba(27, 53, 22, 0.08); border-radius: 0.5rem; background: var(--theme-bg-alt); font-size: 0.875rem; font-weight: 500; line-height: 1.4; color: var(--theme-text); transition: border-color 0.2s, color 0.2s; }
-      .location-link--flat:hover { border-color: rgba(76, 175, 80, 0.35); color: var(--theme-accent); }
       .scroll-mt-28 { scroll-margin-top: 7rem; }
       .site-footer { background: var(--theme-bg-alt); border-top: 1px solid rgba(27, 53, 22, 0.06); }
       .footer-inner { max-width: 80rem; margin: 0 auto; padding: 4rem 1rem 2.5rem; }
@@ -218,15 +212,10 @@
 
       <main class="locations-main">
         <div class="locations-main__inner">
-          <p class="locations-intro">We serve 48 major regions and 68 neighbourhoods across the UK. Browse by service or explore our full location directory below.</p>
+          <p class="locations-intro">We serve 15 major regions and 2,200 neighbourhoods across the UK. Browse by service or explore our full location directory below.</p>
           <div class="locations-sections">
         <section id="general" class="location-section scroll-mt-28" data-section-id="general" data-data-key="general" aria-labelledby="locations-section-general">
           <h2 id="locations-section-general" class="location-section__title">General</h2>
-          <div class="location-directory" aria-busy="true"></div>
-        </section>
-
-        <section id="wilmslow" class="location-section scroll-mt-28 location-section--bordered" data-section-id="wilmslow" data-data-key="wilmslow" aria-labelledby="locations-section-wilmslow">
-          <h2 id="locations-section-wilmslow" class="location-section__title">Wilmslow</h2>
           <div class="location-directory" aria-busy="true"></div>
         </section>
 
@@ -443,7 +432,7 @@
           <div class="footer-grid">
             <div><h4 class="footer-heading">Services</h4><ul class="footer-list"><li><a href="/booking.html">Wash &amp; Fold</a></li><li><a href="/booking.html">Dry Cleaning</a></li><li><a href="/booking.html">Ironing Service</a></li><li><a href="/booking.html">Shirt Service</a></li><li><a href="/booking.html">Curtain Cleaning</a></li><li><a href="/booking.html">Wedding Dress Cleaning</a></li></ul></div>
             <div><h4 class="footer-heading">Operating Hours</h4><ul class="footer-list"><li class="hours-row"><span>Monday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Tuesday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Wednesday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Thursday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Friday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Saturday</span><span>08:00 - 18:00</span></li><li class="hours-row"><span>Sunday</span><span>09:00 - 21:00</span></li></ul></div>
-            <div><h4 class="footer-heading">Explore</h4><ul class="footer-list"><li><a href="/#how-it-works">How It Works</a></li><li><a href="/#why-choose-us">Why Choose Us</a></li><li><a href="/#testimonials">Testimonials</a></li><li><a href="/locations.html">Locations</a></li></ul></div>
+            <div><h4 class="footer-heading">Explore</h4><ul class="footer-list"><li><a href="/#how-it-works">How It Works</a></li><li><a href="/#why-choose-us">Why Choose Us</a></li><li><a href="/#testimonials">Testimonials</a></li><li><a href="/locations">Locations</a></li></ul></div>
             <div><h4 class="footer-heading">Quick Links</h4><ul class="footer-list"><li><a href="/about">About us</a></li><li><a href="/services">Services</a></li><li><a href="/contact">Contact</a></li></ul></div>
             <div><ul class="footer-list"><li><a href="/blog">Blog</a></li><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/commercial">Commercial Cleaning</a></li><li><a href="/terms-conditions">Terms &amp; Conditions</a></li></ul></div>
           </div>
@@ -585,7 +574,7 @@
           if (regionId) {
             params.set('area', regionId);
           }
-          return '/locations.html?' + params.toString();
+          return '/locations?' + params.toString();
         }
 
         function migrateLegacyHashToQuery() {
@@ -654,30 +643,8 @@
           );
         }
 
-        function isFlatSection(sectionId) {
-          var meta = getSectionMeta(sectionId);
-          return !!(meta && meta.layout === 'flat');
-        }
-
-        function setDirectoryLayout(container, sectionId) {
-          container.classList.toggle('location-directory--flat', isFlatSection(sectionId));
-        }
-
         function buildRegionArticle(sectionId, region) {
           var regionAnchorId = sectionId + '/' + region.id;
-
-          if (isFlatSection(sectionId)) {
-            return (
-              '<article id="' +
-              escapeHtml(regionAnchorId) +
-              '" class="location-region location-region--flat scroll-mt-28"><a class="location-link location-link--flat" href="' +
-              escapeHtml(buildLocationsQueryHref(sectionId, region.id)) +
-              '">' +
-              escapeHtml(region.name) +
-              '</a></article>'
-            );
-          }
-
           var headingId = 'location-region-' + sectionId + '-' + region.id;
           var areaLinks = region.areas.map(buildAreaLinkHtml).join('');
 
@@ -701,10 +668,6 @@
         }
 
         function buildRegionShell(sectionId, region) {
-          if (isFlatSection(sectionId)) {
-            return buildRegionArticle(sectionId, region);
-          }
-
           var regionAnchorId = sectionId + '/' + region.id;
           var headingId = 'location-region-' + sectionId + '-' + region.id;
 
@@ -739,8 +702,6 @@
           var regions = getRegions(dataKey);
           var html = '';
 
-          setDirectoryLayout(container, sectionId);
-
           for (var i = 0; i < regions.length; i += 1) {
             html += buildRegionArticle(sectionId, regions[i]);
           }
@@ -769,7 +730,6 @@
           var regions = getRegions(dataKey);
           container.innerHTML = '';
           container.setAttribute('aria-busy', 'true');
-          setDirectoryLayout(container, sectionId);
 
           var regionIndex = 0;
           var areaIndex = 0;

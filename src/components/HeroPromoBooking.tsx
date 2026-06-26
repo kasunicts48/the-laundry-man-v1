@@ -1,9 +1,11 @@
 import React from 'react';
 import { motion, useReducedMotion } from 'motion/react';
 import { useHasPlacedOrder } from '../hooks/useHasPlacedOrder';
-
-const PROMO_CODE = 'LAUNDRY35';
-const BOOKING_PAGE_URL = '/booking.html';
+import {
+  BOOKING_PAGE_URL,
+  FIRST_ORDER_DISCOUNT_PERCENT,
+  FIRST_ORDER_PROMO_CODE,
+} from '../data/firstOrderPromo';
 
 const actionButtonBase =
   'px-5 py-3 font-bold text-xs pill transition-all duration-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] text-center tracking-wide uppercase sm:px-6';
@@ -113,7 +115,7 @@ function FirstOrderPromo() {
               }
               transition={glowTransition}
             >
-              35% OFF
+              {FIRST_ORDER_DISCOUNT_PERCENT}% OFF
             </motion.span>{' '}
             Your First Order
           </p>
@@ -124,9 +126,9 @@ function FirstOrderPromo() {
             </span>
             <span
               className="inline-flex items-center justify-center rounded-lg border border-emerald-400/50 bg-black/40 px-2.5 py-1 text-sm font-bold tracking-[0.16em] text-paper shadow-[0_0_16px_rgba(52,211,153,0.2)] ring-1 ring-emerald-400/20 sm:px-3 sm:py-1.5 sm:text-sm"
-              aria-label={`Promo code ${PROMO_CODE}`}
+              aria-label={`Promo code ${FIRST_ORDER_PROMO_CODE}`}
             >
-              {PROMO_CODE}
+              {FIRST_ORDER_PROMO_CODE}
             </span>
           </div>
         </div>
