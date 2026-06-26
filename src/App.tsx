@@ -8,22 +8,22 @@ import { useOpenBooking } from './hooks/useOpenBooking';
 import Home from './pages/Home';
 import About from './pages/About';
 import Services from './pages/Services';
-import Book from './pages/Book';
 import Commercial from './pages/Commercial';
 import Blog from './pages/Blog';
 import BlogDetails from './pages/BlogDetails';
 import Contact from './pages/Contact';
-import Locations from './pages/Locations';
+import LocationsRedirect from './pages/LocationsRedirect';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
 import { isReservedPathSegment } from './data/locations';
 
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
+    if (hash) return;
     window.scrollTo(0, 0);
-  }, [pathname]);
+  }, [pathname, hash]);
 
   return null;
 }
@@ -47,19 +47,18 @@ function AppLayout() {
 
   return (
     <div className="min-h-screen flex flex-col font-sans text-ink bg-navy">
-      <Header onBookNow={() => openBooking()} />
+      <Header />
 
       <main className="flex-grow">
         <Routes>
           <Route path="/" element={<Home onBookNow={openBooking} />} />
           <Route path="/about" element={<About />} />
-          <Route path="/book" element={<Book />} />
           <Route path="/services" element={<Services onBookNow={openBooking} />} />
           <Route path="/commercial" element={<Commercial />} />
           <Route path="/blog" element={<Blog />} />
           <Route path="/blog/:id" element={<BlogDetails />} />
           <Route path="/contact" element={<Contact />} />
-          <Route path="/locations" element={<Locations />} />
+          <Route path="/locations" element={<LocationsRedirect />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-conditions" element={<TermsConditions />} />
           <Route path="/:location" element={<LocationHomeRoute onBookNow={openBooking} />} />
@@ -68,7 +67,7 @@ function AppLayout() {
 
       <Footer />
 
-      <StickyBookNowBar onBookNow={() => openBooking()} />
+      <StickyBookNowBar />
     </div>
   );
 }

@@ -66,6 +66,7 @@ export default function Hero({ locationName, cityData }: HeroProps) {
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.4 }}
+            className="flex justify-center sm:justify-start"
           >
             <HeroPromoBooking />
           </motion.div>

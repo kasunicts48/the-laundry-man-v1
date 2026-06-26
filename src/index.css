@@ -113,98 +113,19 @@ h1, h2, h3, h4, h5, h6 {
   box-shadow: 0 14px 48px -10px color-mix(in oklab, var(--theme-accent) 55%, transparent);
 }
 
-/* CleanCloud embed — match site theme; no third-party gray panel look */
-.cleancloud-booking-page .cleancloud-booking-shell {
+/* CleanCloud booking page shell — widget overrides live in cleanCloudOverrides.ts */
+.cleancloud-booking-page {
+  margin: 0;
+  padding: 0;
+  overflow-x: clip;
   background: var(--theme-bg);
 }
 
-.cleancloud-booking-page .cleancloud-booking-shell,
-.cleancloud-booking-page .cleancloud-store-container,
-.cleancloud-booking-page #myStoreContainer,
-.cleancloud-booking-page .cleanCloudWebApp {
-  position: relative !important;
-  width: 100% !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
-  background-color: var(--theme-bg) !important;
-  background: var(--theme-bg) !important;
-  color: var(--theme-text-soft) !important;
-  box-shadow: none !important;
-}
-
-.cleancloud-booking-page .cleanCloudWebApp .__cc_order-flow-wrapper,
-.cleancloud-booking-page .cleanCloudWebApp .__cc_authWrapper,
-.cleancloud-booking-page .cleanCloudWebApp .__cc_order-flow,
-.cleancloud-booking-page .cleanCloudWebApp .__cc_order-flow__container,
-.cleancloud-booking-page .cleanCloudWebApp .footerMenuWrapper,
-.cleancloud-booking-page .cleanCloudWebApp [class*='order-flow'] {
-  background-color: var(--theme-bg) !important;
-  background: var(--theme-bg) !important;
-}
-
-.cleancloud-booking-page .cleanCloudWebApp [class*='card'],
-.cleancloud-booking-page .cleanCloudWebApp [class*='Card'],
-.cleancloud-booking-page .cleanCloudWebApp [class*='panel'],
-.cleancloud-booking-page .cleanCloudWebApp [class*='Panel'] {
-  background-color: var(--theme-bg-alt) !important;
-  border-color: color-mix(in oklab, var(--theme-accent) 18%, transparent) !important;
-}
-
-.cleancloud-booking-page .cleanCloudWebApp .__cc_order-flow__container--fullscreen {
-  position: relative !important;
-  inset: auto !important;
-  top: auto !important;
-  left: auto !important;
-  right: auto !important;
-  bottom: auto !important;
-  width: 100% !important;
-  height: auto !important;
-  min-height: 0 !important;
-  max-height: none !important;
-  overflow: visible !important;
-  z-index: auto !important;
-  background-color: var(--theme-bg) !important;
-}
-
-/* CleanCloud default grays — blend with white page background */
-.cleancloud-booking-page .cleanCloudWebApp div[style*='background-color: rgb(241, 241, 244)'],
-.cleancloud-booking-page .cleanCloudWebApp div[style*='background-color:#f1f1f4'],
-.cleancloud-booking-page .cleanCloudWebApp div[style*='background-color: #f1f1f4'],
-.cleancloud-booking-page .cleanCloudWebApp div[style*='background: rgb(241, 241, 244)'],
-.cleancloud-booking-page .cleanCloudWebApp div[style*='background:#f1f1f4'],
-.cleancloud-booking-page .cleanCloudWebApp div[style*='background: #f1f1f4'] {
-  background-color: var(--theme-bg) !important;
-  background: var(--theme-bg) !important;
-}
-
-/* Desktop — center login / sign-up form */
 @media (min-width: 768px) {
-  .cleancloud-booking-page .cleanCloudWebApp .cleanCloudAuthentication {
-    width: 100% !important;
-    flex-direction: column !important;
-    justify-content: center !important;
-    align-items: center !important;
+  .cleancloud-booking-page {
+    padding-top: var(--site-header-height, 6.625rem);
+    padding-bottom: 3rem;
   }
-
-  .cleancloud-booking-page .cleanCloudWebApp .__cc_authenticationFormWrapper {
-    margin-left: auto !important;
-    margin-right: auto !important;
-  }
-}
-
-/* Hide CleanCloud branding footer only — do not hide the auth form */
-.cleancloud-booking-page .cleanCloudWebApp .__cc_desktopFooter,
-.cleancloud-booking-page .cleanCloudWebApp #poweredByCleanCloud {
-  display: none !important;
-  box-shadow: none !important;
-}
-
-.cleancloud-booking-page .cleancloud-booking-shell .cleanCloudWebApp .cleanCloudAuthentication .__cc_authenticationFormWrapper {
-  box-shadow: none !important;
-  -webkit-box-shadow: none !important;
-  -moz-box-shadow: none !important;
 }
 
 /* Imported blog article HTML */

@@ -16,10 +16,10 @@ function HeaderSocialIcon({ type }: { type: 'facebook' | 'tiktok' | 'instagram' 
 }
 
 interface HeaderProps {
-  onBookNow: () => void;
+  onBookNow?: () => void;
 }
 
-export default function Header({ onBookNow }: HeaderProps) {
+export default function Header(_props: HeaderProps = {}) {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const headerRef = useRef<HTMLDivElement>(null);
@@ -132,12 +132,12 @@ export default function Header({ onBookNow }: HeaderProps) {
                 {link.name}
               </Link>
             ))}
-            <button 
-              onClick={onBookNow}
-              className="px-6 py-2.5 border border-gold text-gold pill hover:bg-gold hover:text-navy transition-all text-xs font-semibold uppercase tracking-wide cursor-pointer"
+            <a
+              href="/booking.html"
+              className="px-6 py-2.5 border border-gold text-gold pill hover:bg-gold hover:text-navy transition-all text-xs font-semibold uppercase tracking-wide"
             >
               Book Now
-            </button>
+            </a>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -168,15 +168,13 @@ export default function Header({ onBookNow }: HeaderProps) {
               </Link>
             ))}
             <div className="pt-4 pb-2 px-3 flex flex-col items-center space-y-4">
-              <button 
-                onClick={() => {
-                  setIsMobileMenuOpen(false);
-                  onBookNow();
-                }}
-                className="border border-gold text-gold w-full py-3 px-6 pill hover:bg-gold hover:text-navy transition-all text-sm font-semibold uppercase tracking-wide text-center cursor-pointer"
+              <a
+                href="/booking.html"
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="border border-gold text-gold w-full py-3 px-6 pill hover:bg-gold hover:text-navy transition-all text-sm font-semibold uppercase tracking-wide text-center"
               >
                 Book a Collection
-              </button>
+              </a>
             </div>
           </div>
         </div>

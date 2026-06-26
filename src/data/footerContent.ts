@@ -58,7 +58,7 @@ export const footerExploreLinks: FooterLink[] = [
   { label: 'How It Works', href: '/#how-it-works' },
   { label: 'Why Choose Us', href: '/#why-choose-us' },
   { label: 'Testimonials', href: '/#testimonials' },
-  { label: 'Locations', href: '/locations' },
+  { label: 'Locations', href: '/locations.html' },
 ];
 
 export const footerQuickLinksCol2: FooterLink[] = [

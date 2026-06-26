@@ -7,7 +7,8 @@
     "dev": "concurrently -k -n api,vite -c green,blue \"npm run dev:api\" \"vite\"",
     "dev:vite": "vite",
     "dev:api": "node scripts/dev-api.mjs",
-    "build": "vite build",
+    "generate:locations": "node scripts/generate-locations-html.mjs",
+    "build": "npm run generate:locations && vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js node_modules/.vite node_modules/.cache",
     "lint": "tsc --noEmit"

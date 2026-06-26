@@ -1,0 +1,1130 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book a Collection | The Laundry Man</title>
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cleancloudapp.com/webapp/public/webapp/cleancloud.css"
+    />
+    <style>
+      :root {
+        --theme-bg: #ffffff;
+        --theme-bg-alt: #f5f8f5;
+        --theme-text: #1b3516;
+        --theme-text-soft: #2c5125;
+        --theme-accent: #4caf50;
+        --header-height: 6.625rem;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: 'Outfit', system-ui, sans-serif;
+        background: var(--theme-bg);
+        color: var(--theme-text);
+        -webkit-font-smoothing: antialiased;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .site-shell {
+        min-height: 100dvh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* ── Header ── */
+      .site-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 50;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(27, 53, 22, 0.06);
+      }
+
+      .header-topbar {
+        border-bottom: 1px solid rgba(27, 53, 22, 0.06);
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+        font-weight: 500;
+        color: var(--theme-text);
+      }
+
+      .header-inner {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .header-topbar .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .header-email {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--theme-text);
+      }
+
+      .header-email:hover,
+      .header-social a:hover,
+      .nav-link:hover,
+      .footer a:hover {
+        color: var(--theme-accent);
+      }
+
+      .header-social {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+
+      .header-social a {
+        display: inline-flex;
+        color: var(--theme-text);
+      }
+
+      .header-main {
+        padding: 1rem 0;
+      }
+
+      .header-main .header-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .site-logo {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        flex-shrink: 0;
+      }
+
+      .site-logo__mark {
+        width: 2.5rem;
+        height: 2.5rem;
+        border-radius: 9999px;
+        background: var(--theme-accent);
+        color: #fff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-weight: 800;
+        font-size: 1.125rem;
+      }
+
+      .site-logo__text {
+        font-weight: 800;
+        font-size: 1.5rem;
+        line-height: 1.1;
+        color: var(--theme-accent);
+      }
+
+      .site-logo__sub {
+        display: block;
+        margin-top: -0.15rem;
+        font-size: 0.625rem;
+        font-weight: 300;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--theme-text);
+      }
+
+      .desktop-nav {
+        display: none;
+        align-items: center;
+        gap: 2rem;
+      }
+
+      .nav-link {
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--theme-text);
+      }
+
+      .nav-link.is-active {
+        color: var(--theme-accent);
+      }
+
+      .btn-book {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.625rem 1.5rem;
+        border: 1px solid var(--theme-accent);
+        border-radius: 9999px;
+        color: var(--theme-accent);
+        font-size: 0.75rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .btn-book:hover {
+        background: var(--theme-accent);
+        color: #fff;
+      }
+
+      .menu-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0.25rem;
+        border: 0;
+        background: transparent;
+        color: var(--theme-text);
+        cursor: pointer;
+      }
+
+      .mobile-nav {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        z-index: 60;
+        border-top: 1px solid rgba(27, 53, 22, 0.08);
+        background: rgba(255, 255, 255, 0.95);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        box-shadow:
+          0 20px 25px -5px rgba(0, 0, 0, 0.1),
+          0 8px 10px -6px rgba(0, 0, 0, 0.08);
+        max-height: calc(100dvh - var(--header-height, 6.625rem));
+        overflow-y: auto;
+      }
+
+      .mobile-nav.is-open {
+        display: block;
+      }
+
+      .mobile-nav-inner {
+        padding: 1rem;
+      }
+
+      .mobile-nav a:not(.btn-book) {
+        display: block;
+        padding: 0.75rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        border-radius: 0.5rem;
+        color: var(--theme-text);
+      }
+
+      .mobile-nav a:not(.btn-book):hover {
+        color: var(--theme-accent);
+        background: rgba(76, 175, 80, 0.06);
+      }
+
+      .mobile-nav-cta {
+        padding: 1rem 0.75rem 0.5rem;
+      }
+
+      .mobile-nav .btn-book--mobile {
+        display: block;
+        width: 100%;
+        margin-top: 0;
+        padding: 0.75rem 1.5rem;
+        border: 1px solid var(--theme-accent);
+        border-radius: 9999px;
+        color: var(--theme-accent);
+        background: transparent;
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        text-align: center;
+      }
+
+      .mobile-nav .btn-book--mobile:hover {
+        background: var(--theme-accent);
+        color: #fff;
+      }
+
+      @media (min-width: 768px) {
+        .header-topbar {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+
+        .header-inner {
+          padding: 0 1.5rem;
+        }
+
+        .header-email span {
+          display: inline;
+        }
+
+        .desktop-nav {
+          display: flex;
+        }
+
+        .menu-toggle {
+          display: none;
+        }
+      }
+
+      @media (max-width: 639px) {
+        .header-email span {
+          display: none;
+        }
+      }
+
+      /* ── Main / widget ── */
+      .booking-main {
+        flex: 1 1 auto;
+        padding-top: var(--header-height);
+        display: flex;
+        flex-direction: column;
+      }
+
+      .content-inner {
+        width: 100%;
+        max-width: 80rem;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      .booking-inner {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+
+      #bookingToolWrapper,
+      #myStoreContainer {
+        width: 100%;
+        position: relative;
+      }
+
+      /* Mobile — viewport-height frame so widget renders on load */
+      @media (max-width: 767px) {
+        .booking-inner {
+          padding-bottom: 0.75rem;
+          --booking-frame-height: calc(100dvh - var(--header-height) - 1rem);
+        }
+
+        #bookingToolWrapper,
+        #myStoreContainer {
+          min-height: var(--booking-frame-height);
+          height: var(--booking-frame-height);
+          overflow: hidden;
+        }
+
+        #myStoreContainer .cleanCloudWebApp {
+          width: 100% !important;
+          height: 100% !important;
+          min-height: 100% !important;
+          max-height: none !important;
+          margin: 0 !important;
+          overflow: auto !important;
+          -webkit-overflow-scrolling: touch;
+          box-sizing: border-box !important;
+        }
+
+        #myStoreContainer .cleanCloudWebApp .cleanCloudWebApp__container,
+        #myStoreContainer .cleanCloudWebApp .cleanCloudWebApp__content,
+        #myStoreContainer .cleanCloudWebApp .cleanCloudWebApp__appWrapper {
+          position: relative !important;
+          width: 100% !important;
+          height: 100% !important;
+          min-height: 100% !important;
+          max-height: none !important;
+        }
+
+        #myStoreContainer .cleanCloudWebApp .__cc_homeWrapper {
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          min-height: 100% !important;
+          overflow: visible !important;
+        }
+
+        #myStoreContainer .cleanCloudWebApp .__cc_homeWrapperInner {
+          height: 100% !important;
+          min-height: 100% !important;
+          overflow: auto !important;
+          -webkit-overflow-scrolling: touch;
+        }
+      }
+
+      /* Desktop — taller full-viewport frame */
+      @media (min-width: 768px) {
+        .content-inner {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+
+        .booking-inner {
+          padding-top: 1.5rem;
+          padding-bottom: 1rem;
+          --booking-frame-height: calc(100svh - var(--header-height) - 0.5rem);
+        }
+
+        #bookingToolWrapper,
+        #myStoreContainer {
+          flex: 1 1 auto;
+          min-height: var(--booking-frame-height);
+          height: var(--booking-frame-height);
+          overflow: hidden;
+        }
+
+        #myStoreContainer .cleanCloudWebApp {
+          width: 100% !important;
+          height: 100% !important;
+          min-height: 100% !important;
+          max-height: none !important;
+          margin: 0 !important;
+          overflow: auto !important;
+          box-sizing: border-box !important;
+        }
+
+        #myStoreContainer .cleanCloudWebApp .cleanCloudWebApp__container,
+        #myStoreContainer .cleanCloudWebApp .cleanCloudWebApp__content,
+        #myStoreContainer .cleanCloudWebApp .cleanCloudWebApp__appWrapper {
+          position: relative !important;
+          width: 100% !important;
+          height: 100% !important;
+          min-height: 100% !important;
+          max-height: none !important;
+          flex: 1 1 auto !important;
+        }
+
+        #myStoreContainer .cleanCloudWebApp .__cc_homeWrapper {
+          position: absolute !important;
+          top: 0 !important;
+          left: 0 !important;
+          width: 100% !important;
+          height: 100% !important;
+          min-height: 100% !important;
+          overflow: visible !important;
+        }
+
+        #myStoreContainer .cleanCloudWebApp .__cc_homeWrapperInner {
+          height: 100% !important;
+          min-height: 100% !important;
+          overflow: auto !important;
+        }
+
+        #myStoreContainer .cleanCloudWebApp .__cc_order-flow-wrapper,
+        #myStoreContainer .cleanCloudWebApp .__cc_order-flow {
+          width: 100% !important;
+          max-width: 100% !important;
+          min-height: 100% !important;
+          height: 100% !important;
+          box-sizing: border-box !important;
+        }
+      }
+
+      .booking-status {
+        display: none;
+        padding: 2rem 1rem;
+        text-align: center;
+        color: var(--theme-text-soft);
+      }
+
+      .booking-status.is-visible {
+        display: block;
+      }
+
+      .booking-status a {
+        color: var(--theme-accent);
+        text-decoration: underline;
+      }
+
+      /* ── Footer ── */
+      .site-footer {
+        background: var(--theme-bg-alt);
+        border-top: 1px solid rgba(27, 53, 22, 0.06);
+        color: var(--theme-text);
+      }
+
+      .footer-inner {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 4rem 1rem 2.5rem;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .footer-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      @media (min-width: 1280px) {
+        .footer-grid {
+          grid-template-columns: repeat(5, 1fr);
+        }
+      }
+
+      .footer-heading {
+        margin: 0 0 1.5rem;
+        padding-bottom: 0.75rem;
+        border-bottom: 1px solid rgba(27, 53, 22, 0.06);
+        font-size: 0.625rem;
+        font-weight: 700;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--theme-accent);
+      }
+
+      .footer-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      .footer-list li + li {
+        margin-top: 0.625rem;
+      }
+
+      .footer-list a,
+      .footer-list span {
+        font-size: 0.875rem;
+        font-weight: 300;
+        line-height: 1.6;
+        color: var(--theme-text);
+      }
+
+      .hours-row {
+        display: flex;
+        justify-content: space-between;
+        gap: 1rem;
+      }
+
+      .footer-social-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: 0.75rem;
+        margin-top: 2rem;
+      }
+
+      .footer-social-btn {
+        width: 2.25rem;
+        height: 2.25rem;
+        border-radius: 9999px;
+        border: 1px solid rgba(27, 53, 22, 0.1);
+        background: rgba(255, 255, 255, 0.6);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--theme-text);
+      }
+
+      .footer-social-btn:hover {
+        color: var(--theme-accent);
+        border-color: rgba(76, 175, 80, 0.3);
+      }
+
+      .footer-locations {
+        margin-top: 3rem;
+        padding-top: 3rem;
+        border-top: 1px solid rgba(27, 53, 22, 0.06);
+      }
+
+      .locations-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      @media (min-width: 1280px) {
+        .locations-grid {
+          grid-template-columns: 2fr 1fr;
+        }
+      }
+
+      .london-regions {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem 1rem;
+      }
+
+      @media (min-width: 640px) {
+        .london-regions {
+          grid-template-columns: repeat(4, 1fr);
+        }
+      }
+
+      .region-title {
+        margin: 0 0 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 700;
+        color: var(--theme-text);
+      }
+
+      .uk-cities {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0 1.5rem;
+      }
+
+      .footer-bottom {
+        margin-top: 3rem;
+        padding-top: 2rem;
+        border-top: 1px solid rgba(27, 53, 22, 0.06);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        text-align: center;
+        font-size: 0.75rem;
+        font-weight: 300;
+      }
+
+      @media (min-width: 640px) {
+        .footer-bottom {
+          flex-direction: row;
+          justify-content: space-between;
+          text-align: left;
+        }
+      }
+
+      .footer-legal {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+      }
+
+      @media (min-width: 640px) {
+        .footer-legal {
+          justify-content: flex-end;
+        }
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header" id="siteHeader">
+        <div class="header-topbar">
+          <div class="header-inner">
+            <a class="header-email" href="mailto:info@thelaundryman.co.uk">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 4h16v16H4z" opacity="0" />
+                <path d="m4 7 8 5 8-5M4 7v10h16V7" />
+              </svg>
+              <span>info@thelaundryman.co.uk</span>
+            </a>
+            <div class="header-social">
+              <span>Follow Us:</span>
+              <a href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M13.5 8.5H16V5.5H13.5C11.01 5.5 9 7.51 9 10V12H6.5V15H9V22H12V15H15L15.5 12H12V10C12 9.17 12.67 8.5 13.5 8.5Z"/></svg>
+              </a>
+              <a href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.97-1.336-2.214-1.336-3.518V1h-3.077v13.327c0 1.605-1.303 2.9-2.908 2.9s-2.908-1.295-2.908-2.9 1.303-2.9 2.908-2.9c.307 0 .602.047.882.134V9.43a6.026 6.026 0 0 0-.882-.065c-3.233 0-5.852 2.619-5.852 5.852s2.619 5.852 5.852 5.852 5.852-2.619 5.852-5.852V8.687a8.182 8.182 0 0 0 4.773 1.527V7.135a5.093 5.093 0 0 1-2.154-.573z"/></svg>
+              </a>
+              <a href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M7 3C5.34 3 4 4.34 4 6V18C4 19.66 5.34 21 7 21H17C18.66 21 20 19.66 20 18V6C20 4.34 18.66 3 17 3H7ZM12 7.5C13.93 7.5 15.5 9.07 15.5 11C15.5 12.93 13.93 14.5 12 14.5C10.07 14.5 8.5 12.93 8.5 11C8.5 9.07 10.07 7.5 12 7.5ZM12 13C13.1 13 14 12.1 14 11C14 9.9 13.1 9 12 9C10.9 9 10 9.9 10 11C10 12.1 10.9 13 12 13ZM17 8.25C17.41 8.25 17.75 7.91 17.75 7.5C17.75 7.09 17.41 6.75 17 6.75C16.59 6.75 16.25 7.09 16.25 7.5C16.25 7.91 16.59 8.25 17 8.25Z"/></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="header-main">
+          <div class="header-inner">
+            <a class="site-logo" href="/">
+              <span class="site-logo__mark">LM</span>
+              <span class="site-logo__text">
+                The Laundry
+                <span class="site-logo__sub">Man.</span>
+              </span>
+            </a>
+
+            <nav class="desktop-nav" aria-label="Main navigation">
+              <a class="nav-link" href="/">Home</a>
+              <a class="nav-link" href="/about">About Us</a>
+              <a class="nav-link" href="/services">Services</a>
+              <a class="nav-link" href="/commercial">Commercial Cleaning</a>
+              <a class="nav-link" href="/blog">Blog</a>
+              <a class="nav-link" href="/contact">Contact</a>
+              <a class="btn-book" href="/booking.html" aria-current="page">Book Now</a>
+            </nav>
+
+            <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileNav">
+              <span class="sr-only">Toggle menu</span>
+              <svg id="menuIconOpen" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <path d="M4 7h16M4 12h16M4 17h16" />
+              </svg>
+              <svg id="menuIconClose" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true" style="display:none">
+                <path d="M6 6l12 12M18 6 6 18" />
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <nav class="mobile-nav" id="mobileNav" aria-label="Mobile navigation">
+          <div class="mobile-nav-inner">
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+            <a href="/services">Services</a>
+            <a href="/commercial">Commercial Cleaning</a>
+            <a href="/blog">Blog</a>
+            <a href="/contact">Contact</a>
+            <div class="mobile-nav-cta">
+              <a class="btn-book btn-book--mobile" href="/booking.html">Book a Collection</a>
+            </div>
+          </div>
+        </nav>
+      </header>
+
+      <main class="booking-main">
+        <div class="booking-inner content-inner">
+          <div id="bookingToolWrapper">
+            <div id="myStoreContainer"></div>
+          </div>
+          <p id="bookingError" class="booking-status" role="alert">
+            Unable to load the booking system. Please refresh the page or
+            <a href="/contact">contact us</a>.
+          </p>
+        </div>
+      </main>
+
+      <footer class="site-footer" id="footer">
+        <div class="footer-inner">
+          <div class="footer-grid">
+            <div>
+              <h4 class="footer-heading">Services</h4>
+              <ul class="footer-list">
+                <li><a href="/booking.html">Wash &amp; Fold</a></li>
+                <li><a href="/booking.html">Dry Cleaning</a></li>
+                <li><a href="/booking.html">Ironing Service</a></li>
+                <li><a href="/booking.html">Shirt Service</a></li>
+                <li><a href="/booking.html">Curtain Cleaning</a></li>
+                <li><a href="/booking.html">Wedding Dress Cleaning</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="footer-heading">Operating Hours</h4>
+              <ul class="footer-list">
+                <li class="hours-row"><span>Monday</span><span>07:00 - 23:00</span></li>
+                <li class="hours-row"><span>Tuesday</span><span>07:00 - 23:00</span></li>
+                <li class="hours-row"><span>Wednesday</span><span>07:00 - 23:00</span></li>
+                <li class="hours-row"><span>Thursday</span><span>07:00 - 23:00</span></li>
+                <li class="hours-row"><span>Friday</span><span>07:00 - 23:00</span></li>
+                <li class="hours-row"><span>Saturday</span><span>08:00 - 18:00</span></li>
+                <li class="hours-row"><span>Sunday</span><span>09:00 - 21:00</span></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="footer-heading">Explore</h4>
+              <ul class="footer-list">
+                <li><a href="/#how-it-works">How It Works</a></li>
+                <li><a href="/#why-choose-us">Why Choose Us</a></li>
+                <li><a href="/#testimonials">Testimonials</a></li>
+                <li><a href="/locations.html">Locations</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <h4 class="footer-heading">Quick Links</h4>
+              <ul class="footer-list">
+                <li><a href="/about">About us</a></li>
+                <li><a href="/services">Services</a></li>
+                <li><a href="/contact">Contact</a></li>
+              </ul>
+            </div>
+
+            <div>
+              <ul class="footer-list">
+                <li><a href="/blog">Blog</a></li>
+                <li><a href="/privacy-policy">Privacy Policy</a></li>
+                <li><a href="/commercial">Commercial Cleaning</a></li>
+                <li><a href="/terms-conditions">Terms &amp; Conditions</a></li>
+              </ul>
+              <div class="footer-social-row">
+                <span>Social media</span>
+                <a class="footer-social-btn" href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 8.5H16V5.5H13.5C11.01 5.5 9 7.51 9 10V12H6.5V15H9V22H12V15H15L15.5 12H12V10C12 9.17 12.67 8.5 13.5 8.5Z"/></svg>
+                </a>
+                <a class="footer-social-btn" href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.97-1.336-2.214-1.336-3.518V1h-3.077v13.327c0 1.605-1.303 2.9-2.908 2.9s-2.908-1.295-2.908-2.9 1.303-2.9 2.908-2.9c.307 0 .602.047.882.134V9.43a6.026 6.026 0 0 0-.882-.065c-3.233 0-5.852 2.619-5.852 5.852s2.619 5.852 5.852 5.852 5.852-2.619 5.852-5.852V8.687a8.182 8.182 0 0 0 4.773 1.527V7.135a5.093 5.093 0 0 1-2.154-.573z"/></svg>
+                </a>
+                <a class="footer-social-btn" href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+                  <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M7 3C5.34 3 4 4.34 4 6V18C4 19.66 5.34 21 7 21H17C18.66 21 20 19.66 20 18V6C20 4.34 18.66 3 17 3H7ZM12 7.5C13.93 7.5 15.5 9.07 15.5 11C15.5 12.93 13.93 14.5 12 14.5C10.07 14.5 8.5 12.93 8.5 11C8.5 9.07 10.07 7.5 12 7.5ZM12 13C13.1 13 14 12.1 14 11C14 9.9 13.1 9 12 9C10.9 9 10 9.9 10 11C10 12.1 10.9 13 12 13ZM17 8.25C17.41 8.25 17.75 7.91 17.75 7.5C17.75 7.09 17.41 6.75 17 6.75C16.59 6.75 16.25 7.09 16.25 7.5C16.25 7.91 16.59 8.25 17 8.25Z"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-locations" id="locations">
+            <div class="locations-grid">
+              <div>
+                <h4 class="footer-heading">The Laundry Man App London</h4>
+                <div class="london-regions">
+                  <div>
+                    <p class="region-title">East London</p>
+                    <ul class="footer-list">
+                      <li><a href="/hackney">Hackney</a></li>
+                      <li><a href="/walthamstow">Walthamstow</a></li>
+                      <li><a href="/crouch-end">Crouch End</a></li>
+                      <li><a href="/dalston">Dalston</a></li>
+                      <li><a href="/finsbury-park">Finsbury Park</a></li>
+                      <li><a href="/canary-wharf">Canary Wharf</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="region-title">North London</p>
+                    <ul class="footer-list">
+                      <li><a href="/stoke-newington">Stoke Newington</a></li>
+                      <li><a href="/highbury">Highbury</a></li>
+                      <li><a href="/holloway">Holloway</a></li>
+                      <li><a href="/homerton">Homerton</a></li>
+                      <li><a href="/hoxton">Hoxton</a></li>
+                      <li><a href="/camden">Camden</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="region-title">South London</p>
+                    <ul class="footer-list">
+                      <li><a href="/richmond-upon-thames">Richmond Upon Thames</a></li>
+                      <li><a href="/london-fields">London Fields</a></li>
+                      <li><a href="/muswell-hill">Muswell Hill</a></li>
+                      <li><a href="/stratford">Stratford</a></li>
+                      <li><a href="/islington">Islington</a></li>
+                      <li><a href="/hornsey">Hornsey</a></li>
+                      <li><a href="/lambeth">Lambeth</a></li>
+                    </ul>
+                  </div>
+                  <div>
+                    <p class="region-title">West London</p>
+                    <ul class="footer-list">
+                      <li><a href="/mayfair">Mayfair</a></li>
+                      <li><a href="/tottenham">Tottenham</a></li>
+                      <li><a href="/wood-green">Wood Green</a></li>
+                      <li><a href="/stamford-hill">Stamford Hill</a></li>
+                      <li><a href="/leytonstone">Leytonstone</a></li>
+                      <li><a href="/bond-street">Bond Street</a></li>
+                      <li><a href="/hammersmith">Hammersmith</a></li>
+                      <li><a href="/wandsworth">Wandsworth</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="footer-heading">The Laundry Man App UK</h4>
+                <div class="uk-cities">
+                  <ul class="footer-list">
+                    <li><a href="/cheshire">Cheshire</a></li>
+                    <li><a href="/didsbury">Didsbury</a></li>
+                    <li><a href="/leeds">Leeds</a></li>
+                    <li><a href="/newcastle">Newcastle</a></li>
+                    <li><a href="/salford">Salford</a></li>
+                    <li><a href="/manchester-city-centre">Manchester City Centre</a></li>
+                  </ul>
+                  <ul class="footer-list">
+                    <li><a href="/birmingham">Birmingham</a></li>
+                    <li><a href="/harrogate">Harrogate</a></li>
+                    <li><a href="/manchester">Manchester</a></li>
+                    <li><a href="/sheffield">Sheffield</a></li>
+                    <li><a href="/stockport">Stockport</a></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="footer-bottom">
+            <p>© 2026 The Laundry Man App. All Rights Reserved.</p>
+            <nav class="footer-legal" aria-label="Footer legal links">
+              <a href="https://www.flaticon.com/" target="_blank" rel="noopener noreferrer">Icons by Flaticon</a>
+              <span aria-hidden="true">·</span>
+              <a href="/privacy-policy">Privacy Policy</a>
+              <span aria-hidden="true">·</span>
+              <a href="/terms-conditions">Terms of Service</a>
+            </nav>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script>
+      (function () {
+        var header = document.getElementById('siteHeader');
+        var menuToggle = document.getElementById('menuToggle');
+        var mobileNav = document.getElementById('mobileNav');
+        var iconOpen = document.getElementById('menuIconOpen');
+        var iconClose = document.getElementById('menuIconClose');
+
+        function syncHeaderHeight() {
+          if (!header) return;
+          document.documentElement.style.setProperty('--header-height', header.offsetHeight + 'px');
+        }
+
+        function setMobileMenuOpen(isOpen) {
+          if (!mobileNav || !menuToggle) return;
+
+          mobileNav.classList.toggle('is-open', isOpen);
+          menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+          document.body.style.overflow = isOpen ? 'hidden' : '';
+
+          if (iconOpen && iconClose) {
+            iconOpen.style.display = isOpen ? 'none' : 'block';
+            iconClose.style.display = isOpen ? 'block' : 'none';
+          }
+        }
+
+        syncHeaderHeight();
+        window.addEventListener('resize', function () {
+          syncHeaderHeight();
+          if (window.innerWidth >= 768 && mobileNav && mobileNav.classList.contains('is-open')) {
+            setMobileMenuOpen(false);
+          }
+        });
+        window.addEventListener('orientationchange', syncHeaderHeight);
+
+        if (menuToggle && mobileNav) {
+          menuToggle.addEventListener('click', function () {
+            setMobileMenuOpen(!mobileNav.classList.contains('is-open'));
+          });
+
+          mobileNav.querySelectorAll('a').forEach(function (link) {
+            link.addEventListener('click', function () {
+              setMobileMenuOpen(false);
+            });
+          });
+        }
+      })();
+    </script>
+
+    <script src="https://cleancloudapp.com/webapp/public/webapp/cleancloud.js"></script>
+    <script>
+      (function () {
+        var STORE_ID = 4012;
+        var errorEl = document.getElementById('bookingError');
+        var container = document.getElementById('myStoreContainer');
+
+        function showError() {
+          if (errorEl) errorEl.classList.add('is-visible');
+        }
+
+        function isMobileView() {
+          return window.matchMedia('(max-width: 767px)').matches;
+        }
+
+        function mobileWidgetHeight() {
+          var headerHeight = parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue('--header-height')
+          ) || 106;
+          return Math.max(Math.round(window.innerHeight - headerHeight - 16), 420);
+        }
+
+        function desktopWidgetHeight() {
+          var headerHeight = parseFloat(
+            getComputedStyle(document.documentElement).getPropertyValue('--header-height')
+          ) || 106;
+          return Math.max(Math.round(window.innerHeight - headerHeight - 8), 640);
+        }
+
+        function applyMobileFrameFix() {
+          if (!isMobileView()) return;
+
+          var root = container && container.querySelector('.cleanCloudWebApp');
+          if (!root) return;
+
+          root.style.setProperty('max-height', 'none', 'important');
+          root.style.setProperty('height', '100%', 'important');
+          root.style.setProperty('min-height', '100%', 'important');
+
+          root
+            .querySelectorAll(
+              '.cleanCloudWebApp__container, .cleanCloudWebApp__content, .cleanCloudWebApp__appWrapper'
+            )
+            .forEach(function (node) {
+              node.style.setProperty('position', 'relative', 'important');
+              node.style.setProperty('height', '100%', 'important');
+              node.style.setProperty('min-height', '100%', 'important');
+              node.style.setProperty('width', '100%', 'important');
+            });
+
+          root.querySelectorAll('.__cc_homeWrapper').forEach(function (node) {
+            node.style.setProperty('position', 'absolute', 'important');
+            node.style.setProperty('top', '0', 'important');
+            node.style.setProperty('left', '0', 'important');
+            node.style.setProperty('width', '100%', 'important');
+            node.style.setProperty('height', '100%', 'important');
+          });
+
+          root.querySelectorAll('.__cc_homeWrapperInner').forEach(function (node) {
+            node.style.setProperty('height', '100%', 'important');
+            node.style.setProperty('overflow', 'auto', 'important');
+          });
+        }
+
+        function applyDesktopFrameFix() {
+          if (isMobileView()) return;
+
+          var root = container && container.querySelector('.cleanCloudWebApp');
+          if (!root) return;
+
+          root.style.setProperty('max-height', 'none', 'important');
+          root.style.setProperty('height', '100%', 'important');
+          root.style.setProperty('min-height', '100%', 'important');
+
+          root
+            .querySelectorAll(
+              '.cleanCloudWebApp__container, .cleanCloudWebApp__content, .cleanCloudWebApp__appWrapper'
+            )
+            .forEach(function (node) {
+              node.style.setProperty('position', 'relative', 'important');
+              node.style.setProperty('height', '100%', 'important');
+              node.style.setProperty('min-height', '100%', 'important');
+              node.style.setProperty('width', '100%', 'important');
+            });
+
+          root.querySelectorAll('.__cc_homeWrapper').forEach(function (node) {
+            node.style.setProperty('position', 'absolute', 'important');
+            node.style.setProperty('top', '0', 'important');
+            node.style.setProperty('left', '0', 'important');
+            node.style.setProperty('width', '100%', 'important');
+            node.style.setProperty('height', '100%', 'important');
+          });
+
+          root.querySelectorAll('.__cc_homeWrapperInner').forEach(function (node) {
+            node.style.setProperty('height', '100%', 'important');
+            node.style.setProperty('overflow', 'auto', 'important');
+          });
+        }
+
+        function sizeWidgetShell() {
+          var wrapper = document.getElementById('bookingToolWrapper');
+          var heightPx = (isMobileView() ? mobileWidgetHeight() : desktopWidgetHeight()) + 'px';
+
+          if (wrapper) {
+            wrapper.style.minHeight = heightPx;
+            wrapper.style.height = heightPx;
+          }
+          if (container) {
+            container.style.minHeight = heightPx;
+            container.style.height = heightPx;
+          }
+
+          if (isMobileView()) {
+            applyMobileFrameFix();
+          } else {
+            applyDesktopFrameFix();
+          }
+        }
+
+        var frameRefreshTimer = null;
+        function scheduleFrameRefresh() {
+          if (frameRefreshTimer) window.clearTimeout(frameRefreshTimer);
+          frameRefreshTimer = window.setTimeout(sizeWidgetShell, 120);
+        }
+
+        function initCleanCloud() {
+          sizeWidgetShell();
+
+          if (typeof window.CleanCloudWebApp !== 'function') {
+            showError();
+            return;
+          }
+
+          if (!container) {
+            showError();
+            return;
+          }
+
+          try {
+            window.CleanCloudWebApp('#myStoreContainer', STORE_ID, {
+              width: 'auto',
+              height: isMobileView() ? mobileWidgetHeight() : desktopWidgetHeight(),
+              responsivityEnabled: true,
+            });
+
+            window.addEventListener('CleanCloud.ORDER_COMPLETED', function () {
+              try {
+                localStorage.setItem('has_placed_order', 'true');
+              } catch (storageError) {
+                console.warn('Could not persist order state:', storageError);
+              }
+            });
+
+            window.addEventListener('resize', scheduleFrameRefresh);
+            window.addEventListener('orientationchange', scheduleFrameRefresh);
+
+            scheduleFrameRefresh();
+            window.setTimeout(scheduleFrameRefresh, 500);
+
+            if (container) {
+              var observer = new MutationObserver(scheduleFrameRefresh);
+              observer.observe(container, { childList: true, subtree: true });
+            }
+          } catch (error) {
+            console.error('CleanCloud init failed:', error);
+            showError();
+          }
+        }
+
+        window.addEventListener('load', function () {
+          window.setTimeout(initCleanCloud, 300);
+        });
+      })();
+    </script>
+  </body>
+</html>

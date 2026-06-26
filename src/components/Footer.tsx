@@ -35,6 +35,14 @@ function FooterNavLink({ label, href }: FooterLink) {
     );
   }
 
+  if (href.endsWith('.html')) {
+    return (
+      <a href={href} className={linkClassName}>
+        {label}
+      </a>
+    );
+  }
+
   if (href.startsWith('/') && !href.startsWith('//')) {
     return (
       <Link to={href} className={linkClassName}>
@@ -50,15 +58,11 @@ function FooterNavLink({ label, href }: FooterLink) {
   );
 }
 
-function FooterServiceLink({ label, serviceId }: FooterServiceLink) {
+function FooterServiceLink({ label }: FooterServiceLink) {
   return (
-    <Link
-      to="/book"
-      state={{ serviceType: serviceId }}
-      className={linkClassName}
-    >
+    <a href="/booking.html" className={linkClassName}>
       {label}
-    </Link>
+    </a>
   );
 }
 

@@ -1,21 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 
-interface StickyBookNowBarProps {
-  onBookNow: () => void;
-}
-
-export default function StickyBookNowBar({ onBookNow }: StickyBookNowBarProps) {
+export default function StickyBookNowBar() {
   const [isVisible, setIsVisible] = useState(false);
-  const location = useLocation();
-  const isBookPage = location.pathname === '/book';
 
   useEffect(() => {
-    if (isBookPage) {
-      setIsVisible(false);
-      return;
-    }
-
     const hero = document.getElementById('hero');
 
     if (!hero) {
@@ -29,17 +17,13 @@ export default function StickyBookNowBar({ onBookNow }: StickyBookNowBarProps) {
       ([entry]) => {
         setIsVisible(!entry.isIntersecting);
       },
-      { threshold: 0 }
+      { threshold: 0 },
     );
 
     observer.observe(hero);
 
     return () => observer.disconnect();
-  }, [location.pathname, isBookPage]);
-
-  if (isBookPage) {
-    return null;
-  }
+  }, []);
 
   return (
     <div
@@ -49,13 +33,12 @@ export default function StickyBookNowBar({ onBookNow }: StickyBookNowBarProps) {
       aria-label="Quick booking"
       aria-hidden={!isVisible}
     >
-      <button
-        type="button"
-        onClick={onBookNow}
-        className="w-full bg-gold text-navy font-bold py-3.5 px-6 pb-[max(0.875rem,env(safe-area-inset-bottom))] rounded-none active:scale-[0.98] transition-all duration-200 cursor-pointer uppercase tracking-wider text-sm shadow-sm md:rounded-full"
+      <a
+        href="/booking.html"
+        className="block w-full bg-gold text-navy font-bold py-3.5 px-6 pb-[max(0.875rem,env(safe-area-inset-bottom))] rounded-none active:scale-[0.98] transition-all duration-200 uppercase tracking-wider text-sm shadow-sm text-center"
       >
         Book Now
-      </button>
+      </a>
     </div>
   );
 }

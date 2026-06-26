@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import ServicesOverview from '../components/ServicesOverview';
 import InnerPageHeader, { InnerPageTitleHighlight } from '../components/InnerPageHeader';
 import type { ServicesBookingLocationState } from '../data/footerContent';
@@ -10,17 +10,13 @@ interface ServicesProps {
 
 export default function Services({ onBookNow }: ServicesProps) {
   const location = useLocation();
-  const navigate = useNavigate();
 
   useEffect(() => {
     const state = location.state as ServicesBookingLocationState | null;
     if (!state?.autoOpenBooking) return;
 
-    navigate('/book', {
-      replace: true,
-      state: state.serviceType ? { serviceType: state.serviceType } : undefined,
-    });
-  }, [location.state, navigate]);
+    window.location.assign('/booking.html');
+  }, [location.state]);
 
   return (
     <>
