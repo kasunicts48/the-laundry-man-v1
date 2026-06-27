@@ -11,6 +11,7 @@ export const RESERVED_PATH_SEGMENTS = new Set([
   'commercial',
   'blog',
   'contact',
+  'download-app',
   'locations',
   'privacy-policy',
   'terms-conditions',

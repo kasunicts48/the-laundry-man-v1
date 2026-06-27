@@ -11,6 +11,10 @@ export function locationsStaticPlugin(): Plugin {
       return `/locations/index.html${search ? `?${search}` : ''}`;
     }
 
+    if (pathname === '/download-app' || pathname === '/download-app/') {
+      return `/download-app/index.html${search ? `?${search}` : ''}`;
+    }
+
     return url;
   };
 

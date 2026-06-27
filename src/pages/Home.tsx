@@ -1,10 +1,12 @@
 import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero';
+import HomeDoorstepIntro from '../components/HomeDoorstepIntro';
 import HowItWorks from '../components/HowItWorks';
 import ServicesOverview from '../components/ServicesOverview';
 import WhyChooseUs from '../components/WhyChooseUs';
 import AppPromoAndReviews from '../components/AppPromo';
+import HomeFaq from '../components/HomeFaq';
 import { usePageLocation } from '../hooks/usePageLocation';
 
 interface HomeProps {
@@ -76,6 +78,7 @@ export default function Home({ onBookNow }: HomeProps) {
   return (
     <>
       <Hero locationName={displayName} cityData={cityData} />
+      <HomeDoorstepIntro />
       <HowItWorks />
       <ServicesOverview
         city={isRootHome ? undefined : displayName}
@@ -84,6 +87,7 @@ export default function Home({ onBookNow }: HomeProps) {
       />
       <WhyChooseUs />
       <AppPromoAndReviews cityData={cityData} />
+      <HomeFaq />
     </>
   );
 }

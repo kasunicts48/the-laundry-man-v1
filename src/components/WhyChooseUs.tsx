@@ -3,33 +3,34 @@ import { motion } from 'motion/react';
 
 const benefits = [
   {
-    title: '100% Customer Satisfaction',
-    description: 'We provide excellent customer service.',
+    title: 'A Real Laundry & Dry Cleaning Company',
+    description:
+      'We are a professional laundry and dry cleaning business — not an app company. Garment care is what we do, and quality is at the heart of everything we offer.',
+  },
+  {
+    title: 'Cleaned at Our Own Site',
+    description:
+      'Every item is cleaned, finished, and quality-checked at our own facility. That means full control over standards, care, and results from start to finish.',
   },
   {
     title: 'Free Collection & Delivery',
     description:
-      'We process all cleaning at our own site. We provide door-to-door collection and delivery.',
+      'Enjoy convenient door-to-door collection and delivery across our service areas, so professional laundry care fits around your schedule.',
   },
   {
-    title: 'Highly Recommended Service',
+    title: '100% Customer Satisfaction',
     description:
-      'Our customer-focused approach has helped us acquire loyal repeat customers, offering the most efficient and effective customer service. Available for you through email, online chat or call.',
-  },
-  {
-    title: 'Affordable Prices',
-    description:
-      'We have a solution for all your laundry needs. We provide the best service in the most convenient way, at the most affordable prices.',
+      'We provide excellent customer service and take pride in returning your clothes fresh, clean, and ready to wear.',
   },
   {
     title: 'Best Quality',
     description:
-      'We offer a premiere Dry Cleaning service. We also have a specialist for leather, duvets and much more.',
+      'From everyday wash & fold to specialist dry cleaning, leather, duvets, and more — our experienced team handles every fabric with care.',
   },
   {
-    title: 'Book With Us',
+    title: 'Affordable Prices',
     description:
-      'Orders can be booked by calling, email or through our booking app. Through which you can track your order total, pickup and delivery dates and time, as well as pay at your convenience.',
+      'We offer practical solutions for all your laundry needs, with competitive pricing and a straightforward booking experience online or by phone.',
   },
 ];
 
@@ -42,10 +43,11 @@ export default function WhyChooseUs() {
             Why Choose Us
           </h2>
           <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate tracking-tighter">
-            Best Dry Cleaning & Laundry Service
+            Professional Laundry & Dry Cleaning You Can Trust
           </h3>
           <p className="text-ink font-light mt-4 text-lg leading-relaxed">
-            We pick up, clean and return within 24 hours.
+            We are a dry cleaning and laundry company — not an app company. We collect your
+            clothes, clean every item at our own site, and return them within 24 hours.
           </p>
         </div>
 

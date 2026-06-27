@@ -7,6 +7,8 @@ interface ImportMetaEnv {
   readonly VITE_CLEANCLOUD_STORE_ID?: string;
   /** Optional — admin notifications are sent server-side via public/api/.env LAUNDRY_SERVICE_EMAIL */
   readonly VITE_LAUNDRY_SERVICE_EMAIL?: string;
+  /** Public site URL used in QR codes (e.g. https://www.thelaundryman.co.uk) */
+  readonly VITE_SITE_URL?: string;
 }
 
 interface ImportMeta {

@@ -64,13 +64,13 @@ export default function ServicesOverview({ city, cityData, onBookNow, hideSectio
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="flex h-full flex-col items-center text-center group cursor-pointer bg-transparent border-0 shadow-none rounded-none py-5 md:py-0 p-1.5 md:bg-navy md:border md:border-slate/5 md:rounded-3xl md:p-8 lg:p-10 md:shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
+                className="flex h-full flex-col items-center text-center group cursor-pointer bg-transparent border-0 shadow-none rounded-none py-7 md:py-0 p-2 md:bg-navy md:border md:border-slate/5 md:rounded-3xl md:p-8 lg:p-10 md:shadow-sm md:hover:shadow-xl md:hover:-translate-y-2 transition-all duration-300 relative overflow-hidden"
                 onClick={() => setSelectedService(service)}
               >
                 <div className="absolute inset-0 hidden bg-gold/5 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none md:block"></div>
 
                 <div className="relative z-10 flex h-full w-full flex-col justify-between items-center md:h-auto md:justify-start">
-                  <div className="mx-auto mb-1 flex h-32 w-32 shrink-0 items-center justify-center md:mb-6 md:h-20 md:w-20 lg:h-24 lg:w-24">
+                  <div className="mx-auto mb-3 flex h-40 w-40 shrink-0 items-center justify-center sm:h-44 sm:w-44 md:mb-6 md:h-20 md:w-20 lg:h-24 lg:w-24">
                     <img 
                       src={service.image} 
                       alt={service.title}
@@ -83,11 +83,11 @@ export default function ServicesOverview({ city, cityData, onBookNow, hideSectio
                   </div>
 
                   <div className="flex w-full flex-col items-center md:gap-y-0">
-                    <h4 className="mb-1 w-full px-0.5 text-center text-base font-bold uppercase leading-tight tracking-wide text-slate transition-colors group-hover:text-gold md:mb-0 md:text-xl md:leading-snug">
+                    <h4 className="mb-2 w-full px-1 text-center text-xl font-bold uppercase leading-snug tracking-wide text-slate transition-colors group-hover:text-gold sm:text-2xl md:mb-0 md:px-0.5 md:text-xl md:leading-snug">
                       {service.title}
                     </h4>
 
-                    <div className="mt-1 flex w-full shrink-0 flex-col items-center justify-center text-xs md:mt-2 md:text-sm font-normal text-ink leading-tight md:leading-tight">
+                    <div className="mt-2 flex w-full shrink-0 flex-col items-center justify-center text-sm sm:text-base md:mt-2 md:text-sm font-normal text-ink leading-snug md:leading-tight">
                       <span className="block md:inline">Prices starting from</span>
                       <span className="block md:inline md:ml-1">{service.price}</span>
                     </div>
@@ -96,7 +96,7 @@ export default function ServicesOverview({ city, cityData, onBookNow, hideSectio
 
                 {index < services.length - 1 && (
                   <hr
-                    className="md:hidden mt-5 w-48 max-w-[70%] border-0 border-t border-slate/20"
+                    className="md:hidden mt-7 w-56 max-w-[80%] border-0 border-t border-slate/20"
                     aria-hidden="true"
                   />
                 )}

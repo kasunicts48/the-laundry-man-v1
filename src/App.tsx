@@ -15,6 +15,7 @@ import BlogDetails from './pages/BlogDetails';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsConditions from './pages/TermsConditions';
+import AppRedirect from './pages/AppRedirect';
 import { isReservedPathSegment } from './data/locations';
 
 function ScrollToTop() {
@@ -80,7 +81,10 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <AppLayout />
+      <Routes>
+        <Route path="/download-app" element={<AppRedirect />} />
+        <Route path="/*" element={<AppLayout />} />
+      </Routes>
     </Router>
   );
 }

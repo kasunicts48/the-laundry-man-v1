@@ -3,7 +3,6 @@ import { Link, useLocation } from 'react-router-dom';
 import { Menu, X, Facebook, Instagram, Mail } from 'lucide-react';
 import { footerSocialLinks } from '../data/footerContent';
 import { isLocationHomePath } from '../data/locations';
-import MarqueeTicker from './MarqueeTicker';
 
 function HeaderSocialIcon({ type }: { type: 'facebook' | 'tiktok' | 'instagram' }) {
   if (type === 'facebook') return <Facebook size={14} />;
@@ -70,7 +69,6 @@ export default function Header(_props: HeaderProps = {}) {
 
   const hasHeroBanner = isLocationHomePath(location.pathname);
   const useSolidHeader = !hasHeroBanner || isScrolled;
-  const showMarqueeTicker = hasHeroBanner;
 
   return (
     <header
@@ -81,8 +79,6 @@ export default function Header(_props: HeaderProps = {}) {
       }`}
     >
       <div ref={headerRef}>
-        {showMarqueeTicker && <MarqueeTicker />}
-
         {/* Top Bar */}
         <div
           className={`text-ink border-b border-white/5 py-2 px-4 sm:px-6 lg:px-8 text-xs font-medium ${

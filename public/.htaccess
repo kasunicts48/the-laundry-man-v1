@@ -10,6 +10,9 @@ DirectoryIndex index.html index.php
   # /locations and /locations/ → directory index (static locations page)
   RewriteRule ^locations/?$ /locations/index.html [L,QSA]
 
+  # App download smart redirect (QR code destination)
+  RewriteRule ^download-app/?$ /download-app/index.html [L,QSA]
+
   # InfinityFree: serve existing files and folders directly (booking.html, locations/, assets/, etc.)
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
