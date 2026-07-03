@@ -2,6 +2,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getStaticFooterCss, getStaticFooterHtml } from './static-footer.mjs';
+import { renderSocialIcon } from './social-icons.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -699,10 +700,13 @@ const html = `<!doctype html>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+    <meta http-equiv="Pragma" content="no-cache" />
+    <meta http-equiv="Expires" content="0" />
     <title>Service Areas | The Laundry Man</title>
     <meta name="description" content="Browse laundry and dry cleaning service areas across the UK. Free collection and delivery in ${regionCount} regions and ${areaCount.toLocaleString()} neighbourhoods." />
-    <link rel="icon" href="/logo-laundry-man-app.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/logo-laundry-man-app.png" />
+    <link rel="icon" href="/logo-laundry-man-app-icon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/logo-laundry-man-app-icon.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
@@ -731,7 +735,7 @@ const html = `<!doctype html>
         backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(27, 53, 22, 0.06);
       }
-      .header-topbar { border-bottom: 1px solid rgba(27, 53, 22, 0.06); padding: 0.75rem 1rem; font-size: 0.875rem; font-weight: 600; }
+      .header-topbar { background: #134633; color: rgba(255, 255, 255, 0.9); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 0.75rem 1rem; font-size: 0.875rem; font-weight: 600; }
       .header-email svg, .header-social a svg { width: 1.25rem; height: 1.25rem; }
       .header-social a { min-width: 2rem; min-height: 2rem; justify-content: center; }
       .header-social { display: flex; align-items: center; gap: 0.5rem; }
@@ -743,8 +747,9 @@ const html = `<!doctype html>
       }
       .header-inner { max-width: 80rem; margin: 0 auto; padding: 0 1rem; }
       .header-topbar .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-      .header-email, .header-social a { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--theme-text); }
-      .header-email:hover, .header-social a:hover, .nav-link:hover, .footer a:hover, .location-link:hover { color: var(--theme-accent); }
+      .header-email, .header-social a { display: inline-flex; align-items: center; gap: 0.5rem; color: rgba(255, 255, 255, 0.9); }
+      .header-email:hover, .nav-link:hover, .footer a:hover, .location-link:hover { color: var(--theme-accent); }
+      .header-social a:hover { opacity: 0.85; }
       .header-main { padding: 1rem 0; }
       .header-main .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
       .site-logo { display: flex; align-items: center; flex-shrink: 0; }
@@ -848,9 +853,9 @@ ${staticFooterCss}
             </a>
             <div class="header-social">
               <span>Follow Us:</span>
-              <a href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5 8.5H16V5.5H13.5C11.01 5.5 9 7.51 9 10V12H6.5V15H9V22H12V15H15L15.5 12H12V10C12 9.17 12.67 8.5 13.5 8.5Z"/></svg></a>
-              <a href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.97-1.336-2.214-1.336-3.518V1h-3.077v13.327c0 1.605-1.303 2.9-2.908 2.9s-2.908-1.295-2.908-2.9 1.303-2.9 2.908-2.9c.307 0 .602.047.882.134V9.43a6.026 6.026 0 0 0-.882-.065c-3.233 0-5.852 2.619-5.852 5.852s2.619 5.852 5.852 5.852 5.852-2.619 5.852-5.852V8.687a8.182 8.182 0 0 0 4.773 1.527V7.135a5.093 5.093 0 0 1-2.154-.573z"/></svg></a>
-              <a href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M7 3C5.34 3 4 4.34 4 6V18C4 19.66 5.34 21 7 21H17C18.66 21 20 19.66 20 18V6C20 4.34 18.66 3 17 3H7ZM12 7.5C13.93 7.5 15.5 9.07 15.5 11C15.5 12.93 13.93 14.5 12 14.5C10.07 14.5 8.5 12.93 8.5 11C8.5 9.07 10.07 7.5 12 7.5Z"/></svg></a>
+              <a href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">${renderSocialIcon('facebook', 14)}</a>
+              <a href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok">${renderSocialIcon('tiktok', 14)}</a>
+              <a href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram">${renderSocialIcon('instagram', 14, '-locations-header')}</a>
             </div>
           </div>
         </div>

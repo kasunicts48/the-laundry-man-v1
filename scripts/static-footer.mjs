@@ -1,7 +1,7 @@
 import { readFileSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import { socialIcons } from './social-icons.mjs';
+import { renderSocialIcon } from './social-icons.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const ukLocations = JSON.parse(
@@ -361,7 +361,6 @@ export function getStaticFooterCss() {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        color: #ffffff;
         transition: all 0.3s;
       }
 
@@ -373,9 +372,9 @@ export function getStaticFooterCss() {
       }
 
       .footer-social-btn:hover {
-        color: rgb(76, 175, 80);
         border-color: rgba(76, 175, 80, 0.4);
         background: rgba(76, 175, 80, 0.15);
+        opacity: 0.9;
       }
 
       .footer-locations {
@@ -453,12 +452,17 @@ export function getStaticFooterHtml({ includeLocations = true } = {}) {
   const exploreCol1 = footerExploreLinks.slice(0, exploreSplit);
   const exploreCol2 = footerExploreLinks.slice(exploreSplit);
 
-  const socialHtml = `<div class="footer-social-icons">${footerSocialLinks
-    .map(
-      (social) =>
-        `<a class="footer-social-btn" href="${escapeHtml(social.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(social.label)}">${socialIcons[social.icon]}</a>`
-    )
-    .join('')}</div>`;
+  function renderSocialHtml(idSuffix) {
+    return `<div class="footer-social-icons">${footerSocialLinks
+      .map(
+        (social, index) =>
+          `<a class="footer-social-btn" href="${escapeHtml(social.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(social.label)}">${renderSocialIcon(social.icon, 18, `${idSuffix}-${index}`)}</a>`
+      )
+      .join('')}</div>`;
+  }
+
+  const socialHtmlQuick = renderSocialHtml('footer-quick');
+  const socialHtmlBottom = renderSocialHtml('footer-bottom');
 
   const locationsHtml = includeLocations
     ? `
@@ -508,7 +512,7 @@ export function getStaticFooterHtml({ includeLocations = true } = {}) {
                   ${renderLinkList(footerQuickLinksCol2)}
                   <div class="footer-social-row">
                     <span>Social media</span>
-                    ${socialHtml}
+                    ${socialHtmlQuick}
                   </div>
                 </div>
               </div>
@@ -526,7 +530,7 @@ export function getStaticFooterHtml({ includeLocations = true } = {}) {
             </nav>
             <div class="footer-social-bottom">
               <span>Follow us</span>
-              ${socialHtml}
+              ${socialHtmlBottom}
             </div>
           </div>
         </div>

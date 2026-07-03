@@ -78,9 +78,7 @@ export default function Header(_props: HeaderProps = {}) {
       <div ref={headerRef}>
         {/* Top Bar */}
         <div
-          className={`text-ink border-b border-white/5 py-1.5 px-4 sm:py-2 sm:px-6 lg:px-8 text-xs font-medium transition-colors duration-300 ${
-            useSolidHeader ? '' : 'bg-navy'
-          }`}
+          className="border-b border-white/10 bg-[#134633] py-1.5 px-4 text-xs font-medium text-paper/90 transition-colors duration-300 sm:py-2 sm:px-6 lg:px-8"
         >
           <div className="max-w-7xl mx-auto flex justify-between items-center gap-3">
           <a
@@ -100,7 +98,7 @@ export default function Header(_props: HeaderProps = {}) {
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center justify-center hover:text-gold transition-colors"
+                  className="inline-flex items-center justify-center hover:opacity-80 transition-opacity"
                   aria-label={social.label}
                 >
                   <SocialIcon type={social.icon} className="h-4 w-4 sm:h-3.5 sm:w-3.5" />

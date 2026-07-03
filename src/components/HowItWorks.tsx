@@ -46,10 +46,10 @@ export default function HowItWorks() {
   return (
     <section id="how-it-works" className="py-12 sm:py-24 bg-navy relative scroll-mt-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 lg:max-w-none">
           <h2 className="section-eyebrow">How It Works</h2>
-          <h3 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate tracking-tighter">
-            Effortless Laundry in 3 Simple Steps
+          <h3 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-extrabold text-slate tracking-tighter lg:whitespace-nowrap">
+            You Click, We Collect, Clean & Deliver
           </h3>
         </div>
 

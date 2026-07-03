@@ -14,9 +14,9 @@ export default function HomeAudienceCards() {
 
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-12 max-w-3xl text-center sm:mb-14">
-          <h2 className="section-eyebrow">Who we help</h2>
+          <h2 className="section-eyebrow">Who we serve</h2>
           <h3 className="text-3xl font-extrabold tracking-tighter text-slate sm:text-4xl lg:text-5xl">
-           Leave the laundry to us and get back to your life.
+           We do laundry. You do life.
           </h3>
         </div>
 

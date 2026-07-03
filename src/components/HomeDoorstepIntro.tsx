@@ -73,8 +73,8 @@ export default function HomeDoorstepIntro() {
               and return everything fresh, folded, and ready to wear — without you leaving the house.
             </p>
 
-            <div className="mt-6 w-full overflow-hidden rounded-2xl bg-[#134633] p-5 sm:mt-7 sm:p-6 lg:max-w-none">
-              <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-5">
+            <div className="mt-6 w-full overflow-hidden rounded-2xl bg-[#134633] shadow-accent-sm sm:mt-7 lg:max-w-none">
+              <ul className="grid grid-cols-1 gap-4 p-5 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-5 sm:p-6">
                 {highlights.map(({ icon: Icon, title, subtitle }, index) => (
                   <motion.li
                     key={title}
@@ -96,16 +96,32 @@ export default function HomeDoorstepIntro() {
                   </motion.li>
                 ))}
               </ul>
-            </div>
 
-            <div className="mt-6 flex w-full items-start gap-3 rounded-xl border border-gold/25 bg-gold/5 px-4 py-3.5 text-left sm:mt-7">
-              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold">
-                <Gem className="h-4 w-4" aria-hidden="true" />
-              </span>
-              <p className="text-sm leading-relaxed text-ink sm:text-base">
-                <span className="font-semibold text-slate">We specialise in designerwear.</span>{' '}
-                Luxury labels and delicate fabrics are cared for with expert handling at our own site.
-              </p>
+              <motion.div
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.45 }}
+                className="relative border-t border-white/10 bg-gradient-to-r from-black/20 via-black/10 to-black/20 px-5 py-5 sm:px-6 sm:py-6"
+              >
+                <div
+                  className="pointer-events-none absolute inset-y-0 left-0 w-1 bg-gradient-to-b from-gold via-gold/70 to-transparent"
+                  aria-hidden="true"
+                />
+                <div className="flex items-start gap-4 sm:gap-5">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-gold/15 text-gold ring-1 ring-gold/25 sm:h-14 sm:w-14">
+                    <Gem className="h-5 w-5 sm:h-6 sm:w-6" aria-hidden="true" />
+                  </span>
+                  <div className="min-w-0 text-left">
+                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold sm:text-[11px]">
+                      Designerwear specialists
+                    </p>
+                    <p className="mt-1.5 text-base font-extrabold leading-snug text-paper sm:text-lg">
+                      We specialise in designerwear
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
             </div>
 
             <div className="mt-6 w-full sm:mt-7">

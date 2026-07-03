@@ -82,7 +82,7 @@ function FooterSocialLinks({ className = '' }: { className?: string }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={social.label}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-paper/15 bg-paper/10 text-paper hover:border-[rgb(76,175,80)]/40 hover:bg-[rgb(76,175,80)]/15 hover:text-[rgb(76,175,80)] transition-all duration-300"
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-paper/15 bg-paper/10 hover:border-[rgb(76,175,80)]/40 hover:bg-[rgb(76,175,80)]/15 hover:opacity-90 transition-all duration-300"
         >
           <SocialIcon type={social.icon} size={18} />
         </a>
