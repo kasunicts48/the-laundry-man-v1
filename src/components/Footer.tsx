@@ -2,25 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import {
   footerServices,
-  footerOperatingHours,
   footerQuickLinksCol1,
   footerQuickLinksCol2,
   footerExploreLinks,
-  footerLondonRegions,
-  footerUkCitiesCol1,
-  footerUkCitiesCol2,
+  footerLondonAreaColumns,
+  footerManchesterAreaColumns,
   footerSocialLinks,
   resolveCityHref,
   type FooterLink,
-  type FooterServiceLink,
 } from '../data/footerContent';
+import { SocialIcon } from './SocialIcon';
 
 const linkClassName =
-  'text-sm text-ink font-light hover:text-gold transition-colors duration-300 leading-relaxed';
+  'text-sm text-paper/90 font-light hover:text-[rgb(76,175,80)] transition-colors duration-300 leading-relaxed';
 
 function FooterSectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h4 className="text-[10px] uppercase tracking-widest text-gold font-bold pb-3 mb-6 border-b border-white/5">
+    <h4 className="text-[10px] uppercase tracking-widest text-[rgb(76,175,80)] font-bold pb-3 mb-6 border-b border-paper/10">
       {children}
     </h4>
   );
@@ -62,26 +60,6 @@ function FooterNavLink({ label, href }: FooterLink) {
   );
 }
 
-function FooterServiceLink({ label }: FooterServiceLink) {
-  return (
-    <a href="/booking.html" className={linkClassName}>
-      {label}
-    </a>
-  );
-}
-
-function FooterServiceLinkList({ links }: { links: FooterServiceLink[] }) {
-  return (
-    <ul className="space-y-2.5">
-      {links.map((link) => (
-        <li key={link.serviceId}>
-          <FooterServiceLink {...link} />
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 function FooterLinkList({ links }: { links: FooterLink[] }) {
   return (
     <ul className="space-y-2.5">
@@ -94,27 +72,22 @@ function FooterLinkList({ links }: { links: FooterLink[] }) {
   );
 }
 
-function SocialIcon({ type }: { type: 'facebook' | 'tiktok' | 'instagram' }) {
-  if (type === 'facebook') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true" className="w-6 h-6 fill-current">
-        <path d="M13.5 8.5H16V5.5H13.5C11.01 5.5 9 7.51 9 10V12H6.5V15H9V22H12V15H15L15.5 12H12V10C12 9.17 12.67 8.5 13.5 8.5Z" />
-      </svg>
-    );
-  }
-
-  if (type === 'tiktok') {
-    return (
-      <svg viewBox="0 0 24 24" aria-hidden="true" className="w-6 h-6 fill-current">
-        <path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.97-1.336-2.214-1.336-3.518V1h-3.077v13.327c0 1.605-1.303 2.9-2.908 2.9s-2.908-1.295-2.908-2.9 1.303-2.9 2.908-2.9c.307 0 .602.047.882.134V9.43a6.026 6.026 0 0 0-.882-.065c-3.233 0-5.852 2.619-5.852 5.852s2.619 5.852 5.852 5.852 5.852-2.619 5.852-5.852V8.687a8.182 8.182 0 0 0 4.773 1.527V7.135a5.093 5.093 0 0 1-2.154-.573z" />
-      </svg>
-    );
-  }
-
+function FooterSocialLinks({ className = '' }: { className?: string }) {
   return (
-    <svg viewBox="0 0 24 24" aria-hidden="true" className="w-6 h-6 fill-current">
-      <path d="M7 3C5.34 3 4 4.34 4 6V18C4 19.66 5.34 21 7 21H17C18.66 21 20 19.66 20 18V6C20 4.34 18.66 3 17 3H7ZM12 7.5C13.93 7.5 15.5 9.07 15.5 11C15.5 12.93 13.93 14.5 12 14.5C10.07 14.5 8.5 12.93 8.5 11C8.5 9.07 10.07 7.5 12 7.5ZM12 13C13.1 13 14 12.1 14 11C14 9.9 13.1 9 12 9C10.9 9 10 9.9 10 11C10 12.1 10.9 13 12 13ZM17 8.25C17.41 8.25 17.75 7.91 17.75 7.5C17.75 7.09 17.41 6.75 17 6.75C16.59 6.75 16.25 7.09 16.25 7.5C16.25 7.91 16.59 8.25 17 8.25Z" />
-    </svg>
+    <div className={`flex items-center gap-3 ${className}`}>
+      {footerSocialLinks.map((social) => (
+        <a
+          key={social.label}
+          href={social.href}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={social.label}
+          className="flex h-9 w-9 items-center justify-center rounded-full border border-paper/15 bg-paper/10 text-paper hover:border-[rgb(76,175,80)]/40 hover:bg-[rgb(76,175,80)]/15 hover:text-[rgb(76,175,80)] transition-all duration-300"
+        >
+          <SocialIcon type={social.icon} size={18} />
+        </a>
+      ))}
+    </div>
   );
 }
 
@@ -132,166 +105,111 @@ function AreaList({ areas }: { areas: string[] }) {
   );
 }
 
-function LondonRegion({ name, areas }: { name: string; areas: string[] }) {
-  return (
-    <div>
-      <p className="text-sm font-bold text-white mb-2">{name}</p>
-      <AreaList areas={areas} />
-    </div>
-  );
-}
-
-function UkCityList({ cities }: { cities: string[] }) {
-  return (
-    <ul className="space-y-2.5">
-      {cities.map((city) => (
-        <li key={city}>
-          <Link to={resolveCityHref(city)} className={linkClassName}>
-            {city}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 export default function Footer() {
   return (
-    <footer id="footer" className="bg-navy-alt text-ink border-t border-white/5 transition-colors duration-500">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-28 md:pb-10 lg:pt-24">
-        <div className="grid w-full grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-y-12 gap-x-8 lg:gap-x-10 xl:gap-x-12 items-start">
-          <div className="min-w-0">
+    <footer id="footer" className="relative overflow-hidden bg-[#134633] text-paper border-t border-paper/10 transition-colors duration-500">
+      <div
+        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-black/20"
+        aria-hidden="true"
+      />
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-28 md:pb-10 lg:pt-24">
+        <div className="grid w-full grid-cols-1 gap-y-12 gap-x-8 md:grid-cols-2 lg:grid-cols-12 lg:gap-x-10 items-start">
+          <div className="min-w-0 lg:col-span-4">
             <FooterSectionHeading>Services</FooterSectionHeading>
-            <FooterServiceLinkList links={footerServices} />
-          </div>
-
-          <div className="min-w-0">
-            <FooterSectionHeading>Operating Hours</FooterSectionHeading>
-            <ul className="space-y-2.5">
-              {footerOperatingHours.map(({ day, hours }) => (
-                <li key={day} className="flex items-baseline justify-between gap-4 text-sm font-light">
-                  <span className="text-ink">{day}</span>
-                  <span className="text-ink shrink-0 tabular-nums">{hours}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-
-          <div className="min-w-0">
-            <FooterSectionHeading>Explore</FooterSectionHeading>
-            <FooterLinkList links={footerExploreLinks} />
-          </div>
-
-          <div className="min-w-0">
-            <FooterSectionHeading>Quick Links</FooterSectionHeading>
-            <FooterLinkList links={footerQuickLinksCol1} />
-          </div>
-
-          <div className="min-w-0 flex flex-col">
-            <div
-              className="hidden md:block pb-3 mb-6 border-b border-white/5"
-              aria-hidden="true"
-            >
-              <span className="text-[10px] uppercase tracking-widest font-bold opacity-0 select-none pointer-events-none">
-                Quick Links
-              </span>
+            <div className="grid grid-cols-2 gap-x-6 sm:gap-x-8">
+              <FooterLinkList links={footerServices.slice(0, Math.ceil(footerServices.length / 2))} />
+              <FooterLinkList links={footerServices.slice(Math.ceil(footerServices.length / 2))} />
             </div>
-            <FooterLinkList links={footerQuickLinksCol2} />
-            <div className="mt-8 flex flex-wrap items-center gap-4">
-              <span className="text-sm text-ink font-light">Social media</span>
-              <div className="flex items-center gap-3">
-                {footerSocialLinks.map((social) => (
-                  <a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={social.label}
-                    className="w-9 h-9 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-ink hover:text-gold hover:border-gold/30 hover:bg-gold/5 transition-all duration-300"
-                  >
-                    <SocialIcon type={social.icon} />
-                  </a>
-                ))}
+          </div>
+
+          <div className="min-w-0 lg:col-span-3">
+            <FooterSectionHeading>Explore</FooterSectionHeading>
+            <div className="grid grid-cols-2 gap-x-6 sm:gap-x-8">
+              <FooterLinkList links={footerExploreLinks.slice(0, Math.ceil(footerExploreLinks.length / 2))} />
+              <FooterLinkList links={footerExploreLinks.slice(Math.ceil(footerExploreLinks.length / 2))} />
+            </div>
+          </div>
+
+          <div className="min-w-0 md:col-span-2 lg:col-span-5">
+            <FooterSectionHeading>Quick Links</FooterSectionHeading>
+            <div className="grid grid-cols-2 gap-x-6 sm:gap-x-8">
+              <FooterLinkList links={footerQuickLinksCol1} />
+              <div className="flex flex-col">
+                <FooterLinkList links={footerQuickLinksCol2} />
+                <div className="mt-6 flex flex-wrap items-center gap-4 sm:mt-8">
+                  <span className="text-sm font-light text-paper/90">Social media</span>
+                  <FooterSocialLinks />
+                </div>
               </div>
             </div>
           </div>
         </div>
 
         {/* Lower section — locations */}
-        <div id="locations" className="mt-16 pt-12 border-t border-white/5 scroll-mt-28">
-          <div className="grid grid-cols-1 xl:grid-cols-12 gap-12 xl:gap-x-8 xl:gap-y-12 items-start">
-            <div className="xl:col-span-8">
+        <div id="locations" className="mt-8 scroll-mt-28 pt-4">
+          <div className="space-y-12">
+            <div>
               <FooterSectionHeading>The Laundry Man App London</FooterSectionHeading>
-              <div className="grid grid-cols-2 gap-x-6 gap-y-8 sm:hidden">
-                <div className="space-y-8 min-w-0">
-                  {footerLondonRegions.slice(0, 2).map((region) => (
-                    <div key={region.name}>
-                      <LondonRegion name={region.name} areas={region.areas} />
-                    </div>
-                  ))}
-                </div>
-                <div className="space-y-8 min-w-0">
-                  {footerLondonRegions.slice(2).map((region) => (
-                    <div key={region.name}>
-                      <LondonRegion name={region.name} areas={region.areas} />
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="hidden sm:grid sm:grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-6">
-                {footerLondonRegions.map((region) => (
-                  <div key={region.name}>
-                    <LondonRegion name={region.name} areas={region.areas} />
-                  </div>
+              <div className="grid grid-cols-2 gap-x-4 sm:grid-cols-4 sm:gap-x-6 lg:gap-x-8 gap-y-2.5">
+                {footerLondonAreaColumns.map((column, index) => (
+                  <AreaList key={index} areas={column} />
                 ))}
               </div>
             </div>
 
-            <div className="xl:col-span-4">
-              <FooterSectionHeading>The Laundry Man App UK</FooterSectionHeading>
-              <div className="grid grid-cols-2 gap-x-6 sm:gap-x-8 gap-y-2.5">
-                <UkCityList cities={footerUkCitiesCol1} />
-                <UkCityList cities={footerUkCitiesCol2} />
+            <div>
+              <FooterSectionHeading>The Laundry Man App Manchester</FooterSectionHeading>
+              <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-4 sm:gap-x-8 gap-y-2.5">
+                {footerManchesterAreaColumns.map((column, index) => (
+                  <AreaList key={index} areas={column} />
+                ))}
               </div>
             </div>
           </div>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/5 flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-          <p className="text-xs text-ink font-medium">
-            © 2026 The Laundry Man App. All Rights Reserved.
-          </p>
-          <nav
-            className="flex flex-wrap items-center justify-center sm:justify-end gap-x-2 gap-y-2 text-xs text-ink font-light"
-            aria-label="Footer legal and attribution links"
-          >
-            <a
-              href="https://www.flaticon.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-gold transition-colors duration-300"
+        <div className="mt-12 border-t border-paper/10 pt-8">
+          <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
+            <p className="text-xs font-medium text-paper/80">
+              © 2026 The Laundry Man App. All Rights Reserved.
+            </p>
+            <nav
+              className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-xs font-light text-paper/80 sm:justify-end"
+              aria-label="Footer legal and attribution links"
             >
-              Icons by Flaticon
-            </a>
-            <span className="text-ink" aria-hidden="true">
-              ·
-            </span>
-            <Link
-              to="/privacy-policy"
-              className="hover:text-gold transition-colors duration-300"
-            >
-              Privacy Policy
-            </Link>
-            <span className="text-ink" aria-hidden="true">
-              ·
-            </span>
-            <Link
-              to="/terms-conditions"
-              className="hover:text-gold transition-colors duration-300"
-            >
-              Terms of Service
-            </Link>
-          </nav>
+              <a
+                href="https://www.flaticon.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-[rgb(76,175,80)] transition-colors duration-300"
+              >
+                Icons by Flaticon
+              </a>
+              <span className="text-paper/40" aria-hidden="true">
+                ·
+              </span>
+              <Link
+                to="/privacy-policy"
+                className="hover:text-[rgb(76,175,80)] transition-colors duration-300"
+              >
+                Privacy Policy
+              </Link>
+              <span className="text-paper/40" aria-hidden="true">
+                ·
+              </span>
+              <Link
+                to="/terms-conditions"
+                className="hover:text-[rgb(76,175,80)] transition-colors duration-300"
+              >
+                Terms of Service
+              </Link>
+            </nav>
+          </div>
+
+          <div className="mt-6 flex flex-col items-center gap-3 md:hidden">
+            <span className="text-xs font-light text-paper/80">Follow us</span>
+            <FooterSocialLinks />
+          </div>
         </div>
       </div>
     </footer>

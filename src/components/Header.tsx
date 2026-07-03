@@ -1,19 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Menu, X, Facebook, Instagram, Mail } from 'lucide-react';
+import { Menu, X, Mail } from 'lucide-react';
 import { footerSocialLinks } from '../data/footerContent';
 import { isLocationHomePath } from '../data/locations';
-
-function HeaderSocialIcon({ type }: { type: 'facebook' | 'tiktok' | 'instagram' }) {
-  if (type === 'facebook') return <Facebook size={14} />;
-  if (type === 'instagram') return <Instagram size={14} />;
-
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-      <path d="M19.321 5.562a5.122 5.122 0 0 1-.443-.258 6.228 6.228 0 0 1-1.137-.966c-.849-.97-1.336-2.214-1.336-3.518V1h-3.077v13.327c0 1.605-1.303 2.9-2.908 2.9s-2.908-1.295-2.908-2.9 1.303-2.9 2.908-2.9c.307 0 .602.047.882.134V9.43a6.026 6.026 0 0 0-.882-.065c-3.233 0-5.852 2.619-5.852 5.852s2.619 5.852 5.852 5.852 5.852-2.619 5.852-5.852V8.687a8.182 8.182 0 0 0 4.773 1.527V7.135a5.093 5.093 0 0 1-2.154-.573z" />
-    </svg>
-  );
-}
+import BookNowButton from './BookNowButton';
+import SiteLogo from './SiteLogo';
+import { SocialIcon } from './SocialIcon';
 
 interface HeaderProps {
   onBookNow?: () => void;
@@ -81,29 +73,35 @@ export default function Header(_props: HeaderProps = {}) {
       <div ref={headerRef}>
         {/* Top Bar */}
         <div
-          className={`text-ink border-b border-white/5 py-2 px-4 sm:px-6 lg:px-8 text-xs font-medium ${
+          className={`text-ink border-b border-white/5 py-3 px-4 sm:py-2 sm:px-6 lg:px-8 text-sm sm:text-xs font-medium ${
             useSolidHeader ? '' : 'bg-navy'
           }`}
         >
-          <div className="max-w-7xl mx-auto flex justify-between items-center">
-          <a href="mailto:info@thelaundryman.co.uk" className="flex items-center gap-2 hover:text-gold transition-colors">
-            <Mail size={14} />
-            <span className="hidden sm:inline">info@thelaundryman.co.uk</span>
+          <div className="max-w-7xl mx-auto flex justify-between items-center gap-3">
+          <a
+            href="mailto:info@thelaundryman.co.uk"
+            className="flex min-h-10 items-center gap-2.5 hover:text-gold transition-colors sm:min-h-0"
+            aria-label="Email info@thelaundryman.co.uk"
+          >
+            <Mail className="h-5 w-5 shrink-0 sm:h-3.5 sm:w-3.5" strokeWidth={1.75} aria-hidden="true" />
+            <span className="hidden text-sm leading-tight sm:inline sm:text-xs">info@thelaundryman.co.uk</span>
           </a>
-          <div className="flex items-center gap-4">
-            <span className="text-ink">Follow Us:</span>
-            {footerSocialLinks.map((social) => (
-              <a
-                key={social.label}
-                href={social.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-gold transition-colors"
-                aria-label={social.label}
-              >
-                <HeaderSocialIcon type={social.icon} />
-              </a>
-            ))}
+          <div className="flex shrink-0 items-center gap-2 sm:gap-4">
+            <span className="text-sm font-semibold sm:text-xs sm:font-medium">Follow Us:</span>
+            <div className="flex items-center gap-0.5 sm:gap-3">
+              {footerSocialLinks.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-8 w-8 items-center justify-center hover:text-gold transition-colors sm:h-auto sm:w-auto"
+                  aria-label={social.label}
+                >
+                  <SocialIcon type={social.icon} className="h-5 w-5 sm:h-3.5 sm:w-3.5" />
+                </a>
+              ))}
+            </div>
           </div>
           </div>
         </div>
@@ -112,13 +110,8 @@ export default function Header(_props: HeaderProps = {}) {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 py-4">
           <div className="flex justify-between items-center">
           {/* Logo */}
-          <Link to="/" className="flex-shrink-0 flex items-center gap-2 cursor-pointer" onClick={() => window.scrollTo(0,0)}>
-            <div className="w-10 h-10 bg-gold rounded-full flex items-center justify-center text-navy font-heading font-bold text-xl">
-              LM
-            </div>
-            <span className={`font-heading font-extrabold text-2xl tracking-tight text-gold`}>
-              The Laundry<br/><span className="text-ink font-light leading-none block -mt-1 tracking-wider uppercase text-[10px]">Man.</span>
-            </span>
+          <Link to="/" className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => window.scrollTo(0,0)}>
+            <SiteLogo />
           </Link>
 
           {/* Desktop Nav */}
@@ -132,19 +125,15 @@ export default function Header(_props: HeaderProps = {}) {
                 {link.name}
               </Link>
             ))}
-            <a
-              href="/booking.html"
-              className="px-6 py-2.5 border border-gold text-gold pill hover:bg-gold hover:text-navy transition-all text-xs font-semibold uppercase tracking-wide"
-            >
-              Book Now
-            </a>
+            <BookNowButton className="!px-6 !py-2.5 !text-xs" label="Book Now" />
           </nav>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center">
-            <button 
+          {/* Mobile: Menu */}
+          <div className="flex items-center md:hidden">
+            <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="text-ink hover:text-gold focus:outline-none"
+              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
             </button>
@@ -167,14 +156,8 @@ export default function Header(_props: HeaderProps = {}) {
                 {link.name}
               </Link>
             ))}
-            <div className="pt-4 pb-2 px-3 flex flex-col items-center space-y-4">
-              <a
-                href="/booking.html"
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="border border-gold text-gold w-full py-3 px-6 pill hover:bg-gold hover:text-navy transition-all text-sm font-semibold uppercase tracking-wide text-center"
-              >
-                Book a Collection
-              </a>
+            <div className="pt-4 pb-2 px-3">
+              <BookNowButton fullWidth label="Book Now" onClick={() => setIsMobileMenuOpen(false)} />
             </div>
           </div>
         </div>

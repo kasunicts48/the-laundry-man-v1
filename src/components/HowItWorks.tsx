@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'motion/react';
 
+import BookNowButton from './BookNowButton';
 import bookingIcon from '../assets/icons/booking.png';
 import clothingIcon from '../assets/icons/clothing.png';
 import fastDeliveryIcon from '../assets/icons/fast-delivery.png';
@@ -80,6 +81,10 @@ export default function HowItWorks() {
               </p>
             </motion.div>
           ))}
+        </div>
+
+        <div className="mt-10 flex justify-center sm:mt-12">
+          <BookNowButton label="Book Now" />
         </div>
       </div>
     </section>

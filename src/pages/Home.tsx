@@ -2,12 +2,16 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero';
 import HomeDoorstepIntro from '../components/HomeDoorstepIntro';
+import HomeAudienceCards from '../components/HomeAudienceCards';
 import HowItWorks from '../components/HowItWorks';
+import HomeAppControl from '../components/HomeAppControl';
+import HomeTrustBand from '../components/HomeTrustBand';
 import ServicesOverview from '../components/ServicesOverview';
 import WhyChooseUs from '../components/WhyChooseUs';
 import AppPromoAndReviews from '../components/AppPromo';
 import HomeFaq from '../components/HomeFaq';
 import { usePageLocation } from '../hooks/usePageLocation';
+import { SITE_LOGO_URL } from '../data/siteBrand';
 
 interface HomeProps {
   onBookNow: (serviceId?: string) => void;
@@ -47,7 +51,7 @@ export default function Home({ onBookNow }: HomeProps) {
       '@context': 'https://schema.org',
       '@type': 'DryCleaningOrLaundry',
       name: `The Laundry Man - ${displayName}`,
-      image: 'https://thelaundryman.co.uk/logo.png',
+      image: SITE_LOGO_URL,
       '@id': pageUrl,
       url: pageUrl,
       telephone: '+44 123 456 7890',
@@ -80,12 +84,15 @@ export default function Home({ onBookNow }: HomeProps) {
       <Hero locationName={displayName} cityData={cityData} />
       <HomeDoorstepIntro />
       <HowItWorks />
+      <HomeAudienceCards />
       <ServicesOverview
         city={isRootHome ? undefined : displayName}
         cityData={isRootHome ? undefined : cityData}
         onBookNow={onBookNow}
       />
       <WhyChooseUs />
+      <HomeAppControl />
+      <HomeTrustBand />
       <AppPromoAndReviews cityData={cityData} />
       <HomeFaq />
     </>

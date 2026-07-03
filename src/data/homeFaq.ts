@@ -15,6 +15,11 @@ export const homeFaqItems: HomeFaqItem[] = [
       'We provide wash & fold, dry cleaning, ironing, express laundry, and commercial laundry for hotels and businesses. Service availability may vary slightly by city, so check your local coverage when you book.',
   },
   {
+    question: 'Do you clean designer and luxury clothing?',
+    answer:
+      'Yes. We specialise in designerwear, including luxury labels, delicate fabrics, tailored pieces, and premium finishes. Every garment is cleaned and quality-checked at our own site with expert handling, so your designer items receive the specialist care they deserve.',
+  },
+  {
     question: 'How much does laundry cost in the United Kingdom?',
     answer:
       'Pricing depends on the service you choose and your location. You can view exact costs before confirming your order, with no hidden fees — so you always know what you are paying upfront.',

@@ -1,6 +1,7 @@
 import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { getStaticFooterCss, getStaticFooterHtml } from './static-footer.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -690,6 +691,9 @@ const rendererScript = `
       })();
 `;
 
+const staticFooterCss = getStaticFooterCss();
+const staticFooterHtml = getStaticFooterHtml({ includeLocations: true });
+
 const html = `<!doctype html>
 <html lang="en">
   <head>
@@ -697,7 +701,8 @@ const html = `<!doctype html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Service Areas | The Laundry Man</title>
     <meta name="description" content="Browse laundry and dry cleaning service areas across the UK. Free collection and delivery in ${regionCount} regions and ${areaCount.toLocaleString()} neighbourhoods." />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/logo-laundry-man-app.png" type="image/png" />
+    <link rel="apple-touch-icon" href="/logo-laundry-man-app.png" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
@@ -726,18 +731,25 @@ const html = `<!doctype html>
         backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(27, 53, 22, 0.06);
       }
-      .header-topbar { border-bottom: 1px solid rgba(27, 53, 22, 0.06); padding: 0.5rem 1rem; font-size: 0.75rem; font-weight: 500; }
+      .header-topbar { border-bottom: 1px solid rgba(27, 53, 22, 0.06); padding: 0.75rem 1rem; font-size: 0.875rem; font-weight: 600; }
+      .header-email svg, .header-social a svg { width: 1.25rem; height: 1.25rem; }
+      .header-social a { min-width: 2rem; min-height: 2rem; justify-content: center; }
+      .header-social { display: flex; align-items: center; gap: 0.5rem; }
+      @media (min-width: 640px) {
+        .header-topbar { padding: 0.5rem 1rem; font-size: 0.75rem; font-weight: 500; }
+        .header-email svg, .header-social a svg { width: 0.875rem; height: 0.875rem; }
+        .header-social a { min-width: 0; min-height: 0; }
+        .header-social { gap: 1rem; }
+      }
       .header-inner { max-width: 80rem; margin: 0 auto; padding: 0 1rem; }
       .header-topbar .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
       .header-email, .header-social a { display: inline-flex; align-items: center; gap: 0.5rem; color: var(--theme-text); }
-      .header-social { display: flex; align-items: center; gap: 1rem; }
       .header-email:hover, .header-social a:hover, .nav-link:hover, .footer a:hover, .location-link:hover { color: var(--theme-accent); }
       .header-main { padding: 1rem 0; }
       .header-main .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-      .site-logo { display: flex; align-items: center; gap: 0.5rem; flex-shrink: 0; }
-      .site-logo__mark { width: 2.5rem; height: 2.5rem; border-radius: 9999px; background: var(--theme-accent); color: #fff; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 1.125rem; }
-      .site-logo__text { font-weight: 800; font-size: 1.5rem; line-height: 1.1; color: var(--theme-accent); }
-      .site-logo__sub { display: block; margin-top: -0.15rem; font-size: 0.625rem; font-weight: 300; letter-spacing: 0.12em; text-transform: uppercase; color: var(--theme-text); }
+      .site-logo { display: flex; align-items: center; flex-shrink: 0; }
+      .site-logo img { display: block; height: 2.5rem; width: auto; }
+      @media (min-width: 640px) { .site-logo img { height: 2.75rem; } }
       .desktop-nav { display: none; align-items: center; gap: 2rem; }
       .nav-link { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--theme-text); }
       .nav-link.is-active { color: var(--theme-accent); }
@@ -820,19 +832,7 @@ const html = `<!doctype html>
       .location-link { font-size: 0.875rem; font-weight: 300; line-height: 1.5; color: var(--theme-text-soft); transition: color 0.2s; }
       .location-link--heading { font-weight: 800; color: var(--theme-text); }
       .scroll-mt-28 { scroll-margin-top: 7rem; }
-      .site-footer { background: var(--theme-bg-alt); border-top: 1px solid rgba(27, 53, 22, 0.06); }
-      .footer-inner { max-width: 80rem; margin: 0 auto; padding: 4rem 1rem 2.5rem; }
-      .footer-grid { display: grid; grid-template-columns: 1fr; gap: 2.5rem; }
-      @media (min-width: 768px) { .footer-grid { grid-template-columns: repeat(2, 1fr); } }
-      @media (min-width: 1024px) { .footer-grid { grid-template-columns: repeat(3, 1fr); } }
-      @media (min-width: 1280px) { .footer-grid { grid-template-columns: repeat(5, 1fr); } }
-      .footer-heading { margin: 0 0 1.5rem; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(27, 53, 22, 0.06); font-size: 0.625rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--theme-accent); }
-      .footer-list { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 0.625rem; font-size: 0.875rem; font-weight: 300; }
-      .hours-row { display: flex; justify-content: space-between; gap: 1rem; }
-      .footer-bottom { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid rgba(27, 53, 22, 0.06); display: flex; flex-direction: column; gap: 1rem; text-align: center; font-size: 0.75rem; font-weight: 300; }
-      @media (min-width: 640px) { .footer-bottom { flex-direction: row; justify-content: space-between; text-align: left; } }
-      .footer-legal { display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 0.5rem; }
-      @media (min-width: 640px) { .footer-legal { justify-content: flex-end; } }
+${staticFooterCss}
       .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0; }
       @media (min-width: 640px) { .locations-main { padding-left: 1.5rem; padding-right: 1.5rem; } }
     </style>
@@ -857,8 +857,7 @@ const html = `<!doctype html>
         <div class="header-main">
           <div class="header-inner">
             <a class="site-logo" href="/">
-              <span class="site-logo__mark">LM</span>
-              <span class="site-logo__text">The Laundry<span class="site-logo__sub">Man.</span></span>
+              <img src="/logo-laundry-man-app.png" alt="The Laundry Man" width="44" height="44" />
             </a>
             <nav class="desktop-nav" aria-label="Main navigation">
               <a class="nav-link" href="/">Home</a>
@@ -911,21 +910,7 @@ ${sectionsHtml}
         </div>
       </main>
 
-      <footer class="site-footer" id="footer">
-        <div class="footer-inner">
-          <div class="footer-grid">
-            <div><h4 class="footer-heading">Services</h4><ul class="footer-list"><li><a href="/booking.html">Wash &amp; Fold</a></li><li><a href="/booking.html">Dry Cleaning</a></li><li><a href="/booking.html">Ironing Service</a></li><li><a href="/booking.html">Shirt Service</a></li><li><a href="/booking.html">Curtain Cleaning</a></li><li><a href="/booking.html">Wedding Dress Cleaning</a></li></ul></div>
-            <div><h4 class="footer-heading">Operating Hours</h4><ul class="footer-list"><li class="hours-row"><span>Monday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Tuesday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Wednesday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Thursday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Friday</span><span>07:00 - 23:00</span></li><li class="hours-row"><span>Saturday</span><span>08:00 - 18:00</span></li><li class="hours-row"><span>Sunday</span><span>09:00 - 21:00</span></li></ul></div>
-            <div><h4 class="footer-heading">Explore</h4><ul class="footer-list"><li><a href="/#how-it-works">How It Works</a></li><li><a href="/#why-choose-us">Why Choose Us</a></li><li><a href="/#testimonials">Testimonials</a></li><li><a href="/locations">Locations</a></li></ul></div>
-            <div><h4 class="footer-heading">Quick Links</h4><ul class="footer-list"><li><a href="/about">About us</a></li><li><a href="/services">Services</a></li><li><a href="/contact">Contact</a></li></ul></div>
-            <div><ul class="footer-list"><li><a href="/blog">Blog</a></li><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/commercial">Commercial Cleaning</a></li><li><a href="/terms-conditions">Terms &amp; Conditions</a></li></ul></div>
-          </div>
-          <div class="footer-bottom">
-            <p>© 2026 The Laundry Man App. All Rights Reserved.</p>
-            <nav class="footer-legal" aria-label="Footer legal links"><a href="/privacy-policy">Privacy Policy</a><span aria-hidden="true">·</span><a href="/terms-conditions">Terms of Service</a></nav>
-          </div>
-        </div>
-      </footer>
+${staticFooterHtml}
     </div>
     <script>
       (function () {

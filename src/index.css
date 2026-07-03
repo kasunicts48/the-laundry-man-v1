@@ -102,6 +102,15 @@ h1, h2, h3, h4, h5, h6 {
   @apply rounded-full;
 }
 
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
 .glass-card {
   background: var(--theme-glass);
   border: 1px solid color-mix(in oklab, var(--theme-accent) 15%, transparent);
@@ -119,6 +128,47 @@ h1, h2, h3, h4, h5, h6 {
 
 .shadow-accent-lg {
   box-shadow: 0 14px 48px -10px color-mix(in oklab, var(--theme-accent) 55%, transparent);
+}
+
+/* iOS-style squircle clip for photos (corner-shape where supported) */
+.squircle {
+  overflow: hidden;
+  border-radius: 1.75rem;
+}
+
+.squircle-shape {
+  border-radius: 1.75rem;
+}
+
+@supports (corner-shape: squircle) {
+  .squircle,
+  .squircle-shape {
+    corner-shape: squircle;
+    border-radius: 2.25rem;
+  }
+}
+
+/* Organic blob — asymmetric silhouette with smooth rounded corners */
+.shape-blob {
+  --blob-radius: 58% 42% 62% 38% / 52% 58% 42% 48%;
+  overflow: hidden;
+  border-radius: var(--blob-radius);
+}
+
+.shape-blob-alt {
+  --blob-radius: 44% 56% 36% 64% / 46% 54% 58% 42%;
+}
+
+.shape-blob-trust {
+  --blob-radius: 52% 48% 34% 66% / 42% 58% 54% 46%;
+}
+
+.shape-blob-doorstep {
+  --blob-radius: 40% 60% 55% 45% / 58% 42% 48% 52%;
+}
+
+.shape-blob-faq {
+  --blob-radius: 48% 52% 60% 40% / 44% 56% 46% 54%;
 }
 
 /* CleanCloud booking page shell — widget overrides live in cleanCloudOverrides.ts */

@@ -1,5 +1,21 @@
 DirectoryIndex index.html index.php
 
+# Ensure video/media files are served with the correct MIME type.
+# InfinityFree's Apache does not map these by default, which stops <video> from playing.
+<IfModule mod_mime.c>
+  AddType video/webm .webm
+  AddType video/mp4 .mp4
+  AddType image/webp .webp
+  AddType image/svg+xml .svg
+</IfModule>
+
+# Allow byte-range requests so browsers can stream/seek the video.
+<IfModule mod_headers.c>
+  <FilesMatch "\.(webm|mp4)$">
+    Header set Accept-Ranges bytes
+  </FilesMatch>
+</IfModule>
+
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /

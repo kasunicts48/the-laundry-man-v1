@@ -1,8 +1,9 @@
 import React from 'react';
-import { Clock, HandHeart, ShoppingBag } from 'lucide-react';
+import { Clock, Gem, HandHeart, Leaf, ShoppingBag } from 'lucide-react';
 import { motion } from 'motion/react';
 
-import doorstepIntroImage from '../assets/images/cleaning-delivery-eco-firendly.jpeg';
+import BookNowButton from './BookNowButton';
+import doorstepIntroImage from '../assets/images/we use eco-friendly products.jpeg';
 
 const highlights = [
   {
@@ -14,6 +15,11 @@ const highlights = [
     icon: Clock,
     title: '24hr Turnaround',
     subtitle: 'On nearly all items',
+  },
+  {
+    icon: Leaf,
+    title: 'Eco-Friendly Products',
+    subtitle: 'We use eco-friendly products for gentler, responsible garment care',
   },
   {
     icon: HandHeart,
@@ -39,18 +45,14 @@ export default function HomeDoorstepIntro() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="glass-card grid grid-cols-1 items-center gap-8 overflow-hidden p-6 sm:gap-10 sm:p-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:gap-12 lg:p-10"
+          className="grid grid-cols-1 items-stretch gap-8 sm:gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-14"
         >
-          <div className="relative mx-auto w-full max-w-xl lg:max-w-none">
-            <div
-              className="pointer-events-none absolute -inset-3 rounded-[2rem] bg-gold/15 blur-2xl"
-              aria-hidden="true"
-            />
-            <div className="relative overflow-hidden rounded-3xl border border-gold/20 shadow-accent">
+          <div className="relative mx-auto w-full max-w-md sm:max-w-lg lg:mx-0 lg:h-full lg:max-w-none">
+            <div className="relative aspect-[4/3] squircle border border-gold/20 shadow-accent-sm lg:absolute lg:inset-0 lg:aspect-auto lg:h-full">
               <img
                 src={doorstepIntroImage}
-                alt="Dry cleaning delivered to a happy customer at her front door"
-                className="aspect-[75/56] h-auto w-full object-cover"
+                alt="Eco-friendly laundry products used for professional garment care"
+                className="absolute inset-0 h-full w-full object-cover"
                 loading="lazy"
                 decoding="async"
                 width={1200}
@@ -60,39 +62,56 @@ export default function HomeDoorstepIntro() {
             </div>
           </div>
 
-          <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+          <div className="flex flex-col items-center justify-center text-center lg:items-start lg:text-left">
             <h2 className="max-w-xl text-3xl font-extrabold tracking-tighter text-slate sm:text-4xl lg:text-[2.75rem] lg:leading-[1.05]">
               Laundry and dry cleaning at{' '}
               <span className="text-gold">your doorstep</span>
             </h2>
 
-            <p className="mt-4 max-w-lg text-base font-light leading-relaxed text-ink sm:text-lg">
-              We collect from your home, clean every garment with care, and return everything fresh,
-              folded, and ready to wear — without you leaving the house.
+            <p className="mt-4 text-base font-light leading-relaxed text-ink sm:text-lg">
+              We collect from your home, clean every garment with care using eco-friendly products,
+              and return everything fresh, folded, and ready to wear — without you leaving the house.
             </p>
 
-            <ul className="mt-6 flex w-full max-w-lg flex-col gap-5 sm:mt-8 sm:gap-6">
-              {highlights.map(({ icon: Icon, title, subtitle }, index) => (
-                <motion.li
-                  key={title}
-                  initial={{ opacity: 0, x: -12 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4, delay: 0.15 + index * 0.08 }}
-                  className="flex items-start gap-4 text-left"
-                >
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center text-slate">
-                    <Icon className="h-9 w-9 stroke-[1.5] text-slate" aria-hidden="true" />
-                  </span>
-                  <div className="pt-0.5">
-                    <p className="text-base font-bold leading-snug text-slate sm:text-lg">{title}</p>
-                    <p className="mt-0.5 text-sm font-light leading-relaxed text-ink sm:text-base">
-                      {subtitle}
-                    </p>
-                  </div>
-                </motion.li>
-              ))}
-            </ul>          </div>
+            <div className="mt-6 w-full overflow-hidden rounded-2xl bg-[#134633] p-5 sm:mt-7 sm:p-6 lg:max-w-none">
+              <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-x-6 sm:gap-y-5">
+                {highlights.map(({ icon: Icon, title, subtitle }, index) => (
+                  <motion.li
+                    key={title}
+                    initial={{ opacity: 0, x: -12 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.4, delay: 0.15 + index * 0.08 }}
+                    className="flex items-start gap-4 text-left"
+                  >
+                    <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-paper/15 text-[rgb(76,175,80)] sm:h-10 sm:w-10">
+                      <Icon className="h-6 w-6 stroke-[1.5] sm:h-5 sm:w-5" aria-hidden="true" />
+                    </span>
+                    <div className="pt-0.5">
+                      <p className="text-base font-semibold leading-snug text-paper sm:text-lg">{title}</p>
+                      <p className="mt-0.5 text-sm font-light leading-relaxed text-paper/90 sm:text-base">
+                        {subtitle}
+                      </p>
+                    </div>
+                  </motion.li>
+                ))}
+              </ul>
+            </div>
+
+            <div className="mt-6 flex w-full items-start gap-3 rounded-xl border border-gold/25 bg-gold/5 px-4 py-3.5 text-left sm:mt-7">
+              <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-gold/15 text-gold">
+                <Gem className="h-4 w-4" aria-hidden="true" />
+              </span>
+              <p className="text-sm leading-relaxed text-ink sm:text-base">
+                <span className="font-semibold text-slate">We specialise in designerwear.</span>{' '}
+                Luxury labels and delicate fabrics are cared for with expert handling at our own site.
+              </p>
+            </div>
+
+            <div className="mt-6 w-full sm:mt-7">
+              <BookNowButton fullWidth label="Book Now" />
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>

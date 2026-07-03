@@ -1,20 +1,14 @@
-import { services, type ServiceId } from './services';
 import { resolveLocationHref } from './locations';
+import ukLocationsData from './ukLocations.json';
 
 export interface FooterLink {
   label: string;
   href: string;
 }
 
-export interface FooterServiceLink {
-  label: string;
-  href: '/services';
-  serviceId: ServiceId;
-}
-
 export interface ServicesBookingLocationState {
   autoOpenBooking?: boolean;
-  serviceType?: ServiceId;
+  serviceType?: string;
 }
 
 export interface OperatingHour {
@@ -32,11 +26,23 @@ export function resolveCityHref(area: string): string {
   return resolveLocationHref(area);
 }
 
-export const footerServices: FooterServiceLink[] = services.map((service) => ({
-  label: service.title,
-  href: '/services',
-  serviceId: service.id,
-}));
+/** Laundryheap-style service & solution links for the footer */
+export const footerServices: FooterLink[] = [
+  { label: 'Laundry', href: '/services' },
+  { label: 'Wash & Fold', href: '/booking.html' },
+  { label: 'Dry Cleaning', href: '/booking.html' },
+  { label: 'Dry Cleaners', href: '/services' },
+  { label: 'Ironing Service', href: '/booking.html' },
+  { label: 'Shirt Service', href: '/booking.html' },
+  { label: 'Curtain Cleaning', href: '/booking.html' },
+  { label: 'Wedding Dress Cleaning', href: '/booking.html' },
+  { label: 'Airbnb Laundry', href: '/commercial' },
+  { label: 'Hotel Laundry', href: '/commercial' },
+  { label: 'Commercial Laundry', href: '/commercial' },
+  { label: 'Express Laundry', href: '/booking.html' },
+  { label: 'Laundry Near Me', href: '/locations' },
+  { label: 'Dry Cleaners Near Me', href: '/locations' },
+];
 
 export const footerOperatingHours: OperatingHour[] = [
   { day: 'Monday', hours: '07:00 - 23:00' },
@@ -51,20 +57,24 @@ export const footerOperatingHours: OperatingHour[] = [
 export const footerQuickLinksCol1: FooterLink[] = [
   { label: 'About us', href: '/about' },
   { label: 'Services', href: '/services' },
+  { label: 'Commercial Cleaning', href: '/commercial' },
   { label: 'Contact', href: '/contact' },
+  { label: 'Book a Collection', href: '/booking.html' },
 ];
 
 export const footerExploreLinks: FooterLink[] = [
   { label: 'How It Works', href: '/#how-it-works' },
   { label: 'Why Choose Us', href: '/#why-choose-us' },
+  { label: 'Prices & Services', href: '/services' },
   { label: 'Testimonials', href: '/#testimonials' },
+  { label: 'FAQ', href: '/#faq' },
   { label: 'Locations', href: '/locations' },
 ];
 
 export const footerQuickLinksCol2: FooterLink[] = [
   { label: 'Blog', href: '/blog' },
+  { label: 'Download App', href: '/download-app' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
-  { label: 'Commercial Cleaning', href: '/commercial' },
   { label: 'Terms & Conditions', href: '/terms-conditions' },
 ];
 
@@ -87,22 +97,23 @@ export const footerLondonRegions: LondonRegion[] = [
   },
 ];
 
-export const footerUkCitiesCol1: string[] = [
-  'Cheshire',
-  'Didsbury',
-  'Leeds',
-  'Newcastle',
-  'Salford',
-  'Manchester City Centre',
-];
+function splitIntoColumns(items: string[], columns: number): string[][] {
+  const chunkSize = Math.ceil(items.length / columns);
 
-export const footerUkCitiesCol2: string[] = [
-  'Birmingham',
-  'Harrogate',
-  'Manchester',
-  'Sheffield',
-  'Stockport',
-];
+  return Array.from({ length: columns }, (_, index) =>
+    items.slice(index * chunkSize, (index + 1) * chunkSize)
+  );
+}
+
+export const footerLondonAreas: string[] = footerLondonRegions.flatMap((region) => region.areas);
+
+export const footerLondonAreaColumns = splitIntoColumns(footerLondonAreas, 4);
+
+const manchesterRegion = ukLocationsData.general.find((region) => region.id === 'manchester');
+
+export const footerManchesterAreas: string[] = manchesterRegion?.areas ?? [];
+
+export const footerManchesterAreaColumns = splitIntoColumns(footerManchesterAreas, 4);
 
 export const footerSocialLinks = [
   {

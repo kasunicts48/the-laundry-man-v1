@@ -1,7 +1,6 @@
 import React from 'react';
 import { useMatch } from 'react-router-dom';
 import { motion } from 'motion/react';
-import lavBotLaundry from '../assets/images/lav_bot_laundry_1780456662542.png';
 import HeroPromoBooking from './HeroPromoBooking';
 import { DEFAULT_LOCATION_NAME } from '../data/locations';
 import type { CityData } from '../data/cities';
@@ -22,13 +21,23 @@ export default function Hero({ locationName, cityData }: HeroProps) {
       className="hero-section relative overflow-hidden flex items-center min-h-[100svh] pb-10 sm:pb-12 lg:pb-14"
     >
       <div className="absolute inset-0 z-0 bg-navy">
-        <img
-          src={lavBotLaundry}
-          alt=""
+        <video
+          className="h-full w-full object-cover object-center md:object-[80%_center]"
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
           aria-hidden="true"
-          className="w-full h-full object-cover object-bottom opacity-20 md:opacity-100 transition-opacity duration-700"
-        />
+        >
+          <source src="/videos/laundry-man-video.webm" type="video/webm" />
+        </video>
       </div>
+
+      <div
+        className="pointer-events-none absolute inset-0 z-[1] bg-paper/65 sm:bg-paper/55"
+        aria-hidden="true"
+      />
 
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="max-w-3xl">

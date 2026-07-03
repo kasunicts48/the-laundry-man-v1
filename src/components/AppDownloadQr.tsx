@@ -14,7 +14,7 @@ export default function AppDownloadQr() {
   const downloadUrl = getDownloadAppQrUrl();
 
   return (
-    <div className="flex flex-col gap-6 sm:flex-row sm:items-start">
+    <div className="flex flex-col gap-6 sm:flex-row sm:items-center">
       <div
         className="shrink-0 self-start overflow-hidden rounded-3xl border border-white/10 p-3.5 shadow-sm"
         style={{ backgroundColor: QR_CODE_BG_COLOR }}
@@ -38,10 +38,9 @@ export default function AppDownloadQr() {
         />
       </div>
 
-      <div className="flex min-w-0 flex-1 flex-col gap-4 sm:pt-2">
+      <div className="flex min-w-0 flex-1 flex-col justify-center gap-4">
         <p className="text-sm font-light leading-relaxed text-ink">
-          Scan to download on your phone. iOS and Android users are sent to the right app store
-          automatically.
+          Scan to download on your phone.
         </p>
 
         <div className="flex flex-col gap-4">
