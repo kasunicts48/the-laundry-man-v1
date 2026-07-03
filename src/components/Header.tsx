@@ -61,44 +61,49 @@ export default function Header(_props: HeaderProps = {}) {
 
   const hasHeroBanner = isLocationHomePath(location.pathname);
   const useSolidHeader = !hasHeroBanner || isScrolled;
+  const useLightNav = hasHeroBanner && !isScrolled;
+
+  const navTextClass = useLightNav
+    ? 'text-paper/90 hover:text-gold'
+    : 'text-ink hover:text-gold';
 
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 border-b ${
         useSolidHeader
           ? 'bg-navy/80 backdrop-blur-md border-white/5'
-          : 'bg-transparent border-transparent'
+          : 'bg-transparent border-white/10'
       }`}
     >
       <div ref={headerRef}>
         {/* Top Bar */}
         <div
-          className={`text-ink border-b border-white/5 py-3 px-4 sm:py-2 sm:px-6 lg:px-8 text-sm sm:text-xs font-medium ${
+          className={`text-ink border-b border-white/5 py-1.5 px-4 sm:py-2 sm:px-6 lg:px-8 text-xs font-medium transition-colors duration-300 ${
             useSolidHeader ? '' : 'bg-navy'
           }`}
         >
           <div className="max-w-7xl mx-auto flex justify-between items-center gap-3">
           <a
             href="mailto:info@thelaundryman.co.uk"
-            className="flex min-h-10 items-center gap-2.5 hover:text-gold transition-colors sm:min-h-0"
+            className="flex items-center gap-2 hover:text-gold transition-colors"
             aria-label="Email info@thelaundryman.co.uk"
           >
-            <Mail className="h-5 w-5 shrink-0 sm:h-3.5 sm:w-3.5" strokeWidth={1.75} aria-hidden="true" />
-            <span className="hidden text-sm leading-tight sm:inline sm:text-xs">info@thelaundryman.co.uk</span>
+            <Mail className="h-4 w-4 shrink-0 sm:h-3.5 sm:w-3.5" strokeWidth={1.75} aria-hidden="true" />
+            <span className="hidden leading-tight sm:inline">info@thelaundryman.co.uk</span>
           </a>
           <div className="flex shrink-0 items-center gap-2 sm:gap-4">
-            <span className="text-sm font-semibold sm:text-xs sm:font-medium">Follow Us:</span>
-            <div className="flex items-center gap-0.5 sm:gap-3">
+            <span className="font-semibold sm:font-medium">Follow Us:</span>
+            <div className="flex items-center gap-2 sm:gap-3">
               {footerSocialLinks.map((social) => (
                 <a
                   key={social.label}
                   href={social.href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-8 w-8 items-center justify-center hover:text-gold transition-colors sm:h-auto sm:w-auto"
+                  className="inline-flex items-center justify-center hover:text-gold transition-colors"
                   aria-label={social.label}
                 >
-                  <SocialIcon type={social.icon} className="h-5 w-5 sm:h-3.5 sm:w-3.5" />
+                  <SocialIcon type={social.icon} className="h-4 w-4 sm:h-3.5 sm:w-3.5" />
                 </a>
               ))}
             </div>
@@ -120,7 +125,7 @@ export default function Header(_props: HeaderProps = {}) {
               <Link 
                 key={link.name} 
                 to={link.href}
-                className={`font-semibold transition-colors uppercase tracking-wide text-xs ${isScrolled ? 'text-ink hover:text-gold' : 'text-ink hover:text-gold'} ${(location.pathname === link.href || (location.pathname !== '/' && link.href !== '/' && location.pathname.startsWith(link.href))) ? '!text-gold' : ''}`}
+                className={`font-semibold transition-colors uppercase tracking-wide text-xs ${navTextClass} ${(location.pathname === link.href || (location.pathname !== '/' && link.href !== '/' && location.pathname.startsWith(link.href))) ? '!text-gold' : ''}`}
               >
                 {link.name}
               </Link>
@@ -132,7 +137,7 @@ export default function Header(_props: HeaderProps = {}) {
           <div className="flex items-center md:hidden">
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-ink hover:text-gold focus:outline-none"
+              className={`${navTextClass} focus:outline-none`}
               aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
             >
               {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}

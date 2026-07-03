@@ -18,11 +18,12 @@ export default function Hero({ locationName, cityData }: HeroProps) {
   return (
     <div
       id="hero"
-      className="hero-section relative overflow-hidden flex items-center min-h-[100svh] pb-10 sm:pb-12 lg:pb-14"
+      className="hero-section relative flex min-h-[100svh] flex-col overflow-hidden bg-black sm:block"
     >
-      <div className="absolute inset-0 z-0 bg-navy">
+      {/* Video: in-flow top block on mobile, full background on tablet/desktop */}
+      <div className="relative -mb-px h-[55svh] w-full shrink-0 overflow-hidden sm:absolute sm:inset-0 sm:z-0 sm:mb-0 sm:h-full">
         <video
-          className="h-full w-full object-cover object-center md:object-[80%_center]"
+          className="block h-full w-full object-cover object-center md:object-[80%_center]"
           autoPlay
           muted
           loop
@@ -32,56 +33,67 @@ export default function Hero({ locationName, cityData }: HeroProps) {
         >
           <source src="/videos/laundry-man-video.webm" type="video/webm" />
         </video>
+        {/* Mobile: fade video bottom smoothly into the black content area */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 top-0 bg-[linear-gradient(to_top,#000_0%,#000_7%,transparent_42%)] sm:hidden"
+          aria-hidden="true"
+        />
       </div>
 
+      {/* Desktop/tablet: even overlay */}
       <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-paper/65 sm:bg-paper/55"
+        className="pointer-events-none absolute inset-0 z-[1] hidden bg-black/50 sm:block"
         aria-hidden="true"
       />
 
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
-        <div className="max-w-3xl">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <h1 className="font-extrabold text-white leading-[0.95] tracking-tighter mb-5 sm:mb-6">
-              {isRootHome ? (
-                <div className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl">
-                  Premium Laundry &<br />
-                  <span className="text-gold">Dry Cleaning Services.</span>
-                </div>
-              ) : (
-                <div className="text-5xl sm:text-6xl lg:text-6xl xl:text-7xl">
-                  Premium Laundry &<br />
-                  Dry Cleaning Services in{' '}
-                  <span className="text-gold">{resolvedLocationName}</span>.
-                </div>
-              )}
-            </h1>
-          </motion.div>
+      {/* Content: fills remaining space below video on mobile, centered over video on desktop */}
+      <div className="relative z-10 flex flex-1 flex-col justify-center px-4 pb-8 pt-4 sm:min-h-[100svh] sm:flex-none sm:flex-row sm:items-center sm:px-6 sm:pb-12 sm:pt-0 lg:px-8 lg:pb-14">
+        <div className="mx-auto w-full max-w-7xl">
+          <div className="grid grid-cols-1 items-start gap-4 sm:items-center sm:gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
+            <div className="text-center lg:text-left">
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8 }}
+              >
+                <h1 className="mb-3 font-extrabold leading-[0.95] tracking-tighter text-paper sm:mb-6">
+                  {isRootHome ? (
+                    <div className="text-3xl sm:text-6xl lg:text-6xl xl:text-7xl">
+                      Premium Laundry &<br />
+                      <span className="text-gold">Dry Cleaning Services.</span>
+                    </div>
+                  ) : (
+                    <div className="text-3xl sm:text-6xl lg:text-6xl xl:text-7xl">
+                      Premium Laundry &<br />
+                      Dry Cleaning Services in{' '}
+                      <span className="text-gold">{resolvedLocationName}</span>.
+                    </div>
+                  )}
+                </h1>
+              </motion.div>
 
-          <motion.p
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="text-base sm:text-lg text-ink mb-6 sm:mb-8 max-w-2xl font-light leading-relaxed"
-          >
-            {isRootHome
-              ? 'Eco-friendly, professional garment care delivered right to your door. We pick up, clean, and return your clothes pristine within 24 hours.'
-              : cityData?.heroDescription ??
-                `Eco-friendly, professional garment care delivered right to your door in ${resolvedLocationName}. We pick up, clean, and return your clothes pristine within 24 hours.`}
-          </motion.p>
+              <motion.p
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="mx-auto max-w-xl text-xs font-light leading-relaxed text-paper/90 sm:text-lg lg:mx-0"
+              >
+                {isRootHome
+                  ? 'Eco-friendly, professional garment care delivered right to your door. We pick up, clean, and return your clothes pristine within 24 hours.'
+                  : cityData?.heroDescription ??
+                    `Eco-friendly, professional garment care delivered right to your door in ${resolvedLocationName}. We pick up, clean, and return your clothes pristine within 24 hours.`}
+              </motion.p>
+            </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="flex justify-center sm:justify-start"
-          >
-            <HeroPromoBooking />
-          </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="flex w-full justify-center lg:justify-end"
+            >
+              <HeroPromoBooking />
+            </motion.div>
+          </div>
         </div>
       </div>
     </div>

@@ -90,8 +90,12 @@ h1, h2, h3, h4, h5, h6 {
   @apply font-heading tracking-tight transition-colors duration-500;
 }
 
-.hero-section {
-  padding-top: var(--site-header-height, 6.625rem);
+/* Desktop/tablet: video is the full background, so clear the fixed header.
+   Mobile: video is an in-flow block at the top and sits behind the header, so no padding. */
+@media (min-width: 640px) {
+  .hero-section {
+    padding-top: var(--site-header-height, 6.625rem);
+  }
 }
 
 .section-eyebrow {
