@@ -1,9 +1,9 @@
-import curtainIcon from '../assets/icons/curtain.png';
-import weddingIcon from '../assets/icons/wedding.png';
-import shirtServiceIcon from '../assets/icons/washing.png';
-import ironingIcon from '../assets/icons/clothes.png';
-import dryCleaningIcon from '../assets/icons/dry-cleaning.png';
-import laundryServiceIcon from '../assets/icons/laundry-service.png';
+import curtainIcon from '../assets/icons/curtain.webp';
+import weddingIcon from '../assets/icons/wedding.webp';
+import shirtServiceIcon from '../assets/icons/washing.webp';
+import ironingIcon from '../assets/icons/clothes.webp';
+import dryCleaningIcon from '../assets/icons/dry-cleaning.webp';
+import laundryServiceIcon from '../assets/icons/laundry-service.webp';
 
 export interface ServiceItem {
   id: string;

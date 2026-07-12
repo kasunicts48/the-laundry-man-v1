@@ -5,7 +5,6 @@ import BannerCommercial from '../assets/images/banner-commercial.svg?react';
 import BannerContact from '../assets/images/banner-contact.svg?react';
 import BannerLegal from '../assets/images/banner-legal.svg?react';
 import BannerLocations from '../assets/images/Directions-bro.svg?react';
-import BannerServices from '../assets/images/banner-services.svg?react';
 
 export type BannerIllustrationAspect = 'landscape' | 'square';
 export type BannerIllustrationComponent = FC<SVGProps<SVGSVGElement>>;
@@ -28,9 +27,9 @@ export const innerPageIllustrations: Record<string, InnerPageIllustrationConfig>
     aspect: 'square',
   },
   '/services': {
-    Illustration: BannerServices,
+    Illustration: BannerLegal,
     alt: 'Laundry and dry cleaning illustration',
-    aspect: 'square',
+    aspect: 'landscape',
   },
   '/commercial': {
     Illustration: BannerCommercial,

@@ -7,8 +7,8 @@
     <meta http-equiv="Pragma" content="no-cache" />
     <meta http-equiv="Expires" content="0" />
     <title>Book a Collection | The Laundry Man</title>
-    <link rel="icon" href="/logo-laundry-man-app-icon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/logo-laundry-man-app-icon.png" />
+    <link rel="icon" href="/logo-laundry-man-app-icon.webp" type="image/png" />
+    <link rel="apple-touch-icon" href="/logo-laundry-man-app-icon.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -65,47 +65,24 @@
         backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(27, 53, 22, 0.06);
       }
-
+/* ── Header top bar (synced with src/components/Header.tsx) ── */
       .header-topbar {
         background: #134633;
-        color: rgba(255, 255, 255, 0.9);
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        padding: 0.75rem 1rem;
-        font-size: 0.875rem;
-        font-weight: 600;
-      }
-
-      .header-email svg,
-      .header-social a svg {
-        width: 1.25rem;
-        height: 1.25rem;
-      }
-
-      .header-social a {
-        display: inline-flex;
-        min-width: 2rem;
-        min-height: 2rem;
-        justify-content: center;
+        padding: 0.375rem 1rem;
+        font-size: 0.75rem;
+        font-weight: 500;
         color: rgba(255, 255, 255, 0.9);
-      }
-
-      .header-social {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-      }
-
-      .header-inner {
-        max-width: 80rem;
-        margin: 0 auto;
-        padding: 0 1rem;
       }
 
       .header-topbar .header-inner {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        gap: 1rem;
+        gap: 0.75rem;
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 0;
       }
 
       .header-email {
@@ -113,16 +90,169 @@
         align-items: center;
         gap: 0.5rem;
         color: rgba(255, 255, 255, 0.9);
+        transition: color 0.3s;
       }
 
-      .header-email:hover,
-      .nav-link:hover,
-      .footer a:hover {
+      .header-email:hover {
         color: var(--theme-accent);
       }
 
+      .header-email svg,
+      .header-social a svg {
+        display: block;
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+      }
+
+      .header-social {
+        display: flex;
+        flex-shrink: 0;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .header-social > span {
+        font-weight: 600;
+      }
+
+      .header-social-icons {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .header-social a {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: opacity 0.3s;
+      }
+
       .header-social a:hover {
-        opacity: 0.85;
+        opacity: 0.8;
+      }
+
+      @media (min-width: 640px) {
+        .header-topbar {
+          padding: 0.5rem 1.5rem;
+        }
+
+        .header-email svg,
+        .header-social a svg {
+          width: 0.875rem;
+          height: 0.875rem;
+        }
+
+        .header-social {
+          gap: 1rem;
+        }
+
+        .header-social > span {
+          font-weight: 500;
+        }
+
+        .header-social-icons {
+          gap: 0.75rem;
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .header-topbar {
+          padding-left: 2rem;
+          padding-right: 2rem;
+        }
+      }
+
+      @media (max-width: 639px) {
+        .header-email span {
+          display: none;
+        }
+      }
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      .header-inner {
+        max-width: 80rem;
+        margin: 0 auto;
+        padding: 0 1rem;
+      }
+
+      .nav-link:hover,
+      .footer a:hover {
+        color: var(--theme-accent);
       }
 
       .header-main {
@@ -269,41 +399,7 @@
         color: #fff;
       }
 
-      @media (min-width: 640px) {
-        .header-topbar {
-          padding: 0.5rem 1rem;
-          font-size: 0.75rem;
-          font-weight: 500;
-        }
-
-        .header-email svg,
-        .header-social a svg {
-          width: 0.875rem;
-          height: 0.875rem;
-        }
-
-        .header-social a {
-          min-width: 0;
-          min-height: 0;
-        }
-
-        .header-social {
-          gap: 1rem;
-        }
-      }
-
-      @media (max-width: 639px) {
-        .header-email span {
-          display: none;
-        }
-      }
-
       @media (min-width: 768px) {
-        .header-topbar {
-          padding-left: 1.5rem;
-          padding-right: 1.5rem;
-        }
-
         .header-inner {
           padding: 0 1.5rem;
         }
@@ -604,10 +700,6 @@
         color: rgb(76, 175, 80);
       }
 
-      .footer-area-link:hover {
-        color: rgb(76, 175, 80);
-      }
-
       .footer-services-cols,
       .footer-explore-cols,
       .footer-quick-cols {
@@ -625,7 +717,7 @@
       }
 
       .footer-social-row {
-        display: flex;
+        display: none;
         flex-wrap: wrap;
         align-items: center;
         gap: 1rem;
@@ -633,8 +725,9 @@
         max-width: 100%;
       }
 
-      @media (min-width: 640px) {
+      @media (min-width: 768px) {
         .footer-social-row {
+          display: flex;
           margin-top: 2rem;
         }
       }
@@ -709,25 +802,50 @@
         gap: 3rem;
       }
 
-      .footer-area-grid {
+      .footer-area-cols-5,
+      .footer-area-cols-4 {
         display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 0.625rem 0.75rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 0.75rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
       }
 
-      .footer-area-link {
+      .footer-city-box {
+        display: block;
+        border-radius: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.625rem 1rem;
+        text-align: center;
         font-size: 0.875rem;
         font-weight: 300;
-        line-height: 1.6;
         color: rgba(255, 255, 255, 0.9);
         text-decoration: none;
-        transition: color 0.3s;
+        transition: all 0.3s;
+      }
+
+      .footer-city-box:hover {
+        border-color: rgba(76, 175, 80, 0.4);
+        background: rgba(76, 175, 80, 0.1);
+        color: rgb(76, 175, 80);
       }
 
       @media (min-width: 640px) {
-        .footer-area-grid {
+        .footer-area-cols-5 {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
+        .footer-area-cols-4 {
           grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: 0.625rem 2rem;
+          gap: 0 2rem;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .footer-area-cols-5 {
+          grid-template-columns: repeat(5, minmax(0, 1fr));
         }
       }
 
@@ -831,6 +949,82 @@
 
       
 
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
+      
+
             .sr-only {
         position: absolute;
         width: 1px;
@@ -849,24 +1043,13 @@
       <header class="site-header" id="siteHeader">
         <div class="header-topbar">
           <div class="header-inner">
-            <a class="header-email" href="mailto:info@thelaundryman.co.uk">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M4 4h16v16H4z" opacity="0" />
-                <path d="m4 7 8 5 8-5M4 7v10h16V7" />
-              </svg>
+            <a class="header-email" href="mailto:info@thelaundryman.co.uk" aria-label="Email info@thelaundryman.co.uk">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" aria-hidden="true"><path d="m4 7 8 5 8-5M4 7v10h16V7"/></svg>
               <span>info@thelaundryman.co.uk</span>
             </a>
             <div class="header-social">
               <span>Follow Us:</span>
-              <a href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
-                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
-              </a>
-              <a href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok">
-                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><path fill="#25F4EE" transform="translate(-0.9,0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FE2C55" transform="translate(0.9,-0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FFFFFF" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/></svg>
-              </a>
-              <a href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
-                <svg width="14" height="14" viewBox="0 0 24 24" aria-hidden="true"><defs><radialGradient id="ig-gradient-booking-header" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#FDD35D"/><stop offset="25%" stop-color="#FDA75E"/><stop offset="50%" stop-color="#F86A69"/><stop offset="70%" stop-color="#E0459E"/><stop offset="100%" stop-color="#8A3AB9"/></radialGradient></defs><path fill="url(#ig-gradient-booking-header)" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg>
-              </a>
+              <div class="header-social-icons"><a href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#25F4EE" transform="translate(-0.9,0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FE2C55" transform="translate(0.9,-0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FFFFFF" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/></svg></a><a href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><defs><radialGradient id="ig-gradient-booking-header-2" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#FDD35D"/><stop offset="25%" stop-color="#FDA75E"/><stop offset="50%" stop-color="#F86A69"/><stop offset="70%" stop-color="#E0459E"/><stop offset="100%" stop-color="#8A3AB9"/></radialGradient></defs><path fill="url(#ig-gradient-booking-header-2)" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg></a></div>
             </div>
           </div>
         </div>
@@ -874,7 +1057,7 @@
         <div class="header-main">
           <div class="header-inner">
             <a class="site-logo" href="/">
-              <img src="/logo-laundry-man-app.png" alt="The Laundry Man" width="44" height="44" />
+              <img src="/logo-laundry-man-app.webp" alt="The Laundry Man" width="44" height="44" />
             </a>
 
             <nav class="desktop-nav" aria-label="Main navigation">
@@ -963,12 +1146,10 @@
           <div class="footer-locations" id="locations">
             <div class="locations-sections">
               <div>
-                <h4 class="footer-heading">The Laundry Man App London</h4>
-                <div class="footer-area-grid"><a href="/hackney" class="footer-area-link">Hackney</a><a href="/walthamstow" class="footer-area-link">Walthamstow</a><a href="/crouch-end" class="footer-area-link">Crouch End</a><a href="/dalston" class="footer-area-link">Dalston</a><a href="/finsbury-park" class="footer-area-link">Finsbury Park</a><a href="/canary-wharf" class="footer-area-link">Canary Wharf</a><a href="/stoke-newington" class="footer-area-link">Stoke Newington</a><a href="/highbury" class="footer-area-link">Highbury</a><a href="/holloway" class="footer-area-link">Holloway</a><a href="/homerton" class="footer-area-link">Homerton</a><a href="/hoxton" class="footer-area-link">Hoxton</a><a href="/camden" class="footer-area-link">Camden</a><a href="/richmond-upon-thames" class="footer-area-link">Richmond Upon Thames</a><a href="/london-fields" class="footer-area-link">London Fields</a><a href="/muswell-hill" class="footer-area-link">Muswell Hill</a><a href="/stratford" class="footer-area-link">Stratford</a><a href="/islington" class="footer-area-link">Islington</a><a href="/hornsey" class="footer-area-link">Hornsey</a><a href="/lambeth" class="footer-area-link">Lambeth</a><a href="/mayfair" class="footer-area-link">Mayfair</a><a href="/tottenham" class="footer-area-link">Tottenham</a><a href="/wood-green" class="footer-area-link">Wood Green</a><a href="/stamford-hill" class="footer-area-link">Stamford Hill</a><a href="/leytonstone" class="footer-area-link">Leytonstone</a><a href="/bond-street" class="footer-area-link">Bond Street</a><a href="/hammersmith" class="footer-area-link">Hammersmith</a><a href="/wandsworth" class="footer-area-link">Wandsworth</a></div>
-              </div>
-              <div>
-                <h4 class="footer-heading">The Laundry Man App Manchester</h4>
-                <div class="footer-area-grid"><a href="/abbey-hey" class="footer-area-link">Abbey Hey</a><a href="/agecroft" class="footer-area-link">Agecroft</a><a href="/alkrington" class="footer-area-link">Alkrington</a><a href="/ancoats" class="footer-area-link">Ancoats</a><a href="/ardwick" class="footer-area-link">Ardwick</a><a href="/astley" class="footer-area-link">Astley</a><a href="/atherton" class="footer-area-link">Atherton</a><a href="/audenshaw" class="footer-area-link">Audenshaw</a><a href="/baguley" class="footer-area-link">Baguley</a><a href="/beswick" class="footer-area-link">Beswick</a><a href="/blackfriars" class="footer-area-link">Blackfriars</a><a href="/blackley" class="footer-area-link">Blackley</a><a href="/boothstown" class="footer-area-link">Boothstown</a><a href="/brooklands" class="footer-area-link">Brooklands</a><a href="/burnage" class="footer-area-link">Burnage</a><a href="/bury" class="footer-area-link">Bury</a><a href="/cadishead" class="footer-area-link">Cadishead</a><a href="/carrington" class="footer-area-link">Carrington</a><a href="/castle-industrial-estate" class="footer-area-link">Castle Industrial Estate</a><a href="/charlestown" class="footer-area-link">Charlestown</a><a href="/cheetham-hill" class="footer-area-link">Cheetham Hill</a><a href="/cheetwood" class="footer-area-link">Cheetwood</a><a href="/chester" class="footer-area-link">Chester</a><a href="/chorlton-cum-hardy" class="footer-area-link">Chorlton-cum-Hardy</a><a href="/chorlton-on-medlock" class="footer-area-link">Chorlton-on-Medlock</a><a href="/claremont" class="footer-area-link">Claremont</a><a href="/clayton" class="footer-area-link">Clayton</a><a href="/clifton" class="footer-area-link">Clifton</a><a href="/collyhurst" class="footer-area-link">Collyhurst</a><a href="/crumpsall" class="footer-area-link">Crumpsall</a><a href="/deansgate" class="footer-area-link">Deansgate</a><a href="/denton" class="footer-area-link">Denton</a><a href="/didsbury" class="footer-area-link">Didsbury</a><a href="/droylsden" class="footer-area-link">Droylsden</a><a href="/eccles" class="footer-area-link">Eccles</a><a href="/failsworth" class="footer-area-link">Failsworth</a><a href="/fallowfield" class="footer-area-link">Fallowfield</a><a href="/firswood" class="footer-area-link">Firswood</a><a href="/gorton" class="footer-area-link">Gorton</a><a href="/harpurhey" class="footer-area-link">Harpurhey</a><a href="/higher-broughton" class="footer-area-link">Higher Broughton</a><a href="/hulme" class="footer-area-link">Hulme</a><a href="/irlam" class="footer-area-link">Irlam</a><a href="/irlams-o-th-height" class="footer-area-link">Irlams O' Th' Height</a><a href="/jd-williams" class="footer-area-link">JD Williams</a><a href="/kersal" class="footer-area-link">Kersal</a><a href="/ladybarn" class="footer-area-link">Ladybarn</a><a href="/large-user-and-po-box" class="footer-area-link">Large user and PO Box</a><a href="/levenshulme" class="footer-area-link">Levenshulme</a><a href="/little-hulton" class="footer-area-link">Little Hulton</a><a href="/longsight" class="footer-area-link">Longsight</a><a href="/lower-broughton" class="footer-area-link">Lower Broughton</a><a href="/manchester-airport" class="footer-area-link">Manchester Airport</a><a href="/manchester" class="footer-area-link">Manchester City Centre</a><a href="/manchester-science-park" class="footer-area-link">Manchester Science Park</a><a href="/manchester-x" class="footer-area-link">Manchester X</a><a href="/middleton" class="footer-area-link">Middleton</a><a href="/miles-platting" class="footer-area-link">Miles Platting</a><a href="/mosley-common" class="footer-area-link">Mosley Common</a><a href="/moss-side" class="footer-area-link">Moss Side</a><a href="/moston" class="footer-area-link">Moston</a><a href="/new-moston" class="footer-area-link">New Moston</a><a href="/newton-heath" class="footer-area-link">Newton Heath</a><a href="/northenden" class="footer-area-link">Northenden</a><a href="/northern-quarter" class="footer-area-link">Northern Quarter</a><a href="/old-trafford" class="footer-area-link">Old Trafford</a><a href="/oldham" class="footer-area-link">Oldham</a><a href="/openshaw" class="footer-area-link">Openshaw</a><a href="/ordsall" class="footer-area-link">Ordsall</a><a href="/partington" class="footer-area-link">Partington</a><a href="/pendlebury" class="footer-area-link">Pendlebury</a><a href="/piccadilly" class="footer-area-link">Piccadilly</a><a href="/preston" class="footer-area-link">Preston</a><a href="/prestwich" class="footer-area-link">Prestwich</a><a href="/radcliffe" class="footer-area-link">Radcliffe</a><a href="/rochdale" class="footer-area-link">Rochdale</a><a href="/roundthorn-industrial-estate" class="footer-area-link">Roundthorn Industrial Estate</a><a href="/rusholme" class="footer-area-link">Rusholme</a><a href="/sale" class="footer-area-link">Sale</a><a href="/salford" class="footer-area-link">Salford</a><a href="/salford-quays" class="footer-area-link">Salford Quays</a><a href="/seedley" class="footer-area-link">Seedley</a><a href="/sharston-industrial-area" class="footer-area-link">Sharston Industrial Area</a><a href="/stockport" class="footer-area-link">Stockport</a><a href="/stoneclough" class="footer-area-link">Stoneclough</a><a href="/strangeways" class="footer-area-link">Strangeways</a><a href="/stretford" class="footer-area-link">Stretford</a><a href="/swinton" class="footer-area-link">Swinton</a><a href="/tameside" class="footer-area-link">Tameside</a><a href="/the-trafford-centre" class="footer-area-link">The Trafford Centre</a><a href="/trafford" class="footer-area-link">Trafford</a><a href="/trafford-park" class="footer-area-link">Trafford Park</a><a href="/trinity" class="footer-area-link">Trinity</a><a href="/tyldesley" class="footer-area-link">Tyldesley</a><a href="/university" class="footer-area-link">University</a><a href="/urmston" class="footer-area-link">Urmston</a><a href="/walkden" class="footer-area-link">Walkden</a><a href="/wardley" class="footer-area-link">Wardley</a><a href="/wardley-industrial-estate" class="footer-area-link">Wardley Industrial Estate</a><a href="/warrington" class="footer-area-link">Warrington</a><a href="/weaste" class="footer-area-link">Weaste</a><a href="/whalley-range" class="footer-area-link">Whalley Range</a><a href="/whitefield" class="footer-area-link">Whitefield</a><a href="/whitlane" class="footer-area-link">Whitlane</a><a href="/wigan" class="footer-area-link">Wigan</a><a href="/withington" class="footer-area-link">Withington</a><a href="/worsley" class="footer-area-link">Worsley</a><a href="/wythenshawe" class="footer-area-link">Wythenshawe</a></div>
+                <h4 class="footer-heading">The Laundry Man App UK</h4>
+                <ul class="footer-area-cols-5">
+                  <li><a class="footer-city-box" href="/locations?service=general&amp;area=london">London</a></li><li><a class="footer-city-box" href="/locations?service=general&amp;area=birmingham">Birmingham</a></li><li><a class="footer-city-box" href="/locations?service=general&amp;area=cheshire">Cheshire</a></li><li><a class="footer-city-box" href="/locations?service=general&amp;area=manchester">Manchester</a></li><li><a class="footer-city-box" href="/locations?service=general&amp;area=leeds">Leeds</a></li>
+                </ul>
               </div>
             </div>
           </div>

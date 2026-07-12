@@ -3,7 +3,7 @@ import { Clock, Gem, HandHeart, Leaf, ShoppingBag } from 'lucide-react';
 import { motion } from 'motion/react';
 
 import BookNowButton from './BookNowButton';
-import doorstepIntroImage from '../assets/images/we use eco-friendly products.jpeg';
+import doorstepIntroImage from '../assets/images/we use eco-friendly products.webp';
 
 const highlights = [
   {
@@ -64,8 +64,8 @@ export default function HomeDoorstepIntro() {
 
           <div className="flex flex-col items-center justify-center text-center lg:items-start lg:text-left">
             <h2 className="max-w-xl text-3xl font-extrabold tracking-tighter text-slate sm:text-4xl lg:text-[2.75rem] lg:leading-[1.05]">
-              Laundry and dry cleaning at{' '}
-              <span className="text-gold">your doorstep</span>
+            24 hours{' '}
+              <span className="text-gold">eco-laundry and eco dry cleaning service</span>
             </h2>
 
             <p className="mt-4 text-base font-light leading-relaxed text-ink sm:text-lg">

@@ -11,7 +11,7 @@ import {
 import { motion } from 'motion/react';
 
 import BookNowButton from './BookNowButton';
-import whyChooseUsImage from '../assets/images/side-view-young-woman-spending-time-home.jpg';
+import whyChooseUsImage from '../assets/images/laundry-fold-cloths.webp';
 
 const benefits: {
   icon: LucideIcon;
@@ -116,19 +116,19 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="relative min-h-[14rem] sm:min-h-[18rem] lg:min-h-0"
+            className="relative"
           >
-            <div className="relative h-full min-h-[14rem] shape-blob sm:min-h-[18rem] lg:min-h-full">
+            <div className="relative mx-auto max-w-[11rem] sm:max-w-xs lg:mx-0 lg:h-full lg:min-h-[18rem] lg:max-w-none">
               <img
                 src={whyChooseUsImage}
                 alt="Professional dry cleaning and laundry equipment at our facility"
-                className="absolute inset-0 h-full w-full object-cover"
+                className="block h-auto w-full object-contain lg:absolute lg:inset-0 lg:h-full lg:w-full lg:object-cover"
                 loading="lazy"
                 decoding="async"
                 width={900}
                 height={675}
               />
-              <div className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#134633]/35 to-transparent" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-1/4 bg-gradient-to-t from-[#134633]/35 to-transparent lg:block" />
             </div>
           </motion.div>
         </div>

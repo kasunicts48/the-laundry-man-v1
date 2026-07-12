@@ -1,12 +1,8 @@
-import { readFileSync } from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { renderSocialIcon } from './social-icons.mjs';
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const ukLocations = JSON.parse(
-  readFileSync(path.join(__dirname, '../src/data/ukLocations.json'), 'utf8')
-);
 
 function escapeHtml(value) {
   return String(value)
@@ -34,6 +30,13 @@ function resolveLocationHref(area) {
   const slug =
     SLUG_ALIASES[trimmed] ?? SLUG_ALIASES[toLocationSlug(area)] ?? toLocationSlug(area);
   return `/${slug}`;
+}
+
+function resolveFooterUkCityHref(area) {
+  const trimmed = area.toLowerCase().trim();
+  const slug =
+    SLUG_ALIASES[trimmed] ?? SLUG_ALIASES[toLocationSlug(area)] ?? toLocationSlug(area);
+  return `/locations?service=general&area=${encodeURIComponent(slug)}`;
 }
 
 const footerServices = [
@@ -77,57 +80,7 @@ const footerQuickLinksCol2 = [
   { label: 'Terms & Conditions', href: '/terms-conditions' },
 ];
 
-const footerLondonRegions = [
-  {
-    name: 'East London',
-    areas: ['Hackney', 'Walthamstow', 'Crouch End', 'Dalston', 'Finsbury Park', 'Canary Wharf'],
-  },
-  {
-    name: 'North London',
-    areas: ['Stoke Newington', 'Highbury', 'Holloway', 'Homerton', 'Hoxton', 'Camden'],
-  },
-  {
-    name: 'South London',
-    areas: [
-      'Richmond Upon Thames',
-      'London Fields',
-      'Muswell Hill',
-      'Stratford',
-      'Islington',
-      'Hornsey',
-      'Lambeth',
-    ],
-  },
-  {
-    name: 'West London',
-    areas: [
-      'Mayfair',
-      'Tottenham',
-      'Wood Green',
-      'Stamford Hill',
-      'Leytonstone',
-      'Bond Street',
-      'Hammersmith',
-      'Wandsworth',
-    ],
-  },
-];
-
-function splitIntoColumns(items, columns) {
-  const chunkSize = Math.ceil(items.length / columns);
-
-  return Array.from({ length: columns }, (_, index) =>
-    items.slice(index * chunkSize, (index + 1) * chunkSize)
-  );
-}
-
-const footerLondonAreas = footerLondonRegions.flatMap((region) => region.areas);
-const footerLondonAreaColumns = splitIntoColumns(footerLondonAreas, 4);
-
-const footerManchesterAreas =
-  ukLocations.general.find((region) => region.id === 'manchester')?.areas ?? [];
-
-const footerManchesterAreaColumns = splitIntoColumns(footerManchesterAreas, 4);
+const footerUkCities = ['London', 'Birmingham', 'Cheshire', 'Manchester', 'Leeds'];
 
 const footerSocialLinks = [
   {
@@ -304,7 +257,7 @@ export function getStaticFooterCss() {
       }
 
       .footer-social-row {
-        display: flex;
+        display: none;
         flex-wrap: wrap;
         align-items: center;
         gap: 1rem;
@@ -312,8 +265,9 @@ export function getStaticFooterCss() {
         max-width: 100%;
       }
 
-      @media (min-width: 640px) {
+      @media (min-width: 768px) {
         .footer-social-row {
+          display: flex;
           margin-top: 2rem;
         }
       }
@@ -388,16 +342,50 @@ export function getStaticFooterCss() {
         gap: 3rem;
       }
 
+      .footer-area-cols-5,
       .footer-area-cols-4 {
         display: grid;
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        gap: 0 1.5rem;
+        gap: 0.75rem;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer-city-box {
+        display: block;
+        border-radius: 0.5rem;
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.05);
+        padding: 0.625rem 1rem;
+        text-align: center;
+        font-size: 0.875rem;
+        font-weight: 300;
+        color: rgba(255, 255, 255, 0.9);
+        text-decoration: none;
+        transition: all 0.3s;
+      }
+
+      .footer-city-box:hover {
+        border-color: rgba(76, 175, 80, 0.4);
+        background: rgba(76, 175, 80, 0.1);
+        color: rgb(76, 175, 80);
       }
 
       @media (min-width: 640px) {
+        .footer-area-cols-5 {
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+        }
+
         .footer-area-cols-4 {
           grid-template-columns: repeat(4, minmax(0, 1fr));
           gap: 0 2rem;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .footer-area-cols-5 {
+          grid-template-columns: repeat(5, minmax(0, 1fr));
         }
       }
 
@@ -469,16 +457,10 @@ export function getStaticFooterHtml({ includeLocations = true } = {}) {
           <div class="footer-locations" id="locations">
             <div class="locations-sections">
               <div>
-                <h4 class="footer-heading">The Laundry Man App London</h4>
-                <div class="footer-area-cols-4">
-                  ${footerLondonAreaColumns.map((column) => renderAreaList(column)).join('')}
-                </div>
-              </div>
-              <div>
-                <h4 class="footer-heading">The Laundry Man App Manchester</h4>
-                <div class="footer-area-cols-4">
-                  ${footerManchesterAreaColumns.map((column) => renderAreaList(column)).join('')}
-                </div>
+                <h4 class="footer-heading">The Laundry Man App UK</h4>
+                <ul class="footer-area-cols-5">
+                  ${footerUkCities.map((city) => `<li><a class="footer-city-box" href="${escapeHtml(resolveFooterUkCityHref(city))}">${escapeHtml(city)}</a></li>`).join('')}
+                </ul>
               </div>
             </div>
           </div>`

@@ -1,5 +1,5 @@
 import { resolveLocationHref } from './locations';
-import ukLocationsData from './ukLocations.json';
+import { buildLocationsHref } from '../utils/locationHash';
 
 export interface FooterLink {
   label: string;
@@ -16,9 +16,9 @@ export interface OperatingHour {
   hours: string;
 }
 
-export interface LondonRegion {
-  name: string;
-  areas: string[];
+/** Footer UK city links → /locations general section for that area. */
+export function resolveFooterUkCityHref(city: string): string {
+  return buildLocationsHref('general', city);
 }
 
 /** @deprecated Use resolveLocationHref from ./locations */
@@ -78,42 +78,7 @@ export const footerQuickLinksCol2: FooterLink[] = [
   { label: 'Terms & Conditions', href: '/terms-conditions' },
 ];
 
-export const footerLondonRegions: LondonRegion[] = [
-  {
-    name: 'East London',
-    areas: ['Hackney', 'Walthamstow', 'Crouch End', 'Dalston', 'Finsbury Park', 'Canary Wharf'],
-  },
-  {
-    name: 'North London',
-    areas: ['Stoke Newington', 'Highbury', 'Holloway', 'Homerton', 'Hoxton', 'Camden'],
-  },
-  {
-    name: 'South London',
-    areas: ['Richmond Upon Thames', 'London Fields', 'Muswell Hill', 'Stratford', 'Islington', 'Hornsey', 'Lambeth'],
-  },
-  {
-    name: 'West London',
-    areas: ['Mayfair', 'Tottenham', 'Wood Green', 'Stamford Hill', 'Leytonstone', 'Bond Street', 'Hammersmith', 'Wandsworth'],
-  },
-];
-
-function splitIntoColumns(items: string[], columns: number): string[][] {
-  const chunkSize = Math.ceil(items.length / columns);
-
-  return Array.from({ length: columns }, (_, index) =>
-    items.slice(index * chunkSize, (index + 1) * chunkSize)
-  );
-}
-
-export const footerLondonAreas: string[] = footerLondonRegions.flatMap((region) => region.areas);
-
-export const footerLondonAreaColumns = splitIntoColumns(footerLondonAreas, 4);
-
-const manchesterRegion = ukLocationsData.general.find((region) => region.id === 'manchester');
-
-export const footerManchesterAreas: string[] = manchesterRegion?.areas ?? [];
-
-export const footerManchesterAreaColumns = splitIntoColumns(footerManchesterAreas, 4);
+export const footerUkCities = ['London', 'Birmingham', 'Cheshire', 'Manchester', 'Leeds'];
 
 export const footerSocialLinks = [
   {

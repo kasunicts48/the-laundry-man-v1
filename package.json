@@ -7,13 +7,14 @@
     "dev": "concurrently -k -n api,vite -c green,blue \"npm run dev:api\" \"vite\"",
     "dev:vite": "vite",
     "dev:api": "node scripts/dev-api.mjs",
-    "generate:locations": "node scripts/generate-locations-html.mjs && node scripts/sync-booking-footer.mjs",
+    "generate:locations": "node scripts/generate-locations-html.mjs && node scripts/sync-booking-footer.mjs && node scripts/sync-booking-header.mjs",
     "build": "npm run generate:locations && vite build",
     "preview": "vite preview",
     "clean": "rm -rf dist server.js node_modules/.vite node_modules/.cache",
     "lint": "tsc --noEmit"
   },
   "dependencies": {
+    "@fontsource/outfit": "^5.2.8",
     "@google/genai": "^2.4.0",
     "@tailwindcss/vite": "^4.1.14",
     "@vitejs/plugin-react": "^5.0.4",

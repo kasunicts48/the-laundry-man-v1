@@ -2,9 +2,9 @@ import React from 'react';
 import { motion } from 'motion/react';
 
 import BookNowButton from './BookNowButton';
-import bookingIcon from '../assets/icons/booking.png';
-import clothingIcon from '../assets/icons/clothing.png';
-import fastDeliveryIcon from '../assets/icons/fast-delivery.png';
+import bookingIcon from '../assets/icons/booking.webp';
+import clothingIcon from '../assets/icons/clothing.webp';
+import fastDeliveryIcon from '../assets/icons/fast-delivery.webp';
 
 const steps = [
   {
@@ -48,8 +48,9 @@ export default function HowItWorks() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 lg:max-w-none">
           <h2 className="section-eyebrow">How It Works</h2>
-          <h3 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-extrabold text-slate tracking-tighter lg:whitespace-nowrap">
-            You Click, We Collect, Clean & Deliver
+          <h3 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-extrabold text-slate tracking-tighter">
+            You Click, we collect we clean <br className="hidden md:inline" /> we deliver at your
+            convenience
           </h3>
         </div>
 

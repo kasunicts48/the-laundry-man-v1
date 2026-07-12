@@ -2,7 +2,7 @@ import React, { useId, useState } from 'react';
 import { ChevronDown } from 'lucide-react';
 import { AnimatePresence, motion } from 'motion/react';
 
-import faqImage from '../assets/images/girl-thinking-smiling.jpg';
+import faqImage from '../assets/images/girl-thinking-smiling.webp';
 import { homeFaqItems } from '../data/homeFaq';
 import BookNowButton from './BookNowButton';
 

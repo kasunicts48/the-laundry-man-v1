@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'motion/react';
 
 import BookNowButton from './BookNowButton';
 import { homeAudienceCards } from '../data/homeAudienceCards';
@@ -20,18 +19,14 @@ export default function HomeAudienceCards() {
           </h3>
         </div>
 
-        <div className="-mx-4 flex gap-5 overflow-x-auto px-4 pb-3 snap-x snap-mandatory scrollbar-hide sm:mx-0 sm:grid sm:grid-cols-2 sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 lg:gap-6">
-          {homeAudienceCards.map((card, index) => {
+        <div className="-mx-4 flex items-start gap-5 overflow-x-auto overflow-y-hidden px-4 pb-3 snap-x snap-mandatory scrollbar-hide sm:mx-0 sm:grid sm:grid-cols-2 sm:items-stretch sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 lg:gap-6">
+          {homeAudienceCards.map((card) => {
             const Icon = card.icon;
 
             return (
-              <motion.article
+              <article
                 key={card.id}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="glass-card group flex w-[min(85vw,20rem)] shrink-0 snap-center flex-col overflow-hidden sm:w-auto"
+                className="glass-card group flex w-[min(85vw,20rem)] shrink-0 snap-center flex-col overflow-hidden max-sm:min-h-[22.5rem] sm:w-auto sm:min-h-0"
               >
                 <div className="relative aspect-[4/3] overflow-hidden">
                   <img
@@ -68,7 +63,7 @@ export default function HomeAudienceCards() {
                     <BookNowButton fullWidth label="Book Now" />
                   </div>
                 </div>
-              </motion.article>
+              </article>
             );
           })}
         </div>

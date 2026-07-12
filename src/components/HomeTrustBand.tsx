@@ -3,7 +3,7 @@ import { Leaf, ShieldCheck, Sparkles } from 'lucide-react';
 import { motion } from 'motion/react';
 
 import BookNowButton from './BookNowButton';
-import trustImage from '../assets/images/Image_change_person_appearance_b…_202606272150.jpeg';
+import trustImage from '../assets/images/laundry-woman.webp';
 
 const trustPoints = [
   {
@@ -71,11 +71,11 @@ export default function HomeTrustBand() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="relative"
           >
-            <div className="relative aspect-[4/3] shape-blob shape-blob-trust">
+            <div className="relative aspect-[4/3] shape-blob">
               <img
                 src={trustImage}
                 alt="Professionals operating modern laundry machines at our own cleaning facility"
-                className="absolute inset-0 h-full w-full -scale-x-100 object-cover"
+                className="absolute inset-0 h-full w-full object-cover"
                 loading="lazy"
                 decoding="async"
               />

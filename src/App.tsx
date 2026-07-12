@@ -1,21 +1,23 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation, useParams, Navigate } from 'react-router-dom';
 import Header from './components/Header';
-import Footer from './components/Footer';
-import StickyBookNowBar from './components/StickyBookNowBar';
-import FirstTimeDiscountPopup from './components/FirstTimeDiscountPopup';
+import RouteFallback from './components/RouteFallback';
 import { useOpenBooking } from './hooks/useOpenBooking';
 
 import Home from './pages/Home';
-import About from './pages/About';
-import Services from './pages/Services';
-import Commercial from './pages/Commercial';
-import Blog from './pages/Blog';
-import BlogDetails from './pages/BlogDetails';
-import Contact from './pages/Contact';
-import PrivacyPolicy from './pages/PrivacyPolicy';
-import TermsConditions from './pages/TermsConditions';
-import AppRedirect from './pages/AppRedirect';
+
+const Footer = lazy(() => import('./components/Footer'));
+const StickyBookNowBar = lazy(() => import('./components/StickyBookNowBar'));
+
+const About = lazy(() => import('./pages/About'));
+const Services = lazy(() => import('./pages/Services'));
+const Commercial = lazy(() => import('./pages/Commercial'));
+const Blog = lazy(() => import('./pages/Blog'));
+const BlogDetails = lazy(() => import('./pages/BlogDetails'));
+const Contact = lazy(() => import('./pages/Contact'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsConditions = lazy(() => import('./pages/TermsConditions'));
+const AppRedirect = lazy(() => import('./pages/AppRedirect'));
 import { isReservedPathSegment } from './data/locations';
 
 function ScrollToTop() {
@@ -51,24 +53,29 @@ function AppLayout() {
       <Header />
 
       <main className="flex-grow">
-        <Routes>
-          <Route path="/" element={<Home onBookNow={openBooking} />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/services" element={<Services onBookNow={openBooking} />} />
-          <Route path="/commercial" element={<Commercial />} />
-          <Route path="/blog" element={<Blog />} />
-          <Route path="/blog/:id" element={<BlogDetails />} />
-          <Route path="/contact" element={<Contact />} />
-          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-          <Route path="/terms-conditions" element={<TermsConditions />} />
-          <Route path="/:location" element={<LocationHomeRoute onBookNow={openBooking} />} />
-        </Routes>
+        <Suspense fallback={<RouteFallback />}>
+          <Routes>
+            <Route path="/" element={<Home onBookNow={openBooking} />} />
+            <Route path="/about" element={<About />} />
+            <Route path="/services" element={<Services onBookNow={openBooking} />} />
+            <Route path="/commercial" element={<Commercial />} />
+            <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/:id" element={<BlogDetails />} />
+            <Route path="/contact" element={<Contact />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
+            <Route path="/:location" element={<LocationHomeRoute onBookNow={openBooking} />} />
+          </Routes>
+        </Suspense>
       </main>
 
-      <Footer />
+      <Suspense fallback={null}>
+        <Footer />
+      </Suspense>
 
-      <StickyBookNowBar />
-      <FirstTimeDiscountPopup />
+      <Suspense fallback={null}>
+        <StickyBookNowBar />
+      </Suspense>
     </div>
   );
 }
@@ -81,10 +88,12 @@ export default function App() {
   return (
     <Router>
       <ScrollToTop />
-      <Routes>
-        <Route path="/download-app" element={<AppRedirect />} />
-        <Route path="/*" element={<AppLayout />} />
-      </Routes>
+      <Suspense fallback={<RouteFallback />}>
+        <Routes>
+          <Route path="/download-app" element={<AppRedirect />} />
+          <Route path="/*" element={<AppLayout />} />
+        </Routes>
+      </Suspense>
     </Router>
   );
 }

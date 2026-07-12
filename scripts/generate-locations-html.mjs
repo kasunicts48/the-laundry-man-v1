@@ -2,7 +2,7 @@ import { mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { getStaticFooterCss, getStaticFooterHtml } from './static-footer.mjs';
-import { renderSocialIcon } from './social-icons.mjs';
+import { getStaticTopbarCss, renderStaticTopbarHtml } from './static-header.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -705,8 +705,8 @@ const html = `<!doctype html>
     <meta http-equiv="Expires" content="0" />
     <title>Service Areas | The Laundry Man</title>
     <meta name="description" content="Browse laundry and dry cleaning service areas across the UK. Free collection and delivery in ${regionCount} regions and ${areaCount.toLocaleString()} neighbourhoods." />
-    <link rel="icon" href="/logo-laundry-man-app-icon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/logo-laundry-man-app-icon.png" />
+    <link rel="icon" href="/logo-laundry-man-app-icon.webp" type="image/png" />
+    <link rel="apple-touch-icon" href="/logo-laundry-man-app-icon.webp" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
@@ -735,21 +735,9 @@ const html = `<!doctype html>
         backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(27, 53, 22, 0.06);
       }
-      .header-topbar { background: #134633; color: rgba(255, 255, 255, 0.9); border-bottom: 1px solid rgba(255, 255, 255, 0.1); padding: 0.75rem 1rem; font-size: 0.875rem; font-weight: 600; }
-      .header-email svg, .header-social a svg { width: 1.25rem; height: 1.25rem; }
-      .header-social a { min-width: 2rem; min-height: 2rem; justify-content: center; }
-      .header-social { display: flex; align-items: center; gap: 0.5rem; }
-      @media (min-width: 640px) {
-        .header-topbar { padding: 0.5rem 1rem; font-size: 0.75rem; font-weight: 500; }
-        .header-email svg, .header-social a svg { width: 0.875rem; height: 0.875rem; }
-        .header-social a { min-width: 0; min-height: 0; }
-        .header-social { gap: 1rem; }
-      }
+${getStaticTopbarCss()}
       .header-inner { max-width: 80rem; margin: 0 auto; padding: 0 1rem; }
-      .header-topbar .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
-      .header-email, .header-social a { display: inline-flex; align-items: center; gap: 0.5rem; color: rgba(255, 255, 255, 0.9); }
-      .header-email:hover, .nav-link:hover, .footer a:hover, .location-link:hover { color: var(--theme-accent); }
-      .header-social a:hover { opacity: 0.85; }
+      .nav-link:hover, .footer a:hover, .location-link:hover { color: var(--theme-accent); }
       .header-main { padding: 1rem 0; }
       .header-main .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
       .site-logo { display: flex; align-items: center; flex-shrink: 0; }
@@ -770,7 +758,6 @@ const html = `<!doctype html>
       .mobile-nav .btn-book--mobile { display: block; width: 100%; padding: 0.75rem 1.5rem; border: 1px solid var(--theme-accent); border-radius: 9999px; color: var(--theme-accent); background: transparent; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; }
       .mobile-nav .btn-book--mobile:hover { background: var(--theme-accent); color: #fff; }
       @media (min-width: 768px) { .desktop-nav { display: flex; } .menu-toggle { display: none; } .header-inner { padding: 0 1.5rem; } }
-      @media (max-width: 639px) { .header-email span { display: none; } }
       .page-banner {
         position: relative;
         z-index: 10;
@@ -845,24 +832,11 @@ ${staticFooterCss}
   <body>
     <div class="site-shell">
       <header class="site-header" id="siteHeader">
-        <div class="header-topbar">
-          <div class="header-inner">
-            <a class="header-email" href="mailto:info@thelaundryman.co.uk">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="m4 7 8 5 8-5M4 7v10h16V7"/></svg>
-              <span>info@thelaundryman.co.uk</span>
-            </a>
-            <div class="header-social">
-              <span>Follow Us:</span>
-              <a href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook">${renderSocialIcon('facebook', 14)}</a>
-              <a href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok">${renderSocialIcon('tiktok', 14)}</a>
-              <a href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram">${renderSocialIcon('instagram', 14, '-locations-header')}</a>
-            </div>
-          </div>
-        </div>
+        ${renderStaticTopbarHtml('-locations-header')}
         <div class="header-main">
           <div class="header-inner">
             <a class="site-logo" href="/">
-              <img src="/logo-laundry-man-app.png" alt="The Laundry Man" width="44" height="44" />
+              <img src="/logo-laundry-man-app.webp" alt="The Laundry Man" width="44" height="44" />
             </a>
             <nav class="desktop-nav" aria-label="Main navigation">
               <a class="nav-link" href="/">Home</a>

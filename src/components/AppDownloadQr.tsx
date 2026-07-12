@@ -51,9 +51,13 @@ export default function AppDownloadQr() {
             className="inline-block transition-transform hover:-translate-y-1"
           >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/3/3c/Download_on_the_App_Store_Badge.svg"
+              src="/badges/app-store-badge.svg"
               alt="Download on the App Store"
               className="h-12 w-auto sm:h-14"
+              width={135}
+              height={40}
+              loading="lazy"
+              decoding="async"
             />
           </a>
           <a
@@ -63,9 +67,13 @@ export default function AppDownloadQr() {
             className="inline-block transition-transform hover:-translate-y-1"
           >
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/7/78/Google_Play_Store_badge_EN.svg"
+              src="/badges/google-play-badge.svg"
               alt="Get it on Google Play"
               className="h-12 w-auto sm:h-14"
+              width={180}
+              height={53}
+              loading="lazy"
+              decoding="async"
             />
           </a>
         </div>

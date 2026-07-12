@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { lazy, Suspense, useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 
-import AppDownloadQr from './AppDownloadQr';
-import orderControlImage from '../assets/images/rifki-kurniawan-3VV2RjB1cOc-unsplash.jpg';
+import orderControlImage from '../assets/images/laundry-mobile.webp';
+
+// Defer the QR-code library (~40KB) until this section is near the viewport so it
+// stays off the initial critical path and out of the below-the-fold bundle.
+const AppDownloadQr = lazy(() => import('./AppDownloadQr'));
 
 function AppPhoneMockup() {
   return (
@@ -24,8 +27,27 @@ function AppPhoneMockup() {
 }
 
 export default function HomeAppControl() {
+  const qrRef = useRef<HTMLDivElement>(null);
+  const [showQr, setShowQr] = useState(false);
+
+  useEffect(() => {
+    const el = qrRef.current;
+    if (!el || showQr) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          setShowQr(true);
+          observer.disconnect();
+        }
+      },
+      { rootMargin: '250px' }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [showQr]);
+
   return (
-    <section className="border-y border-black/5 bg-navy-alt py-14 sm:py-20">
+    <section id="the-app" className="scroll-mt-28 border-y border-black/5 bg-navy-alt py-14 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-stretch gap-8 lg:grid-cols-2 lg:gap-10 lg:gap-x-14">
           <div className="flex flex-col gap-6 lg:gap-8">
@@ -56,7 +78,7 @@ export default function HomeAppControl() {
                   width={1200}
                   height={800}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#134633]/25 via-transparent to-transparent" />
+                <div className="absolute inset-0" />
               </div>
             </motion.div>
           </div>
@@ -85,8 +107,14 @@ export default function HomeAppControl() {
               <p className="mt-3 text-base font-light leading-relaxed text-slate/80">
                 Manage your orders, track driver locations, and pay securely right from your phone.
               </p>
-              <div className="mt-6 lg:mt-8">
-                <AppDownloadQr />
+              <div ref={qrRef} className="mt-6 min-h-[15rem] lg:mt-8">
+                {showQr ? (
+                  <Suspense fallback={<div className="min-h-[15rem]" aria-hidden="true" />}>
+                    <AppDownloadQr />
+                  </Suspense>
+                ) : (
+                  <div className="min-h-[15rem]" aria-hidden="true" />
+                )}
               </div>
             </div>
 

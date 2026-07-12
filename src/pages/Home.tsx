@@ -1,17 +1,10 @@
-import React, { useEffect } from 'react';
+import React, { lazy, Suspense, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Hero from '../components/Hero';
-import HomeDoorstepIntro from '../components/HomeDoorstepIntro';
-import HomeAudienceCards from '../components/HomeAudienceCards';
-import HowItWorks from '../components/HowItWorks';
-import HomeAppControl from '../components/HomeAppControl';
-import HomeTrustBand from '../components/HomeTrustBand';
-import ServicesOverview from '../components/ServicesOverview';
-import WhyChooseUs from '../components/WhyChooseUs';
-import AppPromoAndReviews from '../components/AppPromo';
-import HomeFaq from '../components/HomeFaq';
 import { usePageLocation } from '../hooks/usePageLocation';
 import { SITE_LOGO_URL } from '../data/siteBrand';
+
+const HomeBelowFold = lazy(() => import('../components/HomeBelowFold'));
 
 interface HomeProps {
   onBookNow: (serviceId?: string) => void;
@@ -21,6 +14,19 @@ export default function Home({ onBookNow }: HomeProps) {
   const { pathname } = useLocation();
   const { displayName, slug, cityData, isDefaultLocation } = usePageLocation();
   const isRootHome = pathname === '/' || pathname.replace(/\/+$/, '') === '';
+  const [showBelowFold, setShowBelowFold] = useState(false);
+
+  useEffect(() => {
+    const revealBelowFold = () => setShowBelowFold(true);
+
+    if ('requestIdleCallback' in window) {
+      const idleId = window.requestIdleCallback(revealBelowFold, { timeout: 1800 });
+      return () => window.cancelIdleCallback(idleId);
+    }
+
+    const timeoutId = window.setTimeout(revealBelowFold, 200);
+    return () => window.clearTimeout(timeoutId);
+  }, []);
 
   useEffect(() => {
     const originalTitle = document.title;
@@ -82,19 +88,16 @@ export default function Home({ onBookNow }: HomeProps) {
   return (
     <>
       <Hero locationName={displayName} cityData={cityData} />
-      <HomeDoorstepIntro />
-      <HowItWorks />
-      <HomeAudienceCards />
-      <ServicesOverview
-        city={isRootHome ? undefined : displayName}
-        cityData={isRootHome ? undefined : cityData}
-        onBookNow={onBookNow}
-      />
-      <WhyChooseUs />
-      <HomeAppControl />
-      <HomeTrustBand />
-      <AppPromoAndReviews cityData={cityData} />
-      <HomeFaq />
+      {showBelowFold ? (
+        <Suspense fallback={null}>
+          <HomeBelowFold
+            onBookNow={onBookNow}
+            displayName={displayName}
+            cityData={cityData}
+            isRootHome={isRootHome}
+          />
+        </Suspense>
+      ) : null}
     </>
   );
 }

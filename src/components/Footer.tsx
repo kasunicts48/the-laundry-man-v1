@@ -5,10 +5,9 @@ import {
   footerQuickLinksCol1,
   footerQuickLinksCol2,
   footerExploreLinks,
-  footerLondonAreaColumns,
-  footerManchesterAreaColumns,
+  footerUkCities,
   footerSocialLinks,
-  resolveCityHref,
+  resolveFooterUkCityHref,
   type FooterLink,
 } from '../data/footerContent';
 import { SocialIcon } from './SocialIcon';
@@ -91,20 +90,6 @@ function FooterSocialLinks({ className = '' }: { className?: string }) {
   );
 }
 
-function AreaList({ areas }: { areas: string[] }) {
-  return (
-    <ul className="space-y-2.5">
-      {areas.map((area) => (
-        <li key={area}>
-          <Link to={resolveCityHref(area)} className={linkClassName}>
-            {area}
-          </Link>
-        </li>
-      ))}
-    </ul>
-  );
-}
-
 export default function Footer() {
   return (
     <footer id="footer" className="relative overflow-hidden bg-[#134633] text-paper border-t border-paper/10 transition-colors duration-500">
@@ -136,7 +121,7 @@ export default function Footer() {
               <FooterLinkList links={footerQuickLinksCol1} />
               <div className="flex flex-col">
                 <FooterLinkList links={footerQuickLinksCol2} />
-                <div className="mt-6 flex flex-wrap items-center gap-4 sm:mt-8">
+                <div className="mt-6 hidden flex-wrap items-center gap-4 md:flex sm:mt-8">
                   <span className="text-sm font-light text-paper/90">Social media</span>
                   <FooterSocialLinks />
                 </div>
@@ -147,24 +132,20 @@ export default function Footer() {
 
         {/* Lower section — locations */}
         <div id="locations" className="mt-8 scroll-mt-28 pt-4">
-          <div className="space-y-12">
-            <div>
-              <FooterSectionHeading>The Laundry Man App London</FooterSectionHeading>
-              <div className="grid grid-cols-2 gap-x-4 sm:grid-cols-4 sm:gap-x-6 lg:gap-x-8 gap-y-2.5">
-                {footerLondonAreaColumns.map((column, index) => (
-                  <AreaList key={index} areas={column} />
-                ))}
-              </div>
-            </div>
-
-            <div>
-              <FooterSectionHeading>The Laundry Man App Manchester</FooterSectionHeading>
-              <div className="grid grid-cols-2 gap-x-6 sm:grid-cols-4 sm:gap-x-8 gap-y-2.5">
-                {footerManchesterAreaColumns.map((column, index) => (
-                  <AreaList key={index} areas={column} />
-                ))}
-              </div>
-            </div>
+          <div>
+            <FooterSectionHeading>The Laundry Man App UK</FooterSectionHeading>
+            <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
+              {footerUkCities.map((city) => (
+                <li key={city}>
+                  <a
+                    href={resolveFooterUkCityHref(city)}
+                    className="block rounded-lg border border-paper/15 bg-paper/5 px-4 py-2.5 text-center text-sm font-light text-paper/90 transition-colors duration-300 hover:border-[rgb(76,175,80)]/40 hover:bg-[rgb(76,175,80)]/10 hover:text-[rgb(76,175,80)]"
+                  >
+                    {city}
+                  </a>
+                </li>
+              ))}
+            </ul>
           </div>
         </div>
 

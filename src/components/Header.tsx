@@ -48,7 +48,7 @@ export default function Header(_props: HeaderProps = {}) {
       window.removeEventListener('orientationchange', syncHeaderHeight);
       observer.disconnect();
     };
-  }, [location.pathname, isScrolled]);
+  }, [location.pathname, isScrolled, isMobileMenuOpen]);
 
   const navLinks = [
     { name: 'Home', href: '/' },
@@ -60,8 +60,8 @@ export default function Header(_props: HeaderProps = {}) {
   ];
 
   const hasHeroBanner = isLocationHomePath(location.pathname);
-  const useSolidHeader = !hasHeroBanner || isScrolled;
-  const useLightNav = hasHeroBanner && !isScrolled;
+  const useSolidHeader = !hasHeroBanner || isScrolled || isMobileMenuOpen;
+  const useLightNav = hasHeroBanner && !isScrolled && !isMobileMenuOpen;
 
   const navTextClass = useLightNav
     ? 'text-paper/90 hover:text-gold'
@@ -69,9 +69,9 @@ export default function Header(_props: HeaderProps = {}) {
 
   return (
     <header
-      className={`fixed w-full z-50 transition-all duration-300 border-b ${
+      className={`fixed inset-x-0 top-0 w-full z-50 transition-colors duration-300 border-b ${
         useSolidHeader
-          ? 'bg-navy/80 backdrop-blur-md border-white/5'
+          ? 'bg-navy/95 backdrop-blur-md border-white/5'
           : 'bg-transparent border-white/10'
       }`}
     >
@@ -147,7 +147,7 @@ export default function Header(_props: HeaderProps = {}) {
 
       {/* Mobile Nav */}
       {isMobileMenuOpen && (
-        <div className="md:hidden bg-navy/95 backdrop-blur-md border-t border-white/10 shadow-xl absolute w-full">
+        <div className="md:hidden bg-navy border-t border-white/10 shadow-xl absolute w-full left-0 right-0">
           <div className="px-4 py-4 space-y-1">
             {navLinks.map((link) => (
               <Link

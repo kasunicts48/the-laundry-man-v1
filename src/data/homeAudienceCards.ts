@@ -2,10 +2,10 @@ import type { LucideIcon } from 'lucide-react';
 import { Briefcase, Heart, User, Users } from 'lucide-react';
 
 // Pexels — free for commercial use (pexels.com/license)
-import familiesImage from '../assets/images/audience/families.jpg';
-import businessesImage from '../assets/images/audience/businesses.jpg';
-import professionalsImage from '../assets/images/audience/professionals.jpg';
-import youImage from '../assets/images/audience/you.jpg';
+import familiesImage from '../assets/images/audience/families.webp';
+import businessesImage from '../assets/images/audience/commercial.webp';
+import professionalsImage from '../assets/images/audience/professionals.webp';
+import youImage from '../assets/images/audience/you.webp';
 
 export interface HomeAudienceCard {
   id: string;
@@ -23,17 +23,17 @@ export const homeAudienceCards: HomeAudienceCard[] = [
     eyebrow: 'Made for Families',
     title: 'Families',
     headline:
-      'More memories, fewer chores — Laundry Man treats every garment with the same love you give your family.',
+      'More family time, zero laundry chores.',
     image: familiesImage,
     imageAlt: 'Happy family spending quality time together at home',
     icon: Users,
   },
   {
-    id: 'businesses',
-    eyebrow: 'Made for Businesses',
-    title: 'Businesses',
+    id: 'commercial',
+    eyebrow: 'Made for Commercial',
+    title: 'Commercial',
     headline:
-      'Stop spending company time on company laundry. Laundry Man keeps your operations fresh so your team stays focused on what drives growth.',
+      'We clean. Your business grows.',
     image: businessesImage,
     imageAlt: 'Business team collaborating in a modern office',
     icon: Briefcase,
@@ -43,7 +43,7 @@ export const homeAudienceCards: HomeAudienceCard[] = [
     eyebrow: 'Made for Professionals',
     title: 'Professionals',
     headline:
-      'Your career deserves a sharp wardrobe — Laundry Man keeps you looking the part while you focus on the bigger picture.',
+      'Look sharp. Focus on success.',
     image: professionalsImage,
     imageAlt: 'Professional in a sharp suit ready for work',
     icon: User,
@@ -53,7 +53,7 @@ export const homeAudienceCards: HomeAudienceCard[] = [
     eyebrow: 'Made for You',
     title: 'You',
     headline:
-      "Whether it's a lazy Sunday or a packed Monday, Laundry Man fits around your life — not the other way around.",
+      "Laundry that fits your life.",
     image: youImage,
     imageAlt: 'Person relaxing and enjoying free time',
     icon: Heart,
