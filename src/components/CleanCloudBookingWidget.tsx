@@ -151,14 +151,14 @@ export default function CleanCloudBookingWidget({ onOrderSuccess }: CleanCloudBo
       {loadState === 'loading' && (
         <div className="absolute inset-0 z-10 flex min-h-[20rem] flex-col items-center justify-center gap-3 bg-navy sm:min-h-[24rem]">
           <Loader2 className="h-8 w-8 animate-spin text-gold" />
-          <p className="text-sm font-light text-slate">Loading booking system…</p>
+          <p className="text-sm font-light text-ink">Loading booking system…</p>
         </div>
       )}
 
       {loadState === 'error' && (
         <div className="absolute inset-0 z-10 flex flex-col items-center justify-center gap-4 bg-navy px-6 text-center">
           <AlertCircle className="h-10 w-10 text-gold" />
-          <p className="max-w-md text-sm font-light leading-relaxed text-slate">{loadError}</p>
+          <p className="max-w-md text-sm font-light leading-relaxed text-ink">{loadError}</p>
           <button
             type="button"
             onClick={() => window.location.reload()}

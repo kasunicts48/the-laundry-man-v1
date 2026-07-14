@@ -13,7 +13,7 @@ import {
 import { SocialIcon } from './SocialIcon';
 
 const linkClassName =
-  'text-sm text-paper/90 font-light hover:text-[rgb(76,175,80)] transition-colors duration-300 leading-relaxed';
+  'text-sm text-paper font-light hover:text-[rgb(76,175,80)] transition-colors duration-300 leading-relaxed';
 
 function FooterSectionHeading({ children }: { children: React.ReactNode }) {
   return (
@@ -122,7 +122,7 @@ export default function Footer() {
               <div className="flex flex-col">
                 <FooterLinkList links={footerQuickLinksCol2} />
                 <div className="mt-6 hidden flex-wrap items-center gap-4 md:flex sm:mt-8">
-                  <span className="text-sm font-light text-paper/90">Social media</span>
+                  <span className="text-sm font-light text-paper">Social media</span>
                   <FooterSocialLinks />
                 </div>
               </div>
@@ -139,7 +139,7 @@ export default function Footer() {
                 <li key={city}>
                   <a
                     href={resolveFooterUkCityHref(city)}
-                    className="block rounded-lg border border-paper/15 bg-paper/5 px-4 py-2.5 text-center text-sm font-light text-paper/90 transition-colors duration-300 hover:border-[rgb(76,175,80)]/40 hover:bg-[rgb(76,175,80)]/10 hover:text-[rgb(76,175,80)]"
+                    className="block rounded-lg border border-paper/15 bg-paper/5 px-4 py-2.5 text-center text-sm font-light text-paper transition-colors duration-300 hover:border-[rgb(76,175,80)]/40 hover:bg-[rgb(76,175,80)]/10 hover:text-[rgb(76,175,80)]"
                   >
                     {city}
                   </a>
@@ -151,11 +151,11 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-paper/10 pt-8">
           <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-            <p className="text-xs font-medium text-paper/80">
+            <p className="text-xs font-medium text-paper">
               © 2026 The Laundry Man App. All Rights Reserved.
             </p>
             <nav
-              className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-xs font-light text-paper/80 sm:justify-end"
+              className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-xs font-light text-paper sm:justify-end"
               aria-label="Footer legal and attribution links"
             >
               <a
@@ -188,7 +188,7 @@ export default function Footer() {
           </div>
 
           <div className="mt-6 flex flex-col items-center gap-3 md:hidden">
-            <span className="text-xs font-light text-paper/80">Follow us</span>
+            <span className="text-xs font-light text-paper">Follow us</span>
             <FooterSocialLinks />
           </div>
         </div>

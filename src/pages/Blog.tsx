@@ -28,7 +28,7 @@ function Pagination({
         type="button"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="cursor-pointer rounded-full border border-phone-border px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate transition-colors hover:border-gold/30 hover:text-gold disabled:cursor-not-allowed disabled:opacity-40"
+        className="cursor-pointer rounded-full border border-phone-border px-4 py-2 text-xs font-bold uppercase tracking-wider text-ink transition-colors hover:border-gold/30 hover:text-gold disabled:cursor-not-allowed disabled:opacity-40"
       >
         Previous
       </button>
@@ -42,7 +42,7 @@ function Pagination({
           className={`min-w-10 cursor-pointer rounded-full border px-3 py-2 text-xs font-bold transition-colors ${
             page === currentPage
               ? 'border-gold bg-gold text-navy'
-              : 'border-phone-border text-slate hover:border-gold/30 hover:text-gold'
+              : 'border-phone-border text-ink hover:border-gold/30 hover:text-gold'
           }`}
         >
           {page}
@@ -53,7 +53,7 @@ function Pagination({
         type="button"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="cursor-pointer rounded-full border border-phone-border px-4 py-2 text-xs font-bold uppercase tracking-wider text-slate transition-colors hover:border-gold/30 hover:text-gold disabled:cursor-not-allowed disabled:opacity-40"
+        className="cursor-pointer rounded-full border border-phone-border px-4 py-2 text-xs font-bold uppercase tracking-wider text-ink transition-colors hover:border-gold/30 hover:text-gold disabled:cursor-not-allowed disabled:opacity-40"
       >
         Next
       </button>

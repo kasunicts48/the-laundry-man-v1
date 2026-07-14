@@ -49,10 +49,10 @@ function AppLayout() {
   const openBooking = useOpenBooking();
 
   return (
-    <div className="min-h-screen flex flex-col font-sans text-ink bg-navy">
+    <div className="flex min-h-screen min-w-0 max-w-full flex-col overflow-x-clip bg-navy font-sans text-ink">
       <Header />
 
-      <main className="flex-grow">
+      <main className="min-w-0 max-w-full flex-grow overflow-x-clip">
         <Suspense fallback={<RouteFallback />}>
           <Routes>
             <Route path="/" element={<Home onBookNow={openBooking} />} />

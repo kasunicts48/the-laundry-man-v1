@@ -50,7 +50,7 @@ function FirstOrderPromo() {
 
   return (
     <div className="w-full sm:max-w-[20rem]">
-      <div className="overflow-hidden rounded-xl border border-[rgba(76,175,80,0.2)] bg-paper shadow-[0_8px_24px_rgba(0,0,0,0.08)] sm:rounded-2xl sm:border-paper/15 sm:bg-paper/97 sm:shadow-[0_20px_50px_rgba(0,0,0,0.35)] sm:backdrop-blur-md">
+      <div className="overflow-hidden rounded-xl border border-white/10 bg-[#134633] shadow-[0_8px_24px_rgba(0,0,0,0.2)] sm:rounded-2xl sm:border-paper/15 sm:bg-paper/97 sm:shadow-[0_20px_50px_rgba(0,0,0,0.35)] sm:backdrop-blur-md">
         <div
           className="h-1 bg-gradient-to-r from-transparent via-gold/70 to-transparent sm:via-gold"
           aria-hidden="true"
@@ -58,7 +58,7 @@ function FirstOrderPromo() {
 
         <div className="p-4 sm:p-5">
           <div className="flex items-center justify-between gap-3">
-            <span className="inline-flex shrink-0 items-center whitespace-nowrap rounded-full border border-[rgba(76,175,80,0.3)] bg-[rgba(76,175,80,0.08)] px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.16em] text-gold sm:text-[9px] sm:tracking-[0.18em]">
+            <span className="inline-flex shrink-0 items-center whitespace-nowrap rounded-full border border-gold/50 bg-gold/15 px-2.5 py-0.5 text-[9px] font-bold uppercase tracking-[0.16em] text-gold sm:border-[rgba(76,175,80,0.3)] sm:bg-[rgba(76,175,80,0.08)] sm:tracking-[0.18em]">
               First order offer
             </span>
 
@@ -66,27 +66,27 @@ function FirstOrderPromo() {
               <span className="text-4xl font-extrabold leading-none tracking-tight text-gold tabular-nums sm:text-5xl">
                 {FIRST_ORDER_DISCOUNT_PERCENT}%
               </span>
-              <span className="text-lg font-bold uppercase tracking-wide text-[#1B3516] sm:text-xl">
+              <span className="text-lg font-bold uppercase tracking-wide text-paper sm:text-xl sm:text-[#1B3516]">
                 off
               </span>
             </div>
           </div>
 
-          <p className="mt-2.5 text-sm font-medium leading-snug text-[#1B3516]/75 sm:mt-2 sm:text-sm sm:text-slate/75">
+          <p className="mt-2.5 text-sm font-medium leading-snug text-paper sm:mt-2 sm:text-ink">
             Your first laundry or dry cleaning order
           </p>
 
           <div className="mt-3.5 sm:mt-3.5">
-            <p className="mb-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-[#1B3516]/50 sm:mb-1.5 sm:text-[9px] sm:text-slate/45 sm:tracking-[0.18em]">
+            <p className="mb-1.5 text-[9px] font-semibold uppercase tracking-[0.16em] text-paper sm:text-ink sm:tracking-[0.18em]">
               Promo code
             </p>
             <button
               type="button"
               onClick={handleCopyCode}
-              className="flex min-h-11 w-full cursor-pointer items-center justify-between gap-3 rounded-lg border border-dashed border-[rgba(76,175,80,0.35)] bg-[rgba(76,175,80,0.06)] px-3.5 py-2.5 text-left transition-all hover:border-gold/50 hover:bg-[#f5f8f5] active:bg-[#f0f4f0] sm:min-h-0 sm:gap-3 sm:py-2.5"
+              className="flex min-h-11 w-full cursor-pointer items-center justify-between gap-3 rounded-lg border border-dashed border-white/30 bg-white/10 px-3.5 py-2.5 text-left transition-all hover:border-gold/50 hover:bg-white/15 active:bg-white/20 sm:min-h-0 sm:gap-3 sm:border-[rgba(76,175,80,0.35)] sm:bg-[rgba(76,175,80,0.06)] sm:py-2.5 sm:hover:bg-[#f5f8f5] sm:active:bg-[#f0f4f0]"
               aria-label={`Copy promo code ${FIRST_ORDER_PROMO_CODE}`}
             >
-              <span className="font-mono text-sm font-bold tracking-[0.16em] text-[#1B3516] sm:text-base sm:tracking-[0.2em]">
+              <span className="font-mono text-sm font-bold tracking-[0.16em] text-paper sm:text-base sm:text-ink sm:tracking-[0.2em]">
                 {FIRST_ORDER_PROMO_CODE}
               </span>
               <span className="flex shrink-0 items-center gap-1.5 text-xs font-semibold text-gold sm:text-[11px]">
@@ -115,7 +115,7 @@ function FirstOrderPromo() {
             />
           </a>
 
-          <p className="mt-2 hidden text-center text-[10px] font-light leading-relaxed text-slate/50 sm:mt-2.5 sm:block">
+          <p className="mt-2 hidden text-center text-[10px] font-light leading-relaxed text-ink sm:mt-2.5 sm:block">
             Free collection &amp; delivery · Applied at checkout
           </p>
         </div>

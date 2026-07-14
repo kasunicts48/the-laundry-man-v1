@@ -1,6 +1,6 @@
 import React from 'react';
 import HomeDoorstepIntro from './HomeDoorstepIntro';
-import HomeAudienceCards from './HomeAudienceCards';
+// import HomeAudienceCards from './HomeAudienceCards';
 import HowItWorks from './HowItWorks';
 import SpecialOffers from './SpecialOffers';
 import HomeAppControl from './HomeAppControl';
@@ -29,7 +29,7 @@ export default function HomeBelowFold({
       <HomeDoorstepIntro />
       <HowItWorks />
       <SpecialOffers />
-      <HomeAudienceCards />
+      {/* <HomeAudienceCards /> */}
       <ServicesOverview
         city={isRootHome ? undefined : displayName}
         cityData={isRootHome ? undefined : cityData}

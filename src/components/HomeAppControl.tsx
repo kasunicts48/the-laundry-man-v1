@@ -104,7 +104,7 @@ export default function HomeAppControl() {
               <h3 className="text-2xl font-extrabold tracking-tighter text-slate sm:text-3xl">
                 Download Our App for Easier Booking
               </h3>
-              <p className="mt-3 text-base font-light leading-relaxed text-slate/80">
+              <p className="mt-3 text-base font-light leading-relaxed text-ink">
                 Manage your orders, track driver locations, and pay securely right from your phone.
               </p>
               <div ref={qrRef} className="mt-6 min-h-[15rem] lg:mt-8">

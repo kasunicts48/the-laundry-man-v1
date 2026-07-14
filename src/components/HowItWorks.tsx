@@ -9,19 +9,18 @@ import fastDeliveryIcon from '../assets/icons/fast-delivery.webp';
 const steps = [
   {
     image: bookingIcon,
-    title: '1. Schedule Booking',
-    description: 'Easily schedule a convenient collection slot online or via our app.',
+    title: '1. Book Your Slot',
+    description: 'Pick your preferred collection time online or through our app.',
   },
   {
     image: clothingIcon,
-    title: '2. Pickup & Clean',
-    description:
-      'Our trusted drivers collect your clothes directly and our experts clean them meticulously.',
+    title: '2. We Collect & Clean',
+    description: 'We pick up your items and clean them to the highest standard.',
   },
   {
     image: fastDeliveryIcon,
-    title: '3. Fast Delivery',
-    description: 'Your clothes are returned fresh, folded, and ready to wear.',
+    title: '3. Delivered Fresh',
+    description: 'Your laundry is returned crisp, folded, and ready to go.',
   },
 ];
 
@@ -44,13 +43,13 @@ function StepIcon({ image, title }: { image: string; title: string }) {
 
 export default function HowItWorks() {
   return (
-    <section id="how-it-works" className="py-12 sm:py-24 bg-navy relative scroll-mt-28">
+    <section id="how-it-works" className="relative scroll-mt-28 overflow-hidden bg-navy py-12 sm:py-24">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 lg:max-w-none">
           <h2 className="section-eyebrow">How It Works</h2>
           <h3 className="text-3xl sm:text-4xl lg:text-4xl xl:text-5xl font-extrabold text-slate tracking-tighter">
-            You Click, we collect we clean <br className="hidden md:inline" /> we deliver at your
-            convenience
+            You book, we collect, we clean, we deliver
+            <br className="hidden md:inline" /> — on your schedule.
           </h3>
         </div>
 

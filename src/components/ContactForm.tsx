@@ -4,7 +4,7 @@ import { motion } from 'motion/react';
 import type { ContactPayload } from '../types';
 
 const inputClassName =
-  'w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink/50';
+  'w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink';
 
 const labelClassName = 'block text-xs uppercase tracking-widest font-bold text-ink mb-2';
 

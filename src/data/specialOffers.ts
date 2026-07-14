@@ -1,3 +1,8 @@
+import beddingRefreshIcon from '../assets/icons/special-offers/bedding-refresh.webp';
+import bundleSavingsIcon from '../assets/icons/special-offers/bundle-savings.webp';
+import firstOrderIcon from '../assets/icons/special-offers/first-order.webp';
+import prepayDiscountIcon from '../assets/icons/special-offers/prepay-discount.webp';
+
 export interface SpecialOfferPriceLine {
   label: string;
   price: string;
@@ -7,60 +12,49 @@ export interface SpecialOfferCard {
   id: string;
   title: string;
   eyebrow?: string;
-  type: 'pricing' | 'promo';
-  priceLines?: SpecialOfferPriceLine[];
-  headline?: string;
-  validUntil?: string;
-  businessName?: string;
-  postcode?: string;
-  phone?: string;
+  icon: string;
+  priceLines: SpecialOfferPriceLine[];
 }
 
 export const specialOffers: SpecialOfferCard[] = [
   {
-    id: 'bundle-pricing',
-    title: 'Bundle Savings',
-    eyebrow: 'Special offer',
-    type: 'pricing',
+    id: 'laundry-service',
+    title: 'Laundry service',
+    eyebrow: 'Wash & fold',
+    icon: bundleSavingsIcon,
     priceLines: [
-      { label: '8 kg wash and fold', price: '£19.99' },
-      { label: '2pc suit', price: '£15.99' },
-      { label: '5 shirts clean and iron', price: '£12.50' },
-      { label: 'One suit × 5 shirts clean & iron', price: '£25.00' },
+      { label: '8 kg wash & fold', price: '£15.00' },
+      { label: 'Each extra kg', price: '£2.50' },
     ],
   },
   {
-    id: 'prepay-discount',
-    title: 'Prepay Discount',
-    eyebrow: 'Limited time',
-    type: 'promo',
-    headline:
-      'Enjoy Unlimited 35% discount on your Dry Cleaning & Laundry Orders with prepayment.',
-    validUntil: '25/06/26',
-    businessName: 'The Eco Dry Cleaning & Laundry',
-    postcode: 'SK9 1HG',
-    phone: '01625527581',
-  },
-  {
-    id: 'first-order',
-    title: 'First Order Offer',
-    eyebrow: 'New customers',
-    type: 'promo',
-    headline: '30% off your first laundry or dry cleaning order when you book online.',
-    validUntil: 'Ongoing',
-    businessName: 'The Laundry Man App',
-    postcode: 'UK-wide service',
-  },
-  {
-    id: 'bedding-bundle',
-    title: 'Bedding Refresh',
-    eyebrow: 'Home essentials',
-    type: 'pricing',
+    id: 'shirt-service',
+    title: 'Shirt service',
+    eyebrow: 'Clean & iron',
+    icon: firstOrderIcon,
     priceLines: [
-      { label: 'Double duvet clean', price: '£12.99' },
-      { label: 'King duvet clean', price: '£15.99' },
-      { label: '2 pillows refresh', price: '£8.99' },
-      { label: 'Duvet + 2 pillows bundle', price: '£22.00' },
+      { label: 'Single shirt', price: '£2.95' },
+      { label: '5 shirts', price: '£12.50' },
+    ],
+  },
+  {
+    id: 'dry-clean',
+    title: 'Dry cleaning',
+    eyebrow: 'By the piece',
+    icon: beddingRefreshIcon,
+    priceLines: [
+      { label: '2-piece suit', price: '£15.99' },
+      { label: 'Two 2-piece suits', price: '£25.00' },
+    ],
+  },
+  {
+    id: 'managers-special',
+    title: "Manager's special",
+    eyebrow: 'Best value',
+    icon: prepayDiscountIcon,
+    priceLines: [
+      { label: '2-piece suit + 5 shirts', price: '£25.00' },
+      { label: '10 shirts', price: '£20.00' },
     ],
   },
 ];

@@ -19,7 +19,7 @@ export default function HomeAudienceCards() {
           </h3>
         </div>
 
-        <div className="-mx-4 flex items-start gap-5 overflow-x-auto overflow-y-hidden px-4 pb-3 snap-x snap-mandatory scrollbar-hide sm:mx-0 sm:grid sm:grid-cols-2 sm:items-stretch sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 lg:gap-6">
+        <div className="-mx-4 flex max-w-[100vw] items-start gap-5 overflow-x-auto overflow-y-hidden px-4 pb-3 snap-x snap-mandatory scrollbar-hide sm:mx-0 sm:max-w-none sm:grid sm:grid-cols-2 sm:items-stretch sm:overflow-visible sm:px-0 sm:pb-0 lg:grid-cols-4 lg:gap-6">
           {homeAudienceCards.map((card) => {
             const Icon = card.icon;
 
@@ -44,7 +44,7 @@ export default function HomeAudienceCards() {
                       <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[rgb(76,175,80)] text-paper shadow-md">
                         <Icon className="h-4 w-4" aria-hidden="true" />
                       </span>
-                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-paper/90">
+                      <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-paper">
                         {card.eyebrow}
                       </p>
                     </div>
@@ -55,7 +55,7 @@ export default function HomeAudienceCards() {
                   <h3 className="text-xl font-extrabold tracking-tight text-slate sm:text-2xl">
                     {card.title}
                   </h3>
-                  <p className="mt-2.5 flex-1 text-sm font-light leading-relaxed text-slate/80 sm:text-[0.95rem]">
+                  <p className="mt-2.5 flex-1 text-sm font-light leading-relaxed text-ink sm:text-[0.95rem]">
                     {card.headline}
                   </p>
 

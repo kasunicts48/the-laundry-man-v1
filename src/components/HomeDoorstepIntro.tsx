@@ -64,13 +64,13 @@ export default function HomeDoorstepIntro() {
 
           <div className="flex flex-col items-center justify-center text-center lg:items-start lg:text-left">
             <h2 className="max-w-xl text-3xl font-extrabold tracking-tighter text-slate sm:text-4xl lg:text-[2.75rem] lg:leading-[1.05]">
-            24 hours{' '}
-              <span className="text-gold">eco-laundry and eco dry cleaning service</span>
+              24hr Eco-Laundry &amp;{' '}
+              <span className="text-gold">Dry Cleaning</span>
             </h2>
 
             <p className="mt-4 text-base font-light leading-relaxed text-ink sm:text-lg">
-              We collect from your home, clean every garment with care using eco-friendly products,
-              and return everything fresh, folded, and ready to wear — without you leaving the house.
+              Pickup from your home or workplace • Eco-friendly cleaning • Perfect results for all
+              your clothes.
             </p>
 
             <div className="mt-6 w-full overflow-hidden rounded-2xl bg-[#134633] shadow-accent-sm sm:mt-7 lg:max-w-none">
@@ -89,7 +89,7 @@ export default function HomeDoorstepIntro() {
                     </span>
                     <div className="pt-0.5">
                       <p className="text-base font-semibold leading-snug text-paper sm:text-lg">{title}</p>
-                      <p className="mt-0.5 text-sm font-light leading-relaxed text-paper/90 sm:text-base">
+                      <p className="mt-0.5 text-sm font-light leading-relaxed text-paper sm:text-base">
                         {subtitle}
                       </p>
                     </div>

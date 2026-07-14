@@ -58,11 +58,11 @@ export default function Hero({ locationName, cityData }: HeroProps) {
           <div className="flex flex-col gap-5 sm:grid sm:grid-cols-1 sm:items-center sm:gap-10 lg:grid-cols-2 lg:gap-12 xl:gap-16">
             <div className="shrink-0 max-sm:w-full text-left">
               <div
-                className="hero-rise flex items-center gap-3 sm:grid sm:grid-cols-[auto_1fr] sm:items-start sm:gap-x-4 sm:gap-y-2.5 lg:gap-x-5 lg:gap-y-3"
+                className="hero-rise flex items-center gap-3 max-sm:min-w-0 sm:grid sm:grid-cols-[auto_1fr] sm:items-start sm:gap-x-4 sm:gap-y-2.5 lg:gap-x-5 lg:gap-y-3"
               >
-                <SiteLogo className="size-[4.75rem] shrink-0 object-contain sm:row-span-2 sm:h-[4.5rem] sm:w-[4.5rem] md:h-20 md:w-20 lg:size-auto lg:aspect-square lg:h-full lg:w-auto" />
-                <div className="flex min-w-0 flex-col justify-center gap-1.5 sm:contents">
-                  <h1 className="whitespace-nowrap text-[1.5rem] font-extrabold leading-none tracking-tight text-gold sm:col-start-2 sm:text-4xl sm:text-paper lg:text-5xl xl:text-[3.25rem]">
+                <SiteLogo className="size-[4.75rem] shrink-0 object-contain sm:row-span-2 sm:h-[4.5rem] sm:w-[4.5rem] md:h-20 md:w-20 lg:h-28 lg:w-28 xl:h-[8.5rem] xl:w-[8.5rem]" />
+                <div className="flex min-w-0 flex-col justify-center gap-1.5 max-sm:flex-1 sm:contents">
+                  <h1 className="whitespace-nowrap text-[1.5rem] font-extrabold leading-none tracking-tight text-gold max-sm:min-w-0 max-sm:whitespace-normal sm:col-start-2 sm:text-4xl sm:text-paper lg:text-5xl xl:text-[3.25rem]">
                     The Laundry Man App
                   </h1>
                   <p className="max-w-full text-[0.9375rem] font-normal leading-snug text-[#1B3516] sm:col-start-2 sm:max-w-xl sm:text-xl sm:font-medium sm:text-gold sm:leading-snug lg:text-2xl">

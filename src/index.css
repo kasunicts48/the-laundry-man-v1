@@ -42,12 +42,24 @@
   --site-header-height: 6.625rem;
 }
 
-.inner-page-banner {
-  margin-top: calc(var(--site-header-height, 6.625rem) - 1px);
+html {
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 body {
   @apply bg-navy text-ink font-sans antialiased transition-colors duration-500;
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+#root {
+  overflow-x: clip;
+  max-width: 100%;
+}
+
+.inner-page-banner {
+  margin-top: calc(var(--site-header-height, 6.625rem) - 1px);
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -92,6 +104,10 @@ h1, h2, h3, h4, h5, h6 {
 
 .section-eyebrow {
   @apply text-sm sm:text-base uppercase tracking-widest text-gold font-bold mb-2;
+}
+
+.text-copy {
+  @apply text-ink;
 }
 
 .pill {

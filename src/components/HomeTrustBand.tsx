@@ -43,7 +43,7 @@ export default function HomeTrustBand() {
             <h2 className="text-3xl font-extrabold tracking-tighter text-paper sm:text-4xl lg:text-5xl lg:leading-[1.08]">
              Premium laundry care, built around your life.
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base font-normal leading-relaxed text-paper/90 sm:text-lg lg:mx-0">
+            <p className="mx-auto mt-4 max-w-xl text-base font-normal leading-relaxed text-paper sm:text-lg lg:mx-0">
               Every garment is cleaned, finished, and quality-checked at our own site, with
               professional care and doorstep collection across the UK.
             </p>

@@ -77,10 +77,9 @@ export default function ServicesOverview({
                 <h3 className="text-3xl font-extrabold tracking-tighter text-slate sm:text-4xl lg:text-5xl">
                   Eco-Friendly Laundry in {cityData?.name || city}
                 </h3>
-                <p className="mt-4 text-base font-light leading-relaxed text-slate/80 sm:text-lg">
-                  {cityData
-                    ? cityData.servicesDescription
-                    : `Welcome to ${city}'s premier sustainable garment care service.`}
+                <p className="mt-4 text-base font-light leading-relaxed text-ink sm:text-lg">
+                  We process all garments at our own premises. With many years of experience, we
+                  deliver the highest quality service to every customer.
                 </p>
               </>
             ) : (
@@ -88,9 +87,9 @@ export default function ServicesOverview({
                 <h3 className="text-3xl font-extrabold tracking-tighter text-slate sm:text-4xl lg:text-5xl">
                   Comprehensive Garment Care
                 </h3>
-                <p className="mt-4 text-base font-light leading-relaxed text-slate/80 sm:text-lg">
-                  We handle everything from wash &amp; fold to wedding dresses and curtains —
-                  superior quality across every fabric.
+                <p className="mt-4 text-base font-light leading-relaxed text-ink sm:text-lg">
+                  We process all garments at our own premises. With many years of experience, we
+                  deliver the highest quality service to every customer.
                 </p>
               </>
             )}
@@ -118,7 +117,7 @@ export default function ServicesOverview({
                 {service.title}
               </h4>
 
-              <p className="mt-3 inline-flex items-center rounded-full bg-[rgb(76,175,80)]/10 px-4 py-1.5 text-base font-semibold text-slate md:px-3 md:py-1 md:text-sm">
+              <p className="mt-3 inline-flex items-center rounded-full bg-[rgb(76,175,80)]/10 px-4 py-1.5 text-base font-semibold text-ink md:px-3 md:py-1 md:text-sm">
                 From {service.price}
               </p>
             </motion.button>
@@ -167,7 +166,7 @@ export default function ServicesOverview({
                         <h3 className="mb-2 text-2xl font-extrabold tracking-tighter text-slate sm:text-3xl">
                           {selectedService.title}
                         </h3>
-                        <p className="text-sm font-semibold text-slate/80">
+                        <p className="text-sm font-semibold text-ink">
                           Prices starting from {selectedService.price}
                         </p>
                       </div>
@@ -180,7 +179,7 @@ export default function ServicesOverview({
                       </button>
                     </div>
 
-                    <div className="space-y-4 text-left text-sm font-light leading-relaxed text-slate/80 sm:text-base">
+                    <div className="space-y-4 text-left text-sm font-light leading-relaxed text-ink sm:text-base">
                       {selectedService.description.split('\n\n').map((paragraph: string, i: number) => (
                         <p key={i}>{paragraph}</p>
                       ))}

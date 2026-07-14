@@ -64,21 +64,21 @@ export default function Header(_props: HeaderProps = {}) {
   const useLightNav = hasHeroBanner && !isScrolled && !isMobileMenuOpen;
 
   const navTextClass = useLightNav
-    ? 'text-paper/90 hover:text-gold'
+    ? 'text-paper hover:text-gold'
     : 'text-ink hover:text-gold';
 
   return (
     <header
-      className={`fixed inset-x-0 top-0 w-full z-50 transition-colors duration-300 border-b ${
+      className={`fixed inset-x-0 top-0 w-full z-50 transition-colors duration-300 ${
         useSolidHeader
-          ? 'bg-navy/95 backdrop-blur-md border-white/5'
-          : 'bg-transparent border-white/10'
+          ? 'border-b border-white/5 bg-navy/95 backdrop-blur-md'
+          : 'border-b border-transparent bg-transparent'
       }`}
     >
       <div ref={headerRef}>
         {/* Top Bar */}
         <div
-          className="border-b border-white/10 bg-[#134633] py-1.5 px-4 text-xs font-medium text-paper/90 transition-colors duration-300 sm:py-2 sm:px-6 lg:px-8"
+          className="border-b border-white/10 bg-[#134633] py-1.5 px-4 text-xs font-medium text-paper transition-colors duration-300 sm:py-2 sm:px-6 lg:px-8"
         >
           <div className="max-w-7xl mx-auto flex justify-between items-center gap-3">
           <a

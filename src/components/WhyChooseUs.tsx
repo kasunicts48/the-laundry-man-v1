@@ -75,7 +75,7 @@ export default function WhyChooseUs() {
           <h3 className="text-3xl font-extrabold tracking-tighter text-paper sm:text-4xl lg:text-5xl">
             Professional Laundry & Dry Cleaning You Can Trust
           </h3>
-          <p className="mt-4 text-base font-normal leading-relaxed text-paper/90 sm:text-lg">
+          <p className="mt-4 text-base font-normal leading-relaxed text-paper sm:text-lg">
             We are not an app company — we are a dry cleaning and laundry company. We clean all
             items at our own site, with free collection and delivery across our service areas.
           </p>
@@ -102,7 +102,7 @@ export default function WhyChooseUs() {
                   <h4 className="mb-1.5 text-base font-semibold leading-snug text-paper sm:text-lg">
                     {benefit.title}
                   </h4>
-                  <p className="text-sm font-light leading-relaxed text-paper/90 sm:text-base">
+                  <p className="text-sm font-light leading-relaxed text-paper sm:text-base">
                     {benefit.description}
                   </p>
                 </div>
