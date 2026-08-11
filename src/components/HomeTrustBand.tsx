@@ -1,22 +1,26 @@
 import React from 'react';
-import { Leaf, ShieldCheck, Sparkles } from 'lucide-react';
+import { BellRing, CalendarClock, MapPinned, Sparkles, type LucideIcon } from 'lucide-react';
 import { motion } from 'motion/react';
 
 import BookNowButton from './BookNowButton';
-import trustImage from '../assets/images/laundry-woman.webp';
+import trustImage from '../assets/images/Laundry_man_why_choose_us.webp';
 
-const trustPoints = [
+const trustPoints: { icon: LucideIcon; label: string }[] = [
   {
-    icon: Leaf,
-    label: 'Eco-friendly garment care',
+    icon: BellRing,
+    label: 'Real-time updates on every order',
   },
   {
-    icon: ShieldCheck,
-    label: 'Trusted local professionals',
+    icon: MapPinned,
+    label: 'Track our own drivers live',
+  },
+  {
+    icon: CalendarClock,
+    label: 'Change times or dates with one tap',
   },
   {
     icon: Sparkles,
-    label: 'Premium results, every time',
+    label: 'We manage everything for you',
   },
 ];
 
@@ -41,12 +45,8 @@ export default function HomeTrustBand() {
               The Laundry Man
             </p>
             <h2 className="text-3xl font-extrabold tracking-tighter text-paper sm:text-4xl lg:text-5xl lg:leading-[1.08]">
-             Premium laundry care, built around your life.
+              Hassle-Free Service
             </h2>
-            <p className="mx-auto mt-4 max-w-xl text-base font-normal leading-relaxed text-paper sm:text-lg lg:mx-0">
-              Every garment is cleaned, finished, and quality-checked at our own site, with
-              professional care and doorstep collection across the UK.
-            </p>
 
             <ul className="mt-8 flex flex-col gap-3 sm:items-center lg:items-start">
               {trustPoints.map(({ icon: Icon, label }) => (
@@ -74,7 +74,7 @@ export default function HomeTrustBand() {
             <div className="relative aspect-[4/3] shape-blob">
               <img
                 src={trustImage}
-                alt="Professionals operating modern laundry machines at our own cleaning facility"
+                alt="The Laundry Man App delivery van and doorstep collection service"
                 className="absolute inset-0 h-full w-full object-cover"
                 loading="lazy"
                 decoding="async"

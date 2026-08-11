@@ -85,7 +85,7 @@ export default function ServicesOverview({
             ) : (
               <>
                 <h3 className="text-3xl font-extrabold tracking-tighter text-slate sm:text-4xl lg:text-5xl">
-                  Comprehensive Garment Care
+                  Professional garments care
                 </h3>
                 <p className="mt-4 text-base font-light leading-relaxed text-ink sm:text-lg">
                   We process all garments at our own premises. With many years of experience, we

@@ -22,7 +22,7 @@ export const services: ServiceItem[] = [
     description:
       'Enjoy the convenience of professionally washed, carefully dried, and neatly folded laundry, ready to wear or put away. Our Wash & Fold service is ideal for busy individuals, families, and businesses looking to save time without compromising on quality.\n\nFor garments that require extra care and a crisp, polished appearance, we also offer a professional ironing service. Every item is handled with attention to detail to ensure your clothes are returned fresh, clean, and finished to the highest standard.',
     image: laundryServiceIcon,
-    price: '£4.50',
+    price: '£2.50',
   },
   {
     id: 'dry-cleaning',
@@ -49,7 +49,7 @@ export const services: ServiceItem[] = [
     description:
       'Look your best every day with our professional Shirt Service. Each shirt is carefully washed, expertly pressed, and finished to a high standard, ensuring a crisp, fresh, and professional appearance.\n\nUsing quality laundry processes and professional finishing equipment, we help maintain the shape, fabric quality, and appearance of your shirts. For your convenience, shirts can be returned neatly folded or individually hung and ready to wear, saving you valuable time while delivering outstanding results.',
     image: shirtServiceIcon,
-    price: '£6.00',
+    price: '£2.95',
   },
   {
     id: 'curtain-cleaning',

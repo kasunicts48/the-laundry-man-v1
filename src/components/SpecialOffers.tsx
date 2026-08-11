@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef } from 'react';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import BookNowButton from './BookNowButton';
 import { specialOffers, type SpecialOfferCard } from '../data/specialOffers';
@@ -9,16 +9,14 @@ const MOBILE_CAROUSEL_END_SPACER =
 
 function OfferPriceList({ lines }: { lines: SpecialOfferCard['priceLines'] }) {
   return (
-    <ul className="flex flex-col gap-2">
+    <ul className="mt-6 flex flex-col">
       {lines.map((line) => (
         <li
           key={line.label}
-          className="flex items-center justify-between gap-3 rounded-lg border border-white/10 bg-white/5 px-3 py-2.5"
+          className="flex items-baseline justify-between gap-4 border-b border-ink/20 py-3 last:border-b-0"
         >
-          <span className="min-w-0 text-[0.8125rem] font-medium leading-snug text-paper">
-            {line.label}
-          </span>
-          <span className="shrink-0 text-sm font-extrabold tabular-nums text-gold">{line.price}</span>
+          <span className="min-w-0 text-sm font-normal leading-snug text-ink">{line.label}</span>
+          <span className="shrink-0 text-sm font-medium tabular-nums text-ink">{line.price}</span>
         </li>
       ))}
     </ul>
@@ -27,47 +25,24 @@ function OfferPriceList({ lines }: { lines: SpecialOfferCard['priceLines'] }) {
 
 const OfferCard: React.FC<{ offer: SpecialOfferCard }> = ({ offer }) => {
   return (
-    <article className="flex h-[22rem] w-[min(85vw,17.5rem)] shrink-0 snap-center flex-col overflow-hidden rounded-3xl border border-white/10 bg-[#134633] shadow-[0_8px_32px_rgba(0,0,0,0.12)] sm:h-auto sm:w-auto sm:min-h-[20rem]">
-      <div className="flex h-[5.5rem] shrink-0 items-center border-b border-white/10 bg-gradient-to-r from-white/5 via-transparent to-transparent px-4 sm:h-auto sm:min-h-[5.25rem] sm:px-5">
-        <div className="flex w-full items-center gap-3">
-          <img
-            src={offer.icon}
-            alt=""
-            className="h-9 w-9 shrink-0 object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.35)]"
-            width={36}
-            height={36}
-            loading="lazy"
-            decoding="async"
-            aria-hidden="true"
-          />
-          <div className="min-w-0">
-            {offer.eyebrow ? (
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-[rgb(76,175,80)]">
-                {offer.eyebrow}
-              </p>
-            ) : null}
-            <h3 className="mt-1 line-clamp-2 text-base font-extrabold leading-tight tracking-tight text-paper sm:text-lg">
-              {offer.title}
-            </h3>
-          </div>
-        </div>
-      </div>
+    <article className="flex h-auto w-[min(85vw,17.5rem)] shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-ink bg-paper px-5 py-6 sm:w-auto sm:rounded-3xl sm:px-6 sm:py-7">
+      <header className="text-center">
+        <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-ink sm:text-[0.9375rem]">
+          {offer.title}
+        </h3>
+        {offer.eyebrow ? (
+          <p className="mt-1.5 text-sm font-normal leading-snug text-ink/80">{offer.eyebrow}</p>
+        ) : null}
+      </header>
 
-      <div className="flex min-h-0 flex-1 flex-col bg-[#134633] p-4 sm:p-5">
-        <div className="flex min-h-0 flex-1 flex-col justify-start overflow-hidden">
-          <OfferPriceList lines={offer.priceLines} />
-        </div>
-
-        <div className="mt-auto shrink-0 pt-4">
-          <BookNowButton fullWidth label="Book Now" />
-        </div>
-      </div>
+      <OfferPriceList lines={offer.priceLines} />
     </article>
   );
 };
 
 export default function SpecialOffers() {
   const carouselRef = useRef<HTMLDivElement>(null);
+  const [activeIndex, setActiveIndex] = useState(INITIAL_CENTER_INDEX);
 
   useLayoutEffect(() => {
     const container = carouselRef.current;
@@ -83,6 +58,55 @@ export default function SpecialOffers() {
     centerMiddleCard();
     requestAnimationFrame(centerMiddleCard);
   }, []);
+
+  useEffect(() => {
+    const container = carouselRef.current;
+    if (!container) return;
+
+    const updateActiveIndex = () => {
+      if (window.matchMedia('(min-width: 640px)').matches) return;
+
+      const cards = Array.from(container.children).slice(1, -1) as HTMLElement[];
+      if (!cards.length) return;
+
+      const center = container.scrollLeft + container.clientWidth / 2;
+      let closest = 0;
+      let closestDistance = Number.POSITIVE_INFINITY;
+
+      cards.forEach((card, index) => {
+        const cardCenter = card.offsetLeft + card.offsetWidth / 2;
+        const distance = Math.abs(cardCenter - center);
+        if (distance < closestDistance) {
+          closestDistance = distance;
+          closest = index;
+        }
+      });
+
+      setActiveIndex(closest);
+    };
+
+    updateActiveIndex();
+    container.addEventListener('scroll', updateActiveIndex, { passive: true });
+    window.addEventListener('resize', updateActiveIndex);
+
+    return () => {
+      container.removeEventListener('scroll', updateActiveIndex);
+      window.removeEventListener('resize', updateActiveIndex);
+    };
+  }, []);
+
+  const scrollToCard = (index: number) => {
+    const container = carouselRef.current;
+    if (!container) return;
+
+    const card = container.children[index + 1] as HTMLElement | undefined;
+    if (!card) return;
+
+    container.scrollTo({
+      left: card.offsetLeft - (container.clientWidth - card.offsetWidth) / 2,
+      behavior: 'smooth',
+    });
+  };
 
   return (
     <section id="special-offers" className="relative scroll-mt-28 overflow-hidden bg-navy py-14 sm:py-20">
@@ -110,12 +134,32 @@ export default function SpecialOffers() {
           <div className={MOBILE_CAROUSEL_END_SPACER} aria-hidden="true" />
         </div>
 
-        <p className="mt-3 text-center text-xs font-light text-ink sm:hidden" aria-hidden="true">
-          Swipe to see more prices
-        </p>
+        <div className="mt-4 flex justify-center gap-2.5 sm:hidden" aria-label="Price cards">
+          {specialOffers.map((offer, index) => (
+            <button
+              key={offer.id}
+              type="button"
+              onClick={() => scrollToCard(index)}
+              className={`h-2.5 w-2.5 rounded-full border-2 transition-colors ${
+                activeIndex === index
+                  ? 'border-gold bg-gold'
+                  : 'border-gold/40 bg-transparent'
+              }`}
+              aria-label={`Show ${offer.title}`}
+              aria-current={activeIndex === index ? 'true' : undefined}
+            />
+          ))}
+        </div>
 
-        <div className="mt-6 text-center sm:mt-8">
-          <p className="text-sm font-light text-ink sm:text-base">
+        <div className="mx-auto mt-8 flex w-full max-w-sm flex-col items-stretch gap-3 sm:mt-10 sm:max-w-md">
+          <a
+            href="#the-app"
+            className="inline-flex w-full items-center justify-center rounded-full border-2 border-gold bg-transparent px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-gold transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold hover:text-[#1B3516] active:scale-[0.98]"
+          >
+            View full pricelist
+          </a>
+          <BookNowButton label="Book Now" fullWidth />
+          <p className="pt-1 text-center text-sm font-light text-ink sm:text-base">
             To see all prices,{' '}
             <a
               href="#the-app"

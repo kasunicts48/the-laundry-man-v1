@@ -110,38 +110,68 @@ export default function Header(_props: HeaderProps = {}) {
         </div>
 
         {/* Main Nav */}
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 transition-all duration-300 py-4">
-          <div className="flex justify-between items-center">
-          {/* Logo */}
-          <Link to="/" className="flex-shrink-0 flex items-center cursor-pointer" onClick={() => window.scrollTo(0,0)}>
-            <SiteLogo />
-          </Link>
-
-          {/* Desktop Nav */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navLinks.map((link) => (
-              <Link 
-                key={link.name} 
-                to={link.href}
-                className={`font-semibold transition-colors uppercase tracking-wide text-xs ${navTextClass} ${(location.pathname === link.href || (location.pathname !== '/' && link.href !== '/' && location.pathname.startsWith(link.href))) ? '!text-gold' : ''}`}
-              >
-                {link.name}
-              </Link>
-            ))}
-            <BookNowButton className="!px-6 !py-2.5 !text-xs" label="Book Now" />
-          </nav>
-
-          {/* Mobile: Menu */}
-          <div className="flex items-center md:hidden">
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`${navTextClass} focus:outline-none`}
-              aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+        <div className="mx-auto max-w-7xl px-4 transition-all duration-300 py-3 sm:px-6 sm:py-4 lg:px-8">
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* Logo */}
+            <Link
+              to="/"
+              className="flex w-10 shrink-0 items-center sm:w-11"
+              onClick={() => window.scrollTo(0, 0)}
             >
-              {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+              <SiteLogo />
+            </Link>
+
+            {/* Mobile brand — only when navbar has a solid background */}
+            {useSolidHeader ? (
+              <Link
+                to="/"
+                onClick={() => window.scrollTo(0, 0)}
+                className="group flex min-w-0 flex-1 flex-col items-center justify-center rounded-lg px-1 py-0.5 text-center transition-opacity active:opacity-70 md:hidden"
+                aria-label="The Laundry Man App home"
+              >
+                <span className="max-w-full truncate text-[0.6875rem] font-extrabold uppercase leading-none tracking-[0.14em] text-ink sm:text-xs">
+                  The Laundry Man App
+                </span>
+                <span className="mt-1 max-w-full truncate text-[0.625rem] font-semibold leading-none tracking-wide text-[rgb(76,175,80)]">
+                  Eco laundry &amp; dry cleaning
+                </span>
+              </Link>
+            ) : (
+              <div className="min-w-0 flex-1 md:hidden" aria-hidden="true" />
+            )}
+
+            {/* Desktop Nav */}
+            <nav className="ml-auto hidden items-center space-x-8 md:flex">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.name}
+                  to={link.href}
+                  className={`font-semibold transition-colors uppercase tracking-wide text-xs ${navTextClass} ${
+                    location.pathname === link.href ||
+                    (location.pathname !== '/' &&
+                      link.href !== '/' &&
+                      location.pathname.startsWith(link.href))
+                      ? '!text-gold'
+                      : ''
+                  }`}
+                >
+                  {link.name}
+                </Link>
+              ))}
+              <BookNowButton className="!px-6 !py-2.5 !text-xs" label="Book Now" />
+            </nav>
+
+            {/* Mobile: Menu — matched width to logo for balanced brand centering */}
+            <div className="flex w-10 shrink-0 justify-end md:hidden sm:w-11">
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className={`${navTextClass} -mr-1 rounded-lg p-1 focus:outline-none`}
+                aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
+              >
+                {isMobileMenuOpen ? <X size={26} /> : <Menu size={26} />}
+              </button>
+            </div>
           </div>
-        </div>
         </div>
       </div>
 

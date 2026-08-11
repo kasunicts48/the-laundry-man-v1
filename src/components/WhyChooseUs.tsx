@@ -1,58 +1,55 @@
 import React from 'react';
 import {
   BadgePoundSterling,
+  Clock,
   Factory,
-  HeartHandshake,
-  Shirt,
+  Gem,
+  Leaf,
   Sparkles,
   Truck,
+  UserCheck,
   type LucideIcon,
 } from 'lucide-react';
 import { motion } from 'motion/react';
 
 import BookNowButton from './BookNowButton';
-import whyChooseUsImage from '../assets/images/laundry-fold-cloths.webp';
+import whyChooseUsImage from '../assets/images/waching_room_laundry_man.webp';
 
 const benefits: {
   icon: LucideIcon;
   title: string;
-  description: string;
 }[] = [
   {
-    icon: Shirt,
-    title: 'Not an App Company',
-    description:
-      'We are not an app company — we are a dry cleaning and laundry company. Garment care is our business, and quality is at the heart of everything we do.',
+    icon: Gem,
+    title: 'Designerwear specialists',
   },
   {
     icon: Factory,
-    title: 'We Clean All Items at Our Own Site',
-    description:
-      'Every garment is cleaned, finished, and quality-checked at our own facility — not sent to a third party. That means full control over standards, care, and results.',
+    title: 'All work done on-site',
+  },
+  {
+    icon: Leaf,
+    title: 'Eco-friendly cleaning',
   },
   {
     icon: Truck,
-    title: 'Free Collection & Delivery',
-    description:
-      'Enjoy convenient door-to-door collection and delivery across our service areas, so professional laundry care fits around your schedule.',
+    title: 'Free collection & delivery',
   },
   {
-    icon: HeartHandshake,
-    title: '100% Customer Satisfaction',
-    description:
-      'We provide excellent customer service and take pride in returning your clothes fresh, clean, and ready to wear.',
-  },
-  {
-    icon: Sparkles,
-    title: 'Best Quality',
-    description:
-      'From everyday wash & fold to specialist dry cleaning, leather, duvets, and more — our experienced team handles every fabric with care.',
+    icon: UserCheck,
+    title: 'Our own trusted drivers',
   },
   {
     icon: BadgePoundSterling,
-    title: 'Affordable Prices',
-    description:
-      'We offer practical solutions for all your laundry needs, with competitive pricing and a straightforward booking experience online or by phone.',
+    title: 'Premium service, fair prices',
+  },
+  {
+    icon: Clock,
+    title: '24-hour turnaround',
+  },
+  {
+    icon: Sparkles,
+    title: 'Expert care you can trust',
   },
 ];
 
@@ -73,42 +70,43 @@ export default function WhyChooseUs() {
             Why Choose Us
           </p>
           <h3 className="text-3xl font-extrabold tracking-tighter text-paper sm:text-4xl lg:text-5xl">
-            Professional Laundry & Dry Cleaning You Can Trust
+            Professional Laundry &amp; Dry Cleaning You Can Trust
           </h3>
           <p className="mt-4 text-base font-normal leading-relaxed text-paper sm:text-lg">
-            We are not an app company — we are a dry cleaning and laundry company. We clean all
-            items at our own site, with free collection and delivery across our service areas.
+            We are laundry and dry cleaning specialists first – not just an app business. Every
+            single garment is cleaned at our own premises by our expert team, with free collection
+            and delivery across all our service areas.
           </p>
         </div>
 
         <div className="grid grid-cols-1 items-stretch gap-10 lg:grid-cols-2 lg:gap-12">
-          <div className="grid content-center gap-6 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-6 lg:gap-y-7">
-            {benefits.map((benefit, index) => {
-              const Icon = benefit.icon;
+          <div className="flex flex-col justify-center">
+            <h4 className="mb-6 text-center text-xl font-extrabold tracking-tight text-paper sm:mb-7 sm:text-left sm:text-2xl">
+              Why Choose The Laundry Man?
+            </h4>
+            <div className="grid content-center gap-5 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-5">
+              {benefits.map((benefit, index) => {
+                const Icon = benefit.icon;
 
-              return (
-              <motion.div
-                key={benefit.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.06 }}
-                className="flex flex-col items-center gap-2.5 text-center sm:flex-row sm:items-start sm:gap-3 sm:text-left"
-              >
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-paper/15 text-[rgb(76,175,80)] sm:h-8 sm:w-8">
-                  <Icon className="h-6 w-6 sm:h-4 sm:w-4" aria-hidden="true" />
-                </span>
-                <div>
-                  <h4 className="mb-1.5 text-base font-semibold leading-snug text-paper sm:text-lg">
-                    {benefit.title}
-                  </h4>
-                  <p className="text-sm font-light leading-relaxed text-paper sm:text-base">
-                    {benefit.description}
-                  </p>
-                </div>
-              </motion.div>
-              );
-            })}
+                return (
+                  <motion.div
+                    key={benefit.title}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: index * 0.05 }}
+                    className="flex flex-row items-center justify-center gap-3 text-center sm:justify-start sm:text-left"
+                  >
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-paper/15 text-[rgb(76,175,80)]">
+                      <Icon className="h-4 w-4" aria-hidden="true" />
+                    </span>
+                    <p className="min-w-0 text-base font-semibold leading-snug text-paper sm:text-lg">
+                      {benefit.title}
+                    </p>
+                  </motion.div>
+                );
+              })}
+            </div>
           </div>
 
           <motion.div
@@ -116,19 +114,19 @@ export default function WhyChooseUs() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="relative"
+            className="relative order-first lg:order-none"
           >
-            <div className="relative mx-auto max-w-[11rem] sm:max-w-xs lg:mx-0 lg:h-full lg:min-h-[18rem] lg:max-w-none">
+            <div className="relative mx-auto w-full overflow-hidden rounded-2xl border border-white/10 sm:rounded-3xl lg:mx-0 lg:h-full lg:min-h-[22rem] lg:rounded-none lg:border-0">
               <img
                 src={whyChooseUsImage}
-                alt="Professional dry cleaning and laundry equipment at our facility"
-                className="block h-auto w-full object-contain lg:absolute lg:inset-0 lg:h-full lg:w-full lg:object-cover"
+                alt="Professional washing machines and laundry facility at The Laundry Man"
+                className="block aspect-[4/3] h-auto w-full object-cover object-center sm:aspect-[16/10] lg:absolute lg:inset-0 lg:aspect-auto lg:h-full lg:w-full lg:object-cover lg:object-center"
                 loading="lazy"
                 decoding="async"
-                width={900}
-                height={675}
+                width={1200}
+                height={900}
               />
-              <div className="pointer-events-none absolute inset-x-0 bottom-0 hidden h-1/4 bg-gradient-to-t from-[#134633]/35 to-transparent lg:block" />
+              <div className="pointer-events-none absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#134633]/40 to-transparent lg:from-[#134633]/35" />
             </div>
           </motion.div>
         </div>

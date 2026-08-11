@@ -1,5 +1,6 @@
 import React from 'react';
 import HomeDoorstepIntro from './HomeDoorstepIntro';
+import HomeDesignerWear from './HomeDesignerWear';
 // import HomeAudienceCards from './HomeAudienceCards';
 import HowItWorks from './HowItWorks';
 import SpecialOffers from './SpecialOffers';
@@ -27,6 +28,7 @@ export default function HomeBelowFold({
   return (
     <>
       <HomeDoorstepIntro />
+      <HomeDesignerWear />
       <HowItWorks />
       <SpecialOffers />
       {/* <HomeAudienceCards /> */}
