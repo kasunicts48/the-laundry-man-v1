@@ -27,12 +27,12 @@ export default function AppDownloadQr() {
           fgColor={QR_CODE_FG_COLOR}
           bgColor={QR_CODE_BG_COLOR}
           ecLevel="M"
-          quietZone={0}
-          qrStyle="dots"
+          quietZone={12}
+          qrStyle="squares"
           eyeRadius={[
-            { outer: 14, inner: 8 },
-            { outer: 14, inner: 8 },
-            { outer: 14, inner: 8 },
+            { outer: 12, inner: 6 },
+            { outer: 12, inner: 6 },
+            { outer: 12, inner: 6 },
           ]}
           style={{ height: 'auto', maxWidth: '100%', width: QR_SIZE }}
         />

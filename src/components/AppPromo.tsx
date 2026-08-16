@@ -21,7 +21,7 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
           <h2 className="section-eyebrow">Testimonials</h2>
-          <h3 className="text-3xl font-extrabold tracking-tighter text-slate sm:text-4xl lg:text-5xl">
+          <h3 className="text-3xl font-semibold tracking-tight text-slate sm:text-4xl lg:text-5xl">
             What Our Customers Say
           </h3>
         </div>
@@ -32,9 +32,9 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
               {[...Array(5)].map((_, idx) => (
                 <div
                   key={idx}
-                  className="flex h-6 w-6 items-center justify-center rounded-[2px] bg-[#00B67A]"
+                  className="flex h-6 w-6 items-center justify-center rounded-[2px] bg-gold"
                 >
-                  <Star size={12} className="fill-white text-white" />
+                  <Star size={12} className="fill-paper text-paper" />
                 </div>
               ))}
             </div>
@@ -44,11 +44,11 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
               href="https://www.trustpilot.com/review/www.thelaundryman.co.uk"
               target="_blank"
               rel="noopener noreferrer"
-              className="hidden items-center gap-2 hover:opacity-80 transition-opacity sm:flex"
+              className="hidden items-center gap-2 transition-opacity hover:opacity-80 sm:flex"
             >
-              <span className="text-sm font-light text-ink whitespace-nowrap">Based on reviews on</span>
-              <div className="flex items-center gap-1 font-bold text-ink whitespace-nowrap">
-                <Star size={16} className="fill-[#00B67A] text-[#00B67A]" />
+              <span className="whitespace-nowrap text-sm font-light text-ink">Based on reviews on</span>
+              <div className="flex items-center gap-1 whitespace-nowrap font-bold text-ink">
+                <Star size={16} className="fill-gold text-gold" />
                 Trustpilot
               </div>
             </a>
@@ -63,20 +63,20 @@ export default function AppPromoAndReviews({ cityData }: AppPromoProps = {}) {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="glass-card border-l-[4px] border-l-[#00B67A] !rounded-bl-md !rounded-tl-md p-6"
+              className="glass-card !rounded-bl-md !rounded-tl-md border-l-[4px] border-l-gold p-6"
             >
               <div className="mb-3 flex gap-[2px]">
                 {[...Array(5)].map((_, idx) => (
                   <div
                     key={idx}
-                    className="flex h-5 w-5 items-center justify-center rounded-[2px] bg-[#00B67A]"
+                    className="flex h-5 w-5 items-center justify-center rounded-[2px] bg-gold"
                   >
-                    <Star size={10} className="fill-white text-white" />
+                    <Star size={10} className="fill-paper text-paper" />
                   </div>
                 ))}
               </div>
               <p className="mb-3 font-light leading-relaxed text-ink">"{review.text}"</p>
-              <p className="text-sm font-bold text-[#00B67A]">- {review.author}</p>
+              <p className="text-sm font-bold text-gold">- {review.author}</p>
             </motion.div>
           ))}
         </div>

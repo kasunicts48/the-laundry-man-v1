@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from 'motion/react';
 
 import faqImage from '../assets/images/girl-thinking.webp';
 import { homeFaqItems } from '../data/homeFaq';
-import BookNowButton from './BookNowButton';
 
 export default function HomeFaq() {
   const baseId = useId();
@@ -19,35 +18,28 @@ export default function HomeFaq() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-10 text-center sm:mb-12">
           <h2 className="section-eyebrow">Questions &amp; Answers</h2>
-          <h3 className="text-3xl font-extrabold tracking-tighter text-slate sm:text-4xl lg:text-5xl">
+          <h3 className="text-3xl font-semibold tracking-tight text-slate sm:text-4xl lg:text-5xl">
             Got a question? We&apos;re happy to help.
           </h3>
           <p className="mx-auto mt-4 max-w-2xl text-base font-light leading-relaxed text-ink sm:text-lg">
-            Straightforward answers about laundry, dry cleaning, and doorstep delivery across the
-            UK.
+            Warm, straightforward answers about how we collect, clean, and deliver your laundry.
           </p>
         </div>
 
         <div className="grid grid-cols-1 items-start gap-10 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:gap-12 lg:gap-x-14">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-            className="relative mx-auto w-full max-w-md lg:mx-0 lg:max-w-none lg:sticky lg:top-28"
-          >
-            <div className="relative aspect-[3/4] max-h-[28rem] shape-blob shape-blob-faq sm:max-h-[32rem] lg:max-h-none lg:min-h-[24rem]">
+          <div className="relative mx-auto flex w-full max-w-md justify-center lg:mx-0 lg:block lg:max-w-none lg:sticky lg:top-28">
+            <div className="relative mx-auto aspect-[3/4] max-h-[28rem] w-full max-w-[min(100%,21rem)] shape-blob shape-blob-faq sm:max-h-[32rem] sm:max-w-none lg:max-h-none lg:min-h-[24rem]">
               <img
                 src={faqImage}
                 alt="Smiling woman thinking about laundry and dry cleaning questions"
-                className="absolute inset-0 h-full w-full object-cover object-top"
+                className="absolute inset-0 h-full w-full object-cover object-center"
                 loading="lazy"
                 decoding="async"
                 width={800}
                 height={1067}
               />
             </div>
-          </motion.div>
+          </div>
 
           <div className="space-y-3 sm:space-y-4">
             {homeFaqItems.map((item, index) => {
@@ -106,10 +98,6 @@ export default function HomeFaq() {
               );
             })}
           </div>
-        </div>
-
-        <div className="mt-10 flex justify-center sm:mt-12">
-          <BookNowButton label="Book Now" />
         </div>
       </div>
     </section>

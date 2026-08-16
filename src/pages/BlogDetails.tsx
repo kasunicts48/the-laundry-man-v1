@@ -20,7 +20,7 @@ function BlogContent({ blocks }: { blocks: BlogContentBlock[] }) {
         if (block.type === 'label') {
           return (
             <p key={index}>
-              <strong className="text-white font-bold">{block.label}: </strong>
+              <strong className="font-semibold text-slate">{block.label}: </strong>
               {block.text}
             </p>
           );
@@ -104,12 +104,12 @@ export default function BlogDetails() {
       <div className="pt-32 pb-20 min-h-[70vh] bg-navy px-4 sm:px-6 lg:px-8 max-w-3xl mx-auto">
         <Link
           to="/blog"
-          className="inline-flex items-center gap-2 text-gold text-sm font-bold uppercase tracking-widest mb-8 hover:opacity-80 transition-opacity"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-gold transition-opacity hover:opacity-80"
         >
           <ArrowLeft size={16} />
           Back to Blog
         </Link>
-        <h1 className="text-3xl font-extrabold text-white mb-4">Article not found</h1>
+        <h1 className="mb-4 text-3xl font-semibold text-slate">Article not found</h1>
         <p className="text-ink font-light">The blog post you are looking for does not exist.</p>
       </div>
     );
@@ -119,16 +119,16 @@ export default function BlogDetails() {
     <article className="pt-32 pb-20 min-h-[70vh] bg-navy px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto">
       <Link
         to="/blog"
-        className="inline-flex items-center gap-2 text-gold text-sm font-bold uppercase tracking-widest mb-8 hover:opacity-80 transition-opacity"
+        className="mb-8 inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-gold transition-opacity hover:opacity-80"
       >
         <ArrowLeft size={16} />
         Back to Blog
       </Link>
 
       {post.category && (
-        <p className="text-gold text-xs font-bold uppercase tracking-widest mb-3">{post.category}</p>
+        <p className="mb-3 text-sm font-medium tracking-wide text-gold">{post.category}</p>
       )}
-      <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight mb-4">{post.title}</h1>
+      <h1 className="mb-4 text-3xl font-semibold leading-tight text-slate sm:text-4xl lg:text-5xl">{post.title}</h1>
       <p className="text-sm text-ink font-light mb-8">{post.date}</p>
 
       <div className="overflow-hidden rounded-2xl border border-white/10 mb-10">

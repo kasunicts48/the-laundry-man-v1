@@ -28,7 +28,7 @@ function Pagination({
         type="button"
         onClick={() => onPageChange(currentPage - 1)}
         disabled={currentPage === 1}
-        className="cursor-pointer rounded-full border border-phone-border px-4 py-2 text-xs font-bold uppercase tracking-wider text-ink transition-colors hover:border-gold/30 hover:text-gold disabled:cursor-not-allowed disabled:opacity-40"
+        className="cursor-pointer rounded-full border border-phone-border px-4 py-2 text-sm font-semibold tracking-wide text-ink transition-colors hover:border-gold/30 hover:text-gold disabled:cursor-not-allowed disabled:opacity-40"
       >
         Previous
       </button>
@@ -39,9 +39,9 @@ function Pagination({
           type="button"
           onClick={() => onPageChange(page)}
           aria-current={page === currentPage ? 'page' : undefined}
-          className={`min-w-10 cursor-pointer rounded-full border px-3 py-2 text-xs font-bold transition-colors ${
+          className={`min-w-10 cursor-pointer rounded-full border px-3 py-2 text-sm font-semibold transition-colors ${
             page === currentPage
-              ? 'border-gold bg-gold text-navy'
+              ? 'border-gold bg-gold text-paper'
               : 'border-phone-border text-ink hover:border-gold/30 hover:text-gold'
           }`}
         >
@@ -53,7 +53,7 @@ function Pagination({
         type="button"
         onClick={() => onPageChange(currentPage + 1)}
         disabled={currentPage === totalPages}
-        className="cursor-pointer rounded-full border border-phone-border px-4 py-2 text-xs font-bold uppercase tracking-wider text-ink transition-colors hover:border-gold/30 hover:text-gold disabled:cursor-not-allowed disabled:opacity-40"
+        className="cursor-pointer rounded-full border border-phone-border px-4 py-2 text-sm font-semibold tracking-wide text-ink transition-colors hover:border-gold/30 hover:text-gold disabled:cursor-not-allowed disabled:opacity-40"
       >
         Next
       </button>
@@ -105,17 +105,17 @@ export default function Blog() {
 
                 <div className="flex flex-1 flex-col p-6">
                   {post.category && (
-                    <p className="mb-3 text-xs font-bold uppercase tracking-widest text-gold">
+                    <p className="mb-3 text-sm font-medium tracking-wide text-gold">
                       {post.category}
                     </p>
                   )}
-                  <h2 className="mb-3 text-xl font-bold leading-snug text-white">{post.title}</h2>
+                  <h2 className="mb-3 text-xl font-semibold leading-snug text-slate">{post.title}</h2>
                   <p className="mb-6 flex-1 text-sm font-light leading-relaxed text-ink line-clamp-4">
                     {post.excerpt}
                   </p>
                   <Link
                     to={`/blog/${post.id}`}
-                    className="inline-flex w-fit items-center justify-center rounded-full border border-gold px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-gold transition-colors hover:bg-gold hover:text-navy"
+                    className="inline-flex w-fit items-center justify-center rounded-full border border-gold px-5 py-2.5 text-sm font-semibold tracking-wide text-gold transition-colors hover:bg-gold hover:text-paper"
                   >
                     Read More
                   </Link>

@@ -11,18 +11,18 @@ interface BookNowButtonProps {
 }
 
 export default function BookNowButton({
-  label = 'Book Now',
+  label = 'Schedule your collection',
   variant = 'solid',
   fullWidth = false,
   className = '',
   onClick,
 }: BookNowButtonProps) {
   const base =
-    'inline-flex items-center justify-center px-8 py-3.5 text-sm font-bold uppercase tracking-wider pill transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98]';
+    'inline-flex items-center justify-center px-8 py-3.5 text-sm font-semibold tracking-wide pill transition-all duration-300 hover:-translate-y-0.5 active:scale-[0.98]';
 
   const variants = {
-    solid: 'bg-gold text-navy shadow-accent hover:brightness-110',
-    outline: 'border-2 border-gold text-gold hover:bg-gold hover:text-navy',
+    solid: 'bg-gold text-paper shadow-accent hover:brightness-105',
+    outline: 'border border-gold/70 text-gold hover:bg-gold hover:text-paper',
   };
 
   return (

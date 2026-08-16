@@ -18,7 +18,7 @@ export default function Contact() {
       <div className="pb-20 min-h-[70vh] bg-navy px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-12">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 lg:gap-20 mb-16">
           <div className="glass-card p-10 space-y-8">
-            <h3 className="text-2xl font-bold text-white">London Office</h3>
+            <h3 className="text-2xl font-semibold text-slate">London Office</h3>
             <div className="space-y-4 font-light text-ink">
               <div className="flex items-start gap-4">
                 <MapPin className="text-gold mt-1 shrink-0" size={20} />
@@ -38,7 +38,7 @@ export default function Contact() {
           </div>
 
           <div className="glass-card p-10 space-y-8">
-            <h3 className="text-2xl font-bold text-white">Manchester Office</h3>
+            <h3 className="text-2xl font-semibold text-slate">Manchester Office</h3>
             <div className="space-y-4 font-light text-ink">
               <div className="flex items-start gap-4">
                 <MapPin className="text-gold mt-1 shrink-0" size={20} />

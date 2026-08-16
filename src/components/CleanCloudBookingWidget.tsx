@@ -162,7 +162,7 @@ export default function CleanCloudBookingWidget({ onOrderSuccess }: CleanCloudBo
           <button
             type="button"
             onClick={() => window.location.reload()}
-            className="rounded-full border border-gold/30 px-4 py-2 text-xs font-bold uppercase tracking-wider text-gold transition-colors hover:bg-gold/10"
+            className="rounded-full border border-gold/30 px-4 py-2 text-sm font-semibold tracking-wide text-gold transition-colors hover:bg-gold/10"
           >
             Try again
           </button>

@@ -7,9 +7,10 @@
   --color-white: var(--theme-text-strong);
   --color-gold: var(--theme-accent);
   --color-gold-hover: color-mix(in oklab, var(--theme-accent) 80%, black);
+  --color-sale: var(--theme-sale-badge);
   --color-glass: var(--theme-glass);
   --color-phone-border: var(--theme-phone-border);
-  --color-ink: #000000;
+  --color-ink: #333740;
   --color-paper: #ffffff;
   
   --font-sans: "Outfit", ui-sans-serif, system-ui, sans-serif;
@@ -22,24 +23,28 @@
   --theme-text-soft: #F4F5F7;
   --theme-text-strong: #FFFFFF;
   --theme-accent: #D4AF37;
+  --theme-sale-badge: #5B9BD5;
   --theme-glass: rgba(244, 245, 247, 0.05);
   --theme-phone-border: #2A3B4C;
   --theme-bg-image: none;
 }
 
+/* Soft eco palette — Background #FAFAFA · Ink #333740 · Headings #2A3B4C · Accent #68A88C · Sale #5B9BD5 */
 [data-theme="eco-professional"] {
-  --theme-bg: #FFFFFF;
-  --theme-bg-alt: #F5F8F5;
-  --theme-text-soft: #2C5125;
-  --theme-text-strong: #1B3516;
-  --theme-accent: #4CAF50;
-  --theme-glass: rgba(76, 175, 80, 0.05);
-  --theme-phone-border: rgba(76, 175, 80, 0.2);
+  --theme-bg: #FAFAFA;
+  --theme-bg-alt: #F3F6F4;
+  --theme-text-soft: #2A3B4C;
+  --theme-text-strong: #2A3B4C;
+  --theme-accent: #68A88C;
+  --theme-sale-badge: #5B9BD5;
+  --theme-glass: rgba(104, 168, 140, 0.07);
+  --theme-phone-border: rgba(104, 168, 140, 0.22);
   --theme-bg-image: none;
 }
 
 :root {
   --site-header-height: 6.625rem;
+  --theme-sale-badge: #5B9BD5;
 }
 
 html {
@@ -74,6 +79,70 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Short phones (e.g. 376×667): shrink bottom content so the hero image
+   keeps a similar share of the screen as on taller phones (e.g. 430×932). */
+@media (max-width: 639px) and (max-height: 780px) {
+  .hero-section .hero-mobile-content {
+    padding-top: 0.5rem;
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+
+  .hero-section .hero-mobile-stack {
+    gap: 0.5rem;
+  }
+
+  .hero-section .hero-mobile-logo {
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .hero-section .hero-mobile-title {
+    font-size: 1.125rem;
+  }
+
+  .hero-section .hero-mobile-tagline {
+    font-size: 0.75rem;
+    line-height: 1.25;
+  }
+
+  .hero-section .hero-promo-header {
+    padding: 0.5rem 0.875rem;
+  }
+
+  .hero-section .hero-promo-percent {
+    font-size: 1.5rem;
+  }
+
+  .hero-section .hero-promo-sub {
+    display: none;
+  }
+
+  .hero-section .hero-promo-body {
+    padding: 0.625rem 0.75rem 0.75rem;
+  }
+
+  .hero-section .hero-promo-code {
+    min-height: 2.25rem;
+    padding-top: 0.375rem;
+    padding-bottom: 0.375rem;
+  }
+
+  .hero-section .hero-promo-cta {
+    margin-top: 0.5rem;
+    min-height: 2.25rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
+  .hero-section .hero-promo-note {
+    display: none;
+  }
+
+  .hero-section .hero-promo-placeholder {
+    min-height: 6.5rem;
+  }
+}
+
 /* Hero entrance animation — CSS-only so the hero renders without the JS animation
    library (motion) in the critical path. */
 @keyframes heroRise {
@@ -103,7 +172,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .section-eyebrow {
-  @apply text-sm sm:text-base uppercase tracking-widest text-gold font-bold mb-2;
+  @apply mb-2 text-sm font-medium tracking-wide text-gold sm:text-base;
 }
 
 .text-copy {

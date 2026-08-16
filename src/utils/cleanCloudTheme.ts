@@ -6,11 +6,11 @@ function readCssVar(name: string, fallback: string): string {
 
 /** Maps site CSS theme tokens to CleanCloud widget theme options. */
 export function getCleanCloudThemeOptions() {
-  const bg = readCssVar('--theme-bg', '#FFFFFF');
-  const bgAlt = readCssVar('--theme-bg-alt', '#F5F8F5');
-  const accent = readCssVar('--theme-accent', '#4CAF50');
-  const textSoft = readCssVar('--theme-text-soft', '#2C5125');
-  const textStrong = readCssVar('--theme-text-strong', '#1B3516');
+  const bg = readCssVar('--theme-bg', '#FAFAFA');
+  const bgAlt = readCssVar('--theme-bg-alt', '#F3F6F4');
+  const accent = readCssVar('--theme-accent', '#68A88C');
+  const textSoft = readCssVar('--theme-text-soft', '#2A3B4C');
+  const textStrong = readCssVar('--theme-text-strong', '#2A3B4C');
 
   const isLightSurface = bg.toLowerCase() === '#ffffff' || bg.startsWith('#f');
 

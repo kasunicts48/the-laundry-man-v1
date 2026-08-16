@@ -11,9 +11,11 @@ const bookingHtml = readFileSync(bookingPath, 'utf8');
 const topbarCss = getStaticTopbarCss();
 const topbarHtml = renderStaticTopbarHtml('-booking-header');
 
+// Tolerate CRLF and extra blank lines between the synced topbar CSS and .header-inner.
 const topbarCssRe =
-  /\s*\/\* ── Header top bar[\s\S]*?(?=\n\s*\.header-inner\s*\{\n\s*max-width: 80rem)/;
-const topbarHtmlRe = /<div class="header-topbar">[\s\S]*?<\/div>\s*\n\s*<div class="header-main">/;
+  /\s*\/\* ── Header top bar[\s\S]*?(?=\r?\n\s*\.header-inner\s*\{\r?\n\s*max-width:\s*80rem)/;
+const topbarHtmlRe =
+  /<div class="header-topbar">[\s\S]*?<\/div>\s*(?=\r?\n\s*<div class="header-main">)/;
 
 if (!topbarCssRe.test(bookingHtml)) {
   throw new Error('Could not find header top bar CSS block in public/booking.html');
@@ -25,7 +27,7 @@ if (!topbarHtmlRe.test(bookingHtml)) {
 
 const updatedHtml = bookingHtml
   .replace(topbarCssRe, `\n${topbarCss}\n\n      `)
-  .replace(topbarHtmlRe, `${topbarHtml}\n\n        <div class="header-main">`);
+  .replace(topbarHtmlRe, `${topbarHtml}\n`);
 
 writeFileSync(bookingPath, updatedHtml, 'utf8');
 console.log('Synced header top bar in public/booking.html');

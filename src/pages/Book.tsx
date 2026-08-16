@@ -8,7 +8,7 @@ export default function Book() {
       <div className="cleancloud-booking-back shrink-0 border-b border-phone-border px-3 py-2 sm:px-6 sm:py-3">
         <Link
           to="/"
-          className="inline-flex items-center gap-2 rounded-full border border-phone-border px-3 py-1.5 text-xs font-bold uppercase tracking-wider text-ink transition-colors hover:border-gold/30 hover:text-gold"
+          className="inline-flex items-center gap-2 rounded-full border border-phone-border px-3 py-1.5 text-sm font-semibold tracking-wide text-ink transition-colors hover:border-gold/30 hover:text-gold"
         >
           <ArrowLeft size={16} />
           Back

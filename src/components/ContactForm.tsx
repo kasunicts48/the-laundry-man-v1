@@ -6,7 +6,7 @@ import type { ContactPayload } from '../types';
 const inputClassName =
   'w-full px-4 py-4 rounded-xl border border-white/10 focus:ring-1 focus:ring-gold focus:border-gold outline-none bg-white/5 text-ink transition-all font-sans placeholder:text-ink';
 
-const labelClassName = 'block text-xs uppercase tracking-widest font-bold text-ink mb-2';
+const labelClassName = 'mb-2 block text-sm font-medium tracking-wide text-ink';
 
 interface ContactFormProps {
   defaultSubject?: string;
@@ -106,23 +106,23 @@ export default function ContactForm({
       transition={{ duration: 0.5 }}
       className="glass-card p-8 sm:p-10"
     >
-      <h3 className="text-2xl font-bold text-white mb-2">{heading}</h3>
-      <p className="text-ink font-light mb-8">{description}</p>
+      <h3 className="mb-2 text-2xl font-semibold text-slate">{heading}</h3>
+      <p className="mb-8 font-light text-ink">{description}</p>
 
       {isSuccess ? (
-        <div className="text-center py-8 space-y-6">
+        <div className="space-y-6 py-8 text-center">
           <CheckCircle2 className="mx-auto text-gold" size={56} />
           <div>
-            <h4 className="text-xl font-bold text-white mb-2">Message Sent</h4>
-            <p className="text-ink font-light">
-              Thank you, <span className="font-bold text-white">{formData.name}</span>. We&apos;ve received your message and will respond to{' '}
+            <h4 className="mb-2 text-xl font-semibold text-slate">Message Sent</h4>
+            <p className="font-light text-ink">
+              Thank you, <span className="font-semibold text-slate">{formData.name}</span>. We&apos;ve received your message and will respond to{' '}
               <span className="text-gold">{formData.email}</span> shortly.
             </p>
           </div>
           <button
             type="button"
             onClick={resetForm}
-            className="px-8 py-3 border border-gold text-gold pill hover:bg-gold hover:text-navy transition-all font-bold uppercase tracking-wide text-xs"
+            className="pill border border-gold px-8 py-3 text-sm font-semibold tracking-wide text-gold transition-all hover:bg-gold hover:text-paper"
           >
             Send Another Message
           </button>
@@ -219,7 +219,7 @@ export default function ContactForm({
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full sm:w-auto flex items-center justify-center gap-2 px-10 py-4 bg-gold text-navy pill font-bold uppercase tracking-wide text-xs hover:bg-white transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex w-full items-center justify-center gap-2 rounded-full bg-gold px-10 py-4 text-sm font-semibold tracking-wide text-paper transition-all hover:brightness-105 disabled:cursor-not-allowed disabled:opacity-50 sm:w-auto"
           >
             <Send size={16} />
             {isSubmitting ? 'Sending...' : 'Send Message'}

@@ -51,7 +51,7 @@ export default function LegalPageLayout({
       <article className="pb-20 min-h-[70vh] bg-navy px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto pt-12">
         <Link
           to={backHref}
-          className="inline-flex items-center gap-2 text-gold text-sm font-bold uppercase tracking-widest mb-8 hover:opacity-80 transition-opacity"
+          className="mb-8 inline-flex items-center gap-2 text-sm font-semibold tracking-wide text-gold transition-opacity hover:opacity-80"
         >
           <ArrowLeft size={16} />
           {backLabel}
@@ -61,7 +61,7 @@ export default function LegalPageLayout({
           {sections.map((section, sectionIndex) => (
             <section key={section.title ?? sectionIndex} className="space-y-4">
               {section.title && (
-                <h2 className="text-xl sm:text-2xl font-bold text-white border-b border-white/5 pb-3">
+                <h2 className="border-b border-black/5 pb-3 text-xl font-semibold text-slate sm:text-2xl">
                   {section.title}
                 </h2>
               )}

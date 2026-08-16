@@ -57,15 +57,16 @@ export const footerOperatingHours: OperatingHour[] = [
 export const footerQuickLinksCol1: FooterLink[] = [
   { label: 'About us', href: '/about' },
   { label: 'Services', href: '/services' },
+  { label: 'Pricing', href: '/pricing' },
   { label: 'Commercial Cleaning', href: '/commercial' },
   { label: 'Contact', href: '/contact' },
-  { label: 'Book a Collection', href: '/booking.html' },
+  { label: 'Schedule your collection', href: '/booking.html' },
 ];
 
 export const footerExploreLinks: FooterLink[] = [
   { label: 'How It Works', href: '/#how-it-works' },
   { label: 'Why Choose Us', href: '/#why-choose-us' },
-  { label: 'Prices & Services', href: '/services' },
+  { label: 'Prices & Services', href: '/pricing' },
   { label: 'Testimonials', href: '/#testimonials' },
   { label: 'FAQ', href: '/#faq' },
   { label: 'Locations', href: '/locations' },
@@ -73,7 +74,6 @@ export const footerExploreLinks: FooterLink[] = [
 
 export const footerQuickLinksCol2: FooterLink[] = [
   { label: 'Blog', href: '/blog' },
-  { label: 'Download App', href: '/download-app' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Terms & Conditions', href: '/terms-conditions' },
 ];

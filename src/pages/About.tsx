@@ -9,7 +9,7 @@ export default function About() {
         title={
           <>
             Dedicated to <InnerPageTitleHighlight>Quality</InnerPageTitleHighlight> and the{' '}
-            <InnerPageTitleHighlight>Planet</InnerPageTitleHighlight>.
+            <InnerPageTitleHighlight>Planet</InnerPageTitleHighlight>
           </>
         }
         description="We are a premium eco-friendly laundry and dry cleaning service. Our closed-loop technology and pH-neutral bio-enzymes ensure your garments receive the best care possible, without harming the environment."
@@ -17,7 +17,9 @@ export default function About() {
 
       <div className="pb-20 min-h-[70vh] bg-navy px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto pt-12 flex flex-col justify-center">
         <div className="max-w-4xl space-y-8">
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-white">Why Choose Us?</h2>
+          <h2 className="text-3xl font-semibold tracking-tight text-slate sm:text-4xl">
+            Why The Laundry Man App?
+          </h2>
 
           <div className="space-y-6 text-ink text-base sm:text-lg font-light leading-relaxed">
             <p>

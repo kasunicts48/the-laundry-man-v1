@@ -5,16 +5,19 @@ const headerSocialLinks = [
     label: 'Facebook',
     href: 'https://www.facebook.com/wilmslowedcls/',
     icon: 'facebook',
+    className: 'header-social-btn--facebook',
   },
   {
     label: 'TikTok',
     href: 'https://www.tiktok.com/@ecolaundryanddrycleaners',
     icon: 'tiktok',
+    className: 'header-social-btn--tiktok',
   },
   {
     label: 'Instagram',
     href: 'https://www.instagram.com/thedrycleaners2025',
     icon: 'instagram',
+    className: 'header-social-btn--instagram',
   },
 ];
 
@@ -22,12 +25,13 @@ export function getStaticTopbarCss() {
   return `
       /* ── Header top bar (synced with src/components/Header.tsx) ── */
       .header-topbar {
-        background: #134633;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: none;
+        background: #F3F6F4;
+        border-bottom: 1px solid rgba(42, 59, 76, 0.08);
         padding: 0.375rem 1rem;
         font-size: 0.75rem;
         font-weight: 500;
-        color: rgba(255, 255, 255, 0.9);
+        color: #2A3B4C;
       }
 
       .header-topbar .header-inner {
@@ -44,7 +48,7 @@ export function getStaticTopbarCss() {
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        color: rgba(255, 255, 255, 0.9);
+        color: #2A3B4C;
         transition: color 0.3s;
       }
 
@@ -52,8 +56,7 @@ export function getStaticTopbarCss() {
         color: var(--theme-accent);
       }
 
-      .header-email svg,
-      .header-social a svg {
+      .header-email svg {
         display: block;
         width: 1rem;
         height: 1rem;
@@ -77,26 +80,54 @@ export function getStaticTopbarCss() {
         gap: 0.5rem;
       }
 
-      .header-social a {
+      .header-social-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        border-radius: 9999px;
+        color: #fff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
         transition: opacity 0.3s;
       }
 
-      .header-social a:hover {
-        opacity: 0.8;
+      .header-social-btn:hover {
+        opacity: 0.9;
+      }
+
+      .header-social-btn svg {
+        display: block;
+        width: 0.875rem;
+        height: 0.875rem;
+        flex-shrink: 0;
+      }
+
+      .header-social-btn--facebook { background: #1877F2; }
+      .header-social-btn--tiktok { background: #111111; }
+      .header-social-btn--instagram {
+        background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
       }
 
       @media (min-width: 640px) {
         .header-topbar {
+          display: block;
           padding: 0.5rem 1.5rem;
         }
 
-        .header-email svg,
-        .header-social a svg {
+        .header-email svg {
           width: 0.875rem;
           height: 0.875rem;
+        }
+
+        .header-social-btn {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+
+        .header-social-btn svg {
+          width: 0.75rem;
+          height: 0.75rem;
         }
 
         .header-social {
@@ -118,12 +149,6 @@ export function getStaticTopbarCss() {
           padding-right: 2rem;
         }
       }
-
-      @media (max-width: 639px) {
-        .header-email span {
-          display: none;
-        }
-      }
   `.trim();
 }
 
@@ -131,7 +156,7 @@ export function renderStaticTopbarHtml(idSuffix = '') {
   const socialHtml = headerSocialLinks
     .map(
       (social, index) =>
-        `<a href="${social.href}" target="_blank" rel="noopener noreferrer" aria-label="${social.label}">${renderSocialIcon(social.icon, 16, `${idSuffix}-${index}`)}</a>`
+        `<a class="header-social-btn ${social.className}" href="${social.href}" target="_blank" rel="noopener noreferrer" aria-label="${social.label}">${renderSocialIcon(social.icon, 12, `${idSuffix}-${index}`, { onDark: true })}</a>`
     )
     .join('');
 

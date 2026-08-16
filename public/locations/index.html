@@ -15,11 +15,12 @@
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --theme-bg: #ffffff;
-        --theme-bg-alt: #f5f8f5;
-        --theme-text: #1b3516;
-        --theme-text-soft: #2c5125;
-        --theme-accent: #4caf50;
+        --theme-bg: #FAFAFA;
+        --theme-bg-alt: #F3F6F4;
+        --theme-text: #333740;
+        --theme-text-soft: #2A3B4C;
+        --theme-accent: #68A88C;
+        --theme-sale-badge: #5B9BD5;
         --header-height: 6.625rem;
       }
       *, *::before, *::after { box-sizing: border-box; }
@@ -34,18 +35,19 @@
       .site-shell { min-height: 100dvh; display: flex; flex-direction: column; }
       .site-header {
         position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-        background: rgba(255, 255, 255, 0.92);
+        background: rgba(250, 250, 250, 0.92);
         backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(27, 53, 22, 0.06);
+        border-bottom: 1px solid rgba(42, 59, 76, 0.06);
       }
 /* ── Header top bar (synced with src/components/Header.tsx) ── */
       .header-topbar {
-        background: #134633;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        display: none;
+        background: #F3F6F4;
+        border-bottom: 1px solid rgba(42, 59, 76, 0.08);
         padding: 0.375rem 1rem;
         font-size: 0.75rem;
         font-weight: 500;
-        color: rgba(255, 255, 255, 0.9);
+        color: #2A3B4C;
       }
 
       .header-topbar .header-inner {
@@ -62,7 +64,7 @@
         display: inline-flex;
         align-items: center;
         gap: 0.5rem;
-        color: rgba(255, 255, 255, 0.9);
+        color: #2A3B4C;
         transition: color 0.3s;
       }
 
@@ -70,8 +72,7 @@
         color: var(--theme-accent);
       }
 
-      .header-email svg,
-      .header-social a svg {
+      .header-email svg {
         display: block;
         width: 1rem;
         height: 1rem;
@@ -95,26 +96,54 @@
         gap: 0.5rem;
       }
 
-      .header-social a {
+      .header-social-btn {
         display: inline-flex;
         align-items: center;
         justify-content: center;
+        width: 1.75rem;
+        height: 1.75rem;
+        border-radius: 9999px;
+        color: #fff;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.08);
         transition: opacity 0.3s;
       }
 
-      .header-social a:hover {
-        opacity: 0.8;
+      .header-social-btn:hover {
+        opacity: 0.9;
+      }
+
+      .header-social-btn svg {
+        display: block;
+        width: 0.875rem;
+        height: 0.875rem;
+        flex-shrink: 0;
+      }
+
+      .header-social-btn--facebook { background: #1877F2; }
+      .header-social-btn--tiktok { background: #111111; }
+      .header-social-btn--instagram {
+        background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
       }
 
       @media (min-width: 640px) {
         .header-topbar {
+          display: block;
           padding: 0.5rem 1.5rem;
         }
 
-        .header-email svg,
-        .header-social a svg {
+        .header-email svg {
           width: 0.875rem;
           height: 0.875rem;
+        }
+
+        .header-social-btn {
+          width: 1.5rem;
+          height: 1.5rem;
+        }
+
+        .header-social-btn svg {
+          width: 0.75rem;
+          height: 0.75rem;
         }
 
         .header-social {
@@ -136,12 +165,6 @@
           padding-right: 2rem;
         }
       }
-
-      @media (max-width: 639px) {
-        .header-email span {
-          display: none;
-        }
-      }
       .header-inner { max-width: 80rem; margin: 0 auto; padding: 0 1rem; }
       .nav-link:hover, .footer a:hover, .location-link:hover { color: var(--theme-accent); }
       .header-main { padding: 1rem 0; }
@@ -150,25 +173,25 @@
       .site-logo img { display: block; height: 2.5rem; width: auto; }
       @media (min-width: 640px) { .site-logo img { height: 2.75rem; } }
       .desktop-nav { display: none; align-items: center; gap: 2rem; }
-      .nav-link { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--theme-text); }
+      .nav-link { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; color: var(--theme-text); }
       .nav-link.is-active { color: var(--theme-accent); }
-      .btn-book { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; border: 1px solid var(--theme-accent); border-radius: 9999px; color: var(--theme-accent); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+      .btn-book { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; border: 1px solid var(--theme-accent); border-radius: 9999px; color: var(--theme-accent); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; }
       .btn-book:hover { background: var(--theme-accent); color: #fff; }
       .menu-toggle { display: inline-flex; align-items: center; justify-content: center; padding: 0.25rem; border: 0; background: transparent; color: var(--theme-text); cursor: pointer; }
-      .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 60; border-top: 1px solid rgba(27, 53, 22, 0.08); background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); box-shadow: 0 20px 25px -5px rgba(0,0,0,.1); max-height: calc(100dvh - var(--header-height)); overflow-y: auto; }
+      .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 60; border-top: 1px solid rgba(42, 59, 76, 0.08); background: rgba(250, 250, 250, 0.95); backdrop-filter: blur(12px); box-shadow: 0 20px 25px -5px rgba(0,0,0,.1); max-height: calc(100dvh - var(--header-height)); overflow-y: auto; }
       .mobile-nav.is-open { display: block; }
       .mobile-nav-inner { padding: 1rem; }
-      .mobile-nav a:not(.btn-book) { display: block; padding: 0.75rem; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 0.5rem; color: var(--theme-text); }
-      .mobile-nav a:not(.btn-book):hover { color: var(--theme-accent); background: rgba(76, 175, 80, 0.06); }
+      .mobile-nav a:not(.btn-book) { display: block; padding: 0.75rem; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.02em; border-radius: 0.5rem; color: var(--theme-text); }
+      .mobile-nav a:not(.btn-book):hover { color: var(--theme-accent); background: rgba(104, 168, 140, 0.06); }
       .mobile-nav-cta { padding: 1rem 0.75rem 0.5rem; }
-      .mobile-nav .btn-book--mobile { display: block; width: 100%; padding: 0.75rem 1.5rem; border: 1px solid var(--theme-accent); border-radius: 9999px; color: var(--theme-accent); background: transparent; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; }
+      .mobile-nav .btn-book--mobile { display: block; width: 100%; padding: 0.75rem 1.5rem; border: 1px solid var(--theme-accent); border-radius: 9999px; color: var(--theme-accent); background: transparent; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.02em; text-align: center; }
       .mobile-nav .btn-book--mobile:hover { background: var(--theme-accent); color: #fff; }
       @media (min-width: 768px) { .desktop-nav { display: flex; } .menu-toggle { display: none; } .header-inner { padding: 0 1.5rem; } }
       .page-banner {
         position: relative;
         z-index: 10;
         margin-top: calc(var(--header-height) - 1px);
-        background: #4caf50;
+        background: #68A88C;
         border-radius: 0 0 30px 30px;
         padding: 2.5rem 1rem 3rem;
       }
@@ -191,8 +214,8 @@
         }
       }
       .page-banner__content { min-width: 0; flex: 1 1 auto; text-align: left; }
-      .page-banner__eyebrow { margin: 0 0 0.5rem; font-size: 0.625rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #d1fae5; }
-      .page-banner__title { margin: 0; font-size: clamp(1.875rem, 5vw, 3.75rem); font-weight: 800; line-height: 1.1; color: #1b3516; }
+      .page-banner__eyebrow { margin: 0 0 0.5rem; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.02em; color: rgba(255,255,255,0.85); }
+      .page-banner__title { margin: 0; font-size: clamp(1.875rem, 5vw, 3.75rem); font-weight: 600; line-height: 1.1; color: #ffffff; }
       .page-banner__title span { color: #ffffff; }
       .page-banner__desc { margin: 1rem 0 0; max-width: 48rem; font-size: 1rem; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.92); }
       @media (min-width: 640px) { .page-banner__desc { font-size: 1.125rem; } }
@@ -234,7 +257,7 @@
       .site-footer {
         position: relative;
         overflow: hidden;
-        background: #134633;
+        background: #2A3B4C;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         color: #ffffff;
       }
@@ -319,11 +342,10 @@
         margin: 0 0 1.5rem;
         padding-bottom: 0.75rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        font-size: 0.625rem;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: rgb(76, 175, 80);
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: rgb(104, 168, 140);
       }
 
       .footer-list {
@@ -347,7 +369,7 @@
       }
 
       .site-footer a:hover {
-        color: rgb(76, 175, 80);
+        color: rgb(104, 168, 140);
       }
 
       .footer-services-cols,
@@ -420,12 +442,13 @@
         width: 2.25rem;
         height: 2.25rem;
         border-radius: 9999px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        background: rgba(255, 255, 255, 0.1);
+        border: 0;
+        color: #fff;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.3s;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        transition: opacity 0.3s;
       }
 
       .footer-social-btn svg {
@@ -436,9 +459,13 @@
       }
 
       .footer-social-btn:hover {
-        border-color: rgba(76, 175, 80, 0.4);
-        background: rgba(76, 175, 80, 0.15);
         opacity: 0.9;
+      }
+
+      .footer-social-btn--facebook { background: #1877F2; }
+      .footer-social-btn--tiktok { background: #111111; }
+      .footer-social-btn--instagram {
+        background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
       }
 
       .footer-locations {
@@ -477,9 +504,9 @@
       }
 
       .footer-city-box:hover {
-        border-color: rgba(76, 175, 80, 0.4);
-        background: rgba(76, 175, 80, 0.1);
-        color: rgb(76, 175, 80);
+        border-color: rgba(104, 168, 140, 0.4);
+        background: rgba(104, 168, 140, 0.1);
+        color: rgb(104, 168, 140);
       }
 
       @media (min-width: 640px) {
@@ -553,7 +580,7 @@
             </a>
             <div class="header-social">
               <span>Follow Us:</span>
-              <div class="header-social-icons"><a href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><path fill="#25F4EE" transform="translate(-0.9,0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FE2C55" transform="translate(0.9,-0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FFFFFF" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/></svg></a><a href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" aria-hidden="true"><defs><radialGradient id="ig-gradient-locations-header-2" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#FDD35D"/><stop offset="25%" stop-color="#FDA75E"/><stop offset="50%" stop-color="#F86A69"/><stop offset="70%" stop-color="#E0459E"/><stop offset="100%" stop-color="#8A3AB9"/></radialGradient></defs><path fill="url(#ig-gradient-locations-header-2)" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg></a></div>
+              <div class="header-social-icons"><a class="header-social-btn header-social-btn--facebook" href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFFFFF" d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a class="header-social-btn header-social-btn--tiktok" href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path fill="#25F4EE" transform="translate(-0.9,0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FE2C55" transform="translate(0.9,-0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FFFFFF" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/></svg></a><a class="header-social-btn header-social-btn--instagram" href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="12" height="12" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFFFFF" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg></a></div>
             </div>
           </div>
         </div>
@@ -566,10 +593,11 @@
               <a class="nav-link" href="/">Home</a>
               <a class="nav-link" href="/about">About Us</a>
               <a class="nav-link" href="/services">Services</a>
+              <a class="nav-link" href="/pricing">Pricing</a>
               <a class="nav-link" href="/commercial">Commercial Cleaning</a>
               <a class="nav-link" href="/blog">Blog</a>
               <a class="nav-link" href="/contact">Contact</a>
-              <a class="btn-book" href="/booking.html">Book Now</a>
+              <a class="btn-book" href="/booking.html">Schedule your collection</a>
             </nav>
             <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileNav">
               <span class="sr-only">Toggle menu</span>
@@ -583,10 +611,11 @@
             <a href="/">Home</a>
             <a href="/about">About Us</a>
             <a href="/services">Services</a>
+            <a href="/pricing">Pricing</a>
             <a href="/commercial">Commercial Cleaning</a>
             <a href="/blog">Blog</a>
             <a href="/contact">Contact</a>
-            <div class="mobile-nav-cta"><a class="btn-book btn-book--mobile" href="/booking.html">Book a Collection</a></div>
+            <div class="mobile-nav-cta"><a class="btn-book btn-book--mobile" href="/booking.html">Ready to order</a></div>
           </div>
         </nav>
       </header>
@@ -835,7 +864,7 @@
             <div class="footer-col-explore">
               <h4 class="footer-heading">Explore</h4>
               <div class="footer-explore-cols">
-                <ul class="footer-list"><li><a href="/#how-it-works">How It Works</a></li><li><a href="/#why-choose-us">Why Choose Us</a></li><li><a href="/services">Prices &amp; Services</a></li></ul>
+                <ul class="footer-list"><li><a href="/#how-it-works">How It Works</a></li><li><a href="/#why-choose-us">Why Choose Us</a></li><li><a href="/pricing">Prices &amp; Services</a></li></ul>
                 <ul class="footer-list"><li><a href="/#testimonials">Testimonials</a></li><li><a href="/#faq">FAQ</a></li><li><a href="/locations">Locations</a></li></ul>
               </div>
             </div>
@@ -843,12 +872,12 @@
             <div class="footer-col-quick">
               <h4 class="footer-heading">Quick Links</h4>
               <div class="footer-quick-cols">
-                <ul class="footer-list"><li><a href="/about">About us</a></li><li><a href="/services">Services</a></li><li><a href="/commercial">Commercial Cleaning</a></li><li><a href="/contact">Contact</a></li><li><a href="/booking.html">Book a Collection</a></li></ul>
+                <ul class="footer-list"><li><a href="/about">About us</a></li><li><a href="/services">Services</a></li><li><a href="/pricing">Pricing</a></li><li><a href="/commercial">Commercial Cleaning</a></li><li><a href="/contact">Contact</a></li><li><a href="/booking.html">Schedule your collection</a></li></ul>
                 <div>
-                  <ul class="footer-list"><li><a href="/blog">Blog</a></li><li><a href="/download-app">Download App</a></li><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/terms-conditions">Terms &amp; Conditions</a></li></ul>
+                  <ul class="footer-list"><li><a href="/blog">Blog</a></li><li><a href="/privacy-policy">Privacy Policy</a></li><li><a href="/terms-conditions">Terms &amp; Conditions</a></li></ul>
                   <div class="footer-social-row">
                     <span>Social media</span>
-                    <div class="footer-social-icons"><a class="footer-social-btn" href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a class="footer-social-btn" href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#25F4EE" transform="translate(-0.9,0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FE2C55" transform="translate(0.9,-0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FFFFFF" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/></svg></a><a class="footer-social-btn" href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><defs><radialGradient id="ig-gradientfooter-quick-2" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#FDD35D"/><stop offset="25%" stop-color="#FDA75E"/><stop offset="50%" stop-color="#F86A69"/><stop offset="70%" stop-color="#E0459E"/><stop offset="100%" stop-color="#8A3AB9"/></radialGradient></defs><path fill="url(#ig-gradientfooter-quick-2)" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg></a></div>
+                    <div class="footer-social-icons"><a class="footer-social-btn footer-social-btn--facebook" href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFFFFF" d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a class="footer-social-btn footer-social-btn--tiktok" href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#25F4EE" transform="translate(-0.9,0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FE2C55" transform="translate(0.9,-0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FFFFFF" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/></svg></a><a class="footer-social-btn footer-social-btn--instagram" href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFFFFF" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg></a></div>
                   </div>
                 </div>
               </div>
@@ -876,7 +905,7 @@
             </nav>
             <div class="footer-social-bottom">
               <span>Follow us</span>
-              <div class="footer-social-icons"><a class="footer-social-btn" href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#1877F2" d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a class="footer-social-btn" href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#25F4EE" transform="translate(-0.9,0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FE2C55" transform="translate(0.9,-0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FFFFFF" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/></svg></a><a class="footer-social-btn" href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><defs><radialGradient id="ig-gradientfooter-bottom-2" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#FDD35D"/><stop offset="25%" stop-color="#FDA75E"/><stop offset="50%" stop-color="#F86A69"/><stop offset="70%" stop-color="#E0459E"/><stop offset="100%" stop-color="#8A3AB9"/></radialGradient></defs><path fill="url(#ig-gradientfooter-bottom-2)" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg></a></div>
+              <div class="footer-social-icons"><a class="footer-social-btn footer-social-btn--facebook" href="https://www.facebook.com/wilmslowedcls/" target="_blank" rel="noopener noreferrer" aria-label="Facebook"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFFFFF" d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg></a><a class="footer-social-btn footer-social-btn--tiktok" href="https://www.tiktok.com/@ecolaundryanddrycleaners" target="_blank" rel="noopener noreferrer" aria-label="TikTok"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#25F4EE" transform="translate(-0.9,0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FE2C55" transform="translate(0.9,-0.9)" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/><path fill="#FFFFFF" d="M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z"/></svg></a><a class="footer-social-btn footer-social-btn--instagram" href="https://www.instagram.com/thedrycleaners2025" target="_blank" rel="noopener noreferrer" aria-label="Instagram"><svg width="18" height="18" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFFFFF" d="M12 2.16c3.2 0 3.58.01 4.85.07 1.17.05 1.8.25 2.23.41.56.22.96.48 1.38.9.42.42.68.82.9 1.38.16.43.36 1.06.41 2.23.06 1.27.07 1.65.07 4.85s-.01 3.58-.07 4.85c-.05 1.17-.25 1.8-.41 2.23-.22.56-.48.96-.9 1.38-.42.42-.82.68-1.38.9-.43.16-1.06.36-2.23.41-1.27.06-1.65.07-4.85.07s-3.58-.01-4.85-.07c-1.17-.05-1.8-.25-2.23-.41a3.72 3.72 0 0 1-1.38-.9 3.72 3.72 0 0 1-.9-1.38c-.16-.43-.36-1.06-.41-2.23-.06-1.27-.07-1.65-.07-4.85s.01-3.58.07-4.85c.05-1.17.25-1.8.41-2.23.22-.56.48-.96.9-1.38.42-.42.82-.68 1.38-.9.43-.16 1.06-.36 2.23-.41C8.42 2.17 8.8 2.16 12 2.16M12 0C8.74 0 8.33.01 7.05.07 5.78.13 4.9.33 4.14.63c-.79.3-1.46.72-2.13 1.38C1.35 2.68.93 3.35.63 4.14.33 4.9.13 5.78.07 7.05.01 8.33 0 8.74 0 12s.01 3.67.07 4.95c.06 1.27.26 2.15.56 2.91.3.79.72 1.46 1.38 2.13.67.66 1.34 1.08 2.13 1.38.76.3 1.64.5 2.91.56C8.33 23.99 8.74 24 12 24s3.67-.01 4.95-.07c1.27-.06 2.15-.26 2.91-.56.79-.3 1.46-.72 2.13-1.38.66-.67 1.08-1.34 1.38-2.13.3-.76.5-1.64.56-2.91.06-1.28.07-1.69.07-4.95s-.01-3.67-.07-4.95c-.06-1.27-.26-2.15-.56-2.91a5.88 5.88 0 0 0-1.38-2.13A5.88 5.88 0 0 0 19.86.63c-.76-.3-1.64-.5-2.91-.56C15.67.01 15.26 0 12 0Zm0 5.84a6.16 6.16 0 1 0 0 12.32 6.16 6.16 0 0 0 0-12.32ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.41-10.85a1.44 1.44 0 1 0 0 2.88 1.44 1.44 0 0 0 0-2.88Z"/></svg></a></div>
             </div>
           </div>
         </div>

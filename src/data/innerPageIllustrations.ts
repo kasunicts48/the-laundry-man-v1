@@ -31,6 +31,11 @@ export const innerPageIllustrations: Record<string, InnerPageIllustrationConfig>
     alt: 'Laundry and dry cleaning illustration',
     aspect: 'landscape',
   },
+  '/pricing': {
+    Illustration: BannerLegal,
+    alt: 'Pricing and garment care illustration',
+    aspect: 'landscape',
+  },
   '/commercial': {
     Illustration: BannerCommercial,
     alt: 'Commercial laundry illustration',

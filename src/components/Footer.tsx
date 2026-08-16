@@ -13,11 +13,11 @@ import {
 import { SocialIcon } from './SocialIcon';
 
 const linkClassName =
-  'text-sm text-paper font-light hover:text-[rgb(76,175,80)] transition-colors duration-300 leading-relaxed';
+  'text-sm font-light leading-relaxed text-paper/90 transition-colors duration-300 hover:text-gold';
 
 function FooterSectionHeading({ children }: { children: React.ReactNode }) {
   return (
-    <h4 className="text-[10px] uppercase tracking-widest text-[rgb(76,175,80)] font-bold pb-3 mb-6 border-b border-paper/10">
+    <h4 className="mb-6 border-b border-paper/10 pb-3 text-sm font-semibold tracking-wide text-gold">
       {children}
     </h4>
   );
@@ -81,9 +81,9 @@ function FooterSocialLinks({ className = '' }: { className?: string }) {
           target="_blank"
           rel="noopener noreferrer"
           aria-label={social.label}
-          className="flex h-9 w-9 items-center justify-center rounded-full border border-paper/15 bg-paper/10 hover:border-[rgb(76,175,80)]/40 hover:bg-[rgb(76,175,80)]/15 hover:opacity-90 transition-all duration-300"
+          className={`flex h-9 w-9 items-center justify-center rounded-full text-paper shadow-sm transition-opacity hover:opacity-90 ${social.className}`}
         >
-          <SocialIcon type={social.icon} size={18} />
+          <SocialIcon type={social.icon} size={18} onDark />
         </a>
       ))}
     </div>
@@ -92,13 +92,16 @@ function FooterSocialLinks({ className = '' }: { className?: string }) {
 
 export default function Footer() {
   return (
-    <footer id="footer" className="relative overflow-hidden bg-[#134633] text-paper border-t border-paper/10 transition-colors duration-500">
+    <footer
+      id="footer"
+      className="relative overflow-hidden border-t border-black/5 bg-slate text-paper transition-colors duration-500"
+    >
       <div
         className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/10 via-transparent to-black/20"
         aria-hidden="true"
       />
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-28 md:pb-10 lg:pt-24">
-        <div className="grid w-full grid-cols-1 gap-y-12 gap-x-8 md:grid-cols-2 lg:grid-cols-12 lg:gap-x-10 items-start">
+      <div className="relative mx-auto max-w-7xl px-4 pb-28 pt-16 sm:px-6 md:pb-10 lg:px-8 lg:pt-24">
+        <div className="grid w-full grid-cols-1 items-start gap-x-8 gap-y-12 md:grid-cols-2 lg:grid-cols-12 lg:gap-x-10">
           <div className="min-w-0 lg:col-span-4">
             <FooterSectionHeading>Services</FooterSectionHeading>
             <div className="grid grid-cols-2 gap-x-6 sm:gap-x-8">
@@ -110,8 +113,12 @@ export default function Footer() {
           <div className="min-w-0 lg:col-span-3">
             <FooterSectionHeading>Explore</FooterSectionHeading>
             <div className="grid grid-cols-2 gap-x-6 sm:gap-x-8">
-              <FooterLinkList links={footerExploreLinks.slice(0, Math.ceil(footerExploreLinks.length / 2))} />
-              <FooterLinkList links={footerExploreLinks.slice(Math.ceil(footerExploreLinks.length / 2))} />
+              <FooterLinkList
+                links={footerExploreLinks.slice(0, Math.ceil(footerExploreLinks.length / 2))}
+              />
+              <FooterLinkList
+                links={footerExploreLinks.slice(Math.ceil(footerExploreLinks.length / 2))}
+              />
             </div>
           </div>
 
@@ -122,7 +129,7 @@ export default function Footer() {
               <div className="flex flex-col">
                 <FooterLinkList links={footerQuickLinksCol2} />
                 <div className="mt-6 hidden flex-wrap items-center gap-4 md:flex sm:mt-8">
-                  <span className="text-sm font-light text-paper">Social media</span>
+                  <span className="text-sm font-light text-paper/90">Social media</span>
                   <FooterSocialLinks />
                 </div>
               </div>
@@ -130,7 +137,6 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Lower section — locations */}
         <div id="locations" className="mt-8 scroll-mt-28 pt-4">
           <div>
             <FooterSectionHeading>The Laundry Man App UK</FooterSectionHeading>
@@ -139,7 +145,7 @@ export default function Footer() {
                 <li key={city}>
                   <a
                     href={resolveFooterUkCityHref(city)}
-                    className="block rounded-lg border border-paper/15 bg-paper/5 px-4 py-2.5 text-center text-sm font-light text-paper transition-colors duration-300 hover:border-[rgb(76,175,80)]/40 hover:bg-[rgb(76,175,80)]/10 hover:text-[rgb(76,175,80)]"
+                    className="block rounded-lg border border-paper/15 bg-paper/5 px-4 py-2.5 text-center text-sm font-light text-paper/90 transition-colors duration-300 hover:border-gold/40 hover:bg-gold/10 hover:text-gold"
                   >
                     {city}
                   </a>
@@ -151,44 +157,38 @@ export default function Footer() {
 
         <div className="mt-12 border-t border-paper/10 pt-8">
           <div className="flex flex-col items-center gap-4 text-center sm:flex-row sm:items-center sm:justify-between sm:text-left">
-            <p className="text-xs font-medium text-paper">
+            <p className="text-xs font-medium text-paper/90">
               © 2026 The Laundry Man App. All Rights Reserved.
             </p>
             <nav
-              className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-xs font-light text-paper sm:justify-end"
+              className="flex flex-wrap items-center justify-center gap-x-2 gap-y-2 text-xs font-light text-paper/90 sm:justify-end"
               aria-label="Footer legal and attribution links"
             >
               <a
                 href="https://www.flaticon.com/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:text-[rgb(76,175,80)] transition-colors duration-300"
+                className="transition-colors duration-300 hover:text-gold"
               >
                 Icons by Flaticon
               </a>
               <span className="text-paper/40" aria-hidden="true">
                 ·
               </span>
-              <Link
-                to="/privacy-policy"
-                className="hover:text-[rgb(76,175,80)] transition-colors duration-300"
-              >
+              <Link to="/privacy-policy" className="transition-colors duration-300 hover:text-gold">
                 Privacy Policy
               </Link>
               <span className="text-paper/40" aria-hidden="true">
                 ·
               </span>
-              <Link
-                to="/terms-conditions"
-                className="hover:text-[rgb(76,175,80)] transition-colors duration-300"
-              >
+              <Link to="/terms-conditions" className="transition-colors duration-300 hover:text-gold">
                 Terms of Service
               </Link>
             </nav>
           </div>
 
           <div className="mt-6 flex flex-col items-center gap-3 md:hidden">
-            <span className="text-xs font-light text-paper">Follow us</span>
+            <span className="text-xs font-light text-paper/90">Follow us</span>
             <FooterSocialLinks />
           </div>
         </div>

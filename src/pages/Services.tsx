@@ -24,10 +24,10 @@ export default function Services({ onBookNow }: ServicesProps) {
         eyebrow="Our Services"
         title={
           <>
-            Comprehensive <InnerPageTitleHighlight>Garment Care</InnerPageTitleHighlight>.
+            Professional <InnerPageTitleHighlight>garments care</InnerPageTitleHighlight>.
           </>
         }
-        description="We handle everything from your everyday wash & fold to specialized dry cleaning, ensuring superior quality across all fabrics."
+        description="From everyday wash & fold to specialist dry cleaning, we look after your clothes with care — so you can get on with your day."
       />
 
       <div className="pb-12 min-h-[70vh] bg-navy-alt transition-colors duration-500">

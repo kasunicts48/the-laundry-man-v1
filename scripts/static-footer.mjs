@@ -59,15 +59,16 @@ const footerServices = [
 const footerQuickLinksCol1 = [
   { label: 'About us', href: '/about' },
   { label: 'Services', href: '/services' },
+  { label: 'Pricing', href: '/pricing' },
   { label: 'Commercial Cleaning', href: '/commercial' },
   { label: 'Contact', href: '/contact' },
-  { label: 'Book a Collection', href: '/booking.html' },
+  { label: 'Schedule your collection', href: '/booking.html' },
 ];
 
 const footerExploreLinks = [
   { label: 'How It Works', href: '/#how-it-works' },
   { label: 'Why Choose Us', href: '/#why-choose-us' },
-  { label: 'Prices & Services', href: '/services' },
+  { label: 'Prices & Services', href: '/pricing' },
   { label: 'Testimonials', href: '/#testimonials' },
   { label: 'FAQ', href: '/#faq' },
   { label: 'Locations', href: '/locations' },
@@ -75,7 +76,6 @@ const footerExploreLinks = [
 
 const footerQuickLinksCol2 = [
   { label: 'Blog', href: '/blog' },
-  { label: 'Download App', href: '/download-app' },
   { label: 'Privacy Policy', href: '/privacy-policy' },
   { label: 'Terms & Conditions', href: '/terms-conditions' },
 ];
@@ -87,16 +87,19 @@ const footerSocialLinks = [
     label: 'Facebook',
     href: 'https://www.facebook.com/wilmslowedcls/',
     icon: 'facebook',
+    className: 'footer-social-btn--facebook',
   },
   {
     label: 'TikTok',
     href: 'https://www.tiktok.com/@ecolaundryanddrycleaners',
     icon: 'tiktok',
+    className: 'footer-social-btn--tiktok',
   },
   {
     label: 'Instagram',
     href: 'https://www.instagram.com/thedrycleaners2025',
     icon: 'instagram',
+    className: 'footer-social-btn--instagram',
   },
 ];
 
@@ -124,7 +127,7 @@ export function getStaticFooterCss() {
       .site-footer {
         position: relative;
         overflow: hidden;
-        background: #134633;
+        background: #2A3B4C;
         border-top: 1px solid rgba(255, 255, 255, 0.1);
         color: #ffffff;
       }
@@ -209,11 +212,10 @@ export function getStaticFooterCss() {
         margin: 0 0 1.5rem;
         padding-bottom: 0.75rem;
         border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        font-size: 0.625rem;
-        font-weight: 700;
-        letter-spacing: 0.2em;
-        text-transform: uppercase;
-        color: rgb(76, 175, 80);
+        font-size: 0.875rem;
+        font-weight: 600;
+        letter-spacing: 0.02em;
+        color: rgb(104, 168, 140);
       }
 
       .footer-list {
@@ -237,7 +239,7 @@ export function getStaticFooterCss() {
       }
 
       .site-footer a:hover {
-        color: rgb(76, 175, 80);
+        color: rgb(104, 168, 140);
       }
 
       .footer-services-cols,
@@ -310,12 +312,13 @@ export function getStaticFooterCss() {
         width: 2.25rem;
         height: 2.25rem;
         border-radius: 9999px;
-        border: 1px solid rgba(255, 255, 255, 0.15);
-        background: rgba(255, 255, 255, 0.1);
+        border: 0;
+        color: #fff;
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        transition: all 0.3s;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.12);
+        transition: opacity 0.3s;
       }
 
       .footer-social-btn svg {
@@ -326,9 +329,13 @@ export function getStaticFooterCss() {
       }
 
       .footer-social-btn:hover {
-        border-color: rgba(76, 175, 80, 0.4);
-        background: rgba(76, 175, 80, 0.15);
         opacity: 0.9;
+      }
+
+      .footer-social-btn--facebook { background: #1877F2; }
+      .footer-social-btn--tiktok { background: #111111; }
+      .footer-social-btn--instagram {
+        background: linear-gradient(135deg, #f58529 0%, #dd2a7b 50%, #8134af 100%);
       }
 
       .footer-locations {
@@ -367,9 +374,9 @@ export function getStaticFooterCss() {
       }
 
       .footer-city-box:hover {
-        border-color: rgba(76, 175, 80, 0.4);
-        background: rgba(76, 175, 80, 0.1);
-        color: rgb(76, 175, 80);
+        border-color: rgba(104, 168, 140, 0.4);
+        background: rgba(104, 168, 140, 0.1);
+        color: rgb(104, 168, 140);
       }
 
       @media (min-width: 640px) {
@@ -444,7 +451,7 @@ export function getStaticFooterHtml({ includeLocations = true } = {}) {
     return `<div class="footer-social-icons">${footerSocialLinks
       .map(
         (social, index) =>
-          `<a class="footer-social-btn" href="${escapeHtml(social.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(social.label)}">${renderSocialIcon(social.icon, 18, `${idSuffix}-${index}`)}</a>`
+          `<a class="footer-social-btn ${social.className}" href="${escapeHtml(social.href)}" target="_blank" rel="noopener noreferrer" aria-label="${escapeHtml(social.label)}">${renderSocialIcon(social.icon, 18, `${idSuffix}-${index}`, { onDark: true })}</a>`
       )
       .join('')}</div>`;
   }

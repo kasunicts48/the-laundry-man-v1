@@ -11,6 +11,7 @@ const StickyBookNowBar = lazy(() => import('./components/StickyBookNowBar'));
 
 const About = lazy(() => import('./pages/About'));
 const Services = lazy(() => import('./pages/Services'));
+const Pricing = lazy(() => import('./pages/Pricing'));
 const Commercial = lazy(() => import('./pages/Commercial'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogDetails = lazy(() => import('./pages/BlogDetails'));
@@ -58,6 +59,7 @@ function AppLayout() {
             <Route path="/" element={<Home onBookNow={openBooking} />} />
             <Route path="/about" element={<About />} />
             <Route path="/services" element={<Services onBookNow={openBooking} />} />
+            <Route path="/pricing" element={<Pricing />} />
             <Route path="/commercial" element={<Commercial />} />
             <Route path="/blog" element={<Blog />} />
             <Route path="/blog/:id" element={<BlogDetails />} />

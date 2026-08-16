@@ -27,17 +27,17 @@ export default function StickyBookNowBar() {
 
   return (
     <div
-      className={`fixed bottom-0 left-0 right-0 z-50 block p-0 bg-transparent shadow-none md:hidden transition-transform duration-300 ease-out ${
-        isVisible ? 'translate-y-0' : 'translate-y-full pointer-events-none'
+      className={`fixed bottom-0 left-0 right-0 z-50 block bg-transparent p-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] shadow-none md:hidden transition-transform duration-300 ease-out ${
+        isVisible ? 'translate-y-0' : 'pointer-events-none translate-y-full'
       }`}
       aria-label="Quick booking"
       aria-hidden={!isVisible}
     >
       <a
         href="/booking.html"
-        className="block w-full bg-gold text-navy font-bold py-3.5 px-6 pb-[max(0.875rem,env(safe-area-inset-bottom))] rounded-none active:scale-[0.98] transition-all duration-200 uppercase tracking-wider text-sm shadow-sm text-center"
+        className="block w-full rounded-full bg-gold px-6 py-3.5 text-center text-sm font-semibold tracking-wide text-paper shadow-accent transition-all duration-200 active:scale-[0.98]"
       >
-        Book Now
+        Ready to order
       </a>
     </div>
   );

@@ -5,38 +5,38 @@ export interface HomeFaqItem {
 
 export const homeFaqItems: HomeFaqItem[] = [
   {
-    question: 'How does The Laundry Man work in the United Kingdom?',
+    question: 'How does your service work?',
     answer:
-      'The Laundry Man offers on-demand laundry and dry cleaning across the United Kingdom. Book a pickup online or through our app, choose a time that suits you, and we will collect your items, clean them professionally, and deliver them back to your door — often within 24 hours. You can track your order at every stage using our app or website.',
+      'It’s simple! Book a collection slot online or via our app. Our own trusted driver comes to your door, we clean everything expertly on-site using gentle eco-products, and we deliver fresh back to you — usually within 24 hours.',
   },
   {
-    question: 'What services does The Laundry Man offer in the United Kingdom?',
+    question: 'Do you offer free collection and delivery?',
     answer:
-      'We provide wash & fold, dry cleaning, ironing, express laundry, and commercial laundry for hotels and businesses. Service availability may vary slightly by city, so check your local coverage when you book.',
+      'Yes! We provide free pickup and delivery across all our service areas — no hidden fees, no extra charges.',
   },
   {
-    question: 'Do you clean designer and luxury clothing?',
+    question: 'How quickly will I get my items back?',
     answer:
-      'Yes. We specialise in designerwear, including luxury labels, delicate fabrics, tailored pieces, and premium finishes. Every garment is cleaned and quality-checked at our own site with expert handling, so your designer items receive the specialist care they deserve.',
+      'Most items are cleaned and returned to you within 24 hours. Dry cleaning and special care items may take a little longer — we’ll always give you an exact return time when you book.',
   },
   {
-    question: 'How much does laundry cost in the United Kingdom?',
+    question: 'Can I reschedule my order?',
     answer:
-      'Pricing depends on the service you choose and your location. You can view exact costs before confirming your order, with no hidden fees — so you always know what you are paying upfront.',
+      'Of course! If you need to change your collection or delivery time, just log in to your account, or send us a quick message — we’re happy to adjust it for you.',
   },
   {
-    question: 'Is The Laundry Man safe and reliable?',
+    question: 'What areas do you cover?',
     answer:
-      'Yes. Every garment is cleaned by vetted local professionals and handled with care throughout the process. Thousands of customers across the United Kingdom trust The Laundry Man for their regular laundry and dry cleaning needs.',
+      'We serve Manchester and surrounding areas. Enter your postcode on our homepage to check we’re at your doorstep!',
   },
   {
-    question: 'Can tourists or short-term visitors use The Laundry Man?',
+    question: 'Are you eco-friendly?',
     answer:
-      'Absolutely. The Laundry Man is a practical choice for tourists, business travellers, hotel guests, and short-term renters. You can book a collection and delivery without needing a local contract or subscription.',
+      'Yes! We use eco-friendly products for cleaning that are kind to your garments, gentle on skin, and safe for the environment — without compromising that fresh, professional finish.',
   },
   {
-    question: 'Do you offer laundry services for hotels or businesses?',
+    question: 'Do you care for designer and luxury clothing?',
     answer:
-      'Yes. We provide commercial laundry for hotels, Airbnbs, restaurants, gyms, and corporate offices. For bulk or recurring orders, contact us to request a tailored quote that fits your schedule and volume.',
+      'Absolutely — we’re specialists in designer wear. Every luxury garment is hand-inspected and cleaned individually by our experts, so you get premium care for your premium clothes.',
   },
 ];

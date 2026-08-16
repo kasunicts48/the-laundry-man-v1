@@ -2,9 +2,9 @@
 
 const BRAND = {
   facebook: '#1877F2',
-  instagram: ['#F58529', '#DD2A7B', '#8134AF', '#515BD4'],
   tiktokCyan: '#25F4EE',
   tiktokPink: '#FE2C55',
+  tiktokBlack: '#111111',
 };
 
 const IG_GLYPH =
@@ -13,23 +13,39 @@ const IG_GLYPH =
 const TIKTOK_GLYPH =
   'M12.53 0h3.36c.09.9.42 1.79.99 2.5.68.86 1.68 1.46 2.77 1.62.28.05.56.07.85.08v3.42c-1.4 0-2.79-.36-3.99-1.03V13.9c0 1.4-.34 2.82-1.09 4.02a6.5 6.5 0 0 1-2.9 2.48 6.53 6.53 0 0 1-3.42.52 6.51 6.51 0 0 1-3.06-1.12 6.53 6.53 0 0 1-2.6-4.11c-.14-.75-.13-1.52-.02-2.27a6.52 6.52 0 0 1 2.35-4.06 6.5 6.5 0 0 1 4.6-1.4v3.5a2.97 2.97 0 0 0-1.6-.06 2.97 2.97 0 0 0-1.7 1.14 2.97 2.97 0 0 0-.54 1.98 2.97 2.97 0 0 0 1.3 2.14 2.97 2.97 0 0 0 3.3.08 2.97 2.97 0 0 0 1.31-2.03c.06-.36.05-.72.05-1.08V0Z';
 
-function instagramSvg(size, idSuffix = '') {
+const FB_GLYPH =
+  'M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z';
+
+function facebookSvg(size, onDark) {
+  const fill = onDark ? '#FFFFFF' : BRAND.facebook;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><path fill="${fill}" d="${FB_GLYPH}"/></svg>`;
+}
+
+function instagramSvg(size, idSuffix = '', onDark = false) {
+  if (onDark) {
+    return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><path fill="#FFFFFF" d="${IG_GLYPH}"/></svg>`;
+  }
+
   const gradientId = `ig-gradient${idSuffix}`;
   return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><defs><radialGradient id="${gradientId}" cx="30%" cy="107%" r="150%"><stop offset="0%" stop-color="#FDD35D"/><stop offset="25%" stop-color="#FDA75E"/><stop offset="50%" stop-color="#F86A69"/><stop offset="70%" stop-color="#E0459E"/><stop offset="100%" stop-color="#8A3AB9"/></radialGradient></defs><path fill="url(#${gradientId})" d="${IG_GLYPH}"/></svg>`;
 }
 
-function facebookSvg(size) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><path fill="${BRAND.facebook}" d="M24 12.073c0-6.627-5.373-12-12-12S0 5.446 0 12.073c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>`;
+function tiktokSvg(size, onDark = false) {
+  const center = onDark ? '#FFFFFF' : BRAND.tiktokBlack;
+  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><path fill="${BRAND.tiktokCyan}" transform="translate(-0.9,0.9)" d="${TIKTOK_GLYPH}"/><path fill="${BRAND.tiktokPink}" transform="translate(0.9,-0.9)" d="${TIKTOK_GLYPH}"/><path fill="${center}" d="${TIKTOK_GLYPH}"/></svg>`;
 }
 
-function tiktokSvg(size) {
-  return `<svg width="${size}" height="${size}" viewBox="0 0 24 24" aria-hidden="true"><path fill="${BRAND.tiktokCyan}" transform="translate(-0.9,0.9)" d="${TIKTOK_GLYPH}"/><path fill="${BRAND.tiktokPink}" transform="translate(0.9,-0.9)" d="${TIKTOK_GLYPH}"/><path fill="#FFFFFF" d="${TIKTOK_GLYPH}"/></svg>`;
-}
-
-export function renderSocialIcon(type, size = 18, idSuffix = '') {
-  if (type === 'facebook') return facebookSvg(size);
-  if (type === 'instagram') return instagramSvg(size, idSuffix);
-  if (type === 'tiktok') return tiktokSvg(size);
+/**
+ * @param {'facebook'|'instagram'|'tiktok'} type
+ * @param {number} [size=18]
+ * @param {string} [idSuffix='']
+ * @param {{ onDark?: boolean }} [options]
+ */
+export function renderSocialIcon(type, size = 18, idSuffix = '', options = {}) {
+  const onDark = Boolean(options?.onDark);
+  if (type === 'facebook') return facebookSvg(size, onDark);
+  if (type === 'instagram') return instagramSvg(size, idSuffix, onDark);
+  if (type === 'tiktok') return tiktokSvg(size, onDark);
   return '';
 }
 

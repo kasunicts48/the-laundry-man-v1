@@ -8,6 +8,7 @@ export const RESERVED_PATH_SEGMENTS = new Set([
   'about',
   'book',
   'services',
+  'pricing',
   'commercial',
   'blog',
   'contact',

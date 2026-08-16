@@ -1,6 +1,6 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
-import BookNowButton from './BookNowButton';
 import { specialOffers, type SpecialOfferCard } from '../data/specialOffers';
 
 const INITIAL_CENTER_INDEX = Math.floor(specialOffers.length / 2);
@@ -9,14 +9,14 @@ const MOBILE_CAROUSEL_END_SPACER =
 
 function OfferPriceList({ lines }: { lines: SpecialOfferCard['priceLines'] }) {
   return (
-    <ul className="mt-6 flex flex-col">
+    <ul className="mt-5 flex flex-col">
       {lines.map((line) => (
         <li
           key={line.label}
-          className="flex items-baseline justify-between gap-4 border-b border-ink/20 py-3 last:border-b-0"
+          className="flex items-baseline justify-between gap-4 border-b border-black/10 py-3 last:border-b-0"
         >
           <span className="min-w-0 text-sm font-normal leading-snug text-ink">{line.label}</span>
-          <span className="shrink-0 text-sm font-medium tabular-nums text-ink">{line.price}</span>
+          <span className="shrink-0 text-sm font-semibold tabular-nums text-slate">{line.price}</span>
         </li>
       ))}
     </ul>
@@ -25,13 +25,13 @@ function OfferPriceList({ lines }: { lines: SpecialOfferCard['priceLines'] }) {
 
 const OfferCard: React.FC<{ offer: SpecialOfferCard }> = ({ offer }) => {
   return (
-    <article className="flex h-auto w-[min(85vw,17.5rem)] shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-ink bg-paper px-5 py-6 sm:w-auto sm:rounded-3xl sm:px-6 sm:py-7">
+    <article className="flex h-auto w-[min(85vw,17.5rem)] shrink-0 snap-center flex-col overflow-hidden rounded-2xl border border-black/10 bg-paper px-5 py-6 shadow-accent-sm sm:w-auto sm:rounded-3xl sm:px-6 sm:py-7">
       <header className="text-center">
-        <h3 className="text-sm font-bold uppercase tracking-[0.18em] text-ink sm:text-[0.9375rem]">
+        <h3 className="text-base font-semibold tracking-tight text-slate sm:text-lg">
           {offer.title}
         </h3>
         {offer.eyebrow ? (
-          <p className="mt-1.5 text-sm font-normal leading-snug text-ink/80">{offer.eyebrow}</p>
+          <p className="mt-1.5 text-sm font-normal leading-snug text-ink/70">{offer.eyebrow}</p>
         ) : null}
       </header>
 
@@ -109,18 +109,16 @@ export default function SpecialOffers() {
   };
 
   return (
-    <section id="special-offers" className="relative scroll-mt-28 overflow-hidden bg-navy py-14 sm:py-20">
-      <div
-        className="pointer-events-none absolute inset-0 bg-gradient-to-br from-black/5 via-transparent to-black/10"
-        aria-hidden="true"
-      />
-
+    <section id="special-offers" className="relative scroll-mt-28 overflow-hidden bg-navy py-16 sm:py-24">
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto mb-10 max-w-3xl text-center sm:mb-12">
           <p className="section-eyebrow">Our Prices</p>
-          <h2 className="text-3xl font-extrabold tracking-tighter text-slate sm:text-4xl lg:text-5xl">
-            Premium service — without the High Street price tag
+          <h2 className="text-3xl font-semibold tracking-tight text-slate sm:text-4xl lg:text-5xl">
+            Fair Prices, Premium Service
           </h2>
+          <p className="mt-4 text-base font-light leading-relaxed text-ink sm:text-lg">
+            Expert care without the high-street price tag.
+          </p>
         </div>
 
         <div
@@ -143,7 +141,7 @@ export default function SpecialOffers() {
               className={`h-2.5 w-2.5 rounded-full border-2 transition-colors ${
                 activeIndex === index
                   ? 'border-gold bg-gold'
-                  : 'border-gold/40 bg-transparent'
+                  : 'border-gold/35 bg-transparent'
               }`}
               aria-label={`Show ${offer.title}`}
               aria-current={activeIndex === index ? 'true' : undefined}
@@ -151,24 +149,13 @@ export default function SpecialOffers() {
           ))}
         </div>
 
-        <div className="mx-auto mt-8 flex w-full max-w-sm flex-col items-stretch gap-3 sm:mt-10 sm:max-w-md">
-          <a
-            href="#the-app"
-            className="inline-flex w-full items-center justify-center rounded-full border-2 border-gold bg-transparent px-8 py-3.5 text-sm font-bold uppercase tracking-wider text-gold transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold hover:text-[#1B3516] active:scale-[0.98]"
+        <div className="mx-auto mt-8 flex w-full max-w-sm flex-col items-stretch sm:mt-10 sm:max-w-md">
+          <Link
+            to="/pricing"
+            className="inline-flex w-full items-center justify-center rounded-full border border-gold/70 bg-transparent px-8 py-3.5 text-sm font-semibold tracking-wide text-gold transition-all duration-300 hover:-translate-y-0.5 hover:bg-gold hover:text-paper active:scale-[0.98]"
           >
-            View full pricelist
-          </a>
-          <BookNowButton label="Book Now" fullWidth />
-          <p className="pt-1 text-center text-sm font-light text-ink sm:text-base">
-            To see all prices,{' '}
-            <a
-              href="#the-app"
-              className="font-semibold text-gold transition-colors hover:text-gold-hover hover:underline"
-            >
-              download our app
-            </a>
-            .
-          </p>
+            View Full Price List
+          </Link>
         </div>
       </div>
     </section>

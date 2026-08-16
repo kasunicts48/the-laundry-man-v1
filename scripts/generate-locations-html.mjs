@@ -712,11 +712,12 @@ const html = `<!doctype html>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap" rel="stylesheet" />
     <style>
       :root {
-        --theme-bg: #ffffff;
-        --theme-bg-alt: #f5f8f5;
-        --theme-text: #1b3516;
-        --theme-text-soft: #2c5125;
-        --theme-accent: #4caf50;
+        --theme-bg: #FAFAFA;
+        --theme-bg-alt: #F3F6F4;
+        --theme-text: #333740;
+        --theme-text-soft: #2A3B4C;
+        --theme-accent: #68A88C;
+        --theme-sale-badge: #5B9BD5;
         --header-height: 6.625rem;
       }
       *, *::before, *::after { box-sizing: border-box; }
@@ -731,9 +732,9 @@ const html = `<!doctype html>
       .site-shell { min-height: 100dvh; display: flex; flex-direction: column; }
       .site-header {
         position: fixed; top: 0; left: 0; right: 0; z-index: 50;
-        background: rgba(255, 255, 255, 0.92);
+        background: rgba(250, 250, 250, 0.92);
         backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(27, 53, 22, 0.06);
+        border-bottom: 1px solid rgba(42, 59, 76, 0.06);
       }
 ${getStaticTopbarCss()}
       .header-inner { max-width: 80rem; margin: 0 auto; padding: 0 1rem; }
@@ -744,25 +745,25 @@ ${getStaticTopbarCss()}
       .site-logo img { display: block; height: 2.5rem; width: auto; }
       @media (min-width: 640px) { .site-logo img { height: 2.75rem; } }
       .desktop-nav { display: none; align-items: center; gap: 2rem; }
-      .nav-link { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--theme-text); }
+      .nav-link { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; color: var(--theme-text); }
       .nav-link.is-active { color: var(--theme-accent); }
-      .btn-book { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; border: 1px solid var(--theme-accent); border-radius: 9999px; color: var(--theme-accent); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; }
+      .btn-book { display: inline-flex; align-items: center; justify-content: center; padding: 0.625rem 1.5rem; border: 1px solid var(--theme-accent); border-radius: 9999px; color: var(--theme-accent); font-size: 0.75rem; font-weight: 600; letter-spacing: 0.02em; }
       .btn-book:hover { background: var(--theme-accent); color: #fff; }
       .menu-toggle { display: inline-flex; align-items: center; justify-content: center; padding: 0.25rem; border: 0; background: transparent; color: var(--theme-text); cursor: pointer; }
-      .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 60; border-top: 1px solid rgba(27, 53, 22, 0.08); background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(12px); box-shadow: 0 20px 25px -5px rgba(0,0,0,.1); max-height: calc(100dvh - var(--header-height)); overflow-y: auto; }
+      .mobile-nav { display: none; position: absolute; top: 100%; left: 0; right: 0; z-index: 60; border-top: 1px solid rgba(42, 59, 76, 0.08); background: rgba(250, 250, 250, 0.95); backdrop-filter: blur(12px); box-shadow: 0 20px 25px -5px rgba(0,0,0,.1); max-height: calc(100dvh - var(--header-height)); overflow-y: auto; }
       .mobile-nav.is-open { display: block; }
       .mobile-nav-inner { padding: 1rem; }
-      .mobile-nav a:not(.btn-book) { display: block; padding: 0.75rem; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; border-radius: 0.5rem; color: var(--theme-text); }
-      .mobile-nav a:not(.btn-book):hover { color: var(--theme-accent); background: rgba(76, 175, 80, 0.06); }
+      .mobile-nav a:not(.btn-book) { display: block; padding: 0.75rem; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.02em; border-radius: 0.5rem; color: var(--theme-text); }
+      .mobile-nav a:not(.btn-book):hover { color: var(--theme-accent); background: rgba(104, 168, 140, 0.06); }
       .mobile-nav-cta { padding: 1rem 0.75rem 0.5rem; }
-      .mobile-nav .btn-book--mobile { display: block; width: 100%; padding: 0.75rem 1.5rem; border: 1px solid var(--theme-accent); border-radius: 9999px; color: var(--theme-accent); background: transparent; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; text-align: center; }
+      .mobile-nav .btn-book--mobile { display: block; width: 100%; padding: 0.75rem 1.5rem; border: 1px solid var(--theme-accent); border-radius: 9999px; color: var(--theme-accent); background: transparent; font-size: 0.875rem; font-weight: 600; letter-spacing: 0.02em; text-align: center; }
       .mobile-nav .btn-book--mobile:hover { background: var(--theme-accent); color: #fff; }
       @media (min-width: 768px) { .desktop-nav { display: flex; } .menu-toggle { display: none; } .header-inner { padding: 0 1.5rem; } }
       .page-banner {
         position: relative;
         z-index: 10;
         margin-top: calc(var(--header-height) - 1px);
-        background: #4caf50;
+        background: #68A88C;
         border-radius: 0 0 30px 30px;
         padding: 2.5rem 1rem 3rem;
       }
@@ -785,8 +786,8 @@ ${getStaticTopbarCss()}
         }
       }
       .page-banner__content { min-width: 0; flex: 1 1 auto; text-align: left; }
-      .page-banner__eyebrow { margin: 0 0 0.5rem; font-size: 0.625rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: #d1fae5; }
-      .page-banner__title { margin: 0; font-size: clamp(1.875rem, 5vw, 3.75rem); font-weight: 800; line-height: 1.1; color: #1b3516; }
+      .page-banner__eyebrow { margin: 0 0 0.5rem; font-size: 0.875rem; font-weight: 500; letter-spacing: 0.02em; color: rgba(255,255,255,0.85); }
+      .page-banner__title { margin: 0; font-size: clamp(1.875rem, 5vw, 3.75rem); font-weight: 600; line-height: 1.1; color: #ffffff; }
       .page-banner__title span { color: #ffffff; }
       .page-banner__desc { margin: 1rem 0 0; max-width: 48rem; font-size: 1rem; font-weight: 300; line-height: 1.6; color: rgba(255,255,255,0.92); }
       @media (min-width: 640px) { .page-banner__desc { font-size: 1.125rem; } }
@@ -842,10 +843,11 @@ ${staticFooterCss}
               <a class="nav-link" href="/">Home</a>
               <a class="nav-link" href="/about">About Us</a>
               <a class="nav-link" href="/services">Services</a>
+              <a class="nav-link" href="/pricing">Pricing</a>
               <a class="nav-link" href="/commercial">Commercial Cleaning</a>
               <a class="nav-link" href="/blog">Blog</a>
               <a class="nav-link" href="/contact">Contact</a>
-              <a class="btn-book" href="/booking.html">Book Now</a>
+              <a class="btn-book" href="/booking.html">Schedule your collection</a>
             </nav>
             <button class="menu-toggle" type="button" id="menuToggle" aria-expanded="false" aria-controls="mobileNav">
               <span class="sr-only">Toggle menu</span>
@@ -859,10 +861,11 @@ ${staticFooterCss}
             <a href="/">Home</a>
             <a href="/about">About Us</a>
             <a href="/services">Services</a>
+            <a href="/pricing">Pricing</a>
             <a href="/commercial">Commercial Cleaning</a>
             <a href="/blog">Blog</a>
             <a href="/contact">Contact</a>
-            <div class="mobile-nav-cta"><a class="btn-book btn-book--mobile" href="/booking.html">Book a Collection</a></div>
+            <div class="mobile-nav-cta"><a class="btn-book btn-book--mobile" href="/booking.html">Ready to order</a></div>
           </div>
         </nav>
       </header>
