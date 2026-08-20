@@ -143,12 +143,12 @@ export default function Footer() {
             <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-5">
               {footerUkCities.map((city) => (
                 <li key={city}>
-                  <a
-                    href={resolveFooterUkCityHref(city)}
+                  <Link
+                    to={resolveFooterUkCityHref(city)}
                     className="block rounded-lg border border-paper/15 bg-paper/5 px-4 py-2.5 text-center text-sm font-light text-paper/90 transition-colors duration-300 hover:border-gold/40 hover:bg-gold/10 hover:text-gold"
                   >
                     {city}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>

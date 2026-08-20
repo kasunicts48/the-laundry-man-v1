@@ -1,5 +1,4 @@
 import { resolveLocationHref } from './locations';
-import { buildLocationsHref } from '../utils/locationHash';
 
 export interface FooterLink {
   label: string;
@@ -16,9 +15,11 @@ export interface OperatingHour {
   hours: string;
 }
 
-/** Footer UK city links → /locations general section for that area. */
+/** Footer UK city links → city homepage with hero (e.g. /Birmingham). */
 export function resolveFooterUkCityHref(city: string): string {
-  return buildLocationsHref('general', city);
+  const trimmed = city.trim();
+  if (!trimmed) return '/';
+  return `/${trimmed}`;
 }
 
 /** @deprecated Use resolveLocationHref from ./locations */

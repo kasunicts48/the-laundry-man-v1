@@ -33,10 +33,9 @@ function resolveLocationHref(area) {
 }
 
 function resolveFooterUkCityHref(area) {
-  const trimmed = area.toLowerCase().trim();
-  const slug =
-    SLUG_ALIASES[trimmed] ?? SLUG_ALIASES[toLocationSlug(area)] ?? toLocationSlug(area);
-  return `/locations?service=general&area=${encodeURIComponent(slug)}`;
+  const trimmed = String(area || '').trim();
+  if (!trimmed) return '/';
+  return `/${trimmed}`;
 }
 
 const footerServices = [

@@ -1,29 +1,67 @@
 import React, { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
+import { isLocationHomePath } from '../data/locations';
 
 export default function StickyBookNowBar() {
+  const { pathname } = useLocation();
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const hero = document.getElementById('hero');
-
-    if (!hero) {
-      setIsVisible(true);
-      return;
-    }
-
+    // Hide immediately on route change; re-evaluate against the current hero.
     setIsVisible(false);
 
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        setIsVisible(!entry.isIntersecting);
-      },
-      { threshold: 0 },
-    );
+    let cancelled = false;
+    let observer: IntersectionObserver | null = null;
+    let retryId = 0;
 
-    observer.observe(hero);
+    const disconnect = () => {
+      observer?.disconnect();
+      observer = null;
+    };
 
-    return () => observer.disconnect();
-  }, []);
+    const attachToHero = () => {
+      if (cancelled) return;
+
+      const hero = document.getElementById('hero');
+
+      // Inner pages without a hero: keep the sticky CTA available.
+      if (!hero) {
+        if (!isLocationHomePath(pathname)) {
+          setIsVisible(true);
+        }
+        return false;
+      }
+
+      const rect = hero.getBoundingClientRect();
+      const heroInView = rect.bottom > 0 && rect.top < window.innerHeight;
+      setIsVisible(!heroInView);
+
+      disconnect();
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          if (!cancelled) {
+            setIsVisible(!entry.isIntersecting);
+          }
+        },
+        { threshold: 0 },
+      );
+      observer.observe(hero);
+      return true;
+    };
+
+    // Hero can mount a tick after the route update (city pages).
+    if (!attachToHero()) {
+      retryId = window.setTimeout(() => {
+        attachToHero();
+      }, 50);
+    }
+
+    return () => {
+      cancelled = true;
+      window.clearTimeout(retryId);
+      disconnect();
+    };
+  }, [pathname]);
 
   return (
     <div
