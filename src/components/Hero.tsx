@@ -1,12 +1,13 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useMatch } from 'react-router-dom';
 import HeroPromoBooking from './HeroPromoBooking';
 import SiteLogo from './SiteLogo';
 import { DEFAULT_LOCATION_NAME } from '../data/locations';
 import type { CityData } from '../data/cities';
 import { removeLcpHeroShell } from '../utils/lcpHeroShell';
-import heroMobileImage from '../assets/images/sm-hero-section-image2.webp';
 import heroDesktopImage from '../assets/images/hero-section-image.webp';
+
+const HERO_VIDEO_SRC = '/videos/the-laundry-man-hero.mp4';
 
 interface HeroProps {
   locationName: string;
@@ -15,11 +16,50 @@ interface HeroProps {
 
 export default function Hero({ locationName, cityData }: HeroProps) {
   const isRootHome = Boolean(useMatch({ path: '/', end: true }));
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [videoReady, setVideoReady] = useState(false);
   const resolvedLocationName =
     locationName?.trim() || cityData?.name || DEFAULT_LOCATION_NAME;
 
   useEffect(() => {
     removeLcpHeroShell();
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (prefersReducedMotion) {
+      video.pause();
+      return;
+    }
+
+    // Kick off download immediately (preload=auto + early <link rel=preload>).
+    video.load();
+
+    const markReady = () => setVideoReady(true);
+
+    const play = () => {
+      void video.play().then(markReady).catch(() => {
+        /* Autoplay can fail; poster remains visible. */
+      });
+    };
+
+    if (video.readyState >= 2) {
+      play();
+    } else {
+      video.addEventListener('loadeddata', play, { once: true });
+      video.addEventListener('canplay', play, { once: true });
+    }
+
+    video.addEventListener('playing', markReady, { once: true });
+
+    return () => {
+      video.removeEventListener('loadeddata', play);
+      video.removeEventListener('canplay', play);
+      video.removeEventListener('playing', markReady);
+    };
   }, []);
 
   const heroTitle = isRootHome
@@ -39,28 +79,40 @@ export default function Hero({ locationName, cityData }: HeroProps) {
       id="hero"
       className="hero-section relative flex flex-col overflow-hidden bg-paper max-sm:h-[100svh] sm:block sm:min-h-[100svh] sm:bg-black"
     >
-      {/* Mobile: dominant image band. Desktop: full-bleed background. */}
+      {/* Mobile + desktop: looping hero video background */}
       <div className="relative w-full min-h-0 flex-1 overflow-hidden bg-paper max-sm:min-h-[50svh] sm:absolute sm:inset-0 sm:z-0 sm:h-full sm:flex-none sm:bg-black">
-        <picture className="absolute inset-0 block h-full w-full">
-          <source media="(min-width: 640px)" srcSet={heroDesktopImage} />
-          <img
-            src={heroMobileImage}
-            alt=""
-            className="block h-full w-full object-cover object-[50%_48%] sm:scale-105 sm:object-[50%_40%]"
-            fetchPriority="high"
-            decoding="async"
-            sizes="100vw"
-            aria-hidden="true"
-          />
-        </picture>
-
-        {/* Mobile: soft handoff under the overlapping sheet */}
-        <div
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-paper via-paper/50 to-transparent sm:hidden"
+        {/* Instant poster while bytes arrive */}
+        <img
+          src={heroDesktopImage}
+          alt=""
+          className="absolute inset-0 block h-full w-full object-cover object-center"
+          fetchPriority="high"
+          decoding="async"
           aria-hidden="true"
         />
 
-        {/* Desktop: cinematic scrim */}
+        <video
+          ref={videoRef}
+          className={`absolute inset-0 block h-full w-full object-cover object-center transition-opacity duration-500 ${
+            videoReady ? 'opacity-100' : 'opacity-0'
+          }`}
+          autoPlay
+          muted
+          loop
+          playsInline
+          preload="auto"
+          aria-hidden="true"
+        >
+          <source src={HERO_VIDEO_SRC} type="video/mp4" />
+        </video>
+
+        {/* Mobile: soft handoff under the overlapping sheet */}
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 z-[1] h-16 bg-gradient-to-t from-paper via-paper/50 to-transparent sm:hidden"
+          aria-hidden="true"
+        />
+
+        {/* Desktop: cinematic scrim for readable text */}
         <div
           className="pointer-events-none absolute inset-0 z-[1] hidden sm:block"
           aria-hidden="true"
@@ -70,7 +122,7 @@ export default function Hero({ locationName, cityData }: HeroProps) {
         </div>
       </div>
 
-      {/* Mobile: rounded sheet overlapping the image = one composition */}
+      {/* Mobile: rounded sheet overlapping the video = one composition */}
       <div className="hero-mobile-content relative z-10 -mt-6 flex shrink-0 flex-col rounded-t-[1.75rem] bg-paper px-4 pb-[max(0.875rem,env(safe-area-inset-bottom))] pt-5 shadow-[0_-12px_40px_rgba(42,59,76,0.08)] sm:mt-0 sm:min-h-[100svh] sm:flex-row sm:items-center sm:justify-center sm:rounded-none sm:bg-transparent sm:px-6 sm:pb-16 sm:pt-0 sm:shadow-none lg:px-8 lg:pb-20">
         <div className="mx-auto w-full max-w-7xl">
           <div className="hero-mobile-stack flex flex-col gap-4 sm:grid sm:grid-cols-1 sm:items-center sm:gap-10 lg:grid-cols-[minmax(0,1.2fr)_minmax(18rem,22.5rem)] lg:gap-14 xl:gap-20">

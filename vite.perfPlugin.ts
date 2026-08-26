@@ -61,6 +61,18 @@ export function heroPerfPlugin(): Plugin {
         const mobileHero = findHeroAsset(bundle, HERO_PRELOADS[0].match);
         const desktopHero = findHeroAsset(bundle, HERO_PRELOADS[1].match);
 
+        tags.push({
+          tag: 'link',
+          attrs: {
+            rel: 'preload',
+            as: 'video',
+            href: '/videos/the-laundry-man-hero.mp4',
+            type: 'video/mp4',
+            fetchpriority: 'high',
+          },
+          injectTo: 'head-prepend',
+        });
+
         for (const preload of HERO_PRELOADS) {
           const href = findHeroAsset(bundle, preload.match);
           if (!href) continue;
